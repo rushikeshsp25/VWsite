@@ -37,4 +37,6 @@ class student(models.Model):
     year=models.CharField(max_length=20,choices=YEAR_CHOICES)
     course=models.CharField(max_length=20,choices=COURSE_CHOICES)
     interest=models.CharField(max_length=50)
+    admission=models.BooleanField()
+    fees_paid=models.IntegerField(default=0)
 

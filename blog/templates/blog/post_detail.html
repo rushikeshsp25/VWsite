@@ -11,6 +11,8 @@
         {% endif %}
         <h1>{{ post.title }}</h1>
         <p>{{ post.text }}</p>
+        {% if user.is_active %}
         <a href="{% url 'blog:post_edit' pk=post.pk  %}" class="btn btn-info" role="button">Edit Post</a>
+        {% endif %}
     </div>
 {% endblock %}

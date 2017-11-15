@@ -16,9 +16,11 @@
                 </div>
             {% endfor %}
         </div>
+        {% if user.is_active %}
         <div class="col-md-4" align="center">
           <a href="{% url 'blog:post_new' %}" class="btn btn-info" role="button">New Post</a>
         </div>
+        {% endif %}
     </div>
 </div>
 

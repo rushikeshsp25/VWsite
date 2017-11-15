@@ -32,6 +32,7 @@
                         <th>course</th>
                         <th>interest</th>
                         <th>date_time</th>
+                        <th>Admission info</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -46,6 +47,14 @@
                         <td>{{student.course}}</td>
                         <td>{{student.interest}}</td>
                         <td>{{student.date_time}}</td>
+                        <td>{%if student.admission%}
+                            <a href="{% url 'home:student_detail' pk=student.id%}">
+                            <button type="button" class="btn btn-success" >admitted</button></a>
+                            {%else%}
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                                Not admitted</button>
+                            {%endif%}
+                        </td>
                     </tr>
                     {% endfor %}
                     </tbody>
@@ -57,5 +66,49 @@
         <h2 class="text-center">No Students Found!</h2>
     </div>
     {% endif %}
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Admission Confirmation :</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+			Total Fees for this Course is :
+			<br>
+			amount in rs
+            <br>
+            <form class="form-horizontal" role="form" action="{% url 'home:confirm_admission' pk=1%}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="control-label " for="id_fees_paid">
+                                Enter fees paid by student :
+                            </label>
+                            <div >
+                                <input id="id_fees_paid" maxlength="30" name="username" type="text">
+                            </div>
+                        </div>
+          <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Confirm Admission</button>
+                            </div>
+                        </div>
+      </form>
+		</p>
+
+
+
+      </div>
+      <div class="modal-footer">
+		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

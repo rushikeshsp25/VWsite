@@ -3,14 +3,90 @@
 
 {% block body %}
 {% load staticfiles %}
-  <div align="center" >
-  <a class="btn btn-primary" href="#" role="button">
-      List of Students Requesting for Admission</a>
-      </div>
-  <hr>
-  <h2>Course Wise Students</h2>
-  <hr>
-  <!-- card1 -->
+<div class="container">
+<h2>Search Student :</h2>
+    <hr>
+    <div align="center">
+        {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+        {% endif %}
+    </div>
+    <div class="row">
+
+        <div class="col-md-4">
+<form class="form-horizontal" role="form" action="{% url 'home:search_student' search_by='eno'%}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="control-label " for="id_search_eno">
+                                By Enrollment Number : :
+                            </label>
+                            <div >
+                                <input id="id_search_eno" maxlength="30" name="search_eno" type="text">
+                            </div>
+                        </div>
+          <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Search</button>
+                            </div>
+                        </div>
+      </form>
+            </div>
+        <div class="col-md-4">
+    <form class="form-horizontal" role="form" action="{% url 'home:search_student' search_by='name'%}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="control-label " for="id_search_name">
+                                By Name : :
+                            </label>
+                            <div >
+                                <input id="id_search_name" maxlength="30" name="search_name" type="text">
+                            </div>
+                        </div>
+          <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Search</button>
+                            </div>
+                        </div>
+      </form>
+        </div>
+        <div class="col-md-4">
+             <form class="form-horizontal" role="form" action="{% url 'home:search_student' search_by='email'%}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="control-label " for="id_search_email">
+                                By Email : :
+                            </label>
+                            <div >
+                                <input id="id_search_email" maxlength="30" name="search_email" type="text">
+                            </div>
+                        </div>
+          <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Search</button>
+                            </div>
+                        </div>
+      </form>
+        </div>
+        </div>
+</div>
+<hr>
+<div class="container">
+    <h2>All students in History of VisionWare</h2>
+    <hr>
+    <h3>Filter By :</h3>
+    <div id="accordion" role="tablist">
+  <div class="card">
+    <div class="card-header" role="tab" id="headingOne">
+      <h5 class="mb-0">
+        <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          CourseWise Students
+        </a>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+   <!-- card1 -->
   <div class="card mt-2">
   <div class="card-body">
     <div class="row">
@@ -81,4 +157,132 @@
     </div>
   </div>
 </div>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingTwo">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          College Wise Students
+        </a>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+          <!-- card1 -->
+  <div class="card mt-2">
+  <div class="card-body">
+    <div class="row">
+          <div class="col-md-6 text-center">
+                <h4>College : PCCOE Pune</h4>
+
+          </div>
+          <div class="col-md-6 text-center">
+              <form>
+                  <input type="button" value="Student List" class="btn btn-dark"
+                         onclick="window.location.href='{% url 'home:students_result' 'collegewise' 'PCCOE' %}'" />
+              </form>
+          </div>
+    </div>
+  </div>
+</div>
+
+<!-- card2 -->
+  <div class="card mt-2">
+  <div class="card-body">
+    <div class="row">
+          <div class="col-md-6 text-center">
+                <h4>College : DY Patil Akurdi</h4>
+
+          </div>
+          <div class="col-md-6 text-center">
+            <form>
+                  <input type="button" value="Student List" class="btn btn-dark"
+                         onclick="window.location.href='{% url 'home:students_result' 'collegewise' 'DYAK' %}'" />
+              </form>
+          </div>
+    </div>
+  </div>
+</div>
+
+<!-- card3 -->
+  <div class="card mt-2">
+  <div class="card-body">
+    <div class="row">
+          <div class="col-md-6 text-center">
+                <h4>College : DY Patil Ambi</h4>
+
+          </div>
+          <div class="col-md-6 text-center">
+            <form>
+                  <input type="button" value="Student List" class="btn btn-dark"
+                         onclick="window.location.href='{% url 'home:students_result' 'collegewise' 'DYAM' %}'" />
+              </form>
+          </div>
+    </div>
+  </div>
+</div>
+
+<!-- card4 -->
+  <div class="card mt-2">
+  <div class="card-body">
+    <div class="row">
+          <div class="col-md-6 text-center">
+                <h4>College : DY Patil Pimpri</h4>
+
+          </div>
+          <div class="col-md-6 text-center">
+            <form>
+                  <input type="button" value="Student List" class="btn btn-dark"
+                         onclick="window.location.href='{% url 'home:students_result' 'collegewise' 'DYPI' %}'" />
+              </form>
+          </div>
+    </div>
+  </div>
+  </div>
+
+<!-- card5 -->
+  <div class="card mt-2">
+  <div class="card-body">
+    <div class="row">
+          <div class="col-md-6 text-center">
+                <h4>College : JSPM Tatawade</h4>
+
+          </div>
+          <div class="col-md-6 text-center">
+            <form>
+                  <input type="button" value="Student List" class="btn btn-dark"
+                         onclick="window.location.href='{% url 'home:students_result' 'collegewise' 'JSPM' %}'" />
+              </form>
+          </div>
+    </div>
+  </div>
+  </div>
+
+    <!-- card5 -->
+  <div class="card mt-2">
+  <div class="card-body">
+    <div class="row">
+          <div class="col-md-6 text-center">
+                <h4>College : Other</h4>
+
+          </div>
+          <div class="col-md-6 text-center">
+            <form>
+                  <input type="button" value="Student List" class="btn btn-dark"
+                         onclick="window.location.href='{% url 'home:students_result' 'collegewise' 'Other' %}'" />
+              </form>
+          </div>
+    </div>
+  </div>
+  </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<br>
+<br>
 {% endblock %}

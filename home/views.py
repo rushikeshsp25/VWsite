@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.utils import timezone
 from .forms import UserForm,AdmissionForm
 from django.contrib.auth import authenticate, login,logout
@@ -77,10 +77,53 @@ def students_result(request, type, subtype):
             "result_type": result_type,
             "result_desc": result_desc,
             "students": s_objs,
-        }
+            }
+        elif type=="collegewise":
+            result_type = "College Wise Students"
+            result_desc="College "+subtype
+            s_objs=student.objects.filter(college=subtype).order_by('-date_time')
+
+            context = {
+                "result_type": result_type,
+                "result_desc": result_desc,
+                "students": s_objs,
+            }
         return render(request, 'home/student_result.html', context)
     else:
         return render(request, 'home/login.html')
+
+def confirm_admission(request,pk):
+    if request.user.is_authenticated():
+        s_obj=get_object_or_404(student,pk=pk)
+        s_obj.admission=True
+        s_obj.save()
+        return redirect('home:student_detail', pk=pk)
+    else:
+        return render(request, 'home/login.html')
+
+def student_detail(request,pk):
+    s_obj = get_object_or_404(student, pk=pk)
+    return render(request, 'home/student_detail.html', {'student': s_obj})
+
+def search_student(request,search_by):
+    if request.method == "POST":
+        try:
+            if search_by=='eno':
+                eno=request.POST.get('search_eno',False)
+                s_obj=get_object_or_404(student,pk=eno)
+                return render(request, 'home/student_detail.html', {'student': s_obj})
+            if search_by=='name':
+                name=request.POST.get('search_name',False)
+                s_obj=get_object_or_404(student,name=name)
+                return render(request, 'home/student_detail.html', {'student': s_obj})
+            if search_by=='email':
+                email=request.POST.get('search_email',False)
+                s_obj=get_object_or_404(student,email=email)
+                return render(request, 'home/student_detail.html', {'student': s_obj})
+        except:
+            return render(request, 'home/students.html',{'error_message': 'No Student Found!'})
+
+
 
 def contactus(request):
     return render(request,'home/contactus.html')
