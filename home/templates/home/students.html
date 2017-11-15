@@ -1,0 +1,84 @@
+{% extends 'home/base.html' %}
+{% block title %}students Info{% endblock %}
+
+{% block body %}
+{% load staticfiles %}
+  <div align="center" >
+  <a class="btn btn-primary" href="#" role="button">
+      List of Students Requesting for Admission</a>
+      </div>
+  <hr>
+  <h2>Course Wise Students</h2>
+  <hr>
+  <!-- card1 -->
+  <div class="card mt-2">
+  <div class="card-body">
+    <div class="row">
+          <div class="col-md-6 text-center">
+                <h4>Course : C</h4>
+
+          </div>
+          <div class="col-md-6 text-center">
+              <form>
+                  <input type="button" value="Student List" class="btn btn-dark"
+                         onclick="window.location.href='{% url 'home:students_result' 'coursewise' 'c' %}'" />
+              </form>
+          </div>
+    </div>
+  </div>
+</div>
+
+<!-- card2 -->
+  <div class="card mt-2">
+  <div class="card-body">
+    <div class="row">
+          <div class="col-md-6 text-center">
+                <h4>Course : C++</h4>
+
+          </div>
+          <div class="col-md-6 text-center">
+            <form>
+                  <input type="button" value="Student List" class="btn btn-dark"
+                         onclick="window.location.href='{% url 'home:students_result' 'coursewise' 'cpp' %}'" />
+              </form>
+          </div>
+    </div>
+  </div>
+</div>
+
+<!-- card3 -->
+  <div class="card mt-2">
+  <div class="card-body">
+    <div class="row">
+          <div class="col-md-6 text-center">
+                <h4>Course : PYTHON</h4>
+
+          </div>
+          <div class="col-md-6 text-center">
+            <form>
+                  <input type="button" value="Student List" class="btn btn-dark"
+                         onclick="window.location.href='{% url 'home:students_result' 'coursewise' 'python' %}'" />
+              </form>
+          </div>
+    </div>
+  </div>
+</div>
+
+<!-- card4 -->
+  <div class="card mt-2">
+  <div class="card-body">
+    <div class="row">
+          <div class="col-md-6 text-center">
+                <h4>Course : DJANGO</h4>
+
+          </div>
+          <div class="col-md-6 text-center">
+            <form>
+                  <input type="button" value="Student List" class="btn btn-dark"
+                         onclick="window.location.href='{% url 'home:students_result' 'coursewise' 'django' %}'" />
+              </form>
+          </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
