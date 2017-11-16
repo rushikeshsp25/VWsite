@@ -4,6 +4,17 @@
 {% block body %}
 {% load staticfiles %}
 <div class="container">
+    <h2>Students in Ongoing Courses: </h2>
+    <hr>
+    {% for course in courses %}
+    <a href="{% url 'home:students_result' type='ongoingcoursewise' subtype=course.course_name %}">
+    <button type="button" class="btn btn-primary">Course : {{course.course_name}}</button>
+    </a>
+    {% endfor %}
+
+   </div>
+ <hr><hr><hr>
+<div class="container">
 <h2>Search Student :</h2>
     <hr>
     <div align="center">
@@ -69,7 +80,7 @@
         </div>
         </div>
 </div>
-<hr>
+<hr><hr><hr>
 <div class="container">
     <h2>All students in History of VisionWare</h2>
     <hr>
@@ -87,80 +98,30 @@
     <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
       <div class="card-body">
    <!-- card1 -->
+          {% for course in courses %}
   <div class="card mt-2">
   <div class="card-body">
     <div class="row">
           <div class="col-md-6 text-center">
-                <h4>Course : C</h4>
+                <h4>Course : {{course.course_name}}</h4>
 
           </div>
           <div class="col-md-6 text-center">
               <form>
                   <input type="button" value="Student List" class="btn btn-dark"
-                         onclick="window.location.href='{% url 'home:students_result' 'coursewise' 'c' %}'" />
+                         onclick="window.location.href='{% url 'home:students_result' type='coursewise' subtype=course.course_name %}'" />
               </form>
           </div>
     </div>
   </div>
 </div>
+          {% endfor %}
 
-<!-- card2 -->
-  <div class="card mt-2">
-  <div class="card-body">
-    <div class="row">
-          <div class="col-md-6 text-center">
-                <h4>Course : C++</h4>
-
-          </div>
-          <div class="col-md-6 text-center">
-            <form>
-                  <input type="button" value="Student List" class="btn btn-dark"
-                         onclick="window.location.href='{% url 'home:students_result' 'coursewise' 'cpp' %}'" />
-              </form>
-          </div>
-    </div>
-  </div>
-</div>
-
-<!-- card3 -->
-  <div class="card mt-2">
-  <div class="card-body">
-    <div class="row">
-          <div class="col-md-6 text-center">
-                <h4>Course : PYTHON</h4>
-
-          </div>
-          <div class="col-md-6 text-center">
-            <form>
-                  <input type="button" value="Student List" class="btn btn-dark"
-                         onclick="window.location.href='{% url 'home:students_result' 'coursewise' 'python' %}'" />
-              </form>
-          </div>
-    </div>
-  </div>
-</div>
-
-<!-- card4 -->
-  <div class="card mt-2">
-  <div class="card-body">
-    <div class="row">
-          <div class="col-md-6 text-center">
-                <h4>Course : DJANGO</h4>
-
-          </div>
-          <div class="col-md-6 text-center">
-            <form>
-                  <input type="button" value="Student List" class="btn btn-dark"
-                         onclick="window.location.href='{% url 'home:students_result' 'coursewise' 'django' %}'" />
-              </form>
-          </div>
-    </div>
-  </div>
-</div>
-</div>
       </div>
     </div>
   </div>
+
+
   <div class="card">
     <div class="card-header" role="tab" id="headingTwo">
       <h5 class="mb-0">

@@ -28,6 +28,25 @@ COURSE_CHOICES= (
     ('Django', 'Django'),
 )
 
+
+LEVEL_CHOICES= (
+    ('Beginer', 'Beginer'),
+    ('Intermediate', 'Intermediate'),
+    ('Advanced', 'Advanced'),
+)
+
+class course(models.Model):
+    course_name=models.CharField(max_length=30,unique=True)
+    level=models.CharField(max_length=20,choices=LEVEL_CHOICES)
+    course_icon=models.FileField()
+    fees=models.IntegerField(default=0)
+    outcomes=models.CharField(max_length=300)
+    requirements=models.CharField(max_length=300)
+    description=models.CharField(max_length=2000)
+
+    def __str__(self):
+        return self.course_name
+
 class student(models.Model):
     date_time = models.DateTimeField(default=datetime.now, blank=True)
     name=models.CharField(max_length=30)
@@ -35,8 +54,12 @@ class student(models.Model):
     phone=models.CharField(max_length=10)
     college=models.CharField(max_length=20,choices=COLLEGE_CHOICES)
     year=models.CharField(max_length=20,choices=YEAR_CHOICES)
-    course=models.CharField(max_length=20,choices=COURSE_CHOICES)
+    #course=models.CharField(max_length=20,choices=COURSE_CHOICES)
+    course = models.ForeignKey(course,to_field='course_name',on_delete=models.CASCADE)
     interest=models.CharField(max_length=50)
-    admission=models.BooleanField()
+    admission=models.BooleanField(default=False)
     fees_paid=models.IntegerField(default=0)
+
+
+
 

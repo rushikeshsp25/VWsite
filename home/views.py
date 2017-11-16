@@ -1,10 +1,12 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.utils import timezone
-from .forms import UserForm,AdmissionForm
+from .forms import UserForm,AdmissionForm,CourseForm
 from django.contrib.auth import authenticate, login,logout
-from .models import student
+from .models import student,course
+from datetime import datetime
 
 # Create your views here.
+IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
 def logout_user(request):
     logout(request)
@@ -46,11 +48,12 @@ def admission(request):
             return redirect('home:index')
     else:
         form = AdmissionForm()
-    return render(request, 'home/admission.html', {'form': form})
+        return render(request, 'home/admission.html', {'form': form})
 
 def students(request):
     if request.user.is_authenticated():
-        return render(request, 'home/students.html')
+        courses=course.objects.all()
+        return render(request, 'home/students.html',{'courses':courses})
     else:
         return render(request, 'home/login.html')
 
@@ -59,23 +62,22 @@ def students_result(request, type, subtype):
         s_objs = student()
         result_type=""
         result_desc=""
-        if type == 'coursewise':
-            result_type = "Course Wise Students"
-            if subtype == 'c':
-                result_desc = "Course - C"
-                s_objs = student.objects.filter(course='C').order_by('-date_time')
-            elif subtype == 'cpp':
-                result_desc = "Course - C++"
-                s_objs = student.objects.filter(course='C++').order_by('-date_time')
-            elif subtype == 'python':
-                result_desc = "Course - Python"
-                s_objs = student.objects.filter(course='Python').order_by('-date_time')
-            elif subtype == 'django':
-                result_desc = "Course - Django"
-                s_objs = student.objects.filter(course='Django').order_by('-date_time')
+        if type=='ongoingcoursewise':
+            result_type = "Ongoing Course Wise Students"
+            s_objs = student.objects.filter(course=subtype, date_time__year=2017).order_by('-date_time')
             context = {
             "result_type": result_type,
-            "result_desc": result_desc,
+            "result_desc": subtype,
+            "students": s_objs,
+            }
+
+        elif type == 'coursewise':
+            result_type = "Course Wise Students"
+            s_objs = student.objects.filter(course=subtype).order_by('-date_time')
+
+            context = {
+            "result_type": result_type,
+            "result_desc": subtype,
             "students": s_objs,
             }
         elif type=="collegewise":
@@ -121,9 +123,29 @@ def search_student(request,search_by):
                 s_obj=get_object_or_404(student,email=email)
                 return render(request, 'home/student_detail.html', {'student': s_obj})
         except:
-            return render(request, 'home/students.html',{'error_message': 'No Student Found!'})
+            courses = course.objects.all()
+            return render(request, 'home/students.html',{'courses':courses,'error_message': 'No Student Found!'})
 
 
 
 def contactus(request):
     return render(request,'home/contactus.html')
+
+def create_new_course(request):
+    form = CourseForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        course=form.save(commit=False)
+        course.course_icon=request.FILES['course_icon']
+        file_type = course.course_icon.url.split('.')[-1]
+        file_type = file_type.lower()
+        if file_type not in IMAGE_FILE_TYPES:
+            context = {
+                    'form': form,
+                    'error_message': 'Image file must be PNG, JPG, or JPEG',
+            }
+            return render(request, 'home/create_new_course.html', context)
+        course.save()
+        return redirect('home:index')
+
+    form=CourseForm()
+    return render(request,'home/create_new_course.html',{'form':form})
