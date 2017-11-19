@@ -30,7 +30,7 @@ COURSE_CHOICES= (
 
 
 LEVEL_CHOICES= (
-    ('Beginer', 'Beginer'),
+    ('Beginner', 'Beginner'),
     ('Intermediate', 'Intermediate'),
     ('Advanced', 'Advanced'),
 )
@@ -40,9 +40,10 @@ class course(models.Model):
     level=models.CharField(max_length=20,choices=LEVEL_CHOICES)
     course_icon=models.FileField()
     fees=models.IntegerField(default=0)
-    outcomes=models.CharField(max_length=300)
-    requirements=models.CharField(max_length=300)
-    description=models.CharField(max_length=2000)
+    outcomes=models.TextField()
+    requirements=models.TextField()
+    description=models.TextField()
+    syllabus=models.FileField(null=True)
 
     def __str__(self):
         return self.course_name

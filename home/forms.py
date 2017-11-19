@@ -12,7 +12,7 @@ class AdmissionForm(forms.ModelForm):
 class CourseForm(forms.ModelForm):
     class Meta:
         model = course
-        fields = ['course_name','level','course_icon', 'fees','outcomes','requirements','description']
+        fields = ['course_name','level','course_icon', 'fees','outcomes','requirements','description','syllabus']
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)

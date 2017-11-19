@@ -82,7 +82,14 @@
 </div>
 <hr><hr><hr>
 <div class="container">
-    <h2>All students in History of VisionWare</h2>
+    <div >
+    <h2>All students</h2>
+    <a href="{% url 'home:students_all'%}">
+    <button class="btn btn-primary">
+        Click here to see list of all students
+    </button>
+    </a>
+    </div>
     <hr>
     <h3>Filter By :</h3>
     <div id="accordion" role="tablist">
@@ -242,6 +249,9 @@
       </div>
     </div>
   </div>
+
+</div>
+
 
 </div>
 <br>

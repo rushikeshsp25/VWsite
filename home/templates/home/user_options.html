@@ -1,0 +1,13 @@
+{% extends 'home/base.html' %}
+{% block title %}students Info{% endblock %}
+
+{% block body %}
+{% load staticfiles %}
+<div class="container">
+
+<a href="{% url 'home:create_new_course'%}">
+    <button type="button" class="btn btn-success" >Create New Course</button>
+</a>
+
+</div>
+{% endblock %}

@@ -53,18 +53,29 @@ def admission(request):
 def students(request):
     if request.user.is_authenticated():
         courses=course.objects.all()
+
         return render(request, 'home/students.html',{'courses':courses})
+    else:
+        return render(request, 'home/login.html')
+
+def students_all(request):
+    if request.user.is_authenticated:
+        s_objs = student.objects.all().order_by('-date_time')
+        context = {
+            "result_type": "All students ",
+            "result_desc": "",
+            "students": s_objs,
+        }
+        return render(request, 'home/student_result.html', context)
     else:
         return render(request, 'home/login.html')
 
 def students_result(request, type, subtype):
     if request.user.is_authenticated():
-        s_objs = student()
-        result_type=""
-        result_desc=""
+        today=datetime.today()
         if type=='ongoingcoursewise':
             result_type = "Ongoing Course Wise Students"
-            s_objs = student.objects.filter(course=subtype, date_time__year=2017).order_by('-date_time')
+            s_objs = student.objects.filter(course=subtype, date_time__year=today.year).order_by('-date_time')
             context = {
             "result_type": result_type,
             "result_desc": subtype,
@@ -104,48 +115,75 @@ def confirm_admission(request,pk):
         return render(request, 'home/login.html')
 
 def student_detail(request,pk):
-    s_obj = get_object_or_404(student, pk=pk)
-    return render(request, 'home/student_detail.html', {'student': s_obj})
+    if request.user.is_authenticated:
+        s_obj = get_object_or_404(student, pk=pk)
+        return render(request, 'home/student_detail.html', {'student': s_obj})
+    else:
+        return render(request, 'home/login.html')
 
 def search_student(request,search_by):
-    if request.method == "POST":
-        try:
-            if search_by=='eno':
-                eno=request.POST.get('search_eno',False)
-                s_obj=get_object_or_404(student,pk=eno)
-                return render(request, 'home/student_detail.html', {'student': s_obj})
-            if search_by=='name':
-                name=request.POST.get('search_name',False)
-                s_obj=get_object_or_404(student,name=name)
-                return render(request, 'home/student_detail.html', {'student': s_obj})
-            if search_by=='email':
-                email=request.POST.get('search_email',False)
-                s_obj=get_object_or_404(student,email=email)
-                return render(request, 'home/student_detail.html', {'student': s_obj})
-        except:
-            courses = course.objects.all()
-            return render(request, 'home/students.html',{'courses':courses,'error_message': 'No Student Found!'})
-
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            try:
+                if search_by=='eno':
+                    eno=request.POST.get('search_eno',False)
+                    s_obj=get_object_or_404(student,pk=eno)
+                    return render(request, 'home/student_detail.html', {'student': s_obj})
+                if search_by=='name':
+                    name=request.POST.get('search_name',False)
+                    s_obj=get_object_or_404(student,name=name)
+                    return render(request, 'home/student_detail.html', {'student': s_obj})
+                if search_by=='email':
+                    email=request.POST.get('search_email',False)
+                    s_obj=get_object_or_404(student,email=email)
+                    return render(request, 'home/student_detail.html', {'student': s_obj})
+            except:
+                courses = course.objects.all()
+                return render(request, 'home/students.html',{'courses':courses,'error_message': 'No Student Found!'})
+    else:
+        return render(request, 'home/login.html')
 
 
 def contactus(request):
     return render(request,'home/contactus.html')
 
 def create_new_course(request):
-    form = CourseForm(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        course=form.save(commit=False)
-        course.course_icon=request.FILES['course_icon']
-        file_type = course.course_icon.url.split('.')[-1]
-        file_type = file_type.lower()
-        if file_type not in IMAGE_FILE_TYPES:
-            context = {
+    if request.user.is_authenticated:
+        form = CourseForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            course=form.save(commit=False)
+            course.course_icon=request.FILES['course_icon']
+            course.syllabus = request.FILES['syllabus']
+            file_type = course.course_icon.url.split('.')[-1]
+            file_type2 = course.syllabus.url.split('.')[-1]
+            file_type = file_type.lower()
+            file_type2 = file_type2.lower()
+            if file_type not in IMAGE_FILE_TYPES:
+                context = {
+                        'form': form,
+                        'error_message': 'Image file must be PNG, JPG, or JPEG',
+                }
+                return render(request, 'home/create_new_course.html', context)
+            if file_type !='pdf':
+                context = {
                     'form': form,
-                    'error_message': 'Image file must be PNG, JPG, or JPEG',
-            }
-            return render(request, 'home/create_new_course.html', context)
-        course.save()
-        return redirect('home:index')
+                    'error_message': 'Image file must be PDF',
+                }
+                return render(request, 'home/create_new_course.html', context)
+            course.save()
+            return redirect('home:index')
+    else:
+        return render(request, 'home/login.html')
 
     form=CourseForm()
     return render(request,'home/create_new_course.html',{'form':form})
+
+def course_details(request,course_name):
+    course_details=get_object_or_404(course,course_name=course_name)
+    return render(request,'home/course_detail.html',{'course':course_details})
+
+def user_options(request):
+    if request.user.is_authenticated:
+        return render(request, 'home/user_options.html')
+    else:
+        return render(request, 'home/login.html')
