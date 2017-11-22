@@ -44,6 +44,7 @@ class course(models.Model):
     requirements=models.TextField()
     description=models.TextField()
     syllabus=models.FileField(null=True)
+    date_time=models.DateTimeField(default=datetime.now, blank=True)
 
     def __str__(self):
         return self.course_name

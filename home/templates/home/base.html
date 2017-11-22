@@ -10,7 +10,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'home/style.css' %}"/>
-    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Viga" rel="stylesheet">
 
 </head>
 
@@ -54,14 +54,10 @@
           Courses
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-          <a class="dropdown-item" href="{%url 'home:course_details' course_name='C Programming'%}">C Programming</a>
+            {% for course in all_courses %}
+          <a class="dropdown-item" href="{%url 'home:course_details' course_name=course.course_name%}">{{course.course_name}}</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{%url 'home:course_details' course_name='C++ Programming'%}">C++ Programming</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{%url 'home:course_details' course_name='Python Programming'%}">Python Programming</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{%url 'home:course_details' course_name='Web Dev [Django]'%}">Web Dev [Django]</a>
+        {% endfor %}
         </div>
       </li>
       <li class="nav-item">
