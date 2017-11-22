@@ -282,7 +282,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511080640685</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="working fine and ready for first release">
+      <created>1511349225914</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1511349225914</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -336,7 +343,8 @@
     <MESSAGE value="vw site student section updated, blog app base.html updated" />
     <MESSAGE value="course structure changed,it is made as fk for course in student modal" />
     <MESSAGE value="blog app is removed and visionwareforum.blogspot.in link is given over there" />
-    <option name="LAST_COMMIT_MESSAGE" value="blog app is removed and visionwareforum.blogspot.in link is given over there" />
+    <MESSAGE value="working fine and ready for first release" />
+    <option name="LAST_COMMIT_MESSAGE" value="working fine and ready for first release" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
