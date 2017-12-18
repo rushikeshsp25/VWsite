@@ -3,113 +3,398 @@
 
 {% block body %}
 {% load staticfiles %}
-<div class="row">
-    <div class="col-md-8">
-<div class="jumbotron" style="background-color:#BBDEFB;">
-  <h1 class="display-3">About us!</h1>
-  <hr class="my-4">
-
-  <div style="font-family: 'Viga', serif;">
-  <p style="font-size:25px;color:brown;">
-  VisionWare is an organization providing Training for IT Students.
-    It is the first organization which came up with the motto "For the Students By The Students".
-    We believe that student can understand everything about a student much better than the Professors.
-    Under VisionWare excellent and extremely qualified Student Teachers works for the betterment of Students.
-    We focus on real time Learning experience by Working on Small projects along with theory lectures.
-
-    Here Quality is Everything.....
-  </p>
-  </div>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="{%url 'home:aboutus'%}" role="button">Read more</a>
-  </p>
-</div>
-</div>
-    <div class="col-md-4">
-<div class="jumbotron" style="background-color:#BCAAA4;">
-  <h1 >Interested Learning @ VisionWare</h1>
-  <hr class="my-4">
-
-
-  <p style="font-size:20px" >
-  Follow these simple steps :<br>
-      <1> Click Button below to enroll your name with us.<br>
-      <2> And that's it Our team will contact you..
-  </p>
-    <hr class="my-4">
-    <p style="font-size:15px" >
-        <b>Don't miss the opportunity enroll now it's Free</b><br>
-
-  </p>
-
-  <p class="lead">
-    <a class="btn btn-warning btn-lg" href="{%url 'home:admission'%}" role="button">
-        Enroll Now</a>
-  </p>
-</div>
+<div class="home-sec" id="home" >
+           <div class="overlay">
+ <div class="container">
+           <div class="row text-center " >
+           
+               <div class="col-lg-12  col-md-12 col-sm-12">
+               
+                <div class="flexslider set-flexi" id="main-section" >
+                    <ul class="slides move-me">
+                        <!-- Slider 01 -->
+                        <li>
+                              <h3>Delivering Quality Education</h3>
+                           <h1>THE UNIQUE METHOD</h1>
+                            <a  href="#course-sec" class="btn btn-info btn-lg" >
+                                COURSES OFFERED
+                            </a>
+                             <a  href="#features-sec" class="btn btn-success btn-lg" >
+                                HIGHLIGHTS
+                            </a>
+                        </li>
+                        <!-- End Slider 01 -->
+                        
+                        <!-- Slider 02 -->
+                        <li>
+                            <h3>Delivering Quality Education</h3>
+                           <h1>UNMATCHED APPROACH</h1>
+                             <a  href="#course-sec" class="btn btn-info btn-lg" >
+                                COURSES OFFERED
+                            </a>
+                             <a  href="#features-sec" class="btn btn-success btn-lg" >
+                                HIGHLIGHTS
+                            </a>
+                        </li>
+                        <!-- End Slider 02 -->
+                        
+                        <!-- Slider 03 -->
+                        <li>
+                            <h3>Delivering Quality Education</h3>
+                           <h1>AWESOME FACULTY PANEL</h1>
+                             <a  href="#course-sec" class="btn btn-info btn-lg" >
+                                COURSES OFFERED
+                            </a>
+                             <a  href="#features-sec" class="btn btn-success btn-lg" >
+                                HIGHLIGHTS
+                            </a>
+                        </li>
+                        <!-- End Slider 03 -->
+                    </ul>
+                </div>
+                   
+     
+              
+              
+            </div>
+                
+               </div>
+                </div>
+           </div>
+           
+       </div>
+       <!--HOME SECTION END-->   
+    <div  class="tag-line" >
+         <div class="container">
+           <div class="row  text-center" >
+           
+               <div class="col-lg-12  col-md-12 col-sm-12">
+               
+        <h2 data-scroll-reveal="enter from the bottom after 0.1s" ><i class="fa fa-circle-o-notch"></i> WELCOME TO VISIONWARE ONLINE <i class="fa fa-circle-o-notch"></i> </h2>
+                   </div>
+               </div>
+             </div>
+        
     </div>
-</div>
-<div class="jumbotron" style="background-color:#F0F4C3;">
-  <h1 class="display-3">Brand new Courses !</h1>
- <div class="row">
-{% for course in brand_new_courses %}
-     <!-- course card-->
-   <div class="col-md-3">
-     <div class="card h-100" style="width: 17rem;">
-  <div class="card-body">
-    <h4 class="card-title">{{course.course_name}}</h4>
-    <h6 class="card-subtitle mb-2 text-muted">{{course.level}}</h6>
-    <p class="card-text">
-        <img alt="{{course.course_name}}"  src="{{course.course_icon.url}}" width="100%" height="130">
-    </p>
-   </div>
-         <div class="card-footer">
-     <a href="{%url 'home:course_details' course_name=course.course_name%}" class="card-link">View Details</a>
-    </div>
-</div>
-     </div>
-   {% endfor %}
- </div>
-</div>
+    <!--HOME SECTION TAG LINE END-->   
+         <div id="features-sec" class="container set-pad" >
+             <div class="row text-center">
+                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
+                     <h1 data-scroll-reveal="enter from the bottom after 0.2s"  class="header-line">FEATURE LIST </h1>
+                     <p data-scroll-reveal="enter from the bottom after 0.3s" >
+                      VisionWare is an IT Training Institute , established in 2016 by ' the Students For The Students ' .
+                      Our motto is to Provide Quality education in affordable Price.
+                      It is the only institute where Education has higher priority than anything else.
 
-<div class="jumbotron" style="background-color:#FFE0B2;">
-  <h1 class="display-3">Testimonials</h1>
+                         </p>
+                 </div>
+
+             </div>
+             <!--/.HEADER LINE END-->
 
 
-      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="{%static 'home/images/testimonials/0.jpg'%}" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="{%static 'home/images/testimonials/1.jpg'%}" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="{%static 'home/images/testimonials/2.jpg'%}" alt="Third slide">
-    </div>
-      <div class="carousel-item">
-      <img class="d-block w-100" src="{%static 'home/images/testimonials/3.jpg'%}" alt="Forth slide">
-    </div>
-      <div class="carousel-item">
-      <img class="d-block w-100" src="{%static 'home/images/testimonials/4.jpg'%}" alt="Fifth slide">
-    </div>
-      <div class="carousel-item">
-      <img class="d-block w-100" src="{%static 'home/images/testimonials/5.jpg'%}" alt="Sixth slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
+           <div class="row" >
+           
+               
+                 <div class="col-lg-4  col-md-4 col-sm-4" data-scroll-reveal="enter from the bottom after 0.4s">
+                     <div class="about-div">
+                     <i class="fa fa-paper-plane-o fa-4x icon-round-border" ></i>
+                   <h3 >Project Based Learning</h3>
+                 <hr />
+                       <hr />
+                   <p >
+                       Learning by building model is followed @VisionWare. 
+                       mini projects implemented by students help them to understand concept along with it's practical use.
+                       
+                   </p>
+
+                </div>
+                   </div>
+                   <div class="col-lg-4  col-md-4 col-sm-4" data-scroll-reveal="enter from the bottom after 0.5s">
+                     <div class="about-div">
+                     <i class="fa fa-bolt fa-4x icon-round-border" ></i>
+                   <h3 >Discussion Forum</h3>
+                 <hr />
+                       <hr />
+                   <p >
+                       Forum includes techinical discussion , doubt clarification , puzzles and much more .
+                       
+                   </p>
+
+                </div>
+                   </div>
+                 <div class="col-lg-4  col-md-4 col-sm-4" data-scroll-reveal="enter from the bottom after 0.6s">
+                     <div class="about-div">
+                     <i class="fa fa-magic fa-4x icon-round-border" ></i>
+                   <h3 >Seminars for Improvement</h3>
+                 <hr />
+                       <hr />
+                   <p >
+                       seminars on various Trending topics by experts .
+                       
+                   </p>
+
+                </div>
+                   </div>
+                 
+                 
+               </div>
+             </div>
+   <!-- FEATURES SECTION END-->
+    <div id="faculty-sec" >
+    <div class="container set-pad">
+             <div class="row text-center">
+                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
+                     <h1 data-scroll-reveal="enter from the bottom after 0.1s" class="header-line">OUR TEAM </h1>
+                     <p data-scroll-reveal="enter from the bottom after 0.3s">
+
+                         </p>
+                 </div>
+
+             </div>
+             <!--/.HEADER LINE END-->
+
+           <div class="row" >
+           
+               
+                 <div class="col-lg-4  col-md-4 col-sm-4" data-scroll-reveal="enter from the bottom after 0.4s">
+                     <div class="faculty-div">
+                     <img src="{%static 'home/images/faculty/rushi.jpg'%}"  class="img-rounded" width="100%" height="100%"/>
+                   <h3 >RUSHIKESH PHALKE</h3>
+                 <hr />
+                         <h4>C <br /> C++</h4>
+                   <p >
+                       short description. 
+                       
+                   </p>
+                </div>
+                   </div>
+                 <div class="col-lg-4  col-md-4 col-sm-4" data-scroll-reveal="enter from the bottom after 0.5s">
+                     <div class="faculty-div">
+                     <img src="{%static 'home/images/faculty/ashu.jpg'%}"  class="img-rounded" width="100%" height="100%"/>
+                   <h3 >ASHITOSH DHAPATE</h3>
+                 <hr />
+                         <h4>Core Java <br /> Advanced Java</h4>
+                   <p >
+                       short description.  
+                       
+                   </p>
+                </div>
+                   </div>
+               <div class="col-lg-4  col-md-4 col-sm-4" data-scroll-reveal="enter from the bottom after 0.6s">
+                     <div class="faculty-div">
+                     <img src="{%static 'home/images/faculty/neha.jpg'%}" class="img-rounded" width="100%" height="100%"/>
+                   <h3 >NEHA AWATE</h3>
+                 <hr />
+                         <h4>Aptitude <br /> GD/PI</h4>
+                   <p >
+                       short description. 
+                       
+                   </p>
+                </div>
+                   </div>
+                 
+               </div>
+             </div>
+        </div>
+    <!-- FACULTY SECTION END-->
+      <div id="course-sec" class="container set-pad">
+             <div class="row text-center">
+                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
+                     <h1 data-scroll-reveal="enter from the bottom after 0.1s" class="header-line">OUR COURSES </h1>
+                     <p data-scroll-reveal="enter from the bottom after 0.3s">
+                      VisionWare offers various courses for IT students and PLACEMENT4SURE course for all engineering students
+                         appearing for placements.
+                         Courses are designed in such a way that , your basics become strong and you can implement the concepts.
+                         </p>
+                 </div>
+
+             </div>
+             <!--/.HEADER LINE END-->
 
 
-</div>
+           <div class="row set-row-pad" >
+           <div class="col-lg-6 col-md-6 col-sm-6 " data-scroll-reveal="enter from the bottom after 0.4s" >
+                 <img src="{%static 'home/images/courses.PNG'%}" class="img-thumbnail" />
+           </div>
+               <div class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
+                   <div class="panel-group" id="accordion">
+                        <div class="panel panel-default" data-scroll-reveal="enter from the bottom after 0.5s">
+                            <div class="panel-heading" >
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="collapsed">
+                                  <strong>   5+</strong> COMPUTER SCIENCE COURSES
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse1" class="panel-collapse collapse" style="height: 0px;">
+                                <div class="panel-body">
+                                    <p>
+                                      <ul>
+                                    {%for course in all_courses%}
+                                        <li><a href="{%url 'home:course_details' course_name=course.course_name%}">{{course.course_name}}</a></li>
+                                    {%endfor%}
+                                      </ul>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default" data-scroll-reveal="enter from the bottom after 0.7s">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="collapsed">
+                                     PLACEMENT4SURE
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse2" class="panel-collapse collapse" style="height: 0px;">
+                                <div class="panel-body">
+                                    <p>
+                                       Covers all things essential for placements , which includes 
+                                       <ul>
+                                         <li>Aptitude</li>
+                                         <li>Resume Building</li>
+                                         <li>Group Discussion</li>
+                                         <li>Technical Round</li>
+                                         <li>HR round</li>
+                                       </ul>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                   
+           </div>
+             
+                 
+                 
+               </div>
+             </div>
+      <!-- COURSES SECTION END-->
+    <div id="contact-sec"   >
+           <div class="overlay">
+ <div class="container set-pad">
+      <div class="row text-center">
+                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
+                     <h1 data-scroll-reveal="enter from the bottom after 0.1s" class="header-line" >CONTACT US  </h1>
+                     <p data-scroll-reveal="enter from the bottom after 0.3s">
+                      Interested Learning at VisionWare or Having some query , You are just one step away from us .<br>
+                      Fill below form to contact our team .
+                         </p>
+                 </div>
 
+             </div>
+             <!--/.HEADER LINE END-->
+           <div class="row set-row-pad"  data-scroll-reveal="enter from the bottom after 0.5s" >
+           
+               
+                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control "  required="required" placeholder="Your Name" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control " required="required"  placeholder="Your Email" />
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" required="required" class="form-control" style="min-height: 150px;" placeholder="Message"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-info btn-block btn-lg">SUBMIT REQUEST</button>
+                        </div>
+
+                    </form>
+                </div>
+
+                   
+     
+              
+              
+                
+               </div>
+                </div>
+          </div> 
+       </div>
+     <div class="container">
+             <div class="row set-row-pad"  >
+    <div class="col-lg-4 col-md-4 col-sm-4   col-lg-offset-1 col-md-offset-1 col-sm-offset-1 " data-scroll-reveal="enter from the bottom after 0.4s">
+
+                    <h2 ><strong>Our Location </strong></h2>
+        <hr />
+                    <div>
+                        <h4>Bhandarkar Acadamy Classroom</h4>
+                        <h4>Suyog Lane , Near PCCOE Pune</h4>
+                        <h4><strong>Call:</strong>  +91-7775910607 </h4>
+                        <h4><strong>Email: </strong>visionware70@gmail.com</h4>
+                    </div>
+
+
+                </div>
+                 <div class="col-lg-4 col-md-4 col-sm-4   col-lg-offset-1 col-md-offset-1 col-sm-offset-1" data-scroll-reveal="enter from the bottom after 0.4s">
+
+                    <h2 ><strong>Social Conectivity </strong></h2>
+        <hr />
+                    <div >
+                        <a href="http://www.facebook.com">  <img src="{% static 'home/images/Social/facebook.png'%}" alt="" /> </a>
+                     <a href="http://www.plus.google.com"> <img src="{% static 'home/images/Social/google-plus.png'%}" alt="" /></a>
+                     <a href="http://www.twitter.com"> <img src="{% static 'home/images/Social/twitter.png'%}" alt="" /></a>
+                    </div>
+                    </div>
+
+
+                </div>
+                 </div>
+     <!-- CONTACT SECTION END-->
+<div class="testimonials-sec" id="testimonials" >
+           <div class="overlay">
+ <div class="container">
+
+           <div class="row text-center " >
+
+               <div class="col-lg-12  col-md-12 col-sm-12">
+
+                <div class="flexslider set-flexi" id="testimonials-section" >
+                    <h1>Student views</h1>
+                    <ul class="slides move-me">
+                        <!-- Slider 01 -->
+                        <li>
+                           <img class="d-block w-100" src="{%static 'home/images/testimonials/0.jpg'%}" alt="First slide" width="100%" height="100%">
+                        </li>
+                        <!-- End Slider 01 -->
+
+                        <!-- Slider 02 -->
+                        <li>
+                           <img class="d-block w-100" src="{%static 'home/images/testimonials/1.jpg'%}" alt="Second slide" width="100%" height="100%">
+                        </li>
+                        <!-- End Slider 02 -->
+
+                        <!-- Slider 03 -->
+                        <li>
+                            <img class="d-block w-100" src="{%static 'home/images/testimonials/2.jpg'%}" alt="Third slide" width="100%" height="100%">
+                        </li>
+                        <!-- End Slider 03 -->
+                        <!-- Slider 04 -->
+                        <li>
+                            <img class="d-block w-100" src="{%static 'home/images/testimonials/3.jpg'%}" alt="Forth slide" width="100%" height="100%">
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+
+            </div>
+
+               </div>
+                </div>
+           </div>
+
+       </div>
+    <div id="footer">
+          &copy 2018 visionware.com | All Rights Reserved |  <a href="#" style="color: #fff" target="_blank">Design by : Rushikesh Phalke</a>
+    </div>
 {% endblock %}
 
 

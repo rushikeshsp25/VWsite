@@ -3,23 +3,26 @@
 
 {% block body %}
 {% load staticfiles %}
+<br/>
+<br/>
+<br/>
+<div class="container">
 <div class="row">
     <div class="col-md-4">
-        <div class="container-fluid">
-        <div class="card">
-  <img class="card-img-top" src="{{course.course_icon.url}}" alt="Card image cap">
-  <div class="card-block">
+
+  <img  src="{{course.course_icon.url}}" alt="course image" width="100%">
+
     <p class="card-text">
       <div align="center">
       <h2>{{course.course_name}}</h2>
         for {{course.level}}
       </div>
     </p>
-  </div>
-</div>
+
+
             <br>
 </div>
-    </div>
+
     <div class="col-md-5">
         <div class="container-fluid">
         <h2>Outcomes : </h2>
@@ -59,5 +62,5 @@
             <hr>
             <br>
 </div>
-
+</div>
 {% endblock %}

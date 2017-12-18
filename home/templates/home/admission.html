@@ -3,12 +3,18 @@
 
 {% block body %}
 {% load staticfiles %}
-
- <div class="card">
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+ <div class="card col-md-6">
      <div class="card-header p-b-0">
-         <h5 class="card-title">
-             Create New  Admission Request
-            </h5>
+         <h3 class="card-title">
+             <strong>Create New  Admission Request</strong>
+            </h3>
+         <hr />
+         <hr />
          </div>
      {% if error_message %}
      <p><strong>{{ error_message }}</strong></p>
@@ -17,15 +23,42 @@
          <form class="form-group" role="form" action="" method="post" enctype="multipart/form-data">
              {% csrf_token %}
              {% include 'home/form_template.html' %}
+             <br>
              <div class="form-group">
-                 <div class="col-sm-offset-2 col-sm-10">
+                 <div>
                      <button type="submit" class="btn btn-success">Submit</button>
                      </div>
-                 </div>
+                     </div>
              </form>
          </div>
  </div>
+        <div class="col-md-6">
+            <h3 class="card-title">
+             <strong>Instructions for Students</strong>
+            </h3>
+            <hr/>
+            <hr/>
+            <ul>
+                <li>Filling this form will not confirm your admission at VisionWare .</li>
+                <br/>
+                <li>It just indicates that you are interested learning @VisionWare .</li>
+                <br/>
+                <li>You will get all updates regarding course you are choosing after
+                filling this form .</li>
+                <br/>
+                <li>You will receive promotional offers .</li>
+                <br/>
+                <li>Enter your contact details(email and mobile number) correctly .</li>
+                <br/>
+                <li>You can confirm your admission by paying at least 50% fees at VisionWare
+                office , Online payment option is unavailable right now .</li>
+                <br/>
+                <li>If you are interested learning new things , apart from the courses provided by
+                VisionWare then feed them in interest box .</li>
+            </ul>
+        </div>
+        </div>
 </br>
 </br>
-
+</div>
 {% endblock %}

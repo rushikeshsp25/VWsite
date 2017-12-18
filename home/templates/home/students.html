@@ -4,6 +4,9 @@
 {% block body %}
 {% load staticfiles %}
 <div class="container">
+    <br/>
+    <br/>
+    <br/>
     <h2>Students in Ongoing Courses: </h2>
     <hr>
     {% for course in courses %}
@@ -93,22 +96,23 @@
     </div>
     <hr>
     <h3>Filter By :</h3>
-    <div id="accordion" role="tablist">
-  <div class="card">
-    <div class="card-header" role="tab" id="headingOne">
-      <h5 class="mb-0">
-        <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          CourseWise Students
-        </a>
-      </h5>
-    </div>
 
-    <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
-      <div class="card-body">
-   <!-- card1 -->
-          {% for course in courses %}
-  <div class="card mt-2">
-  <div class="card-body">
+    <div >
+                   <div class="panel-group" id="accordion">
+                        <div class="panel panel-default" data-scroll-reveal="enter from the bottom after 0.5s">
+                            <div class="panel-heading" >
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="collapsed">
+                                  <strong> CourseWise Students</strong>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse1" class="panel-collapse collapse" style="height: 0px;">
+                                <div class="panel-body">
+                                    <p>
+                                      <ul>
+                                    {% for course in courses %}
+
     <div class="row">
           <div class="col-md-6 text-center">
                 <h4>Course : {{course.course_name}}</h4>
@@ -121,29 +125,27 @@
               </form>
           </div>
     </div>
-  </div>
-</div>
+
           {% endfor %}
-
-      </div>
-    </div>
-  </div>
-
-
-  <div class="card">
-    <div class="card-header" role="tab" id="headingTwo">
-      <h5 class="mb-0">
-        <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          College Wise Students
-        </a>
-      </h5>
-    </div>
-    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
-      <div class="card-body">
-          <!-- card1 -->
-  <div class="card mt-2">
-  <div class="card-body">
-    <div class="row">
+                                      </ul>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default" data-scroll-reveal="enter from the bottom after 0.7s">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="collapsed">
+                                        <strong>College Wise Students</strong>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse2" class="panel-collapse collapse" style="height: 0px;">
+                                <div class="panel-body">
+                                    <p>
+                                       Covers all things essential for placements , which includes
+                                       <ul>
+                                         <div class="row">
           <div class="col-md-6 text-center">
                 <h4>College : PCCOE Pune</h4>
 
@@ -155,13 +157,7 @@
               </form>
           </div>
     </div>
-  </div>
-</div>
-
-<!-- card2 -->
-  <div class="card mt-2">
-  <div class="card-body">
-    <div class="row">
+                                         <div class="row">
           <div class="col-md-6 text-center">
                 <h4>College : DY Patil Akurdi</h4>
 
@@ -173,31 +169,7 @@
               </form>
           </div>
     </div>
-  </div>
-</div>
-
-<!-- card3 -->
-  <div class="card mt-2">
-  <div class="card-body">
-    <div class="row">
-          <div class="col-md-6 text-center">
-                <h4>College : DY Patil Ambi</h4>
-
-          </div>
-          <div class="col-md-6 text-center">
-            <form>
-                  <input type="button" value="Student List" class="btn btn-dark"
-                         onclick="window.location.href='{% url 'home:students_result' 'collegewise' 'DYAM' %}'" />
-              </form>
-          </div>
-    </div>
-  </div>
-</div>
-
-<!-- card4 -->
-  <div class="card mt-2">
-  <div class="card-body">
-    <div class="row">
+                                         <div class="row">
           <div class="col-md-6 text-center">
                 <h4>College : DY Patil Pimpri</h4>
 
@@ -209,13 +181,19 @@
               </form>
           </div>
     </div>
-  </div>
-  </div>
+                                        <div class="row">
+          <div class="col-md-6 text-center">
+                <h4>College : DY Patil Ambi</h4>
 
-<!-- card5 -->
-  <div class="card mt-2">
-  <div class="card-body">
-    <div class="row">
+          </div>
+          <div class="col-md-6 text-center">
+            <form>
+                  <input type="button" value="Student List" class="btn btn-dark"
+                         onclick="window.location.href='{% url 'home:students_result' 'collegewise' 'DYAM' %}'" />
+              </form>
+          </div>
+    </div>
+                                         <div class="row">
           <div class="col-md-6 text-center">
                 <h4>College : JSPM Tatawade</h4>
 
@@ -227,13 +205,7 @@
               </form>
           </div>
     </div>
-  </div>
-  </div>
-
-    <!-- card5 -->
-  <div class="card mt-2">
-  <div class="card-body">
-    <div class="row">
+                                    <div class="row">
           <div class="col-md-6 text-center">
                 <h4>College : Other</h4>
 
@@ -245,16 +217,17 @@
               </form>
           </div>
     </div>
-  </div>
-  </div>
-      </div>
-    </div>
-  </div>
+                                       </ul>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
 
+                    </div>
+
+           </div>
 </div>
 
-
-</div>
 <br>
 <br>
 {% endblock %}
