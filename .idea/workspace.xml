@@ -2,35 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9a45c70-b536-40f2-988a-cc39b696e69c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/home/static/home/images/Navbar/call.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/home/static/home/images/Navbar/fb.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/home/static/home/images/Navbar/gp.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/home/static/home/images/Navbar/header_strip.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/home/static/home/images/Navbar/linkedin.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/home/static/home/images/Navbar/logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/home/static/home/images/Navbar/twitter.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/home/static/home/images/circles.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/home/static/home/images/testimonials/4.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/home/static/home/images/testimonials/5.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/home/static/home/style.css" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/static/home/images/testimonials/0.jpg" afterPath="$PROJECT_DIR$/home/static/home/images/testimonials/0.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/static/home/images/testimonials/1.jpg" afterPath="$PROJECT_DIR$/home/static/home/images/testimonials/1.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/static/home/images/testimonials/2.jpg" afterPath="$PROJECT_DIR$/home/static/home/images/testimonials/2.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/static/home/images/testimonials/3.jpg" afterPath="$PROJECT_DIR$/home/static/home/images/testimonials/3.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/templates/home/aboutus.html" afterPath="$PROJECT_DIR$/home/templates/home/aboutus.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/templates/home/admission.html" afterPath="$PROJECT_DIR$/home/templates/home/admission.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/templates/home/base.html" afterPath="$PROJECT_DIR$/home/templates/home/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/templates/home/contactus.html" afterPath="$PROJECT_DIR$/home/templates/home/contactus.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/templates/home/course_detail.html" afterPath="$PROJECT_DIR$/home/templates/home/course_detail.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/templates/home/create_new_course.html" afterPath="$PROJECT_DIR$/home/templates/home/create_new_course.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/templates/home/form_template.html" afterPath="$PROJECT_DIR$/home/templates/home/form_template.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/templates/home/index.html" afterPath="$PROJECT_DIR$/home/templates/home/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/templates/home/login.html" afterPath="$PROJECT_DIR$/home/templates/home/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/templates/home/student_detail.html" afterPath="$PROJECT_DIR$/home/templates/home/student_detail.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/templates/home/student_result.html" afterPath="$PROJECT_DIR$/home/templates/home/student_result.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/templates/home/students.html" afterPath="$PROJECT_DIR$/home/templates/home/students.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/templates/home/user_options.html" afterPath="$PROJECT_DIR$/home/templates/home/user_options.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,21 +17,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/home/templates/home/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5148">
-              <caret line="286" column="0" lean-forward="false" selection-start-line="286" selection-start-column="0" selection-end-line="286" selection-end-column="0" />
+            <state relative-caret-position="6426">
+              <caret line="357" column="40" lean-forward="false" selection-start-line="357" selection-start-column="40" selection-end-line="357" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/home/templates/home/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="419">
-              <caret line="72" column="106" lean-forward="false" selection-start-line="72" selection-start-column="106" selection-end-line="72" selection-end-column="106" />
+            <state relative-caret-position="1296">
+              <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -120,8 +93,10 @@
         <entry file="file://$PROJECT_DIR$/home/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="774">
-              <caret line="46" column="68" lean-forward="false" selection-start-line="46" selection-start-column="68" selection-end-line="46" selection-end-column="68" />
-              <folding />
+              <caret line="46" column="35" lean-forward="true" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="67" />
+              <folding>
+                <element signature="e#24#63#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -245,6 +220,19 @@
               <item name="VWsite" type="b2602c69:ProjectViewProjectNode" />
               <item name="VWsite" type="462c0819:PsiDirectoryNode" />
               <item name="home" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="VWsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="VWsite" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="VWsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="VWsite" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -272,7 +260,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$USER_HOME$/Django/casesDOTcovers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -342,21 +330,27 @@
       <option name="project" value="LOCAL" />
       <updated>1511349225914</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="final ready to publish">
+      <created>1513619947554</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1513619947554</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="75" y="34" width="1303" height="780" extended-state="6" />
-    <editor active="true" />
+    <frame x="64" y="-11" width="1303" height="780" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33944222" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35059762" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32970452" sideWeight="0.50278884" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32970452" sideWeight="0.49721116" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32970452" sideWeight="0.49721116" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988048" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988048" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -397,7 +391,8 @@
     <MESSAGE value="course structure changed,it is made as fk for course in student modal" />
     <MESSAGE value="blog app is removed and visionwareforum.blogspot.in link is given over there" />
     <MESSAGE value="working fine and ready for first release" />
-    <option name="LAST_COMMIT_MESSAGE" value="working fine and ready for first release" />
+    <MESSAGE value="final ready to publish" />
+    <option name="LAST_COMMIT_MESSAGE" value="final ready to publish" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -600,14 +595,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/home/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="774">
-          <caret line="46" column="68" lean-forward="false" selection-start-line="46" selection-start-column="68" selection-end-line="46" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/VWsite/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -642,18 +629,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/home/templates/home/index.html">
+    <entry file="file://$PROJECT_DIR$/home/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5148">
-          <caret line="286" column="0" lean-forward="false" selection-start-line="286" selection-start-column="0" selection-end-line="286" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="774">
+          <caret line="46" column="35" lean-forward="true" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="67" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/home/templates/home/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="72" column="106" lean-forward="false" selection-start-line="72" selection-start-column="106" selection-end-line="72" selection-end-column="106" />
+        <state relative-caret-position="1296">
+          <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/templates/home/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6426">
+          <caret line="357" column="40" lean-forward="false" selection-start-line="357" selection-start-column="40" selection-end-line="357" selection-end-column="40" />
           <folding />
         </state>
       </provider>
