@@ -76,6 +76,27 @@
              </div>
         
     </div>
+ <!--HOME SECTION END-->
+    <div  class="announcement" >
+         <div class="container">
+           <div class="row  text-center" >
+
+               <div class="col-lg-12  col-md-12 col-sm-12">
+                   <marquee behavior="alternate">
+                       <h2 data-scroll-reveal="enter from the bottom after 0.1s" >
+                           <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                           C | C++ | Core Java Batches will start from 4th January 2018
+                           <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                           First two days are FREE!
+                           <i class="fa fa-bullhorn" aria-hidden="true"></i> </h2>
+                   </marquee>
+
+
+                   </div>
+               </div>
+             </div>
+
+    </div>
     <!--HOME SECTION TAG LINE END-->   
          <div id="features-sec" class="container set-pad" >
              <div class="row text-center">
@@ -117,7 +138,8 @@
                  <hr />
                        <hr />
                    <p >
-                       Forum includes techinical discussion , doubt clarification , puzzles and much more .
+                       Forum includes techinical discussion , doubt clarification , puzzles and much more . This helps students
+                       to build powerful developer network.
                        
                    </p>
 
@@ -130,7 +152,8 @@
                  <hr />
                        <hr />
                    <p >
-                       seminars on various Trending topics by experts .
+                       seminars on various Trending topics by experts. Intention behind this is to make our students
+                       aware about various areas in IT industry.
                        
                    </p>
 
@@ -163,10 +186,6 @@
                    <h3 >RUSHIKESH PHALKE</h3>
                  <hr />
                          <h4>C <br /> C++</h4>
-                   <p >
-                       short description. 
-                       
-                   </p>
                 </div>
                    </div>
                  <div class="col-lg-4  col-md-4 col-sm-4" data-scroll-reveal="enter from the bottom after 0.5s">
@@ -175,10 +194,6 @@
                    <h3 >ASHITOSH DHAPATE</h3>
                  <hr />
                          <h4>Core Java <br /> Advanced Java</h4>
-                   <p >
-                       short description.  
-                       
-                   </p>
                 </div>
                    </div>
                <div class="col-lg-4  col-md-4 col-sm-4" data-scroll-reveal="enter from the bottom after 0.6s">
@@ -187,10 +202,6 @@
                    <h3 >NEHA AWATE</h3>
                  <hr />
                          <h4>Aptitude <br /> GD/PI</h4>
-                   <p >
-                       short description. 
-                       
-                   </p>
                 </div>
                    </div>
                  
@@ -214,10 +225,10 @@
 
 
            <div class="row set-row-pad" >
-           <div class="col-lg-6 col-md-6 col-sm-6 " data-scroll-reveal="enter from the bottom after 0.4s" >
+           <div class="col-md-4" data-scroll-reveal="enter from the bottom after 0.4s" >
                  <img src="{%static 'home/images/courses.PNG'%}" class="img-thumbnail" />
            </div>
-               <div class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
+               <div class="col-md-8">
                    <div class="panel-group" id="accordion">
                         <div class="panel panel-default" data-scroll-reveal="enter from the bottom after 0.5s">
                             <div class="panel-heading" >
@@ -229,13 +240,17 @@
                             </div>
                             <div id="collapse1" class="panel-collapse collapse" style="height: 0px;">
                                 <div class="panel-body">
-                                    <p>
-                                      <ul>
+                                    <div class="row">
+
                                     {%for course in all_courses%}
-                                        <li><a href="{%url 'home:course_details' course_name=course.course_name%}">{{course.course_name}}</a></li>
-                                    {%endfor%}
-                                      </ul>
-                                    </p>
+                                        <div class="col-md-3">
+                                            <a href="{%url 'home:course_details' course_name=course.course_name%}">
+                                                <img src="{{course.course_icon.url}}" width="100%" height="100"></a>
+                                        <a href="{%url 'home:course_details' course_name=course.course_name%}">{{course.course_name}}</a>
+                                    </div>
+                                            {%endfor%}
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
