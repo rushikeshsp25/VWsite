@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{% block title %}{% endblock %}</title>
+    <title>
+        {% block title %}{% endblock %}
+    </title>
     {% load staticfiles %}
 	
     <meta charset="utf-8" />
@@ -10,6 +12,8 @@
     <meta name="author" content="" />
     
       <!-- BOOTSTRAP CORE STYLE CSS -->
+    <link rel="shortcut icon" type="image/png" href="{%  static 'home/images/favicon.ico' %}"/>
+
     <link rel="stylesheet" type="text/css" href="{% static 'home/css/bootstrap.css' %}" />
     <!-- FONT AWESOME CSS -->
 <link rel="stylesheet" type="text/css" href="{% static 'home/css/font-awesome.min.css' %}"  />
@@ -18,7 +22,7 @@
     <!-- CUSTOM STYLE CSS -->
     <link rel="stylesheet" type="text/css"href="{% static 'home/css/style.css'%}" rel="stylesheet" />    
   <!-- Google	Fonts -->
-	<link rel="stylesheet" type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300'  />
+    <link rel="stylesheet" type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300'  />
 
 </head>
 
@@ -57,11 +61,7 @@
 
             {%endif%}
                     <li><a class="nav-link" href="{%url 'home:contactus'%}">Contact us</a></li>
-                     {%if user.is_authenticated%}
-        <li>
-            <a class="nav-link" href="{%url 'home:students'%}">Students</a>
-            </li>
-            {%endif%}
+
 
                     {%if user.is_authenticated%}
         <li >
