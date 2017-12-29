@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+from django.contrib.auth.models import User
 from django.db import models
 from datetime import datetime
 
@@ -21,11 +21,12 @@ YEAR_CHOICES = (
     ('BE', 'BE'),
 )
 
-COURSE_CHOICES= (
-    ('C', 'C'),
-    ('C++', 'C++'),
-    ('Python', 'Python'),
-    ('Django', 'Django'),
+RATING_CHOICES = (
+    ('1','1'),
+('2','2'),
+('3','3'),
+('4','4'),
+('5','5'),
 )
 
 
@@ -56,7 +57,6 @@ class student(models.Model):
     phone=models.CharField(max_length=10)
     college=models.CharField(max_length=20,choices=COLLEGE_CHOICES)
     year=models.CharField(max_length=20,choices=YEAR_CHOICES)
-    #course=models.CharField(max_length=20,choices=COURSE_CHOICES)
     course = models.ForeignKey(course,to_field='course_name',on_delete=models.CASCADE)
     interest=models.CharField(max_length=50)
     admission=models.BooleanField(default=False)
@@ -64,4 +64,12 @@ class student(models.Model):
 
 
 
+class review(models.Model):
+    date_time = models.DateTimeField(default=datetime.now, blank=True)
+    course = models.ForeignKey(course, to_field='course_name', on_delete=models.CASCADE)
+    rating = models.CharField(max_length=20, choices=RATING_CHOICES)
+    review=models.TextField()
+    reviewer=models.ForeignKey(student,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.review
 

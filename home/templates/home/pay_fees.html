@@ -1,0 +1,57 @@
+{% extends 'home/base.html' %}
+{% block title %}students Result{% endblock %}
+
+{% block body %}
+{% load staticfiles %}
+</br>
+</br>
+</br>
+<div class="container">
+    <table class="table table-bordered table-inverse">
+        <tr>
+            <td>
+            <h3><strong>Total Fees for this Course is :</strong></h3>
+            </td>
+            <td>
+                <h3><strong>rs {{student.course.fees}}</strong></h3>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3><strong>Fees Paid :</strong></h3>
+            </td>
+            <td>
+                <h3><strong>rs {{student.fees_paid}}</strong></h3>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3><strong>Fees Remaining :</strong></h3>
+            </td>
+            <td>
+                <h3><strong>rs {{fees_remaining}}</strong></h3>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3><strong>Pay Now :</strong></h3>
+            </td>
+            <td>
+                {% if error_message %}
+     <p><strong>{{ error_message }}</strong></p>
+     {% endif %}
+                <form role="form" action="{% url 'home:pay_fees' pk=student.pk%}" method="post" enctype="multipart/form-data">
+                     {% csrf_token %}
+  <div class="form-group">
+    <label for="id_feesip">Enter amount Student paying in Rs </label>
+    <input type="number" class="form-control" id="id_feesip" name="feesip" placeholder="0">
+  </div>
+  <button type="submit" class="btn btn-primary mb-2">Confirm</button>
+
+</form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+{%endblock%}

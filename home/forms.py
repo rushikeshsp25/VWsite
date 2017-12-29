@@ -1,5 +1,5 @@
 from django import forms
-from .models import student,course
+from .models import student,course,review
 from django.contrib.auth.models import User
 
 class AdmissionForm(forms.ModelForm):
@@ -19,3 +19,8 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password']
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = review
+        fields = ['course', 'rating', 'review']

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.utils import timezone
-from .forms import UserForm,AdmissionForm,CourseForm
+from .forms import UserForm,AdmissionForm,CourseForm,ReviewForm
 from django.contrib.auth import authenticate, login,logout
 from .models import student,course
 from datetime import datetime
@@ -218,3 +218,41 @@ def user_options(request):
         return render(request, 'home/user_options.html',{'all_courses': all_courses,})
     else:
         return redirect('home:login_user')
+
+def review(request):
+    all_courses = course.objects.all()
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.save()
+            return redirect('home:index')
+    else:
+        form = ReviewForm()
+        return render(request, 'home/post_review.html', {'form': form,
+                                                       'all_courses': all_courses,
+                                                       })
+
+def grant_admission(request,pk):
+    return redirect('home:index')
+
+def pay_fees(request,pk):
+    all_courses = course.objects.all()
+    student_obj = get_object_or_404(student, pk=pk)
+    fees_remaining = student_obj.course.fees - student_obj.fees_paid
+    if request.method == "POST":
+        fees_paying=request.POST.get('feesip',0)
+        print fees_paying
+        if fees_paying>fees_remaining:
+            return render(request, 'home/pay_fees.html', {'student': student_obj,
+                                                          'fees_remaining': fees_remaining,
+                                                          'all_courses': all_courses,
+                                                          'error_message': 'You are trying to get more '
+                                                                           'money from student than remaining amount',
+                                                          })
+        return redirect('home:index')
+
+    return render(request,'home/pay_fees.html',{'student':student_obj,
+                                                'fees_remaining':fees_remaining,
+                                                'all_courses': all_courses,
+                                                })

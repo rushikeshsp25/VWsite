@@ -28,14 +28,28 @@
          <div class="col-md-2">
              <h4>Year</h4>{{student.year}}<hr></div>
          </div>
+     <h4>Other Interest Specified: </h4>{{student.interest}}<hr>
 </div>
     <div class="col-md-5">
     <h2>Course Details : </h2>
 <hr>
 <h4>Course Applied : </h4>{{student.course}}<hr>
- <h4>Other Interest Specified: </h4>{{student.interest}}<hr>
+
         <h4>Admission Date Time </h4>{{student.date_time}}<hr>
-        <h4>Total Fees Paid: </h4>{{student.fees_paid}} rs<hr>
+        <h4>Total Course Fees: </h4>{{student.course.fees}} rs<hr>
+        <h4>Total Fees Paid: </h4>
+        <div class="row">
+            <div class="col-md-6">
+        {{student.fees_paid}} rs<hr>
+                </div>
+            <div class="col-md-6">
+        {%ifnotequal student.course.fees student.fees_paid%}
+        <a href="{% url 'home:student_detail' pk=student.id%}">
+                            <button type="button" class="btn btn-success" >Pay remaining Fees</button></a>
+        {%endifnotequal%}
+            </div>
+            </div>
+        <h4>Admission Confirmed By  : </h4><hr>
 </div>
 
 </div>
