@@ -22,7 +22,6 @@ urlpatterns = [
     url(r'^search_student/(?P<search_by>[a-z]+)/$', views.search_student,name='search_student'),
     url(r'^course_details/(?P<course_name>[^~,]+)/$', views.course_details, name='course_details'),
     url(r'^review/$', views.review, name='review'),
-    url(r'^grant_admission/(?P<pk>\d+)/$', views.grant_admission, name='grant_admission'),
     url(r'^pay_fees/(?P<pk>\d+)/$', views.pay_fees, name='pay_fees'),
 ]
 

@@ -54,7 +54,7 @@
                             <a href="{% url 'home:student_detail' pk=student.id%}">
                             <button type="button" class="btn btn-success" >admitted</button></a>
                             {%else%}
-                            <a href="{% url 'home:pay_fees' pk=student.id%}">
+                            <a href="{% url 'home:student_detail' pk=student.id%}">
                             <button type="button" class="btn btn-danger">
                                 Not admitted</button>
                             </a>

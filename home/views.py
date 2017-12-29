@@ -126,16 +126,6 @@ def students_result(request, type, subtype):
     else:
         return redirect('home:login_user')
 
-def confirm_admission(request,pk):
-    all_courses = course.objects.all()
-    if request.user.is_authenticated():
-        s_obj=get_object_or_404(student,pk=pk)
-        s_obj.admission=True
-        s_obj.save()
-        return redirect('home:student_detail', pk=pk)
-    else:
-        return redirect('home:login_user')
-
 def student_detail(request,pk):
     all_courses = course.objects.all()
     if request.user.is_authenticated:
@@ -233,26 +223,39 @@ def review(request):
                                                        'all_courses': all_courses,
                                                        })
 
-def grant_admission(request,pk):
-    return redirect('home:index')
+def confirm_admission(request,pk):
+    all_courses = course.objects.all()
+    if request.user.is_authenticated():
+        s_obj=get_object_or_404(student,pk=pk)
+        s_obj.admission=True
+        s_obj.date_time=datetime.now()
+        s_obj.save()
+        return redirect('home:student_detail', pk=pk)
+    else:
+        return redirect('home:login_user')
+
 
 def pay_fees(request,pk):
     all_courses = course.objects.all()
-    student_obj = get_object_or_404(student, pk=pk)
-    fees_remaining = student_obj.course.fees - student_obj.fees_paid
     if request.method == "POST":
         fees_paying=request.POST.get('feesip',0)
-        print fees_paying
-        if fees_paying>fees_remaining:
+        student_obj = get_object_or_404(student, pk=pk)
+        fees_remaining = int(student_obj.course.fees) - int(student_obj.fees_paid)
+        if int(fees_paying)>int(fees_remaining):
             return render(request, 'home/pay_fees.html', {'student': student_obj,
                                                           'fees_remaining': fees_remaining,
                                                           'all_courses': all_courses,
-                                                          'error_message': 'You are trying to get more '
-                                                                           'money from student than remaining amount',
+                                                          'error_message':'error',
                                                           })
-        return redirect('home:index')
-
-    return render(request,'home/pay_fees.html',{'student':student_obj,
-                                                'fees_remaining':fees_remaining,
-                                                'all_courses': all_courses,
-                                                })
+        student_obj.fees_paid=int(student_obj.fees_paid)+int(fees_paying)
+        student_obj.save()
+        if int(student_obj.fees_paid)>=int(student_obj.course.fees)/2:
+            return redirect('home:confirm_admission',student_obj.pk)
+        return redirect('home:student_detail',student_obj.pk)
+    else:
+        student_obj = get_object_or_404(student, pk=pk)
+        fees_remaining = int(student_obj.course.fees) - int(student_obj.fees_paid)
+        return render(request,'home/pay_fees.html',{'student':student_obj,
+                                                    'fees_remaining':fees_remaining,
+                                                    'all_courses': all_courses,
+                                                    })
