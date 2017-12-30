@@ -87,12 +87,22 @@
 <hr><hr><hr>
 <div class="container">
     <div >
+        <div class="row">
+            <div class="col-md-6">
     <h2>All students</h2>
     <a href="{% url 'home:students_all'%}">
     <button class="btn btn-primary">
         Click here to see list of all students
     </button>
-    </a>
+    </a></div>
+            <div class="col-md-6">
+    <h2>Contacted Students</h2>
+    <a href="{% url 'home:contacted_students'%}">
+    <button class="btn btn-primary">
+        Click here to see list of contacted students
+    </button>
+    </a></div>
+            </div>
     </div>
     <hr>
     <h3>Filter By :</h3>

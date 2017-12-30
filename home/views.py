@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.utils import timezone
 from .forms import UserForm,AdmissionForm,CourseForm,ReviewForm
 from django.contrib.auth import authenticate, login,logout
-from .models import student,course
+from .models import student,course,student_contact
 from datetime import datetime
 
 # Create your views here.
@@ -56,7 +56,7 @@ def admission(request):
             admission = form.save(commit=False)
             admission.date_time = timezone.now()
             admission.save()
-            return redirect('home:index')
+            return redirect('home:success', 'admission_success')
     else:
         form = AdmissionForm()
         return render(request, 'home/admission.html', {'form': form,
@@ -190,7 +190,7 @@ def create_new_course(request):
                 }
                 return render(request, 'home/create_new_course.html', context)
             new_course.save()
-            return redirect('home:index')
+            return redirect('home:success', 'course_success')
     else:
         return redirect(request, 'home:login_user')
 
@@ -259,3 +259,41 @@ def pay_fees(request,pk):
                                                     'fees_remaining':fees_remaining,
                                                     'all_courses': all_courses,
                                                     })
+
+
+def contact_student(request):
+    if request.method == "POST":
+        name=request.POST.get('name',False)
+        email=request.POST.get('email',False)
+        phone = request.POST.get('phone', False)
+        message=request.POST.get('message',False)
+        student=student_contact()
+        student.name=name
+        student.email=email
+        student.phone=phone
+        student.message=message
+        student.save()
+        return redirect('home:success','contact_success')
+
+def contacted_students(request):
+    all_courses = course.objects.all()
+    s_objs=student_contact.objects.all()
+    s_objs.order_by('-date_time')
+    context = {
+        "result_type": "List of contacted students",
+        "result_desc": "",
+        "students": s_objs,
+        'all_courses': all_courses,
+    }
+    return render(request, 'home/contact_student_result.html', context)
+
+def success(request,success_type):
+    message1="Your response is recorded by Visionware , Our Team will contact you soon ! Thank You:))"
+    message2="Course is Succesfully Created :))"
+    message3 = "Your admission request is recorded by Visionware , Pay 50% fess @VisionWare office to confirm your Admission ! Thank You:))"
+    if success_type=='course_success':
+        return render(request, 'home/success.html',{'success_message':message2,})
+    elif success_type=='contact_success':
+        return render(request, 'home/success.html',{'success_message':message1,})
+    elif success_type=='admission_success':
+        return render(request, 'home/success.html',{'success_message':message3,})

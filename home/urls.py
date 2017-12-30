@@ -23,6 +23,9 @@ urlpatterns = [
     url(r'^course_details/(?P<course_name>[^~,]+)/$', views.course_details, name='course_details'),
     url(r'^review/$', views.review, name='review'),
     url(r'^pay_fees/(?P<pk>\d+)/$', views.pay_fees, name='pay_fees'),
+    url(r'^contact_visionware/$', views.contact_student, name='contact_student'),
+    url(r'^contacted_students/$', views.contacted_students, name='contacted_students'),
+    url(r'^success/(?P<success_type>[^~,]+)/$', views.success, name='success'),
 ]
 
 if settings.DEBUG:              #imp to add for dealing with image

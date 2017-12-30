@@ -62,7 +62,14 @@ class student(models.Model):
     admission=models.BooleanField(default=False)
     fees_paid=models.IntegerField(default=0)
 
-
+class student_contact(models.Model):
+    date_time = models.DateTimeField(default=datetime.now, blank=True)
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+    phone = models.CharField(max_length=10)
+    message=models.TextField()
+    def __str__(self):
+        return self.name
 
 class review(models.Model):
     date_time = models.DateTimeField(default=datetime.now, blank=True)

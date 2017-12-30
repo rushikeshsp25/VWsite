@@ -1,0 +1,56 @@
+{% extends 'home/base.html' %}
+{% block title %}students Result{% endblock %}
+
+{% block body %}
+{% load staticfiles %}
+<div class="container">
+    <br/>
+    <br/>
+    <br/>
+<h3 class="text-center">{{result_type}}</h3>
+     <hr>
+  <div class="row">
+          <div class="col-md-6 text-left">
+              <h4 class="text-left">{{result_desc}}</h4>
+          </div>
+          <div class="col-md-6 text-right">
+            <button type="button" class="btn btn-dark">Export as PDF</button>
+            <button type="button" class="btn btn-dark">Export as Excel</button>
+          </div>
+
+  </div>
+<br>
+
+{% if students %}
+<div class="card-body">
+
+                <table class="table table-bordered table-inverse">
+                    <thead class="thead-inverse">
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Message</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for student in students %}
+                    <tr>
+
+                        <td>{{student.name}}</td>
+                        <td>{{student.email}}</td>
+                        <td>{{student.phone}}</td>
+                        <td>{{student.message}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+    {% else %}
+    <div class="card-body">
+        <h2 class="text-center">No Students Found!</h2>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
