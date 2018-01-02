@@ -9,12 +9,18 @@
     <br/>
     <h2>Students in Ongoing Courses: </h2>
     <hr>
+    <div class="row">
+
     {% for course in courses %}
+        <div class="col-md-3">
     <a href="{% url 'home:students_result' type='ongoingcoursewise' subtype=course.course_name %}">
     <button type="button" class="btn btn-primary">Course : {{course.course_name}}</button>
     </a>
     <br><br>
+            </div>
     {% endfor %}
+
+    </div>
 
    </div>
  <hr><hr><hr>
