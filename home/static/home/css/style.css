@@ -163,30 +163,6 @@ body {
             margin-right: 8px;
         }
 
-
-
-        .demoAnnouncement{
-         background: #D4E157;
-    color: #000;
-        }
-
-        .demoAnnouncement h2 {
-        font-size: 20px;
-        font-weight: 900;
-        color: #004D40;
-
-       }
-    .demoAnnouncement fire{
-        font-size: 20px;
-        font-weight: 900;
-         color: #f5f5f5;
-
-    }
-
-        .demoAnnouncement h2  i {
-            margin-left: 8px;
-            margin-right: 8px;
-        }
 /*=====================================
   HEADER LINE STYLES 
     ===================================*/
