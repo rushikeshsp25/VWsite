@@ -48,7 +48,11 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses<span class="caret"></span></a>
           <ul class="dropdown-menu">
               {% for course in all_courses %}
-            <li><a href="{%url 'home:course_details' course_name=course.course_name%}">{{course.course_name}}</a></li>
+            <li>
+                <a href="{%url 'home:course_details' course_name=course.course_name%}">
+                    {{course.course_name}}
+                </a>
+            </li>
               {% endfor %}
           </ul>
                     <li ><a class="nav-link" href="https://goo.gl/forms/bYVZ3jqoFe9OYvja2" target="_blank">BookADemo</a></li>
