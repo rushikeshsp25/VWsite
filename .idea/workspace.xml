@@ -2,24 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9a45c70-b536-40f2-988a-cc39b696e69c" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/home/static/home/css/animate.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/home/static/home/images/announcements/a1.jpeg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/home/static/home/images/announcements/a2.jpeg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/home/static/home/ppts/inheritance.pdf" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/home/static/home/ppts/oop_c++.pdf" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/home/static/home/ppts/tut1.pdf" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/home/static/home/ppts/tut2.pdf" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/home/static/home/ppts/tut3.pdf" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/home/templates/home/lbwithcpp.html" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/home/static/home/css/style.css" afterPath="$PROJECT_DIR$/home/static/home/css/style.css" />
-      <change beforePath="$PROJECT_DIR$/home/static/home/images/faculty/ashu.jpg" afterPath="$PROJECT_DIR$/home/static/home/images/faculty/ashu.jpg" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/admission.html" afterPath="$PROJECT_DIR$/home/templates/home/admission.html" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/base.html" afterPath="$PROJECT_DIR$/home/templates/home/base.html" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/contactus.html" afterPath="$PROJECT_DIR$/home/templates/home/contactus.html" />
       <change beforePath="$PROJECT_DIR$/home/templates/home/index.html" afterPath="$PROJECT_DIR$/home/templates/home/index.html" />
-      <change beforePath="$PROJECT_DIR$/home/urls.py" afterPath="$PROJECT_DIR$/home/urls.py" />
-      <change beforePath="$PROJECT_DIR$/home/views.py" afterPath="$PROJECT_DIR$/home/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -37,7 +21,7 @@
         <entry file="file://$PROJECT_DIR$/home/templates/home/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="563">
-              <caret line="368" column="27" lean-forward="false" selection-start-line="368" selection-start-column="27" selection-end-line="368" selection-end-column="27" />
+              <caret line="367" column="27" lean-forward="false" selection-start-line="367" selection-start-column="27" selection-end-line="367" selection-end-column="27" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#div#2;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h6#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#3;n#!!top" expanded="true" />
@@ -402,7 +386,14 @@
       <option name="project" value="LOCAL" />
       <updated>1518579241328</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="promotion material updated">
+      <created>1530605905512</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1530605905512</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -473,7 +464,8 @@
     <MESSAGE value="bookdemo google form link is added and some minor changes" />
     <MESSAGE value="removed neha from VW" />
     <MESSAGE value="added meta tags" />
-    <option name="LAST_COMMIT_MESSAGE" value="added meta tags" />
+    <MESSAGE value="promotion material updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="promotion material updated" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -705,9 +697,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="8" column="21" lean-forward="false" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -715,7 +704,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="825">
           <caret line="3494" column="0" lean-forward="true" selection-start-line="3494" selection-start-column="0" selection-end-line="3494" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -723,7 +711,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="15" column="35" lean-forward="false" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -731,7 +718,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="287">
           <caret line="198" column="54" lean-forward="false" selection-start-line="198" selection-start-column="54" selection-end-line="198" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -739,7 +725,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
           <caret line="64" column="124" lean-forward="false" selection-start-line="64" selection-start-column="124" selection-end-line="64" selection-end-column="124" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -747,7 +732,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="756">
           <caret line="47" column="48" lean-forward="false" selection-start-line="47" selection-start-column="48" selection-end-line="47" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -762,7 +746,7 @@
     <entry file="file://$PROJECT_DIR$/home/templates/home/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="563">
-          <caret line="368" column="27" lean-forward="false" selection-start-line="368" selection-start-column="27" selection-end-line="368" selection-end-column="27" />
+          <caret line="367" column="27" lean-forward="false" selection-start-line="367" selection-start-column="27" selection-end-line="367" selection-end-column="27" />
           <folding>
             <element signature="n#style#0;n#div#1;n#div#2;n#!!top" expanded="true" />
             <element signature="n#style#0;n#h6#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#3;n#!!top" expanded="true" />
