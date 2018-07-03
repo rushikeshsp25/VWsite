@@ -5,13 +5,15 @@
 {% load staticfiles %}
 <br>
 <br>
+
+
 <br>
 <div class="container">
     <div class="row">
  <div class="card col-md-6">
      <div class="card-header p-b-0">
          <h3 class="card-title">
-             <strong>Create New  Admission Request</strong>
+             <strong>Enroll Online </strong>
             </h3>
          <hr />
          <hr />
@@ -19,7 +21,7 @@
      {% if error_message %}
      <p><strong>{{ error_message }}</strong></p>
      {% endif %}
-         <form class="form-group" role="form" action="" method="post" enctype="multipart/form-data">
+         <form id="admission_form" lass="form-group" role="form" action="" method="post" enctype="multipart/form-data">
              {% csrf_token %}
              {% include 'home/form_template.html' %}
              <br>

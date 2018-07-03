@@ -44,6 +44,9 @@ def index(request):
     return render(request,'home/index.html',{'brand_new_courses':brand_new_courses,
                                              'all_courses':all_courses,})
 
+def lbwithcpp(request):
+    return render(request,'home/lbwithcpp.html')
+
 def aboutus(request):
     all_courses = course.objects.all()
     return render(request,'home/aboutus.html',{'all_courses': all_courses,})

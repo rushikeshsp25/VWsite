@@ -25,7 +25,9 @@
      <!-- FLEXSLIDER CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'home/css/flexslider.css'%}" rel="stylesheet" />
     <!-- CUSTOM STYLE CSS -->
-    <link rel="stylesheet" type="text/css"href="{% static 'home/css/style.css'%}" rel="stylesheet" />    
+    <link rel="stylesheet" type="text/css"href="{% static 'home/css/style.css'%}" rel="stylesheet" />
+    <!-- Animate css-->
+    <link rel="stylesheet" type="text/css"href="{% static 'home/css/animate.css'%}" rel="stylesheet">
     <!-- Google	Fonts -->
     <link rel="stylesheet" type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300'  />
 
@@ -60,8 +62,8 @@
             </li>
               {% endfor %}
           </ul>
-                    <li ><a class="nav-link" href="https://goo.gl/forms/bYVZ3jqoFe9OYvja2" target="_blank">BookADemo</a></li>
-                     <li><a class="nav-link" href="{%url 'home:admission'%}">Admission</a></li>
+                    <li ><a class="nav-link" href="https://goo.gl/forms/bYVZ3jqoFe9OYvja2" target="_blank">Book Demo Lecture</a></li>
+                     <li><a class="nav-link animated infinite pulse" href="{%url 'home:admission'%}">Online Admission</a></li>
                      <li> <a class="nav-link" href="https://visionwareforum.blogspot.in">Blog</a></li>
 {%if user.is_authenticated%}
         <li>

@@ -8,6 +8,7 @@ app_name='home'
 urlpatterns = [
     url(r'^$', views.index,name='index'),
     url(r'^aboutus/', views.aboutus,name='aboutus'),
+    url(r'^lbwithcpp/', views.lbwithcpp,name='lbwithcpp'),
     url(r'^admission/', views.admission,name='admission'),
     url(r'^contactus/', views.contactus,name='contactus'),
     url(r'^login_user/$', views.login_user, name='login_user'),
