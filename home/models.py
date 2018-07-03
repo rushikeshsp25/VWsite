@@ -37,7 +37,7 @@ LEVEL_CHOICES= (
 )
 
 class course(models.Model):
-    course_name=models.CharField(max_length=30,unique=True)
+    course_name=models.CharField(max_length=50,unique=True)
     level=models.CharField(max_length=20,choices=LEVEL_CHOICES)
     course_icon=models.FileField()
     fees=models.IntegerField(default=0)
