@@ -141,7 +141,7 @@
                   <h3 >Logic Building with C++</h3>
                   <p>
                     <h2>Course Material</h2>
-                    <img alt="workshop in PCCOE"  src="{%static 'home/images/courses/lbwithcpp.png'%}" height="268px">
+                    <img alt="workshop in PCCOE"  src="{%static 'home/images/courses/lbwithcpp.png'%}" width="100%" height="268px">
                   </p>
                   <p><a class="btn btn-primary btn-lg" href="{%url 'home:lbwithcpp'%}" role="button">Download Now</a></p>
                 </div>
@@ -277,18 +277,7 @@
                  <img src="{%static 'home/images/courses.PNG'%}" class="img-thumbnail" />
            </div>
                <div class="col-md-8">
-                   <div class="panel-group" id="accordion">
-                        <div class="panel panel-default" data-scroll-reveal="enter from the bottom after 0.5s">
-                            <div class="panel-heading" >
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="collapsed">
-                                  <strong>   5+</strong> COMPUTER SCIENCE COURSES
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapse1" class="panel-collapse collapse" style="height: 0px;">
-                                <div class="panel-body">
-                                    <div class="row">
+                    <div class="row">
 
                                     {%for course in all_courses%}
                                         <div class="col-md-3">
@@ -298,12 +287,7 @@
                                     </div>
                                             {%endfor%}
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                   
            </div>
              
                  

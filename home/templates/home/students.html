@@ -34,7 +34,7 @@
     </div>
     <div class="row">
 
-        <div class="col-md-4">
+        <div class="col-md-3">
 <form class="form-horizontal" role="form" action="{% url 'home:search_student' search_by='eno'%}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group">
@@ -52,7 +52,8 @@
                         </div>
       </form>
             </div>
-        <div class="col-md-4">
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
     <form class="form-horizontal" role="form" action="{% url 'home:search_student' search_by='name'%}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group">
@@ -70,7 +71,8 @@
                         </div>
       </form>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
              <form class="form-horizontal" role="form" action="{% url 'home:search_student' search_by='email'%}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group">
@@ -88,6 +90,7 @@
                         </div>
       </form>
         </div>
+        <div class="col-md-1"></div>
         </div>
 </div>
 <hr><hr><hr>
