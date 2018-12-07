@@ -3,7 +3,36 @@
   <component name="ChangeListManager">
     <list default="true" id="d9a45c70-b536-40f2-988a-cc39b696e69c" name="Default" comment="one div was unclosed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/forms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/post_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/post_edit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Javabatch.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Javabatch_7VFoa4H.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Javabatch_EYaK9Ij.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Javabatch_bWn5V7q.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/c.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/c_racJuM6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/c_sylabus.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/cpp_sylabus.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/django.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/java.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/me.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/pd.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/pd_Too57fi.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/pd_eCJNIfg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/personality.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/python.jpg" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,7 +96,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/home/templates/home/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-364">
+            <state relative-caret-position="2475">
               <caret line="165" column="4" selection-start-line="165" selection-start-column="4" selection-end-line="165" selection-end-column="4" />
             </state>
           </provider>
@@ -238,35 +267,6 @@
               <item name="VWsite" type="462c0819:PsiDirectoryNode" />
               <item name="home" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="VWsite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="VWsite" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="VWsite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="VWsite" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="VWsite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="VWsite" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="VWsite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="VWsite" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="home" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -542,12 +542,18 @@
       <option name="project" value="LOCAL" />
       <updated>1544156055154</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="one div was unclosed">
+      <created>1544156198650</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1544156198650</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="27" width="1853" height="1053" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" weight="0.32988048" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.19701162" />
@@ -871,7 +877,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/home/templates/home/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-364">
+        <state relative-caret-position="2475">
           <caret line="165" column="4" selection-start-line="165" selection-start-column="4" selection-end-line="165" selection-end-column="4" />
         </state>
       </provider>
