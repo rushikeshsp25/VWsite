@@ -100,7 +100,7 @@ button[type=submit] {
 }
 #announcementLinetext{
     font-family: 'Oswald', sans-serif;
-    color: greenyellow;
+    color: #c4965d;
     top:0;
     left:0;
     font-size:30px;
@@ -122,10 +122,10 @@ button[type=submit] {
     text-align: left;
 }
 .new_batch .jumbotron h2 {
-    color: greenyellow;
+    color: #c4965d;
 }
 .new_batch .jumbotron .btn {
-    background-color: greenyellow;
+    background-color: #c4965d;
     color: #252525;
     width: 100%;
 }
@@ -189,7 +189,7 @@ button[type=submit] {
 }
 h1::after {
     content: " ";
-    border: solid 2px #2f9484;
+    border: solid 2px #B0074A;
     display: block;
     width: 200px;
     margin: 12px auto;
@@ -199,7 +199,7 @@ h1::after {
   ABOUT STYLES 
   ===================================*/
 .about-div hr {
-    border: 1px solid #1A94C4;
+    border: 1px solid #6d4615;
 }
 
 .about-div h3 {
@@ -211,8 +211,8 @@ h1::after {
     padding-top: 10px;
 }
 .icon-round-border {
-    border: 10px double #1A94C4;
-    color: #2f9484;
+    border: 10px double #6d4615;
+    color: #6d4615;
     text-align: center;
     padding-top: 15px;
     height: 100px;
@@ -227,7 +227,7 @@ h1::after {
 .icon-round-border:hover {
         color: #fff;
         border: 10px double #fff;
-        background-color: #1A94C4;
+        background-color: #6d4615;
         -webkit-transition: 0.3s;
         -moz-transition: 0.3s;
         -o-transition: 0.3s;
