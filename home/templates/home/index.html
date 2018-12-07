@@ -66,7 +66,7 @@
                   </p>
                   <p><a class="btn  btn-lg animated infinite pulse" href="{%url 'home:admission'%}" role="button">Enroll Online</a></p>
                 </div>
-               </div>
+            </div>
 
             <div class="col-md-3">
                   <div class="jumbotron">
@@ -140,39 +140,31 @@
 </div>
 <!--HOME SECTION END-->
 <div id="course-sec" class="container-fluid set-pad">
-             <div class="text-center">
-                     <h1 data-scroll-reveal="enter from the bottom after 0.1s" class="header-line">OUR COURSES </h1>
-                     <p data-scroll-reveal="enter from the bottom after 0.3s">
-                      VisionWare offers various courses for IT students.
-                         Courses are designed in such a way that , your basics become strong and you can implement the concepts.
-                         </p>
-
-             </div>
-             <!--/.HEADER LINE END-->
-
-
-           <div class="row set-row-pad" >
-           <div class="col-md-4" data-scroll-reveal="enter from the bottom after 0.4s" >
-                 <img src="{%static 'home/images/courses.PNG'%}" class="img-thumbnail" />
-           </div>
-               <div class="col-md-8">
-                    <div class="row">
-
-                                    {%for course in all_courses%}
-                                        <div class="col-md-3">
-                                            <a href="{%url 'home:course_details' course_name=course.course_name%}">
-                                                <img src="{{course.course_icon.url}}" width="100%" height="100"></a>
-                                        <a href="{%url 'home:course_details' course_name=course.course_name%}">{{course.course_name}}</a>
-                                    </div>
-                                    {%endfor%}
-
-                    </div>
-           </div>
-
-
-
-               </div>
-             </div>
+    <div class="text-center">
+        <h1 data-scroll-reveal="enter from the bottom after 0.1s" class="header-line">OUR COURSES </h1>
+        <p data-scroll-reveal="enter from the bottom after 0.3s">
+            VisionWare offers various courses for IT students.
+            Courses are designed in such a way that , your basics become strong and you can implement the concepts.
+        </p>
+    </div>
+    <!--/.HEADER LINE END-->
+    <div class="row set-row-pad" >
+        <div class="col-md-4" data-scroll-reveal="enter from the bottom after 0.4s" >
+            <img src="{%static 'home/images/courses.PNG'%}" class="img-thumbnail" />
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                {%for course in all_courses%}
+                <div class="col-md-3">
+                    <a href="{%url 'home:course_details' course_name=course.course_name%}">
+                        <img src="{{course.course_icon.url}}" width="100%" height="100"></a>
+                    <a href="{%url 'home:course_details' course_name=course.course_name%}">{{course.course_name}}</a>
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</div>
       <!-- COURSES SECTION END-->
       <!-- COURSES SECTION END-->
 <div id="contact-sec"   >
