@@ -109,9 +109,17 @@ button[type=submit] {
 /*=====================================
   new batch
     ===================================*/
+.collab{
+    margin-bottom: 20px;
+}
 .new_batch .jumbotron{
     background-color: #252525;
     color: wheat;
+    padding: 5%;
+    text-align: center;
+}
+.new_batch .jumbotron ul{
+    text-align: left;
 }
 .new_batch .jumbotron h2 {
     color: greenyellow;
@@ -119,7 +127,9 @@ button[type=submit] {
 .new_batch .jumbotron .btn {
     background-color: greenyellow;
     color: #252525;
+    width: 100%;
 }
+
 /*=====================================
   HOME STYLES 
     ===================================*/
