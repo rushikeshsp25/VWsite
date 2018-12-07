@@ -1,201 +1,26 @@
 ﻿/*=============================================================
-    Authour URI: www.binarytheme.com
-    License: Commons Attribution 3.0
-
-    http://creativecommons.org/licenses/by/3.0/
-
-    100% To use For Personal And Commercial Use.
-    IN EXCHANGE JUST GIVE US CREDITS AND TELL YOUR FRIENDS ABOUT US
-   
+    Authour : team VisionWare
     ========================================================  */
 
 /* =============================================================
    GENERAL STYLES
  ============================================================ */
-body {
+html,body {
     font-family: 'Open Sans', sans-serif;
     line-height: 30px;
     font-size: 14px;
+    width: 100%;
+    height: 100%;
 }
-
-.set-pad {
-    padding-top:35px;
+.container-fluid{
+    padding-left: 10%;
+    padding-right: 10%;
 }
-.set-row-pad {
-    padding-top:30px;
-    padding-bottom:50px;
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
-/*=====================================
-  NAVBAR STYLES 
-    ===================================*/
-
-.logo-custom {
-    max-height: 40px;
-}
-
-#menu {
-    background-color: rgba(28, 43, 75, 1);
-    color: #fff;
-    font-size: 12px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    min-height: 70px;
-}
-
-
-.navbar-inverse {
-    border-color: transparent;
-}
-
-    .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-nav > li > a:hover {
-        color: #FFF;
-        padding: 22px 10px;
-    }
-
-    .promotion {
-    padding-top: 60px;
-    padding-bottom: 60px;
-}
-
-/*=====================================
-  HOME STYLES 
-    ===================================*/
-.home-sec {
-    padding-top: 10px;
-    padding-bottom: 60px;
-    background: url(../images/header.jpg) no-repeat center center;
-    padding: 0;
-    -webkit-background-size: cover;
-    background-size: cover;
-    color: #fff;
-    background-attachment: fixed;
-}
-
-    .home-sec .overlay {
-        background: rgba(38, 57, 88, 0.89);
-        min-height: 500px;
-    }
-
-    .home-sec h1 {
-        color: #fff;
-        font-weight: 900;
-        font-size: 50px;
-        text-transform: uppercase;
-        padding-bottom: 35px;
-    }
-
-    .home-sec h3 {
-        text-transform: uppercase;
-    }
-
-    @keyframes slide {
-  from { left: 100%;}
-  to { left: -100%;}
-}
-@-webkit-keyframes slide {
-  from { left: 100%;}
-  to { left: -100%;}
-}
-
-
-        .announcement{
-         background: #FFAB00;
-    color: #000;
-        }
-
-         .announcement h2 {
-        font-size: 20px;
-        font-weight: 900;
-        padding: 5px 10px 10px 5px;
-        color: #3E2723;
-    }
-
-        .announcement h2  i {
-            margin-left: 8px;
-            margin-right: 8px;
-}
-
-
-
-#text {
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:120px;
-  font-size:20px;
-  animation-name: slide;
-  animation-duration: 20s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  -webkit-animation-name: slide;
-  -webkit-animation-duration: 10s;
-  -webkit-animation-timing-function:linear;
-  -webkit-animation-iteration-count: infinite;
-}
-
-.testimonials-sec {
-    padding-top: 10px;
-    padding-bottom: 60px;
-    padding: 0;
-    -webkit-background-size: cover;
-    background-color: 	#B8860B;
-    background-size: cover;
-    color: #fff;
-    background-attachment: fixed;
-}
-
-.testimonials-sec h1 {
-        color: #000;
-        font-weight: 900;
-        font-size: 50px;
-        text-transform: uppercase;
-        padding-bottom: 35px;
-    }
-
-
-
-
-.set-flexi {
-    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0);
-    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0);
-    -o-box-shadow: 0 1px 4px rgba(0, 0, 0, 0);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0);
-    background-color: transparent;
-    border: 0px solid #000;
-    padding-top: 120px;
-}
-
-.flex-control-nav {
-    display: none!important;
-}
-
-.set-flexi a {
-    margin: 5px;
-}
-/*=====================================
-  TAG LINE STYLES 
-    ===================================*/
-
-.tag-line {
-    background: #E9E9E9;
-    color: #000;
-}
-
-
-
-    .tag-line h2 {
-        font-size: 20px;
-        font-weight: 900;
-        padding: 5px 10px 10px 5px;
-        color: #005E5A;
-    }
-
-        .tag-line h2 > i {
-            margin-left: 8px;
-            margin-right: 8px;
-        }
-
 input[type=text],input[type=email],input[type=password], select {
     width: 100%;
     display: inline-block;
@@ -214,9 +39,134 @@ button[type=submit] {
     border-radius: 4px;
     cursor: pointer;
 }
+.set-pad {
+    padding-top:35px;
+}
+.set-row-pad {
+    padding-top:30px;
+    padding-bottom:50px;
+}
+/*=====================================
+  NAVBAR STYLES 
+    ===================================*/
 
-
-
+.logo-custom {
+    max-height: 40px;
+}
+ .navbar {
+    min-height: 80px;
+     background-color: #B0074A;
+     font-weight: bold;
+}
+.navbar-brand {
+  padding: 0 15px;
+  height: 80px;
+  line-height: 80px;
+}
+.nav.navbar-nav.navbar-right li a {
+    color: #ffffff;     /*font color of navigation bar*/
+}
+.nav.navbar-nav.navbar-right li ul li a {
+    color: #000000;     /*font color of navigation bar*/
+}
+@media (min-width: 768px) {
+  .navbar-nav > li > a {
+    /* (80px - line-height of 27px) / 2 = 26.5px */
+    padding-top: 26.5px;
+    padding-bottom: 26.5px;
+    line-height: 27px;
+  }
+}
+.navbar-inverse {
+    border-color: transparent;
+}
+/*=====================================
+  homeCarousal styles
+    ===================================*/
+#homeCarousal{
+    margin-top:80px ;
+    background-color:#D90429;
+}
+.students_watching img{
+    margin-bottom: 20px;
+}
+/*=====================================
+  announcements
+    ===================================*/
+.announcement-line {
+    background: #252525;
+    min-height:60px;
+    padding-top: 10px;
+}
+#announcementLinetext{
+    font-family: 'Oswald', sans-serif;
+    color: greenyellow;
+    top:0;
+    left:0;
+    font-size:30px;
+    font-weight:10px;
+}
+/*=====================================
+  new batch
+    ===================================*/
+.new_batch .jumbotron{
+    background-color: #252525;
+    color: wheat;
+}
+.new_batch .jumbotron h2 {
+    color: greenyellow;
+}
+.new_batch .jumbotron .btn {
+    background-color: greenyellow;
+    color: #252525;
+}
+/*=====================================
+  HOME STYLES 
+    ===================================*/
+.home-sec {
+    background: url(../images/header.jpg) no-repeat center center;
+    padding: 0;
+    -webkit-background-size: cover;
+    background-size: cover;
+    color: #fff;
+    background-attachment: fixed;
+}
+.home-sec .overlay {
+    background: rgba(25 ,24, 22, 0.89);
+}
+.home-sec h1 {
+    color: #fff;
+    font-weight: 900;
+    font-size: 50px;
+    text-transform: uppercase;
+    padding-bottom: 35px;
+}
+.home-sec h3 {
+    text-transform: uppercase;
+}
+@keyframes slide {
+  from { left: 100%;}
+  to { left: -100%;}
+}
+@-webkit-keyframes slide {
+  from { left: 100%;}
+  to { left: -100%;}
+}
+.set-flexi {
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0);
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0);
+    -o-box-shadow: 0 1px 4px rgba(0, 0, 0, 0);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0);
+    background-color: transparent;
+    border: 0px solid #000;
+    padding-top: 120px;
+}
+.flex-control-nav {
+    display: none!important;
+}
+.set-flexi a {
+    margin: 5px;
+}
 /*=====================================
   HEADER LINE STYLES 
     ===================================*/
@@ -227,7 +177,6 @@ button[type=submit] {
     padding-top: 25px;
     color: #000;
 }
-
 h1::after {
     content: " ";
     border: solid 2px #2f9484;
@@ -242,7 +191,18 @@ h1::after {
 .about-div {
     padding: 30px;
 }
+.about-div hr {
+    border: 1px solid #1A94C4;
+}
 
+.about-div h3 {
+    font-size: 25px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.about-div p {
+    padding-top: 10px;
+}
 .icon-round-border {
     border: 10px double #1A94C4;
     color: #2f9484;
@@ -257,8 +217,7 @@ h1::after {
     -o-transition: 0.3s;
     transition: 0.3s;
 }
-
-    .icon-round-border:hover {
+.icon-round-border:hover {
         color: #fff;
         border: 10px double #fff;
         background-color: #1A94C4;
@@ -266,66 +225,13 @@ h1::after {
         -moz-transition: 0.3s;
         -o-transition: 0.3s;
         transition: 0.3s;
-    }
-
-.about-div hr {
-    border: 1px solid #1A94C4;
 }
-
-.about-div h3 {
-    font-size: 25px;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.about-div p {
-    padding-top: 10px;
-}
-
 .btn-set {
     border-radius: 0px;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     margin-bottom: 20px;
 }
-/*=====================================
-  FACULTY STYLES 
-  ===================================*/
-#faculty-sec {
-    background-color: #000;
-    color: #fff;
-}
-
-    #faculty-sec .header-line {
-        color: #fff;
-    }
-.faculty-div h4 {
-    line-height:30px;
-    font-weight:700;
-}
-.faculty-div {
-    padding: 30px;
-}
-
-    .faculty-div hr {
-        border: 1px solid #1A94C4;
-    }
-
-    .faculty-div h3 {
-        font-size: 25px;
-        font-weight: 700;
-        text-transform: uppercase;
-    }
-
-    .faculty-div p {
-        padding-top: 10px;
-        padding-bottom: 15px;
-    }
-
-    .faculty-div img {
-        border: 10px double #fff;
-    }
-
 /*=====================================
   CONTACT STYLES 
   ===================================*/
@@ -339,25 +245,63 @@ h1::after {
     color: #fff;
     background-attachment: fixed;
 }
-
 #contact-sec .overlay {
-        background: rgba(0, 0, 0, 0.76);
+        background: rgba(25 ,24, 22 ,0.76);
         min-height: 600px;
-    }
-
-    #contact-sec h1 {
-        color:#fff;
-    }
+}
+#contact-sec h1 {
+    color:#fff;
+}
 #contact-sec .form-control{
     background-color:rgba(255, 255, 255, 0);
     color:#fff;
+}
+
+#features-sec .about-div {
+    text-align: center;
+}
+#features-sec .about-div p {
+    text-align: left;
+}
+/*=====================================
+  testimonials STYLES
+  ===================================*/
+.testimonials_contact #testimonials-section {
+    padding-top: 0;
+}
+#testimonials-section{
+    text-align: center;
+}
+.testimonials_contact {
+    background-color: 	#252525;
+}
+.testimonials_contact h1 {
+        color: #fff;
+        font-weight: 900;
+        text-transform: uppercase;
+}
+.testimonials_contact h2 {
+        color: #fff;
+        font-weight: 500;
+}
+.testimonials_contact h3 {
+        color: #fff;
+        font-weight: 500;
+}
+.testimonials_contact h4 {
+        color: #fff;
+        font-weight: 500;
+}
+.testimonials_contact p {
+        color: #fff;
+        font-weight: 500;
 }
 /*=====================================
   Footer STYLES 
   ===================================*/
 #footer {
     padding:5px 20px;
-    background-color:#2d3d5a;
+    background-color:#B0074A;
     text-align:right;
     color:#fff;
     font-size:15px;

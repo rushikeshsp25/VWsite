@@ -5,7 +5,6 @@
         {% block title %}{% endblock %}
     </title>
     {% load staticfiles %}
-	
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="VisionWare is an IT Training Institute ,
@@ -15,7 +14,6 @@
     <meta name="author" content="Rushikesh Phalke" />
     <!-- google verification-->
     <meta name="google-site-verification" content="KqqWnUCf-Hoqw3zQehruxeVGO5IbsZYctHs3lSJGDe4" />
-    
       <!-- BOOTSTRAP CORE STYLE CSS -->
     <link rel="shortcut icon" type="image/png" href="{%  static 'home/images/favicon.ico' %}"/>
 
@@ -30,76 +28,61 @@
     <link rel="stylesheet" type="text/css"href="{% static 'home/css/animate.css'%}" rel="stylesheet">
     <!-- Google	Fonts -->
     <link rel="stylesheet" type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300'  />
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
 
+
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2.0/dist/flickity.min.css">
+    <script src="https://unpkg.com/flickity@2.0/dist/flickity.pkgd.min.js"></script>
 </head>
-
-  <body>
+<body>
 
 <div class="navbar navbar-inverse navbar-fixed-top " id="menu">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{%url 'home:index'%}"><img alt="Pioneering | Refining | Developing"  src="{%static 'home/images/logo.png'%}" width="100" height="50"></a>
-            </div>
-            <div class="navbar-collapse collapse move-me">
-                <ul class="nav navbar-nav navbar-right">
-
-                    <li ><a class="nav-link" href="{%url 'home:index'%}">Home</a></li>
-                     <li><a class="nav-link" href="{%url 'home:aboutus'%}">About us</a></li>
-
-                    <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-              {% for course in all_courses %}
-            <li>
-                <a href="{%url 'home:course_details' course_name=course.course_name%}">
-                    {{course.course_name}}
-                </a>
-            </li>
-              {% endfor %}
-          </ul>
-                    <li ><a class="nav-link" href="https://goo.gl/forms/bYVZ3jqoFe9OYvja2" target="_blank">Book Demo Lecture</a></li>
-                     <li><a class="nav-link animated infinite pulse" href="{%url 'home:admission'%}">Online Admission</a></li>
-                     <li> <a class="nav-link" href="https://visionwareforum.blogspot.in">Blog</a></li>
-{%if user.is_authenticated%}
-        <li>
-            <a class="nav-link" href="{%url 'home:students'%}">Students</a>
-            </li>
-
-
-            {%endif%}
-                    <li><a class="nav-link" href="{%url 'home:contactus'%}">Contact us</a></li>
-
-
-                    {%if user.is_authenticated%}
-        <li >
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Hello {{user.username}}
-        </a>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="{%url 'home:user_options'%}">Options</a></li>
-          <li><a class="dropdown-item" href="{%url 'home:logout_user'%}">Logout {{user.username}}</a></li>
-        </ul>
-      </li>
-        {%else%}
-    	<li >
-             <a class="nav-link" href="{%url 'home:login_user'%}">LogIn</a>
-      </li>
-        {%endif%}
-                </ul>
-            </div>
-           
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{%url 'home:index'%}"><img alt="Pioneering | Refining | Developing"  src="{%static 'home/images/logo.png'%}" height="75"></a>
+        </div>
+        <div class="navbar-collapse collapse move-me">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a class="nav-link" href="{%url 'home:index'%}">Home</a></li>
+                <li><a class="nav-link" href="{%url 'home:aboutus'%}">About us</a></li>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        {% for course in all_courses %}
+                        <li><a href="{%url 'home:course_details' course_name=course.course_name%}">{{course.course_name}}</a></li>
+                        {% endfor %}
+                    </ul>
+                <li ><a class="nav-link  animated infinite flash" href="#" target="_blank">Placement For Sure</a></li>
+                <li><a class="nav-link animated infinite flash" href="{%url 'home:admission'%}">Online Admission</a></li>
+                <li> <a class="nav-link" href="https://visionwareforum.blogspot.in" target="_blank">Blog</a></li>
+                {%if user.is_authenticated%}
+                <li><a class="nav-link" href="{%url 'home:students'%}">Students</a></li>
+                {%endif%}
+                <li><a class="nav-link" href="{%url 'home:contactus'%}">Contact us</a></li>
+                {%if user.is_authenticated%}
+                <li ><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello {{user.username}}</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{%url 'home:user_options'%}">Options</a></li>
+                        <li><a class="dropdown-item" href="{%url 'home:logout_user'%}">Logout {{user.username}}</a></li>
+                    </ul>
+                </li>
+                {%else%}
+                <li ><a class="nav-link" href="{%url 'home:login_user'%}">LogIn</a></li>
+                {%endif%}
+            </ul>
         </div>
     </div>
-    
-    {% block body %}
-    {% endblock %}
 </div>
+{% block body %}
 
+{% endblock %}
+<div id="footer">
+          &copy 2019 visionware.online | All Rights Reserved |  <a href="#" style="color: #fff" target="_blank">Design by : Team VW</a>
+    </div>
 <!--  Jquery Core Script -->
     <script src="{% static 'home/js/jquery-1.10.2.js'%}"></script>
     <!--  Core Bootstrap Script -->
@@ -110,7 +93,7 @@
     <script src="{% static 'home/js/scrollReveal.js'%}"></script>
     <!--  Scroll Scripts --> 
     <script src="{% static 'home/js/jquery.easing.min.js'%}"></script>
-    <!--  Custom Scripts --> 
-         <script src="{% static 'home/js/custom.js'%}"></script>
+    <!--  Custom Scripts -->
+    <script src="{% static 'home/js/custom.js'%}"></script>
   </body>
 </html>

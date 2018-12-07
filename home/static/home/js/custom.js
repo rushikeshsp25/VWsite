@@ -1,32 +1,21 @@
 ﻿
-/*=============================================================
-    Authour URI: www.binarytheme.com
-    License: Commons Attribution 3.0
-
-    http://creativecommons.org/licenses/by/3.0/
-
-    100% Free To use For Personal And Commercial Use.
-    IN EXCHANGE JUST GIVE US CREDITS AND TELL YOUR FRIENDS ABOUT US
-   
-    ========================================================  */
-
 (function ($) {
     "use strict";
     var mainApp = {
         scrollAnimation_fun: function () {
 
             /*====================================
-             ON SCROLL ANIMATION SCRIPTS 
+             ON SCROLL ANIMATION SCRIPTS
             ======================================*/
-           
-            
+
+
             window.scrollReveal = new scrollReveal();
 
         },
          scroll_fun: function () {
 
             /*====================================
-                 EASING PLUGIN SCRIPTS 
+                 EASING PLUGIN SCRIPTS
                 ======================================*/
             $(function () {
                 $('.move-me a').bind('click', function (event) { //just pass move-me in design and start scrolling
@@ -43,7 +32,7 @@
          top_flex_slider_fun:function()
          {
              /*====================================
-              FLEX SLIDER SCRIPTS 
+              FLEX SLIDER SCRIPTS
              ======================================*/
              $('#main-section').flexslider({
                  animation: "fade", //String: Select your animation type, "fade" or "slide"
@@ -61,7 +50,7 @@
 
              });
          },
-      
+
         custom_fun:function()
         {
             /*====================================
@@ -74,14 +63,18 @@
         },
 
     }
-   
-   
+
+
     $(document).ready(function () {
         mainApp.scrollAnimation_fun();
         mainApp.scroll_fun();
         mainApp.top_flex_slider_fun();
         mainApp.custom_fun();
     });
+
 }(jQuery));
+
+
+
 
 
