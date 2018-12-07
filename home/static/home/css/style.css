@@ -13,8 +13,8 @@ html,body {
     height: 100%;
 }
 .container-fluid{
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 .center {
     display: block;
@@ -198,9 +198,6 @@ h1::after {
 /*=====================================
   ABOUT STYLES 
   ===================================*/
-.about-div {
-    padding: 30px;
-}
 .about-div hr {
     border: 1px solid #1A94C4;
 }
@@ -268,7 +265,7 @@ h1::after {
 }
 
 #features-sec .about-div {
-    text-align: center;
+   text-align: center;
 }
 #features-sec .about-div p {
     text-align: left;
@@ -312,7 +309,7 @@ h1::after {
 #footer {
     padding:5px 20px;
     background-color:#B0074A;
-    text-align:right;
+    text-align:center;
     color:#fff;
     font-size:15px;
 }
