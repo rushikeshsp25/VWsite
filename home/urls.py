@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^contact_visionware/$', views.contact_student, name='contact_student'),
     url(r'^contacted_students/$', views.contacted_students, name='contacted_students'),
     url(r'^success/(?P<success_type>[^~,]+)/$', views.success, name='success'),
+    url(r'^satcheck/', views.satcheck, name='satcheck'),
 ]
 
 if settings.DEBUG:              #imp to add for dealing with image

@@ -300,3 +300,7 @@ def success(request,success_type):
         return render(request, 'home/success.html',{'success_message':message1,})
     elif success_type=='admission_success':
         return render(request, 'home/success.html',{'success_message':message3,})
+
+def satcheck(request):
+    all_courses = course.objects.all()
+    return render(request,'home/underconstruction.html',{'all_courses': all_courses,})
