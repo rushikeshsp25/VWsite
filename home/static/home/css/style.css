@@ -303,6 +303,12 @@ h1::after {
         color: #fff;
         font-weight: 500;
 }
+.contact h2 {
+    color: #fff;
+    font-size: 25px;
+    font-weight: 300;
+}
+
 /*=====================================
   Footer STYLES 
   ===================================*/
@@ -311,5 +317,4 @@ h1::after {
     background-color:#B0074A;
     text-align:center;
     color:#fff;
-    font-size:15px;
 }
