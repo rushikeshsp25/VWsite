@@ -7,60 +7,49 @@
 <br/>
 <br/>
 <div class="container">
-<div class="row">
-    <div class="col-md-4">
+    <div class="row">
+        <div class="col-md-4">
+            <img  src="{{course.course_icon.url}}" alt="course image" width="100%">
+            <p class="card-text">
+              <div align="center">
+              <h2>{{course.course_name}}</h2>
+                for {{course.level}}
+              </div>
+            </p>
+            <br>
+        </div>
+        <div class="col-md-5">
+            <div class="container-fluid">
+            <h2>Outcomes : </h2>
+                <p>{{course.outcomes|linebreaksbr}}</p>
+                <hr>
+            <h2>Requirements : </h2>
+                <p>{{course.requirements|linebreaksbr}}</p>
+                <hr>
 
-  <img  src="{{course.course_icon.url}}" alt="course image" width="100%">
-
-    <p class="card-text">
-      <div align="center">
-      <h2>{{course.course_name}}</h2>
-        for {{course.level}}
+                </div>
+        </div>
+        <div class="col-md-3">
+            <div class="container-fluid" align="center">
+                <button type="button" class="btn btn-warning">
+                <h2>Fees : {{course.fees}} </h2>
+            </button>
+            <br><br>
+                <a href="{{course.syllabus.url}}">
+              <img class="marginleft10" src="{% static 'home/images/pdf.png'%}" alt="PDF" >
+                <br>
+              Download syllabus</a>
+          </div>
+        </p>
       </div>
-    </p>
-
-
-            <br>
-</div>
-
-    <div class="col-md-5">
-        <div class="container-fluid">
-        <h2>Outcomes : </h2>
-            <p>{{course.outcomes|linebreaksbr}}</p>
-            <hr>
-        <h2>Requirements : </h2>
-            <p>{{course.requirements|linebreaksbr}}</p>
-            <hr>
-
-            </div>
     </div>
-    <div class="col-md-3">
-
-        <div class="container-fluid" align="center">
-            <button type="button" class="btn btn-warning">
-            <h2>Fees : {{course.fees}} </h2>
-        </button>
-        <br><br>
-            <a href="{{course.syllabus.url}}">
-          <img class="marginleft10" src="{% static 'home/images/pdf.png'%}" alt="PDF" >
-            <br>
-          Download syllabus</a>
-      </div>
-    </p>
-  </div>
-</div>
-            <br>
-</div>
-
-
-    </div>
-
+    <br>
 </div>
 <div class="container">
     <h2>Description :</h2>
-            <p>{{course.description|linebreaksbr}}</p>
-            <hr>
-            <br>
+    <p>{{course.description|linebreaksbr}}</p>
+    <hr>
 </div>
+</br></br>
 </div>
 {% endblock %}
