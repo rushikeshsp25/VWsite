@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d9a45c70-b536-40f2-988a-cc39b696e69c" name="Default" comment="final edit">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/static/home/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/home/static/home/css/style.css" afterDir="false" />
-    </list>
+    <list default="true" id="d9a45c70-b536-40f2-988a-cc39b696e69c" name="Default" comment="final edit" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +12,7 @@
     <session id="-2100152800">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="13" />
+          <entry key="project.closed" value="14" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.6" value="3" />
@@ -317,13 +314,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1510388074704</updated>
-    </task>
-    <task id="LOCAL-00002" summary="course structure changed,it is made as fk for course in student modal">
-      <created>1510811670082</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1510811670082</updated>
     </task>
     <task id="LOCAL-00003" summary="blog app is removed and visionwareforum.blogspot.in link is given over there">
       <created>1511080640685</created>
@@ -661,7 +651,14 @@
       <option name="project" value="LOCAL" />
       <updated>1544336121589</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="final edit">
+      <created>1544336534283</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1544336534283</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TodoView">
@@ -675,7 +672,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="27" width="1853" height="1053" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" weight="0.32988048" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.21029331" />
