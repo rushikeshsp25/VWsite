@@ -29,6 +29,4 @@ urlpatterns = [
     url(r'^success/(?P<success_type>[^~,]+)/$', views.success, name='success'),
     url(r'^satcheck/', views.satcheck, name='satcheck'),
 ]
-
-if settings.DEBUG:              #imp to add for dealing with image
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
