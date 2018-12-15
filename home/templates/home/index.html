@@ -138,9 +138,10 @@
         <div class="col-md-8">
             <div class="row">
                 {%for course in all_courses%}
-                <div data-scroll-reveal="enter from the right after 0.4s" class="col-md-3 col-xs-6">
+                <div data-scroll-reveal="enter from the right after 0.4s" class="col-md-3 col-xs-6" style="margin-bottom: 30px">
                     <a href="{%url 'home:course_details' course_name=course.course_name%}">
                         <img src="{{course.course_icon.url}}" width="100%" ></a>
+                    <a href="{%url 'home:admission'%}"><button type="submit" class="btn">Enroll Now</button></a>
                 </div>
                 {%endfor%}
             </div>

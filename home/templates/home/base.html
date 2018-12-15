@@ -54,7 +54,7 @@
                         <li><a href="{%url 'home:course_details' course_name=course.course_name%}">{{course.course_name}}</a></li>
                         {% endfor %}
                     </ul>
-                <li ><a class="nav-link  animated infinite flash" href="#" target="_blank">Placement For Sure</a></li>
+                <li ><a class="nav-link  animated infinite flash" href="{%url 'home:course_details' course_name='Placement For Sure'%}" target="_blank">Placement For Sure</a></li>
                 <li><a  href="{%url 'home:admission'%}">Online Admission</a></li>
                 <li> <a class="nav-link" href="https://visionwareforum.blogspot.in" target="_blank">Blog</a></li>
                 {%if user.is_authenticated%}

@@ -44,8 +44,8 @@ input[type=text],input[type=email],input[type=password], select {
 
 button[type=submit] {
     width: 100%;
-    background-color: #4CAF50;
-    color: white;
+    background-color: #c4965d;
+    color: #000000;
     margin: 8px 0;
     border: none;
     border-radius: 4px;
@@ -102,9 +102,7 @@ button[type=submit] {
     width: 100%;
     margin-bottom: 20px;
 }
-.courceicon{
 
-}
 /*=====================================
   announcements
     ===================================*/
