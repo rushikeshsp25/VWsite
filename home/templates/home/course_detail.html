@@ -19,16 +19,10 @@
             <br>
         </div>
         <div class="col-md-7">
-            <div class="container-fluid">
-                <h2>Course : {{course.course_name}}</h2>
-            <h3>Outcomes : </h3>
-                <p>{{course.outcomes|linebreaksbr}}</p>
-                <hr>
-            <h3>Requirements : </h3>
-                <p>{{course.requirements|linebreaksbr}}</p>
-                <hr>
-
-                </div>
+            <h2>Course : {{course.course_name}}</h2>
+            <h3>Description :</h3>
+    <p>{{course.description|linebreaksbr}}</p>
+    <hr>
         </div>
         <div class="col-md-2 fees_display">
             <div class="container-fluid" align="center">
@@ -37,7 +31,7 @@
             </button>
                 <br>
                 {% if course.fees_description%}
-                <div class="alert alert-info" role="alert"><p>{{course.fees_description}}</p></div>
+                <div class="alert alert-info" role="alert"><p>{{course.fees_description|linebreaksbr}}</p></div>
                 {% endif %}
 
             <br>
@@ -54,10 +48,15 @@
     <br>
 </div>
 <div class="container-fluid">
-    <h3>Description :</h3>
-    <p>{{course.description|linebreaksbr}}</p>
-    <hr>
-</div>
+            <h3>Outcomes : </h3>
+                <p>{{course.outcomes|linebreaksbr}}</p>
+                <hr>
+            <h3>Requirements : </h3>
+                <p>{{course.requirements|linebreaksbr}}</p>
+                <hr>
+
+                </div>
+        </div>
 </br></br>
 </div>
 {% endblock %}
