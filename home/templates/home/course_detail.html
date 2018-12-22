@@ -1,52 +1,58 @@
 {% extends 'home/base.html' %}
 {% block title %}Course Details | VisionWare{% endblock %}
-
 {% block body %}
 {% load staticfiles %}
 <br/>
 <br/>
 <br/>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <img  src="{{course.course_icon.url}}" alt="course image" width="100%">
+            <a href="{%url 'home:admission'%}"><button type="submit" class="btn">Enroll Now</button></a>
             <p class="card-text">
               <div align="center">
-              <h2>{{course.course_name}}</h2>
-                for {{course.level}}
+                 {{course.level}} level
               </div>
+
             </p>
             <br>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-7">
             <div class="container-fluid">
-            <h2>Outcomes : </h2>
+                <h2>Course : {{course.course_name}}</h2>
+            <h3>Outcomes : </h3>
                 <p>{{course.outcomes|linebreaksbr}}</p>
                 <hr>
-            <h2>Requirements : </h2>
+            <h3>Requirements : </h3>
                 <p>{{course.requirements|linebreaksbr}}</p>
                 <hr>
 
                 </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2 fees_display">
             <div class="container-fluid" align="center">
                 <button type="button" class="btn btn-warning">
                 <h2>Fees : {{course.fees}} </h2>
             </button>
-            <br><br>
+                <br>
+                <div class="alert alert-info" role="alert"><p>{{course.fees_description}}</p></div>
+
+            <br>
                 <a href="{{course.syllabus.url}}">
               <img class="marginleft10" src="{% static 'home/images/pdf.png'%}" alt="PDF" >
                 <br>
               Download syllabus</a>
+                <br>
+
           </div>
         </p>
       </div>
     </div>
     <br>
 </div>
-<div class="container">
-    <h2>Description :</h2>
+<div class="container-fluid">
+    <h3>Description :</h3>
     <p>{{course.description|linebreaksbr}}</p>
     <hr>
 </div>
