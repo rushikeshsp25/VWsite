@@ -50,7 +50,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="1229" />
-          <entry key="html" value="3574" />
+          <entry key="html" value="3612" />
           <entry key="js" value="37" />
           <entry key="py" value="115" />
           <entry key="txt" value="10" />
@@ -59,7 +59,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="1229" />
-          <entry key="HTML" value="3574" />
+          <entry key="HTML" value="3612" />
           <entry key="JavaScript" value="37" />
           <entry key="PLAIN_TEXT" value="10" />
           <entry key="Python" value="115" />
@@ -100,8 +100,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/home/templates/home/course_detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="670">
-              <caret line="55" column="21" lean-forward="true" selection-start-line="55" selection-start-column="21" selection-end-line="55" selection-end-column="21" />
+            <state relative-caret-position="450">
+              <caret line="36" column="70" selection-start-line="36" selection-start-column="70" selection-end-line="36" selection-end-column="70" />
             </state>
           </provider>
         </entry>
@@ -353,20 +353,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1510388074704</updated>
-    </task>
-    <task id="LOCAL-00029" summary="one div was unclosed">
-      <created>1537788101728</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1537788101729</updated>
-    </task>
-    <task id="LOCAL-00030" summary="one div was unclosed">
-      <created>1544155946798</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1544155946798</updated>
     </task>
     <task id="LOCAL-00031" summary="one div was unclosed">
       <created>1544156055154</created>
@@ -697,7 +683,21 @@
       <option name="project" value="LOCAL" />
       <updated>1545465732294</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="final edit">
+      <created>1545465882220</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1545465882221</updated>
+    </task>
+    <task id="LOCAL-00079" summary="final edit">
+      <created>1545465951189</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1545465951190</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1066,8 +1066,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/home/templates/home/course_detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="55" column="21" lean-forward="true" selection-start-line="55" selection-start-column="21" selection-end-line="55" selection-end-column="21" />
+        <state relative-caret-position="450">
+          <caret line="36" column="70" selection-start-line="36" selection-start-column="70" selection-end-line="36" selection-end-column="70" />
         </state>
       </provider>
     </entry>
