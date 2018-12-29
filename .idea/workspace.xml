@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d9a45c70-b536-40f2-988a-cc39b696e69c" name="Default" comment="final edit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/contactus.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/contactus.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home/templates/home/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,15 +15,15 @@
     <session id="-2100152800">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="25" />
+          <entry key="project.closed" value="26" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.11" value="1" />
-          <entry key="project.open.time.6" value="6" />
-          <entry key="project.open.time.7" value="5" />
+          <entry key="project.open.time.6" value="7" />
+          <entry key="project.open.time.7" value="6" />
           <entry key="project.open.time.8" value="8" />
           <entry key="project.open.time.9" value="5" />
-          <entry key="project.opened" value="28" />
+          <entry key="project.opened" value="30" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -51,7 +50,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="1229" />
-          <entry key="html" value="3654" />
+          <entry key="html" value="3691" />
           <entry key="js" value="37" />
           <entry key="py" value="115" />
           <entry key="txt" value="10" />
@@ -60,7 +59,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="1229" />
-          <entry key="HTML" value="3654" />
+          <entry key="HTML" value="3691" />
           <entry key="JavaScript" value="37" />
           <entry key="PLAIN_TEXT" value="10" />
           <entry key="Python" value="115" />
@@ -78,12 +77,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/home/templates/home/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="143" column="20" selection-start-line="143" selection-start-column="20" selection-end-line="143" selection-end-column="112" />
+            <state relative-caret-position="356">
+              <caret line="290" column="65" selection-start-line="290" selection-start-column="65" selection-end-line="290" selection-end-column="65" />
               <folding>
                 <element signature="e#7285#7312#0" expanded="true" />
-                <element signature="e#7674#7701#0" expanded="true" />
-                <element signature="e#10045#10071#0" expanded="true" />
                 <element signature="e#15215#15231#0" expanded="true" />
               </folding>
             </state>
@@ -93,7 +90,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/home/static/home/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="835">
+            <state relative-caret-position="4875">
               <caret line="325" column="16" selection-start-line="325" selection-start-column="16" selection-end-line="325" selection-end-column="16" />
             </state>
           </provider>
@@ -102,7 +99,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/home/templates/home/course_detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="745">
+            <state relative-caret-position="855">
               <caret line="57" column="10" lean-forward="true" selection-start-line="57" selection-start-column="10" selection-end-line="57" selection-end-column="10" />
             </state>
           </provider>
@@ -260,7 +257,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -324,6 +320,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -369,13 +366,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1510388074704</updated>
-    </task>
-    <task id="LOCAL-00032" summary="one div was unclosed">
-      <created>1544156198650</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1544156198650</updated>
     </task>
     <task id="LOCAL-00033" summary="one div was unclosed">
       <created>1544158889583</created>
@@ -713,7 +703,14 @@
       <option name="project" value="LOCAL" />
       <updated>1545466249407</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="final edit">
+      <created>1546051728173</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1546051728173</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TodoView">
@@ -727,9 +724,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="27" width="1853" height="1053" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" weight="0.32988048" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.23851688" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.24405092" />
       <window_info id="Structure" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.5002767" side_tool="true" weight="0.3293348" />
       <window_info anchor="bottom" id="Version Control" order="1" sideWeight="0.4997233" weight="0.3293348" />
@@ -1036,33 +1034,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/home/models.py">
+    <entry file="file://$PROJECT_DIR$/home/templates/home/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="43" column="20" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/home/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="14" column="79" lean-forward="true" selection-start-line="14" selection-start-column="79" selection-end-line="14" selection-end-column="79" />
+        <state relative-caret-position="356">
+          <caret line="290" column="65" selection-start-line="290" selection-start-column="65" selection-end-line="290" selection-end-column="65" />
           <folding>
-            <element signature="e#0#24#0" expanded="true" />
+            <element signature="e#7285#7312#0" expanded="true" />
+            <element signature="e#15215#15231#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/home/static/home/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="835">
+        <state relative-caret-position="4875">
           <caret line="325" column="16" selection-start-line="325" selection-start-column="16" selection-end-line="325" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/home/templates/home/course_detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="745">
+        <state relative-caret-position="855">
           <caret line="57" column="10" lean-forward="true" selection-start-line="57" selection-start-column="10" selection-end-line="57" selection-end-column="10" />
         </state>
       </provider>
@@ -1077,15 +1069,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/home/templates/home/index.html">
+    <entry file="file://$PROJECT_DIR$/home/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="143" column="20" selection-start-line="143" selection-start-column="20" selection-end-line="143" selection-end-column="112" />
+        <state relative-caret-position="600">
+          <caret line="43" column="20" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="14" column="79" lean-forward="true" selection-start-line="14" selection-start-column="79" selection-end-line="14" selection-end-column="79" />
           <folding>
-            <element signature="e#7285#7312#0" expanded="true" />
-            <element signature="e#7674#7701#0" expanded="true" />
-            <element signature="e#10045#10071#0" expanded="true" />
-            <element signature="e#15215#15231#0" expanded="true" />
+            <element signature="e#0#24#0" expanded="true" />
           </folding>
         </state>
       </provider>
