@@ -293,7 +293,7 @@ def contacted_students(request):
 def success(request,success_type):
     message1="Your response is recorded by Visionware , Our Team will contact you soon ! Thank You:))"
     message2="Course is Succesfully Created :))"
-    message3 = "Your admission request is recorded by Visionware , Pay 50% fess @VisionWare office to confirm your Admission ! Thank You:))"
+    message3 = "Your admission request is recorded by Visionware , Our Team will contact you ! Thank You:))"
     if success_type=='course_success':
         return render(request, 'home/success.html',{'success_message':message2,})
     elif success_type=='contact_success':
