@@ -41,7 +41,6 @@ class course(models.Model):
     level=models.CharField(max_length=20,choices=LEVEL_CHOICES)
     course_icon=models.FileField()
     fees=models.IntegerField(default=0)
-    fees_description = models.TextField(null=True)
     outcomes=models.TextField()
     requirements=models.TextField()
     description=models.TextField()
