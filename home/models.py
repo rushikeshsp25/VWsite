@@ -61,6 +61,8 @@ class student(models.Model):
     interest=models.CharField(max_length=50)
     admission=models.BooleanField(default=False)
     fees_paid=models.IntegerField(default=0)
+    def __str__(self):
+        return self.name+"->"+self.course
 
 class student_contact(models.Model):
     date_time = models.DateTimeField(default=datetime.now, blank=True)
