@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d9a45c70-b536-40f2-988a-cc39b696e69c" name="Default" comment="final edit">
+    <list default="true" id="d9a45c70-b536-40f2-988a-cc39b696e69c" name="Default" comment="changes in model">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/models.py" afterDir="false" />
     </list>
@@ -53,8 +53,8 @@
           <entry key="css" value="1229" />
           <entry key="html" value="3732" />
           <entry key="js" value="37" />
-          <entry key="py" value="156" />
-          <entry key="txt" value="10" />
+          <entry key="py" value="169" />
+          <entry key="txt" value="26" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -62,8 +62,8 @@
           <entry key="CSS" value="1229" />
           <entry key="HTML" value="3732" />
           <entry key="JavaScript" value="37" />
-          <entry key="PLAIN_TEXT" value="10" />
-          <entry key="Python" value="156" />
+          <entry key="PLAIN_TEXT" value="26" />
+          <entry key="Python" value="169" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -128,8 +128,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/home/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="64" column="41" selection-start-line="64" selection-start-column="41" selection-end-line="64" selection-end-column="41" />
+            <state relative-caret-position="535">
+              <caret line="64" column="52" selection-start-line="64" selection-start-column="52" selection-end-line="64" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -329,20 +329,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1510388074704</updated>
-    </task>
-    <task id="LOCAL-00039" summary="one div was unclosed">
-      <created>1544200280814</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1544200280814</updated>
-    </task>
-    <task id="LOCAL-00040" summary="one div was unclosed">
-      <created>1544200486960</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1544200486960</updated>
     </task>
     <task id="LOCAL-00041" summary="one div was unclosed">
       <created>1544200826847</created>
@@ -673,7 +659,21 @@
       <option name="project" value="LOCAL" />
       <updated>1547659336982</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="changes in model">
+      <created>1547795555926</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1547795555927</updated>
+    </task>
+    <task id="LOCAL-00089" summary="changes in model">
+      <created>1547795776025</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1547795776025</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TodoView">
@@ -763,7 +763,8 @@
     <MESSAGE value="content updated" />
     <MESSAGE value="one div was unclosed" />
     <MESSAGE value="final edit" />
-    <option name="LAST_COMMIT_MESSAGE" value="final edit" />
+    <MESSAGE value="changes in model" />
+    <option name="LAST_COMMIT_MESSAGE" value="changes in model" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/home/apps.py">
@@ -1039,8 +1040,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/home/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="64" column="41" selection-start-line="64" selection-start-column="41" selection-end-line="64" selection-end-column="41" />
+        <state relative-caret-position="535">
+          <caret line="64" column="52" selection-start-line="64" selection-start-column="52" selection-end-line="64" selection-end-column="52" />
         </state>
       </provider>
     </entry>

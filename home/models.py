@@ -62,7 +62,7 @@ class student(models.Model):
     admission=models.BooleanField(default=False)
     fees_paid=models.IntegerField(default=0)
     def __str__(self):
-        return self.name
+        return self.name+"->"self.course.course_name
 
 class student_contact(models.Model):
     date_time = models.DateTimeField(default=datetime.now, blank=True)
