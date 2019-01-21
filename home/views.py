@@ -270,7 +270,7 @@ def pay_fees(request,pk):
                 return render(request, 'home/pay_fees.html', {'student': student_obj,
                                                               'fees_remaining': fees_remaining,
                                                               'all_courses': all_courses,
-                                                              'error_message': 'SMTP error',
+                                                              'error_message': 'SMTP error has occured !',
                                                               })
             return redirect('home:confirm_admission',student_obj.pk)
         return redirect('home:student_detail',student_obj.pk)
