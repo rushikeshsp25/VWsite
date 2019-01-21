@@ -240,6 +240,17 @@ def confirm_admission(request,pk):
         s_obj.admission=True
         s_obj.date_time=datetime.now()
         s_obj.save()
+        try:
+            send_mail('Your Admission @ VisionWare IT Training Institute',
+                      'Hi ' + s_obj.name + ',\n' + 'Your admission is confirmed for ' + str(
+                          s_obj.course.course_name) +
+                      ' course.\nTotal course Fees is : ' + str(s_obj.course.fees) + '\nYou have Paid : ' + str(
+                          s_obj.fees_paid) +
+                      '\nYour Enrollment Number is : ' + str(
+                          s_obj.pk) + '\nThanks for Being part of Visionware :))'
+                      , 'admin@visionware.in', [str(s_obj.email)])
+        except Exception as e:
+            return redirect('home:student_detail', pk=pk)
         return redirect('home:student_detail', pk=pk)
     else:
         return redirect('home:login_user')
@@ -260,18 +271,6 @@ def pay_fees(request,pk):
         student_obj.fees_paid=int(student_obj.fees_paid)+int(fees_paying)
         student_obj.save()
         if int(student_obj.fees_paid)>=int(student_obj.course.fees)/2:
-            try:
-                send_mail('Your Admission @ VisionWare IT Training Institute',
-                    'Hi '+student_obj.name+',\n'+'Your admission is confirmed for '+str(student_obj.course.course_name)+
-                    ' course.\nTotal course Fees is : '+str(student_obj.course.fees)+'\nYou have Paid : '+str(student_obj.fees_paid)+
-                    '\nYour Enrollment Number is : '+str(student_obj.pk)+'\nThanks for Being part of Visionware :))'
-                          , 'admin@visionware.in', [str(student_obj.email)])
-            except Exception as e:
-                return render(request, 'home/pay_fees.html', {'student': student_obj,
-                                                              'fees_remaining': fees_remaining,
-                                                              'all_courses': all_courses,
-                                                              'error_message': 'SMTP error has occured !',
-                                                              })
             return redirect('home:confirm_admission',student_obj.pk)
         return redirect('home:student_detail',student_obj.pk)
     else:
