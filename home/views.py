@@ -266,7 +266,12 @@ def pay_fees(request,pk):
                     ' course.\nTotal course Fees is : '+str(student_obj.course.fees)+'\nYou have Paid : '+str(student_obj.fees_paid)+
                     '\nYour Enrollment Number is : '+str(student_obj.pk)+'\nThanks for Being part of Visionware :))'
                           , 'admin@visionware.in', [str(student_obj.email)])
-
+            except Exception as e:
+                return render(request, 'home/pay_fees.html', {'student': student_obj,
+                                                              'fees_remaining': fees_remaining,
+                                                              'all_courses': all_courses,
+                                                              'error_message': 'SMTP error has occured !',
+                                                              })
             return redirect('home:confirm_admission',student_obj.pk)
         return redirect('home:student_detail',student_obj.pk)
     else:

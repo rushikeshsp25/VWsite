@@ -78,8 +78,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/home/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="272" column="104" selection-start-line="272" selection-start-column="104" selection-end-line="272" selection-end-column="104" />
+            <state relative-caret-position="420">
+              <caret line="268" column="11" selection-start-line="268" selection-start-column="11" selection-end-line="273" selection-end-column="64" />
               <folding>
                 <element signature="e#0#62#0" expanded="true" />
               </folding>
@@ -90,8 +90,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/VWsite/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="535">
-              <caret line="118" column="60" lean-forward="true" selection-start-line="118" selection-start-column="60" selection-end-line="118" selection-end-column="60" />
+            <state relative-caret-position="805">
+              <caret line="122" column="20" lean-forward="true" selection-start-line="122" selection-start-column="20" selection-end-line="122" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -344,20 +344,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1510388074704</updated>
-    </task>
-    <task id="LOCAL-00050" summary="final edit">
-      <created>1544336121588</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1544336121589</updated>
-    </task>
-    <task id="LOCAL-00051" summary="final edit">
-      <created>1544336534283</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1544336534283</updated>
     </task>
     <task id="LOCAL-00052" summary="final edit">
       <created>1544337042571</created>
@@ -688,7 +674,21 @@
       <option name="project" value="LOCAL" />
       <updated>1548053611737</updated>
     </task>
-    <option name="localTasksCounter" value="99" />
+    <task id="LOCAL-00099" summary="changes in model">
+      <created>1548054155567</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1548054155567</updated>
+    </task>
+    <task id="LOCAL-00100" summary="changes in model">
+      <created>1548054451593</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1548054451594</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1046,15 +1046,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/VWsite/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="118" column="60" lean-forward="true" selection-start-line="118" selection-start-column="60" selection-end-line="118" selection-end-column="60" />
+        <state relative-caret-position="805">
+          <caret line="122" column="20" lean-forward="true" selection-start-line="122" selection-start-column="20" selection-end-line="122" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/home/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="272" column="104" selection-start-line="272" selection-start-column="104" selection-end-line="272" selection-end-column="104" />
+        <state relative-caret-position="420">
+          <caret line="268" column="11" selection-start-line="268" selection-start-column="11" selection-end-line="273" selection-end-column="64" />
           <folding>
             <element signature="e#0#62#0" expanded="true" />
           </folding>
