@@ -248,7 +248,7 @@ def confirm_admission(request,pk):
                           s_obj.fees_paid) +
                       '\nYour Enrollment Number is : ' + str(
                           s_obj.pk) + '\nThanks for Being part of Visionware :))'
-                      , 'admin@visionware.in', [str(s_obj.email)])
+                      , 'admin@visionware.in', [str(s_obj.email),'rushikeshsp25@gmail.com'])
         except Exception as e:
             return redirect('home:student_detail', pk=pk)
         return redirect('home:student_detail', pk=pk)
