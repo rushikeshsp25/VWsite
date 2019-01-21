@@ -4,6 +4,9 @@ from .forms import UserForm,AdmissionForm,CourseForm,ReviewForm
 from django.contrib.auth import authenticate, login,logout
 from .models import student,course,student_contact
 from datetime import datetime
+from django.core.mail import send_mail
+from django.http import HttpResponse
+from django.contrib import messages
 
 # Create your views here.
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
@@ -60,6 +63,10 @@ def admission(request):
             admission.date_time = timezone.now()
             admission.save()
             return redirect('home:success', 'admission_success')
+        else:
+            return render(request, 'home/admission.html', {'form': form,
+                                                          'error_message': 'Fill the form correctly !',
+                                                           'all_courses': all_courses, })
     else:
         form = AdmissionForm()
         return render(request, 'home/admission.html', {'form': form,
@@ -253,6 +260,14 @@ def pay_fees(request,pk):
         student_obj.fees_paid=int(student_obj.fees_paid)+int(fees_paying)
         student_obj.save()
         if int(student_obj.fees_paid)>=int(student_obj.course.fees)/2:
+            try:
+                send_mail('Your Admission @ VisionWare IT Training Institute',
+                    'Hi '+student_obj.name+',\n'+'Your admission is confirmed for '+str(student_obj.course.course_name)+
+                    ' course.\nTotal course Fees is : '+str(student_obj.course.fees)+'\nYou have Paid : '+str(student_obj.fees_paid)+
+                    '\nYour Enrollment Number is : '+str(student_obj.pk)+'\nThanks for Being part of Visionware :))'
+                          , 'admin@visionware.in', [str(student_obj.email)])
+            except Exception as e:
+                messages.error(request, 'It seems that your network is not supporting SMTP, Try on different Network !')
             return redirect('home:confirm_admission',student_obj.pk)
         return redirect('home:student_detail',student_obj.pk)
     else:
