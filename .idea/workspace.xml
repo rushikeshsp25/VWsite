@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d9a45c70-b536-40f2-988a-cc39b696e69c" name="Default" comment="changes in model">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VWsite/settings.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -54,7 +53,7 @@
           <entry key="css" value="1229" />
           <entry key="html" value="3732" />
           <entry key="js" value="37" />
-          <entry key="py" value="993" />
+          <entry key="py" value="1001" />
           <entry key="txt" value="26" />
         </counts>
       </usages-collector>
@@ -64,7 +63,7 @@
           <entry key="HTML" value="3732" />
           <entry key="JavaScript" value="37" />
           <entry key="PLAIN_TEXT" value="26" />
-          <entry key="Python" value="993" />
+          <entry key="Python" value="1001" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -345,20 +344,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1510388074704</updated>
-    </task>
-    <task id="LOCAL-00048" summary="final edit">
-      <created>1544333353299</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1544333353299</updated>
-    </task>
-    <task id="LOCAL-00049" summary="final edit">
-      <created>1544334663970</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1544334663970</updated>
     </task>
     <task id="LOCAL-00050" summary="final edit">
       <created>1544336121588</created>
@@ -689,7 +674,21 @@
       <option name="project" value="LOCAL" />
       <updated>1548052910402</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="changes in model">
+      <created>1548053416482</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1548053416482</updated>
+    </task>
+    <task id="LOCAL-00098" summary="changes in model">
+      <created>1548053611737</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1548053611737</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="TodoView">
