@@ -1,0 +1,19 @@
+{% extends 'home/base.html' %}
+{% block title %}Permission Error{% endblock %}
+
+{% block body %}
+{% load staticfiles %}
+<div class="text-center">
+    <br/><br/><br/>
+<img src="{%static 'home/images/access_denied.jpg'%}" alt="Access Denied" class="mt-5">
+</div>
+
+<div class="text-center mt-5">
+    <form>
+        <br/>
+        <input type="button" value="Back to Home" class="btn btn-primary"
+               onclick="window.location.href='{% url 'home:index' %}'" />
+    </form>
+
+</div>
+{% endblock %}

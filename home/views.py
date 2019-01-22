@@ -7,6 +7,7 @@ from datetime import datetime
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.contrib import messages
+from django.contrib.auth.decorators import user_passes_test
 
 # Create your views here.
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
@@ -73,6 +74,7 @@ def admission(request):
                                                        'all_courses': all_courses,
                                                        })
 
+
 def students(request):
     all_courses = course.objects.all()
     if request.user.is_authenticated():
@@ -83,6 +85,7 @@ def students(request):
     else:
         return redirect('home:login_user')
 
+@user_passes_test(lambda u: u.has_perm('home.view_student'),login_url='/permissionerror/')
 def students_all(request):
     all_courses = course.objects.all()
     if request.user.is_authenticated:
@@ -136,6 +139,7 @@ def students_result(request, type, subtype):
     else:
         return redirect('home:login_user')
 
+@user_passes_test(lambda u: u.has_perm('home.change_student'),login_url='/permissionerror/')
 def student_detail(request,pk):
     all_courses = course.objects.all()
     if request.user.is_authenticated:
@@ -144,6 +148,7 @@ def student_detail(request,pk):
                                                             'all_courses': all_courses,})
     else:
         return redirect('home:login_user')
+
 
 def search_student(request,search_by):
     all_courses = course.objects.all()
@@ -173,6 +178,7 @@ def contactus(request):
     all_courses = course.objects.all()
     return render(request,'home/contactus.html',{'all_courses': all_courses,})
 
+@user_passes_test(lambda u: u.has_perm('home.add_course'),login_url='/permissionerror/')
 def create_new_course(request):
     all_courses = course.objects.all()
     if request.user.is_authenticated:
@@ -233,6 +239,7 @@ def review(request):
                                                        'all_courses': all_courses,
                                                        })
 
+@user_passes_test(lambda u: u.has_perm('home.change_student'),login_url='/permissionerror/')
 def confirm_admission(request,pk):
     all_courses = course.objects.all()
     if request.user.is_authenticated():
@@ -255,7 +262,7 @@ def confirm_admission(request,pk):
     else:
         return redirect('home:login_user')
 
-
+@user_passes_test(lambda u: u.has_perm('home.change_student'),login_url='/permissionerror/')
 def pay_fees(request,pk):
     all_courses = course.objects.all()
     if request.method == "POST":
@@ -281,7 +288,6 @@ def pay_fees(request,pk):
                                                     'all_courses': all_courses,
                                                     })
 
-
 def contact_student(request):
     if request.method == "POST":
         name=request.POST.get('name',False)
@@ -296,6 +302,7 @@ def contact_student(request):
         student.save()
         return redirect('home:success','contact_success')
 
+@user_passes_test(lambda u: u.has_perm('home.view_student'),login_url='/permissionerror/')
 def contacted_students(request):
     all_courses = course.objects.all()
     s_objs=student_contact.objects.all()
@@ -322,3 +329,7 @@ def success(request,success_type):
 def satcheck(request):
     all_courses = course.objects.all()
     return render(request,'home/underconstruction.html',{'all_courses': all_courses,})
+
+def permissionerror(request):
+    all_courses = course.objects.all()
+    return render(request,'home/permission_error.html',{'all_courses': all_courses,})

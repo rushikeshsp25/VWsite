@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^contacted_students/$', views.contacted_students, name='contacted_students'),
     url(r'^success/(?P<success_type>[^~,]+)/$', views.success, name='success'),
     url(r'^satcheck/', views.satcheck, name='satcheck'),
+    url(r'^permissionerror/', views.permissionerror, name='permissionerror'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -3,7 +3,8 @@
 
 {% block body %}
 {% load staticfiles %}
-<div class="container">
+{% if request.user.is_superuser %}
+ <div class="container">
     <br/>
     <br/>
     <br/>
@@ -247,4 +248,22 @@
     <br>
 <br>
 </div>
+{% else %}
+ <div class="container">
+    <br/>
+    <br/>
+    <br/>
+    <h2>Students in Ongoing Courses: </h2>
+    <hr>
+     <a href="{% url 'home:students_result' type='ongoingcoursewise' subtype='Placement For Sure (Mega)' %}">
+    <button type="button" class="btn btn-primary">Course : Placement For Sure (Mega)</button>
+    </a>
+
+<a href="{% url 'home:students_result' type='ongoingcoursewise' subtype='Placement For Sure (Giga)' %}">
+    <button type="button" class="btn btn-primary">Course : Placement For Sure (Giga)</button>
+    </a>
+
+ </div>
+{% endif %}
+
 {% endblock %}
