@@ -1,0 +1,47 @@
+{% extends 'home/base.html' %} {% block title %}Online Admission | VisionWare {% endblock %} {% block head %} {% load static %}
+<link rel="stylesheet" href="{% static 'home/css/page-not-found.css'%}"> {% endblock %} {% block body %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <strong>Enroll Online </strong>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    {% include 'home/form_template.html' %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <strong>Instructions for Students</strong>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>Filling this form will not confirm your admission at VisionWare.</li>
+                        <br/>
+                        <li>It just indicates that you are interested learning @VisionWare.</li>
+                        <br/>
+                        <li>You will get all updates regarding course you are choosing after filling this form.</li>
+                        <br/>
+                        <li>You will receive promotional offers.</li>
+                        <br/>
+                        <li>Enter your contact details(email and mobile number) correctly.</li>
+                        <br/>
+                        <li>You can confirm your admission by paying at least 50% fees at VisionWare office, Online payment option is unavailable right now.</li>
+                        <br/>
+                        <li>If you are interested learning new things, apart from the courses provided by VisionWare then feed them in interest box.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    </br>
+    </br>
+</div>
+{% endblock %}

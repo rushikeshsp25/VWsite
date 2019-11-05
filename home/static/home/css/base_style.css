@@ -1,0 +1,100 @@
+﻿ * {
+     box-sizing: border-box;
+ }
+ 
+ html {
+     height: 100%;
+ }
+ 
+ body {
+     position: relative;
+     margin: 0;
+     min-height: 100%;
+     line-height: 1.5;
+     -webkit-font-smoothing: antialiased;
+ }
+ /* ul {
+     list-style-type: none;
+ } */
+ /* navbar styles */
+ 
+ .top_navbar {
+     padding: 10px;
+     font-family: 'Alegreya Sans SC', sans-serif;
+     box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+ }
+ 
+ .top_navbar .visionware-brand {
+     height: 12vh;
+ }
+ 
+ .top_navbar .navbar-nav .nav-link {
+     font-size: 20px;
+ }
+ 
+ .top_navbar .navbar-nav .nav-link:hover {
+     color: #2b3033;
+ }
+ 
+ .top_navbar .btn-outline-dark:hover {
+     background-color: #38b6ff;
+     color: white;
+     border: none;
+ }
+ /*footer styles*/
+ 
+ .footer {
+     padding-top: 1rem;
+     background-color: #eaeaeb;
+     color: #000000;
+ }
+ 
+ .footer .footer-title {
+     font-family: 'Alegreya Sans SC', sans-serif;
+     margin-bottom: .3rem;
+ }
+ 
+ .footer .footer-text {
+     font-size: .8rem;
+     font-family: 'Open Sans', sans-serif;
+     font-weight: lighter;
+     color: #616161;
+ }
+ 
+ .footer-link {
+     font-size: .8rem;
+     font-family: 'Open Sans', sans-serif;
+     margin-bottom: .3rem;
+ }
+ 
+ .footer-link a {
+     margin-left: .4rem;
+     text-decoration: none;
+     color: #616161;
+ }
+ 
+ .footer-bottom {
+     padding: 1rem;
+     background-color: #38b6ff;
+     text-align: center;
+     color: #000000;
+     font-size: .8rem;
+ }
+ /* card styles */
+ 
+ .card {
+     box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+ }
+ 
+ .card-title {
+     font-size: 1rem;
+ }
+ 
+ .card-text {
+     font-size: .8rem;
+ }
+ /* headings */
+ 
+ .section-heading {
+     font-size: 1.2rem;
+ }

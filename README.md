@@ -1,0 +1,1 @@
+On app init create on college named OTHER
