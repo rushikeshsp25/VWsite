@@ -1,5 +1,5 @@
 from django import forms
-from .models import Course
+from .models import Course, StudyCourse
 from django.contrib.auth.models import User
 
 # class AdmissionForm(forms.ModelForm):
@@ -12,6 +12,11 @@ from django.contrib.auth.models import User
 class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
+        exclude = ['date_time']
+
+class StudyCourseForm(forms.ModelForm):
+    class Meta:
+        model = StudyCourse
         exclude = ['date_time']
 
 # class UserForm(forms.ModelForm):

@@ -85,3 +85,7 @@ class Review(models.Model):
     def __str__(self):
         return self.review
 
+class StudyCourse(models.Model):
+    date_time = models.DateTimeField(default=datetime.now, blank=True)
+    course_name= models.CharField(max_length=30)
+    material_file=models.FileField()

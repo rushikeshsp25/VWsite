@@ -13,5 +13,7 @@ urlpatterns = [
     path('course/edit/<int:pk>/', views.edit_course, name='edit_course'),
     path('course/all/', views.display_all_courses, name='display_all_courses'),
     path('student/admission/', views.student_admission, name='student_admission'),
+    path('study-course/get/<int:pk>/', views.convert_pdf_to_html, name='convert_pdf_to_html'),
+    path('study-course/new/', views.create_new_study_course, name='create_new_study_course'),
 ]
 
