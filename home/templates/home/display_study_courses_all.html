@@ -1,0 +1,23 @@
+{% extends 'home/base.html' %} {% block title %}Study Courses | VisionWare{% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+<section>
+    <p class="section-heading mt-4">Study Courses</p>
+<div class="row">
+  {% for i in courses %}
+<div class="col-md-3 col-6 mb-4">
+<div class="card" style="width: 16rem;" >
+  <div class="card-body">
+    <h5 class="card-title">{{i.course_name}}</h5>
+    <a href="{%url 'home:convert_pdf_to_html' pk=i.id %}" class="btn btn-success mt-1s" name="Submit" >Get Study Material</a>
+  </div>
+</div>
+</div>
+
+{% if forloop.counter|divisibleby:"4" and not forloop.last %}
+</div><div class="row">
+{% endif %}
+{% endfor %}
+
+</div>
+</section>
+
+{% endblock %}

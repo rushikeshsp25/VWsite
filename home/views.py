@@ -10,9 +10,44 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required,user_passes_test
 import os
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+from pdfminer.converter import TextConverter, XMLConverter, HTMLConverter
+from pdfminer.layout import LAParams
+from pdfminer.pdfpage import PDFPage
+from io import BytesIO
+import re
+
 
 # Create your views here.
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
+
+def convert_pdf(path, format='html', codec='utf-8', password=''):
+    ''' this function converts the pdf to html or text'''
+    rsrcmgr = PDFResourceManager()
+    retstr = BytesIO()
+    laparams = LAParams()
+    if format == 'text':
+        device = TextConverter(rsrcmgr, retstr, codec=codec, laparams=laparams)
+    elif format == 'html':
+        device = HTMLConverter(rsrcmgr, retstr, codec=codec, laparams=laparams)
+    elif format == 'xml':
+        device = XMLConverter(rsrcmgr, retstr, codec=codec, laparams=laparams)
+    else:
+        raise ValueError('provide format, either text, html or xml!')
+    fp = open(path, 'rb')
+    interpreter = PDFPageInterpreter(rsrcmgr, device)
+    maxpages = 0
+    caching = True
+    pagenos=set()
+    for page in PDFPage.get_pages(fp, pagenos, maxpages=maxpages, password=password,caching=caching, check_extractable=True):
+        interpreter.process_page(page)
+
+    text = retstr.getvalue().decode()
+    fp.close()
+    device.close()
+    retstr.close()
+    return text
+
 
 def login_user(request):
     if request.method == "POST":
@@ -133,12 +168,16 @@ def convert_pdf_to_html(request,pk):
     study_course = get_object_or_404(StudyCourse, pk=pk)
     material_filename=study_course.material_file
     material_filepath = os.path.abspath(os.path.dirname(__file__)+'/../media/'+str(material_filename))
-    #here do whatever you want with material_filepath
+    html_path=os.path.abspath(os.path.dirname(__file__)+'/templates/home/display_study_course_pdf.html')
+    pdf_to_html=convert_pdf(material_filepath)              #convert pdf to html
+    f=open(html_path,'w')
+    f.write("<head><title>"+study_course.course_name+"</title></head>"+pdf_to_html)                 #write into template
+    f.close()
+    return render(request,'home/display_study_course_pdf.html')
 
-    f=open(material_filepath,"r")
-    ############################
-    return HttpResponse("Converting pdf to HTML")
-
+def display_all_study_course(request):
+    courses=StudyCourse.objects.all()
+    return render(request,'home/display_study_courses_all.html',{'courses':courses})
 
 def handler404(request,*args,**argv):
     return render(request,'home/page_not_found.html',status=404)
