@@ -3,6 +3,9 @@ from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.db import models
 from datetime import datetime
+from django.utils.text import slugify
+import itertools
+
 
 YEAR_CHOICES = (
     ('FE', 'First Year'),
@@ -33,6 +36,7 @@ class College(models.Model):
         return self.name
 
 class Course(models.Model):
+    date_time=models.DateTimeField(default=datetime.now, blank=True)
     course_name=models.CharField(max_length=70,unique=True)
     is_online=models.BooleanField(default=False)
     level=models.CharField(max_length=20,choices=LEVEL_CHOICES)
@@ -42,7 +46,20 @@ class Course(models.Model):
     prerequisits=models.TextField()
     description=models.TextField()
     syllabus=models.FileField()
-    date_time=models.DateTimeField(default=datetime.now, blank=True)
+
+    course_slug = models.SlugField(unique=True,blank=True)
+    def _generate_slug(self):
+        generated_slug = slug_original = slugify(self.course_name, allow_unicode=True)
+        for i in itertools.count(1):
+            if not StudyCourse.objects.filter(course_slug=generated_slug).exists():
+                break
+            generated_slug = '{}-{}'.format(slug_original, i)
+        self.course_slug = generated_slug
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self._generate_slug()
+        super().save(*args, **kwargs)
     def __str__(self):
         return self.course_name
 
@@ -88,6 +105,21 @@ class Review(models.Model):
 class StudyCourse(models.Model):
     date_time = models.DateTimeField(default=datetime.now, blank=True)
     course_name= models.CharField(max_length=30)
+    description = models.TextField(blank=True,null=True)
     material_file=models.FileField(upload_to='StudyCourse')
+    course_slug = models.SlugField(unique=True,blank=True)
+    def _generate_slug(self):
+        generated_slug = slug_original = slugify(self.course_name, allow_unicode=True)
+        for i in itertools.count(1):
+            if not StudyCourse.objects.filter(course_slug=generated_slug).exists():
+                break
+            generated_slug = '{}-{}'.format(slug_original, i)
+        self.course_slug = generated_slug
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self._generate_slug()
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.course_name

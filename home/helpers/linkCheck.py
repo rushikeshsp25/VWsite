@@ -10,7 +10,7 @@ def url_ok(url):
     except:
         return False
 
-def getNotWorkingLinks(html_string):
+def getNotWorkingLinksHtml(html_string):
     not_working_links = []
     soup = BeautifulSoup(html_string,'html.parser')
     for link in soup.findAll('a'):

@@ -24,7 +24,7 @@
 </head>
 
 <body>
-    <nav class="navbar top_navbar navbar-expand-md navbar-light bg-light">
+    <nav class="navbar top_navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="{%url 'home:index' %}">
             <img src="{% static 'home/images/new_logo.png' %}" alt="VisionWare" class="visionware-brand d-inline-block align-middle mr-2">
         </a>
@@ -37,7 +37,7 @@
                     <a class="nav-link" href="{%url 'home:display_all_courses' %}">Courses</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{%url 'home:display_all_study_course' %}">Study Material</a>
+                    <a class="nav-link" href="{%url 'home:display_all_study_material' %}">Study Material</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Gallary</a>
@@ -50,13 +50,13 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                {%if request.user%}
+                {%if request.user.is_authenticated%}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Hello {{request.user}}
                           </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Dashboard</a>
+                        <a class="dropdown-item" href="{%url 'home:dashboard' %}">Dashboard</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{%url 'home:logout_user' %}">Logout</a>
                     </div>
@@ -71,7 +71,12 @@
             </ul>
         </div>
     </nav>
-    <div>{% block body %} {% endblock %}</div>
+    <div>
+        <div class="col-md-6 offset-md-3">
+            {% include 'home/messages.html' %}
+        </div>
+        {% block body %} {% endblock %}
+    </div>
     <div class="footer" id="footer">
         <div class="container">
             <div class="row">

@@ -17,7 +17,7 @@ class CourseForm(forms.ModelForm):
 class StudyCourseForm(forms.ModelForm):
     class Meta:
         model = StudyCourse
-        exclude = ['date_time']
+        exclude = ['date_time','course_slug']
 
 # class UserForm(forms.ModelForm):
 #     password = forms.CharField(widget=forms.PasswordInput)

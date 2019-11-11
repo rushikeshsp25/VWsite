@@ -1,0 +1,21 @@
+{% extends 'home/base.html' %} {% block title %}C, C++, Java, Python, Web Development Training / Class | VisionWare {% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+<section class="container mt-4 mb-4">
+    <p class="section-heading mt-4">Admin Dashboard</p>
+    <hr>
+    <div>
+        <p class="section-heading mt-4">Create a New</p>
+        <a class="btn btn-success" href="{%url 'home:create_new_course'%}">Classroom Training</a>
+        <a class="btn btn-success" href="{%url 'home:create_new_study_material'%}">Study Material</a>
+    </div>
+    <hr>
+    <div>
+        <p class="section-heading mt-4">Reports</p>
+        <a class="btn btn-success" href="{%url 'home:notWorkingLinks'%}">Not reachable Links</a>
+    </div>
+    <hr>
+
+</section>
+{% endblock %} {% block script%}
+<script>
+</script>
+{% endblock %}

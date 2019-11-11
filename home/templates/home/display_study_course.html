@@ -2,16 +2,16 @@
 <link rel="stylesheet" href="{% static 'home/css/study_course.css'%}"> {% endblock %} {% block body %}
 <div class="container-fluid mt-4 mb-4">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 order-md-1 order-3">
             Ads goes here
         </div>
-        <div class="col-md-8">
-            <h2>{{course_name}}</h2>
+        <div class="col-md-8 order-md-2 order-1">
+            <h2 class="course-title">{{course_name}}</h2>
             <div class="row">
                 {{content | safe}}
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 order-md-3 order-2">
             Some other trending course suggestions and visionware batches info goes here
         </div>
     </div>

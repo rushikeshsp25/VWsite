@@ -10,8 +10,10 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required,user_passes_test
 import os
+#for displaying messages
+from django.contrib import messages
 
-from .helpers.linkCheck import getNotWorkingLinks
+from .helpers.linkCheck import getNotWorkingLinksHtml
 
 # Create your views here.
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
@@ -112,35 +114,45 @@ def display_all_courses(request):
 def student_admission(request):
     return render(request,'home/admission.html')
 
-def create_new_study_course(request):
+@login_required
+@user_passes_test(lambda u: u.has_perm('home.create_studycourse'),login_url='/permissionerror/')
+def create_new_study_material(request):
     if request.method == "POST":
         form = StudyCourseForm(request.POST,request.FILES)
         if form.is_valid():
             new_study_course=form.save(commit=False)
             new_study_course.material_file=request.FILES['material_file']
             file_type = new_study_course.material_file.url.split('.')[-1].lower()
-            if file_type !='html':
+            if file_type not in ['html','pdf'] :
                 context = {
                     'form': form,
-                    'error_message': '<li>Syllabus file must be HTML</li>'
+                    'error_message': '<li>Syllabus file must be of type HTML or PDF</li>'
                 }
                 return render(request, 'home/create_edit_study_course.html', context)
             new_study_course.save()
-            return HttpResponse('Study Course created successfully !')
+            messages.success(request,'Study Material created successfully !')
+            return redirect('home:dashboard')
     else:
         form = StudyCourseForm()
     return render(request,'home/create_edit_study_course.html',{'form':form})
 
-def display_study_course(request,pk):
-    study_course = get_object_or_404(StudyCourse, pk=pk)
+def display_study_material(request,course_slug):
+    study_course = get_object_or_404(StudyCourse, course_slug=course_slug)
     material_filename=study_course.material_file
+    file_type = material_filename.url.split('.')[-1].lower()
     material_filepath = os.path.abspath(os.path.dirname(__file__)+'/../media/'+str(material_filename))
-    f=open(material_filepath, "r")
-    contents =f.read()
-    f.close()
-    return render(request,'home/display_study_course.html',{'course_name':study_course.course_name,'content':contents})
+    if file_type == 'pdf':
+        f=open(material_filepath, "rb")     #readin in binary mode is necessary for a pdf file
+        contents =f.read()
+        f.close()
+        return HttpResponse(contents, content_type='application/pdf')
+    else:
+        f=open(material_filepath, "r")
+        contents =f.read()
+        f.close()
+        return render(request,'home/display_study_course.html',{'course_name':study_course.course_name,'content':contents})
 
-def display_all_study_course(request):
+def display_all_study_material(request):
     courses=StudyCourse.objects.all()
     return render(request,'home/display_study_courses_all.html',{'courses':courses})
 
@@ -152,11 +164,15 @@ def notWorkingLinks(request):
     for course in study_courses:
         course_name = course.course_name
         material_filename = course.material_file
+        file_type = material_filename.url.split('.')[-1].lower()
         material_filepath = os.path.abspath(os.path.dirname(__file__)+'/../media/'+str(material_filename))
-        f = open(material_filepath,"r")
-        html_content = f.read()
-        not_working_links = getNotWorkingLinks(html_content)
-        not_working_links_all.append({course_name : not_working_links})
+        if file_type == 'html':
+            f = open(material_filepath,"r")
+            html_content = f.read()
+            not_working_links = getNotWorkingLinksHtml(html_content)
+            not_working_links_all.append({course_name : not_working_links})
+        #also add for pdf
+        #else:
     #sending emails
     admin_emails =  User.objects.filter(is_superuser=True).values_list('email', flat=True)
     try:
@@ -171,6 +187,11 @@ def notWorkingLinks(request):
         return HttpResponse("Something went wrong while sending not working links emails")
     return HttpResponse(not_working_links_all)
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def dashboard(request):
+    return render(request,'home/dashboard.html')
+    
 def handler404(request,*args,**argv):
     return render(request,'home/page_not_found.html',status=404)
 

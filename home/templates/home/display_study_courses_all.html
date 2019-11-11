@@ -4,7 +4,7 @@
     <div class="row">
         {% for course in courses %}
         <div class="col-md-3 col-6 mb-4">
-            <a href="{%url 'home:display_study_course' pk=course.id %}">
+            <a href="{%url 'home:display_study_material' course_slug=course.course_slug %}">
                 <div class="card">
                     <img src="{% static 'home/images/course/course.jpg' %}" class="card-img-top" alt="...">
                     <div class="card-body">
@@ -18,7 +18,6 @@
     </div>
     <div class="row">
         {% endif %} {% endfor %}
-
     </div>
 </section>
 
