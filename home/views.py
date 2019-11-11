@@ -11,6 +11,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required,user_passes_test
 import os
 
+from .helpers.linkCheck import getNotWorkingLinks
+
 # Create your views here.
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
@@ -72,7 +74,7 @@ def create_new_course(request):
     return render(request,'home/create_edit_course.html',{'form':form})
 
 @login_required
-@user_passes_test(lambda u: u.has_perm('home.add_course'),login_url='/permissionerror/')
+@user_passes_test(lambda u: u.has_perm('home.edit_course'),login_url='/permissionerror/')
 def edit_course(request,pk):
     course = get_object_or_404(Course, pk=pk)
     if request.method == "POST":
@@ -139,6 +141,32 @@ def convert_pdf_to_html(request,pk):
     ############################
     return HttpResponse("Converting pdf to HTML")
 
+@login_required
+@user_passes_test(lambda u: u.has_perm('home.view_studycourse'),login_url='/permissionerror/')
+def notWorkingLinks(request):
+    study_courses = StudyCourse.objects.all()
+    not_working_links_all = []
+    for course in study_courses:
+        course_name = course.course_name
+        material_filename = course.material_file
+        material_filepath = os.path.abspath(os.path.dirname(__file__)+'/../media/'+str(material_filename))
+        f = open(material_filepath,"r")
+        html_content = f.read()
+        not_working_links = getNotWorkingLinks(html_content)
+        not_working_links_all.append({course_name : not_working_links})
+    #sending emails
+    admin_emails =  User.objects.filter(is_superuser=True).values_list('email', flat=True)
+    try:
+        send_mail('Unreachable Links Report',
+                'Hi Admin,\n' + 
+                'Following are unreachable links please take action : \n'+
+                str(not_working_links_all),
+                'admin@visionware.in', admin_emails)
+        return HttpResponse("not working links mails sent successfully")
+    except Exception as e:
+        print("Exception is : ",e)
+        return HttpResponse("Something went wrong while sending not working links emails")
+    return HttpResponse(not_working_links_all)
 
 def handler404(request,*args,**argv):
     return render(request,'home/page_not_found.html',status=404)
