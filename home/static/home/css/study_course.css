@@ -1,0 +1,33 @@
+h2 {
+    /*some style*/
+}
+
+.subtopic-container {
+    box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.subtopic-container h4 {
+    /*some style*/
+}
+
+.subtopic-container h4:after {
+    content: ' ';
+    display: block;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.subtopic-container div {
+    margin-left: 30px;
+}
+
+.subtopic-container div a {
+    display: block;
+}

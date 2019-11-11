@@ -9,45 +9,10 @@ from django.urls import reverse
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required,user_passes_test
+from .helpers.pdftohtml import convert_pdf
 import os
-from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
-from pdfminer.converter import TextConverter, XMLConverter, HTMLConverter
-from pdfminer.layout import LAParams
-from pdfminer.pdfpage import PDFPage
-from io import BytesIO
-import re
-
-
 # Create your views here.
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
-
-def convert_pdf(path, format='html', codec='utf-8', password=''):
-    ''' this function converts the pdf to html or text'''
-    rsrcmgr = PDFResourceManager()
-    retstr = BytesIO()
-    laparams = LAParams()
-    if format == 'text':
-        device = TextConverter(rsrcmgr, retstr, codec=codec, laparams=laparams)
-    elif format == 'html':
-        device = HTMLConverter(rsrcmgr, retstr, codec=codec, laparams=laparams)
-    elif format == 'xml':
-        device = XMLConverter(rsrcmgr, retstr, codec=codec, laparams=laparams)
-    else:
-        raise ValueError('provide format, either text, html or xml!')
-    fp = open(path, 'rb')
-    interpreter = PDFPageInterpreter(rsrcmgr, device)
-    maxpages = 0
-    caching = True
-    pagenos=set()
-    for page in PDFPage.get_pages(fp, pagenos, maxpages=maxpages, password=password,caching=caching, check_extractable=True):
-        interpreter.process_page(page)
-
-    text = retstr.getvalue().decode()
-    fp.close()
-    device.close()
-    retstr.close()
-    return text
-
 
 def login_user(request):
     if request.method == "POST":
@@ -152,10 +117,10 @@ def create_new_study_course(request):
             new_study_course=form.save(commit=False)
             new_study_course.material_file=request.FILES['material_file']
             file_type = new_study_course.material_file.url.split('.')[-1].lower()
-            if file_type !='pdf':
+            if file_type !='html':
                 context = {
                     'form': form,
-                    'error_message': '<li>Syllabus file must be PDF</li>'
+                    'error_message': '<li>Syllabus file must be HTML</li>'
                 }
                 return render(request, 'home/create_edit_study_course.html', context)
             new_study_course.save()
@@ -164,16 +129,14 @@ def create_new_study_course(request):
         form = StudyCourseForm()
     return render(request,'home/create_edit_study_course.html',{'form':form})
 
-def convert_pdf_to_html(request,pk):
+def display_study_course(request,pk):
     study_course = get_object_or_404(StudyCourse, pk=pk)
     material_filename=study_course.material_file
     material_filepath = os.path.abspath(os.path.dirname(__file__)+'/../media/'+str(material_filename))
-    html_path=os.path.abspath(os.path.dirname(__file__)+'/templates/home/display_study_course_pdf.html')
-    pdf_to_html=convert_pdf(material_filepath)              #convert pdf to html
-    f=open(html_path,'w')
-    f.write("<head><title>"+study_course.course_name+"</title></head>"+pdf_to_html)                 #write into template
+    f=open(material_filepath, "r")
+    contents =f.read()
     f.close()
-    return render(request,'home/display_study_course_pdf.html')
+    return render(request,'home/display_study_course.html',{'course_name':study_course.course_name,'content':contents})
 
 def display_all_study_course(request):
     courses=StudyCourse.objects.all()

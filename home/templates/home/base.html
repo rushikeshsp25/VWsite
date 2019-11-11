@@ -37,7 +37,7 @@
                     <a class="nav-link" href="{%url 'home:display_all_courses' %}">Courses</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Study Material</a>
+                    <a class="nav-link" href="{%url 'home:display_all_study_course' %}">Study Material</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Gallary</a>
@@ -71,7 +71,7 @@
             </ul>
         </div>
     </nav>
-    <div class="container">{% block body %} {% endblock %}</div>
+    <div>{% block body %} {% endblock %}</div>
     <div class="footer" id="footer">
         <div class="container">
             <div class="row">
