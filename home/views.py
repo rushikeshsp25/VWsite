@@ -10,6 +10,9 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required,user_passes_test
 import os
+import requests
+import PyPDF2
+import io
 #for displaying messages
 from django.contrib import messages
 
@@ -171,8 +174,14 @@ def notWorkingLinks(request):
             html_content = f.read()
             not_working_links = getNotWorkingLinksHtml(html_content)
             not_working_links_all.append({course_name : not_working_links})
-        #also add for pdf
-        #else:
+        elif file_type=='PDF':
+            pdf_content = io.BytesIO()
+            pdf_content.seek(0)
+            pdf_content =PyPDF2.PdfFileReader(open(material_filepath,mode='rb'))
+            not_working_links_pdf = get_not_working_links_pdf(pdf_content)
+            not_working_links_all.append({course_name :not_working_links_pdf })
+        else:
+            return HttpResponse("Please Choose Either Html or Pdf file correctly")
     #sending emails
     admin_emails =  User.objects.filter(is_superuser=True).values_list('email', flat=True)
     try:
@@ -186,6 +195,11 @@ def notWorkingLinks(request):
         print("Exception is : ",e)
         return HttpResponse("Something went wrong while sending not working links emails")
     return HttpResponse(not_working_links_all)
+
+
+
+
+
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
