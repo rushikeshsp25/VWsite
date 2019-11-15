@@ -18,6 +18,14 @@ from .helpers.linkCheck import getNotWorkingLinksHtml
 # Create your views here.
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
+def dictionarify_the_response_queryset(response):
+    d={}
+    for i in response:
+        print(i.id)
+        d[i.response]=d.get(i,0)+1
+    return d
+
+
 def login_user(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -191,7 +199,31 @@ def notWorkingLinks(request):
 @user_passes_test(lambda u: u.is_superuser)
 def dashboard(request):
     return render(request,'home/dashboard.html')
-    
+
+def display_feedback_enabled_batches(request):
+    feedback_enabled_batches=CourseBatch.objects.filter(feedback_enable=True)
+    return render(request,'home/display_feedback_enabled_batches.html',{'feedback_enabled_batches':feedback_enabled_batches})
+
+def display_feedback_questions(request,batch_id):
+    batch=CourseBatch.objects.get(id=batch_id)
+    feedback_questions=FeedbackQuestion.objects.all()
+    return render(request,'home/display_feedback_questions.html',{'feedback_questions':feedback_questions,'batch':batch})
+
+def display_feedback_response(request,batch_id,question_id):
+    question=FeedbackQuestion.objects.get(id=question_id)
+    batch=CourseBatch.objects.get(id=batch_id)
+    if question.question_type=='rating':
+        response=FeedbackResponse.objects.filter(question_id=question_id,batch_id=batch_id)
+        data={'1':0,'2':0,'3':0,'4':0,'5':0}
+        for i in response:
+            if i.response in data.keys():                                     #convert ratings into dictionary format{'rate':'No of students'}
+                data[i.response]=data[i.response]+1        
+        return render(request,'home/display_feedback_response.html',{'data':data,'batch':batch,'question':question})
+    else:
+         response=FeedbackResponse.objects.filter(question_id=question_id,batch_id=batch_id)
+         return render(request,'home/display_feedback_response.html',{'response':response,'batch':batch,'question':question})
+
+
 def handler404(request,*args,**argv):
     return render(request,'home/page_not_found.html',status=404)
 

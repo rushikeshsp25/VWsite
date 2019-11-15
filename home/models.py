@@ -30,6 +30,12 @@ LEVEL_CHOICES= (
     ('Advanced', 'Advanced')
 )
 
+FEEDBACK_TYPE_CHOICES=(
+    ('comment', 'comment'),
+    ('rating', 'rating'),
+)
+
+
 class College(models.Model):
     name=models.CharField(max_length=70,unique=True)
     def __str__(self):
@@ -123,3 +129,25 @@ class StudyCourse(models.Model):
 
     def __str__(self):
         return self.course_name
+
+
+class CourseBatch(models.Model):
+    start_date=models.DateField(blank=True)
+    course=models.ForeignKey(Course,to_field='course_name',on_delete=models.CASCADE)
+    batch_name=models.CharField(max_length=30)
+    fees=models.IntegerField()
+    feedback_enable=models.BooleanField()
+    def __str__(self):
+        return self.batch_name
+
+class FeedbackQuestion(models.Model):
+    question_name=models.TextField()
+    question_type=models.CharField(max_length=10,choices=FEEDBACK_TYPE_CHOICES)
+    def __str__(self):
+        return self.question_name
+
+class FeedbackResponse(models.Model):
+    question_id=models.ForeignKey(FeedbackQuestion,on_delete=models.CASCADE)
+    batch_id=models.ForeignKey(CourseBatch,on_delete=models.CASCADE)
+    student_id=models.ForeignKey(Student,to_field='id',on_delete=models.CASCADE)
+    response=models.TextField()
