@@ -1,0 +1,57 @@
+{% extends 'home/base.html' %} {% block title %}Feedback | VisionWare{% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+<br>
+<div class="container">
+    <link rel="stylesheet" href="{% static 'home/css/star_rating.css'%}">
+
+
+
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Sr. No.</th>
+                <th scope="col">Question</th>
+                <th scope="col">Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in feedback_questions %}
+
+            <tr>
+                <th scope="row">{{i.id}}</th>
+                <td>
+                    <div class="section-body">
+                        <div class="list-group">
+                            {{i.question_name}}
+                        </div>
+                    </div>
+                    {% if i.question_type == "rating" %}
+
+
+                    <link rel="stylesheet" href="{% static 'home/css/star_rating.css'%}">
+                    <fieldset class="rating">
+                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
+                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
+                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Nice">3 stars</label>
+                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Okay!">1 star</label>
+                    </fieldset>
+
+                    {% else %}
+                    <br>
+                    <div class="form-group">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Your Comment Here!"></textarea>
+                    </div> {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+
+
+
+</div>
+
+{% endblock %}

@@ -16,5 +16,6 @@ urlpatterns = [
     path('study-material/new/', views.create_new_study_material, name='create_new_study_material'),
     path('study-material/not-working-links/get/', views.notWorkingLinks, name='notWorkingLinks'),
     path('dashboard/',views.dashboard,name='dashboard'),
+    path('feedback/',views.feedback_questions,name='feedback')
 ]
 

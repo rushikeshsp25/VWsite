@@ -26,7 +26,9 @@ def getNotWorkingLinksHtml(html_string):
 def get_not_working_links_pdf(pdf_content):
     study_courses_pdf = StudyCourse.objects.all()
     not_working_pdf_links_all=[]
-    for  course in study_courses_pdf:   
+    for  course in study_courses_pdf:
+        material_filename = course.material_file
+        course_name = course.course_name     
         pages = pdf_content.getNumPages()
         key = '/Annots'
         uri = '/URI'

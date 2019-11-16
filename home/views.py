@@ -178,7 +178,7 @@ def notWorkingLinks(request):
             pdf_content = io.BytesIO()
             pdf_content.seek(0)
             pdf_content =PyPDF2.PdfFileReader(open(material_filepath,mode='rb'))
-            not_working_links_pdf = get_not_working_links_pdf(pdf_content)
+            not_working_links_pdf=get_not_working_links_pdf(pdf_content)
             not_working_links_all.append({course_name :not_working_links_pdf })
         else:
             return HttpResponse("Please Choose Either Html or Pdf file correctly")
@@ -195,6 +195,13 @@ def notWorkingLinks(request):
         print("Exception is : ",e)
         return HttpResponse("Something went wrong while sending not working links emails")
     return HttpResponse(not_working_links_all)
+
+@login_required
+def feedback_questions(request):
+    feedback_questions=FeedbackQuestion.objects.all()
+    return render(request,'home/feedback.html',{'feedback_questions':feedback_questions})
+
+
 
 
 
