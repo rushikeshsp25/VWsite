@@ -39,9 +39,8 @@
                     <label for="inputCollege">College</label>
                     <select id="inputCollege" class="form-control" name="college" required>
                         {%for college in colleges%}
-                        <option value={{college}}>{{college}}</option>
+                        <option value={{college.shortname_without_space}}>{{college}}</option>
                         {%endfor%}
-                        <option value="Other / Passout / Working">Other / Passout / Working</option>
                     </select>
                 </div>
 

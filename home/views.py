@@ -21,16 +21,13 @@ from .helpers.linkCheck import getNotWorkingLinksHtml
 # Create your views here.
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
-#google reviews on startup
-# google_review_url = f'https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJzQygnlG5wjsR3kLG4sk8l9c&key={os.getenv("API_KEY")}'
-# try:
-#     r = requests.get(url=google_review_url, verify=False)
-#     print(r.json())
-#     response_dict = json.loads(response.text)
-#     for i in response_dict:
-#         print("key: ", i, "val: ", response_dict[i])
-# except:
-#     print("google map api failed")
+def dictionarify_the_response_queryset(response):
+    d={}
+    for i in response:
+        print(i.id)
+        d[i.response]=d.get(i,0)+1
+    return d
+
 
 def login_user(request):
     if(request.user.is_authenticated):
@@ -53,6 +50,7 @@ def login_user(request):
     return render(request, 'home/login.html')
 
 def signup_user(request):
+    colleges = College.objects.all()
     if(request.user.is_authenticated):
         return redirect('home:index')
     if request.method == "POST":
@@ -63,17 +61,32 @@ def signup_user(request):
         college = request.POST['college']
         year = request.POST['year']
         password = request.POST['password']
+        college_obj = College.objects.get(shortname_without_space = college)
+
+        print(fname,lname,email,mobile,college,year,password)
         if not fname or not lname or not email or not mobile or not college or not year or not password:
-            colleges = College.objects.all()
-            print('here')
             return render(request, 'home/signup.html',{'colleges':colleges,
                     'error_message': '<li>Incomplete form is submitted</li>'
             })
+        if User.objects.filter(email=email).exists():
+            messages.error(request,'Signup failed! There is existing account with this email')
+            return render(request, 'home/signup.html',{'colleges':colleges})
+        
+        user = User.objects.create_user(username = email, 
+                            email= email,
+                            first_name = fname,
+                            last_name = lname,
+                            password=password)
+        
+        student = Student(phone = mobile,college=college_obj,year=year)
+        student.save()
 
-        print(fname,lname,email,mobile,college,year,password)
-
-
-        return redirect('home:login_user')
+        if user:
+            messages.success(request,'Account created successfully ! Please login')
+            return redirect('home:login_user')
+        else:
+            messages.error(request,'Signup failed! Please try agin')
+            return render(request, 'home/signup.html',{'colleges':colleges})
     else:
         colleges = College.objects.all()
         return render(request, 'home/signup.html',{'colleges':colleges})
@@ -233,7 +246,37 @@ def notWorkingLinks(request):
 @user_passes_test(lambda u: u.is_superuser)
 def dashboard(request):
     return render(request,'home/dashboard.html')
-    
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def display_feedback_enabled_batches(request):
+    feedback_enabled_batches=CourseBatch.objects.filter(feedback_enable=True).order_by('-start_date')
+    return render(request,'home/display_feedback_enabled_batches.html',{'feedback_enabled_batches':feedback_enabled_batches})
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def display_feedback_questions(request,batch_id):
+    batch=CourseBatch.objects.get(id=batch_id)
+    feedback_questions=FeedbackQuestion.objects.all()
+    return render(request,'home/display_feedback_questions.html',{'feedback_questions':feedback_questions,'batch':batch})
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def display_feedback_response(request,batch_id,question_id):
+    question=FeedbackQuestion.objects.get(id=question_id)
+    batch=CourseBatch.objects.get(id=batch_id)
+    if question.question_type=='rating':
+        response=FeedbackResponse.objects.filter(question_id=question_id,batch_id=batch_id)
+        data={'1':0,'2':0,'3':0,'4':0,'5':0}
+        for i in response:
+            if i.response in data.keys():                                     #convert ratings into dictionary format{'rate':'No of students'}
+                data[i.response]=data[i.response]+1        
+        return render(request,'home/display_feedback_response.html',{'data':data,'batch':batch,'question':question})
+    else:
+         response=FeedbackResponse.objects.filter(question_id=question_id,batch_id=batch_id)
+         return render(request,'home/display_feedback_response.html',{'response':response,'batch':batch,'question':question})
+
+
 def handler404(request,*args,**argv):
     return render(request,'home/page_not_found.html',status=404)
 

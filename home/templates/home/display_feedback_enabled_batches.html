@@ -1,0 +1,11 @@
+{% extends 'home/base.html' %} {% block title %}Feedback Enabled Batches | VisionWare{% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+<section class="container mt-4 mb-4">
+    <div class="col-md-6 col-10 offset-md-3 offset-1">
+        <p class="section-heading">VisionWare Batches</p>
+        <div class="list-group">
+            {% for i in feedback_enabled_batches %}
+            <a href="{% url 'home:feedback_analysis_questions' batch_id=i.id %}" class="list-group-item list-group-item-action">{{i.batch_name}}</a> {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
