@@ -13,12 +13,28 @@ import os
 #for displaying messages
 from django.contrib import messages
 
+import requests
+import json
+
 from .helpers.linkCheck import getNotWorkingLinksHtml
 
 # Create your views here.
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
+#google reviews on startup
+# google_review_url = f'https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJzQygnlG5wjsR3kLG4sk8l9c&key={os.getenv("API_KEY")}'
+# try:
+#     r = requests.get(url=google_review_url, verify=False)
+#     print(r.json())
+#     response_dict = json.loads(response.text)
+#     for i in response_dict:
+#         print("key: ", i, "val: ", response_dict[i])
+# except:
+#     print("google map api failed")
+
 def login_user(request):
+    if(request.user.is_authenticated):
+        return redirect('home:index')
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
@@ -31,10 +47,36 @@ def login_user(request):
                 else:
                     return redirect('home:index')
             else:
-                return render(request, 'home/login.html', {'error_message': 'Your account has been disabled'})
+                return render(request, 'home/login.html', {'error_message': '<li>Your account has been disabled</li>'})
         else:
-            return render(request, 'home/login.html', {'error_message': 'Invalid login'})
+            return render(request, 'home/login.html', {'error_message': '<li>Invalid Username or Password</li>'})
     return render(request, 'home/login.html')
+
+def signup_user(request):
+    if(request.user.is_authenticated):
+        return redirect('home:index')
+    if request.method == "POST":
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        email = request.POST['email']
+        mobile = request.POST['mobile']
+        college = request.POST['college']
+        year = request.POST['year']
+        password = request.POST['password']
+        if not fname or not lname or not email or not mobile or not college or not year or not password:
+            colleges = College.objects.all()
+            print('here')
+            return render(request, 'home/signup.html',{'colleges':colleges,
+                    'error_message': '<li>Incomplete form is submitted</li>'
+            })
+
+        print(fname,lname,email,mobile,college,year,password)
+
+
+        return redirect('home:login_user')
+    else:
+        colleges = College.objects.all()
+        return render(request, 'home/signup.html',{'colleges':colleges})
 
 def logout_user(request):
     logout(request)

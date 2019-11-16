@@ -1,18 +1,18 @@
-.form-row {
+.cust-form-row {
     overflow: hidden;
     padding: 10px;
     font-size: 13px;
     border-bottom: 1px solid #eee;
 }
 
-.form-row .errorlist {
+.cust-form-row .errorlist {
     overflow: hidden;
     color: red;
     display: block;
     width: 100%;
 }
 
-.form-row label {
+.cust-form-row label {
     display: block;
     padding: 4px 10px 0 0;
     float: left;
@@ -21,7 +21,7 @@
     line-height: 1;
 }
 
-.form-row input[type="text"],
+.cust-form-row input[type="text"],
 input[type="number"],
 textarea {
     border: 1px solid #ccc;
@@ -29,7 +29,7 @@ textarea {
     padding-left: 5px;
 }
 
-.form-row input {
+.cust-form-row input {
     height: 35px;
 }
 
@@ -59,7 +59,9 @@ textarea {
     margin: 20px;
 }
 
-.login-container .body input {
+.login-container .body input[type="text"],
+input[type="password"],
+input[type="email"] {
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -68,7 +70,7 @@ textarea {
 }
 
 .login-container .body .btn {
-    width: 160px;
+    width: 100%;
     background-color: #38b6ff;
     color: white;
     border-radius: 4px;

@@ -1,0 +1,72 @@
+{% extends 'home/base.html' %} {% block title %}Signup | VisionWare{% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+<div class="container col-md-6 col-12 offset-md-3 mt-3">
+    <div class="login-container">
+        <div class="head">
+            <p class="section-heading">Signup</p>
+        </div>
+        <hr>
+        <div class="body">
+            <form class="login-form" role="form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="cust-form-row">
+                    {{ form.non_field_errors }} {%if error_message%}
+                    <ul class="errorlist">
+                        {{error_message|safe}}
+                    </ul>
+                    {%endif%}
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="fname">First Name</label>
+                        <input type="text" class="form-control" name="fname" id="fname" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="lname">Last Name</label>
+                        <input type="text" class="form-control" name="lname" id="lname" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 col-12">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" name="email" id="exampleInputEmail1" required>
+                    </div>
+                    <div class="form-group col-md-6 col-12">
+                        <label for="mobile">Mobile Number</label>
+                        <input type="text" class="form-control" id="mobile" name="mobile" pattern="[6-9][0-9]{9}" title="Enter a valid mobile Number without country code" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputCollege">College</label>
+                    <select id="inputCollege" class="form-control" name="college" required>
+                        {%for college in colleges%}
+                        <option value={{college}}>{{college}}</option>
+                        {%endfor%}
+                        <option value="Other / Passout / Working">Other / Passout / Working</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputYear">Year</label>
+                    <select id="inputYear" class="form-control" name="year" required>
+                        <option value="FE">First Year</option>
+                        <option value="SE">Second Year</option>
+                        <option value="TE">Third Year</option>
+                        <option value="BE">Final Year</option>
+                        <option value="NA">Not Applicable</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="form-controls">
+                    <button type="submit" class="btn">signup</button>
+                </div>
+            </form>
+            <hr>
+            <p>Already enrolled
+                <a href="#"> <a href="{%url 'home:login_user'%}">login</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

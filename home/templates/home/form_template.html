@@ -1,6 +1,6 @@
 <form enctype="multipart/form-data" method="POST" class="generated-form mb-5">
     {% csrf_token %}
-    <div class="form-row">
+    <div class="cust-form-row">
         {{ form.non_field_errors }} {%if error_message%}
         <ul class="errorlist">
             {{error_message|safe}}
@@ -8,7 +8,7 @@
         {%endif%}
     </div>
     {%for field in form%}
-    <div class="form-row">
+    <div class="custform-row">
         {{field.errors}}
         <label for="{{ field.id_for_label }}">
                     {{ field.label }}{% if field.field.required %}*{% endif %}
