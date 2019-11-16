@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
-        exclude = ['date_time']
+        exclude = ['date_time','course_slug']
 
 class StudyCourseForm(forms.ModelForm):
     class Meta:

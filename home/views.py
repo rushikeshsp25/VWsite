@@ -276,6 +276,8 @@ def display_feedback_response(request,batch_id,question_id):
          response=FeedbackResponse.objects.filter(question_id=question_id,batch_id=batch_id)
          return render(request,'home/display_feedback_response.html',{'response':response,'batch':batch,'question':question})
 
+def contact_us(request):
+    return render(request,'home/contactus.html')
 
 def handler404(request,*args,**argv):
     return render(request,'home/page_not_found.html',status=404)
