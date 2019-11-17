@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 import os
 #for displaying messages
 from django.contrib import messages
+from django.db.models import Subquery
 
 from .helpers.linkCheck import getNotWorkingLinksHtml
 
@@ -200,15 +201,29 @@ def notWorkingLinks(request):
 def dashboard(request):
     return render(request,'home/dashboard.html')
 
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def display_feedback_enabled_batches(request):
     feedback_enabled_batches=CourseBatch.objects.filter(feedback_enable=True)
     return render(request,'home/display_feedback_enabled_batches.html',{'feedback_enabled_batches':feedback_enabled_batches})
 
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def display_feedback_questions(request,batch_id):
     batch=CourseBatch.objects.get(id=batch_id)
     feedback_questions=FeedbackQuestion.objects.all()
-    return render(request,'home/display_feedback_questions.html',{'feedback_questions':feedback_questions,'batch':batch})
+    rating_question_ids=FeedbackQuestion.objects.filter(question_type='rating').values_list('id')
+    response=FeedbackResponse.objects.filter(batch_id=batch_id,question_id__in=Subquery(rating_question_ids))           #selecting response of a batch and only response type questions
+    data={'1':0,'2':0,'3':0,'4':0,'5':0}
+    for i in response:
+        if i.response in data.keys():                                     #convert ratings into dictionary format{'rate':'No of students'}
+            data[i.response]=data[i.response]+1        
+    return render(request,'home/display_feedback_questions.html',{'feedback_questions':feedback_questions,'batch':batch,'data':data})
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def display_feedback_response(request,batch_id,question_id):
     question=FeedbackQuestion.objects.get(id=question_id)
     batch=CourseBatch.objects.get(id=batch_id)

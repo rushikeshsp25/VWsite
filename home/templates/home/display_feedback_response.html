@@ -5,15 +5,17 @@
  {% endblock %} 
 
  {% block body %}
-<div class="container">
-<div style="margin: 10px 0 0 10px;width: 1000px">
-<p>Batch :{{batch.batch_name}} </p>
-		
-   <p> <h3>{{question.question_name}}</h3> </p>
-    <p><h5>Responses</h5> </p>
+<div class="container" style="margin: 2%">
+<section style="margin: 10px 0 0 10px;width: 1000px">
+<p class="section-heading">Batch : {{batch.batch_name}}</p>
+<br>
+   <p>Question : {{question.question_name}} </p>
+
+<hr>
+<p>Responses : </p>
     <div style="margin: 2px;">
     {% if question.question_type == "rating"  %}
-    <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+    <center><div id="piechart_3d" style="width: 700px; height: 400px;  border-style: solid; border-width: 1px;"></div></center>
     {% else %}
     <div class="list-group">
     {% for i in response %}
@@ -21,7 +23,10 @@
      {% endfor %}
       </div>
     {% endif %}
-		</div>
+    </div>
+    </section>
+      
+    
 		
 </div>
 {% endblock %}
