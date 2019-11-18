@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.utils import timezone
-from .forms import CourseForm, StudyCourseForm
+from .forms import CourseForm, StudyCourseForm,FeedbackForm
 from django.contrib.auth import authenticate, login,logout
 from .models import *
 from datetime import datetime
@@ -162,6 +162,8 @@ def display_all_study_material(request):
 @login_required
 @user_passes_test(lambda u: u.has_perm('home.view_studycourse'),login_url='/permissionerror/')
 def notWorkingLinks(request):
+    
+
     study_courses = StudyCourse.objects.all()
     not_working_links_all = []
     for course in study_courses:
@@ -197,14 +199,41 @@ def notWorkingLinks(request):
     return HttpResponse(not_working_links_all)
 
 @login_required
-def feedback_questions(request):
+def feedback(request):
     feedback_questions=FeedbackQuestion.objects.all()
     return render(request,'home/feedback.html',{'feedback_questions':feedback_questions})
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def feedback_enable(request):
+    batches=CourseBatch.objects.all()
+    batches.feedback_enable=request.POST.get("enable")
+    return render(request,'home/feedback_enable.html',{'batches':batches})
 
 
 
 
+@login_required
+def feedback_questions(request):
+    if request.method == "POST":
+        new_response=FeedbackResponse()
+        new_response.response=request.POST.get("comment")
+        new_response.save()
+    return render(request,'home/feedback_question.html')
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def feedback_questions_new(request):
+    if request.method == "POST":
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            new_course=form.save()
+            new_course.save()
+            return render(request,'home/feedback_question.html')
+
+    else:
+        form = FeedbackForm()
+    return render(request,'home/create_edit_course.html',{'form':form})
 
 
 

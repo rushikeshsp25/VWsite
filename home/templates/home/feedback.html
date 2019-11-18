@@ -1,53 +1,127 @@
 {% extends 'home/base.html' %} {% block title %}Feedback | VisionWare{% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
 <br>
 <div class="container">
-    <link rel="stylesheet" href="{% static 'home/css/star_rating.css'%}">
 
 
-
-
-    <table class="table table-hover">
+    <table border="2" class="table table-hover" rules="all">
         <thead>
             <tr>
                 <th scope="col">Sr. No.</th>
                 <th scope="col">Question</th>
-                <th scope="col">Rating</th>
+                <th align="centre" scope="col">Rating</th>
             </tr>
         </thead>
         <tbody>
             {% for i in feedback_questions %}
-
             <tr>
                 <th scope="row">{{i.id}}</th>
-                <td>
+                <td align="centre">
                     <div class="section-body">
                         <div class="list-group">
                             {{i.question_name}}
                         </div>
                     </div>
-                    {% if i.question_type == "rating" %}
+
+                </td>
+                <div class="starclass">
+                    <td>
+                        {% if i.question_type == "rating" %}
+
+                        <head>
+                            <style>
+                                .star {
+                                    color: #f70;
+                                    font-size: 2.0rem;
+                                    /* space out the stars */
+                                }
+                                
+                                .star::before {
+                                    content: '\2606';
+                                    /* star outline */
+                                    cursor: pointer;
+                                }
+                                
+                                .star.rated::before {
+                                    /* the style for a selected star */
+                                    content: '\2605';
+                                    /* filled star */
+                                }
+                                
+                                .stars {
+                                    counter-reset: rateme 0;
+                                    font-size: 2.0rem;
+                                    font-weight: 900;
+                                }
+                                
+                                .star.rated {
+                                    counter-increment: rateme 1;
+                                }
+                                
+                                .stars::after {
+                                    content: counter(rateme) '/5';
+                                }
+                            </style>
+                        </head>
+                        <div class="stars" data-rating="0">
+                            <span class="star">&nbsp;</span>
+                            <span class="star">&nbsp;</span>
+                            <span class="star">&nbsp;</span>
+                            <span class="star">&nbsp;</span>
+                            <span class="star">&nbsp;</span>
+                        </div>
+                        <script>
+                            //initial setup
+                            document.addEventListener('DOMContentLoaded', function() {
+                                let stars = document.querySelectorAll('.star');
+                                stars.forEach(function(star) {
+                                    star.addEventListener('click', setRating);
+                                });
+
+                                let rating = parseInt(document.querySelector('.star').getAttribute('data-rating'));
+                                let target = stars[rating - 1];
+                                target.dispatchEvent(new MouseEvent('click'));
+                            });
+
+                            function setRating(ev) {
+                                let span = ev.currentTarget;
+                                let stars = document.querySelectorAll('.star');
+                                let match = false;
+                                let num = 0;
+                                stars.forEach(function(star, index) {
+                                    if (match) {
+                                        star.classList.remove('rated');
+                                    } else {
+                                        star.classList.add('rated');
+                                    }
+                                    //are we currently looking at the span that was clicked
+                                    if (star === span) {
+                                        match = true;
+                                        num = index + 1;
+                                    }
+                                });
+                                document.querySelector('.star').setAttribute('data-rating', num);
+                            }
+                        </script>
 
 
-                    <link rel="stylesheet" href="{% static 'home/css/star_rating.css'%}">
-                    <fieldset class="rating">
-                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
-                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
-                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Nice">3 stars</label>
-                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
-                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Okay!">1 star</label>
-                    </fieldset>
 
-                    {% else %}
-                    <br>
-                    <div class="form-group">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Your Comment Here!"></textarea>
-                    </div> {% endif %}
+                        {% else %}
+                        <br>
+                        <div class="form-group">
+                            <textarea name="comment" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Your Comment Here!"></textarea>
+                        </div> {% endif %}
+                </div>
                 </td>
             </tr>
+
             {% endfor %}
+
 
         </tbody>
     </table>
+    <br>
+
+    <a class="btn btn-success" href="{%url 'home:index'%}">Submit Feedback</a>
 
 
 

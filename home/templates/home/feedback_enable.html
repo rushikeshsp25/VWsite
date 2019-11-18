@@ -1,0 +1,50 @@
+{% extends 'home/base.html' %} {% block title %}Feedback | VisionWare{% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+<br>
+<div class="container">
+
+
+    <table border="2" class="table table-hover" rules="all">
+        <thead>
+            <tr>
+                <th scope="col">Sr. No.</th>
+                <th scope="col">Batch Name</th>
+                <th align="centre" scope="col">Enable/Disable</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in batches %}
+            <tr>
+                <th scope="row">{{i.id}}</th>
+                <td align="centre">
+                    <div class="section-body">
+                        <div class="list-group">
+                            {{i.batch_name}}
+                        </div>
+                    </div>
+                </td>
+                <td align="centre">
+                    <div class="section-body">
+                        <div class="list-group">
+                            <div class="input-group mb-3">
+
+                                <select name="enable" class="custom-select" id="inputGroupSelect01">
+                                          <option selected>Choose...</option>
+                                          <option  value="1">True</option>
+                                          <option value="2">False</option>
+                                        </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </td>
+
+                <br>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a class="btn btn-success" href="{%url 'home:index'%}">Submit </a>
+</div>
+
+{% endblock %}

@@ -134,7 +134,7 @@ class CourseBatch(models.Model):
     start_date=models.DateField(blank=True)
     course=models.ForeignKey(Course,to_field='course_name',on_delete=models.CASCADE)
     batch_name=models.CharField(max_length=30)
-    fees=models.IntegerField(max_length=10)
+    fees=models.IntegerField()
     feedback_enable=models.BooleanField()
     def __str__(self):
        return self.batch_name
