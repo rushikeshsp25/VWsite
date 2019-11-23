@@ -1,5 +1,5 @@
 from django import forms
-from .models import Course, StudyCourse
+from .models import Course, StudyCourse,FeedbackBatch
 from django.contrib.auth.models import User
 
 # class AdmissionForm(forms.ModelForm):
@@ -29,3 +29,12 @@ class StudyCourseForm(forms.ModelForm):
 #     class Meta:
 #         model = review
 #         fields = ['course', 'rating', 'review']
+
+class DateInput(forms.DateInput):
+    input_type='date'
+
+class FeedbackBatchForm(forms.ModelForm):
+    class Meta:
+        model = FeedbackBatch
+        exclude = ['date_time']
+        widgets={'start_date':DateInput(),'end_date':DateInput()}

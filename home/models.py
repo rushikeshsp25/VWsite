@@ -136,7 +136,6 @@ class CourseBatch(models.Model):
     course=models.ForeignKey(Course,to_field='course_name',on_delete=models.CASCADE)
     batch_name=models.CharField(max_length=30)
     fees=models.IntegerField()
-    feedback_enable=models.BooleanField()
     def __str__(self):
         return self.batch_name
 
@@ -146,8 +145,15 @@ class FeedbackQuestion(models.Model):
     def __str__(self):
         return self.question_name
 
+class FeedbackBatch(models.Model):
+    batch_id=models.ForeignKey(CourseBatch,on_delete=models.CASCADE)
+    feedback_title=models.CharField(max_length=50,default='')
+    start_date=models.DateField()    
+    end_date=models.DateField()
+    date_time=models.DateTimeField(default=datetime.now)
+
 class FeedbackResponse(models.Model):
     question_id=models.ForeignKey(FeedbackQuestion,on_delete=models.CASCADE)
-    batch_id=models.ForeignKey(CourseBatch,on_delete=models.CASCADE)
+    feedback_batch_id=models.ForeignKey(FeedbackBatch,on_delete=models.CASCADE)
     student_id=models.ForeignKey(Student,to_field='id',on_delete=models.CASCADE)
     response=models.TextField()

@@ -17,7 +17,8 @@ urlpatterns = [
     path('study-material/not-working-links/get/', views.notWorkingLinks, name='notWorkingLinks'),
     path('dashboard/',views.dashboard,name='dashboard'),
     path('feedback-analysis/batches/',views.display_feedback_enabled_batches,name='feedback_analysis_batches'),
-    path('feedback-analysis/questions/<int:batch_id>/',views.display_feedback_questions,name='feedback_analysis_questions'),
-    path('feedback-analysis/response/<int:batch_id>/<int:question_id>/',views.display_feedback_response,name='feedback_analysis_response'),
+    path('feedback-analysis/questions/<int:feedback_batch_id>/',views.display_feedback_questions,name='feedback_analysis_questions'),
+    path('batch/feedback/',views.feedback_batch,name='feedback_batch'),
+
 ]
 

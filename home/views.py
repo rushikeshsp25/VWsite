@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.utils import timezone
-from .forms import CourseForm, StudyCourseForm
+from .forms import CourseForm, StudyCourseForm,FeedbackBatchForm
 from django.contrib.auth import authenticate, login,logout
 from .models import *
 from datetime import datetime
@@ -13,8 +13,8 @@ import os
 #for displaying messages
 from django.contrib import messages
 from django.db.models import Subquery
-
 from .helpers.linkCheck import getNotWorkingLinksHtml
+from .helpers.feedbackQuestionsResponse import feedback_question_responses
 
 # Create your views here.
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
@@ -205,38 +205,47 @@ def dashboard(request):
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
 def display_feedback_enabled_batches(request):
-    feedback_enabled_batches=CourseBatch.objects.filter(feedback_enable=True)
-    return render(request,'home/display_feedback_enabled_batches.html',{'feedback_enabled_batches':feedback_enabled_batches})
-
+    feedback_batches=FeedbackBatch.objects.all().order_by('-start_date')
+    return render(request,'home/display_feedback_batches.html',{'feedback_batches':feedback_batches})
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
-def display_feedback_questions(request,batch_id):
-    batch=CourseBatch.objects.get(id=batch_id)
+def display_feedback_questions(request,feedback_batch_id):
+    feedback_batch=FeedbackBatch.objects.get(id=feedback_batch_id)
     feedback_questions=FeedbackQuestion.objects.all()
     rating_question_ids=FeedbackQuestion.objects.filter(question_type='rating').values_list('id')
-    response=FeedbackResponse.objects.filter(batch_id=batch_id,question_id__in=Subquery(rating_question_ids))           #selecting response of a batch and only response type questions
+    response=FeedbackResponse.objects.filter(feedback_batch_id=feedback_batch_id,question_id__in=Subquery(rating_question_ids))           #selecting response of a batch and only response type questions
     data={'1':0,'2':0,'3':0,'4':0,'5':0}
     for i in response:
         if i.response in data.keys():                                     #convert ratings into dictionary format{'rate':'No of students'}
-            data[i.response]=data[i.response]+1        
-    return render(request,'home/display_feedback_questions.html',{'feedback_questions':feedback_questions,'batch':batch,'data':data})
+            data[i.response]=data[i.response]+1
+    batch_response= FeedbackResponse.objects.filter(feedback_batch_id=feedback_batch_id)   
+    rating_response,comment_response=feedback_question_responses(feedback_questions,batch_response)    
+    return render(request,'home/display_feedback_questions.html',{'feedback_questions':feedback_questions,'overall':data,'rating_response':rating_response,'comment_response':comment_response,'feedback_batch':feedback_batch})
+
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
-def display_feedback_response(request,batch_id,question_id):
-    question=FeedbackQuestion.objects.get(id=question_id)
-    batch=CourseBatch.objects.get(id=batch_id)
-    if question.question_type=='rating':
-        response=FeedbackResponse.objects.filter(question_id=question_id,batch_id=batch_id)
-        data={'1':0,'2':0,'3':0,'4':0,'5':0}
-        for i in response:
-            if i.response in data.keys():                                     #convert ratings into dictionary format{'rate':'No of students'}
-                data[i.response]=data[i.response]+1        
-        return render(request,'home/display_feedback_response.html',{'data':data,'batch':batch,'question':question})
+def feedback_batch(request):
+    if request.method == "POST":
+        form = FeedbackBatchForm(request.POST,request.FILES)
+        if form.is_valid():
+            feedback=form.save(commit=False)
+            if (feedback.end_date-feedback.start_date).days >= 0:
+                print(feedback.end_date-feedback.start_date)
+                messages.success(request,'Feedback for Batch is created successfully !')
+                feedback.save()
+                return redirect('home:dashboard')
+            else:
+                context = {
+                    'form': form,
+                    'error_message': '<li>End date cannot be before Start date</li>'
+                }
+                return render(request,'home/feedback_batch_form.html',context)
     else:
-         response=FeedbackResponse.objects.filter(question_id=question_id,batch_id=batch_id)
-         return render(request,'home/display_feedback_response.html',{'response':response,'batch':batch,'question':question})
+        form = FeedbackBatchForm()
+    return render(request,'home/feedback_batch_form.html',{'form':form})
+
 
 
 def handler404(request,*args,**argv):
