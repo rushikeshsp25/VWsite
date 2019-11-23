@@ -1,11 +1,8 @@
-{% extends 'home/base.html' %} {% block title %}Create/Edit Course | VisionWare{% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+{% extends 'home/base.html' %} {% block title %}Feedback | VisionWare{% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
 <section class="container mt-4 mb-4">
     <p class="section-heading">Question For Feedback</p>
     <div class="col-lg-6 col-10">
-        {% include 'home/form_template.html' %}
+        {% include 'home/form_template_feedback_question.html' %}
     </div>
 </section>
-{% endblock %} {% block script%}
-<script>
-</script>
-{% endblock %}
+{% endblock %} {% block script%} {% endblock %}

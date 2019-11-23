@@ -1,131 +1,90 @@
-{% extends 'home/base.html' %} {% block title %}Feedback | VisionWare{% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+ {% extends 'home/base.html' %} {% block title %}Feedback | VisionWare{% endblock %} {% block head %}
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Star rating system</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head> {% load static %} {% endblock %} {% block body %}
 <br>
+<link rel="stylesheet" href="{% static 'home/css/star_rating.css'%}">
+
 <div class="container">
-
-
-    <table border="2" class="table table-hover" rules="all">
-        <thead>
-            <tr>
-                <th scope="col">Sr. No.</th>
-                <th scope="col">Question</th>
-                <th align="centre" scope="col">Rating</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for i in feedback_questions %}
-            <tr>
-                <th scope="row">{{i.id}}</th>
-                <td align="centre">
-                    <div class="section-body">
-                        <div class="list-group">
-                            {{i.question_name}}
+    <div class="rating-group">
+        <table border="2" class="table table-hover" rules="all">
+            <thead>
+                <tr>
+                    <th scope="col">Sr. No.</th>
+                    <th scope="col">Question</th>
+                    <th align="centre" scope="col">Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in feedback_questions %}
+                <tr>
+                    <th scope="row">{{i.id}}</th>
+                    <td align="centre">
+                        <div class="section-body">
+                            <div class="list-group">
+                                {{i.question_name}}
+                            </div>
                         </div>
-                    </div>
+                    </td>
+                    <div class="starclass">
+                        <td>
+                            {% if i.question_type == "rating" %}
+                            <div class="star-div-{{i.id}}">
+                                <i class="fa fa-star-o star-1" aria-hidden="true"></i>
+                                <i class="fa fa-star-o star-2" aria-hidden="true"></i>
+                                <i class="fa fa-star-o star-3" aria-hidden="true"></i>
+                                <i class="fa fa-star-o star-4" aria-hidden="true"></i>
+                                <i class="fa fa-star-o star-5" aria-hidden="true"></i>
+                            </div>
 
-                </td>
-                <div class="starclass">
-                    <td>
-                        {% if i.question_type == "rating" %}
-
-                        <head>
-                            <style>
-                                .star {
-                                    color: #f70;
-                                    font-size: 2.0rem;
-                                    /* space out the stars */
-                                }
-                                
-                                .star::before {
-                                    content: '\2606';
-                                    /* star outline */
-                                    cursor: pointer;
-                                }
-                                
-                                .star.rated::before {
-                                    /* the style for a selected star */
-                                    content: '\2605';
-                                    /* filled star */
-                                }
-                                
-                                .stars {
-                                    counter-reset: rateme 0;
-                                    font-size: 2.0rem;
-                                    font-weight: 900;
-                                }
-                                
-                                .star.rated {
-                                    counter-increment: rateme 1;
-                                }
-                                
-                                .stars::after {
-                                    content: counter(rateme) '/5';
-                                }
-                            </style>
-                        </head>
-                        <div class="stars" data-rating="0">
-                            <span class="star">&nbsp;</span>
-                            <span class="star">&nbsp;</span>
-                            <span class="star">&nbsp;</span>
-                            <span class="star">&nbsp;</span>
-                            <span class="star">&nbsp;</span>
-                        </div>
-                        <script>
-                            //initial setup
-                            document.addEventListener('DOMContentLoaded', function() {
-                                let stars = document.querySelectorAll('.star');
-                                stars.forEach(function(star) {
-                                    star.addEventListener('click', setRating);
-                                });
-
-                                let rating = parseInt(document.querySelector('.star').getAttribute('data-rating'));
-                                let target = stars[rating - 1];
-                                target.dispatchEvent(new MouseEvent('click'));
-                            });
-
-                            function setRating(ev) {
-                                let span = ev.currentTarget;
-                                let stars = document.querySelectorAll('.star');
-                                let match = false;
-                                let num = 0;
-                                stars.forEach(function(star, index) {
-                                    if (match) {
-                                        star.classList.remove('rated');
-                                    } else {
-                                        star.classList.add('rated');
-                                    }
-                                    //are we currently looking at the span that was clicked
-                                    if (star === span) {
-                                        match = true;
-                                        num = index + 1;
-                                    }
-                                });
-                                document.querySelector('.star').setAttribute('data-rating', num);
-                            }
-                        </script>
-
+                        </td>
 
 
                         {% else %}
                         <br>
-                        <div class="form-group">
-                            <textarea name="comment" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Your Comment Here!"></textarea>
+                        <div class="form-group ">
+                            <textarea name="comment " class="form-control " id="exampleFormControlTextarea1 " rows="3 " placeholder="Enter Your Comment Here! "></textarea>
                         </div> {% endif %}
-                </div>
-                </td>
-            </tr>
 
-            {% endfor %}
+                </tr>
 
+                <script>
+                    document.querySelector('.rating-group').addEventListener('click', function(event) {
+                        // Variable to store the class of element
+                        console.log("Reached here ");
+                        var clickedSelector = ''
+                            // add class of parent div
+                        clickedSelector += '.' + event.path[1].className
+                            // get the class of actual star element which was clicked
+                        var innerClass = event.path[0].className.split(' ')[2]
+                        clickedSelector += ' i.' + innerClass
+                            // get the index of actual star which was clicked
+                        var indexOfStar = parseInt(innerClass.split('-')[1])
+                            // Change color of all stars before the selected star
+                        for (var i = 1; i <= indexOfStar; i++) {
+                            var newSelector = clickedSelector.slice(0, clickedSelector.length - 1) + i.toString()
+                            document.querySelector(newSelector).classList.add('star-selected')
 
-        </tbody>
-    </table>
-    <br>
+                        }
+                        // Remove golden color of all stars after the selected star 
+                        for (var i = indexOfStar + 1; i <= 5; i++) {
+                            var newSelector = clickedSelector.slice(0, clickedSelector.length - 1) + i
+                            document.querySelector(newSelector).classList.remove('star-selected')
+                        }
+                    });
+                </script>
 
-    <a class="btn btn-success" href="{%url 'home:index'%}">Submit Feedback</a>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        <br>
+        <a class="btn btn-success " href="{%url 'home:index'%} ">Submit Feedback</a>
+    </div>
 
-
-
-
-</div>
-
-{% endblock %}
+    {% endblock %}

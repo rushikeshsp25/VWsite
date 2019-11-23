@@ -162,8 +162,6 @@ def display_all_study_material(request):
 @login_required
 @user_passes_test(lambda u: u.has_perm('home.view_studycourse'),login_url='/permissionerror/')
 def notWorkingLinks(request):
-    
-
     study_courses = StudyCourse.objects.all()
     not_working_links_all = []
     for course in study_courses:
@@ -201,25 +199,49 @@ def notWorkingLinks(request):
 @login_required
 def feedback(request):
     feedback_questions=FeedbackQuestion.objects.all()
+    # response=FeedbackResponse()
+    # response.response=request.POST.get("comment")
+    # response.save()
     return render(request,'home/feedback.html',{'feedback_questions':feedback_questions})
+
+
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
-def feedback_enable(request):
-    batches=CourseBatch.objects.all()
-    batches.feedback_enable=request.POST.get("enable")
-    return render(request,'home/feedback_enable.html',{'batches':batches})
+def delete_feedback_question(request,pk):
+    FeedbackQuestion.objects.filter(id=pk).delete()
+    display_all_questions=FeedbackQuestion.objects.all()
+    return render(request,'home/feedback_question.html',{'display_all_questions':display_all_questions})
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def edit_feedback_question(request,pk):
+    course = get_object_or_404(FeedbackQuestion, pk=pk)
+    if request.method=='POST':
+        form = FeedbackForm(request.POST,instance=course)
+        if form.is_valid():
+            new_course=form.save()
+            new_course.save()
+            return render(request,'home/dashboard.html')
 
 
-
+    # FeedbackQuestion.objects.filter(id=pk).delete()
+    # if request.method == "POST":
+    #     form = FeedbackForm(request.POST)
+    #     if form.is_valid():
+    #         new_course=form.save()
+    #         new_course.save()
+    # else:
+    #     form = FeedbackForm()
+    # return render(request,'home/create_edit_course.html',{'form':form})
+    else:
+        form = FeedbackForm(instance=course)
+    return render(request,'home/create_edit_course.html',{'form':form})
 
 @login_required
 def feedback_questions(request):
-    if request.method == "POST":
-        new_response=FeedbackResponse()
-        new_response.response=request.POST.get("comment")
-        new_response.save()
-    return render(request,'home/feedback_question.html')
+    display_all_questions=FeedbackQuestion.objects.all()
+    return render(request,'home/feedback_question.html',{'display_all_questions':display_all_questions})
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
@@ -229,8 +251,7 @@ def feedback_questions_new(request):
         if form.is_valid():
             new_course=form.save()
             new_course.save()
-            return render(request,'home/feedback_question.html')
-
+            return render(request,'home/dashboard.html')
     else:
         form = FeedbackForm()
     return render(request,'home/create_edit_course.html',{'form':form})
@@ -247,3 +268,5 @@ def handler404(request,*args,**argv):
 
 def handler500(request,*args,**argv):
     return HttpResponse("Resourse is deleted or moved")
+
+    

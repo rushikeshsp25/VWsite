@@ -6,7 +6,6 @@ from datetime import datetime
 from django.utils.text import slugify
 import itertools
 
-
 YEAR_CHOICES = (
     ('FE', 'First Year'),
     ('SE', 'Second Year'),
@@ -146,9 +145,14 @@ class FeedbackQuestion(models.Model):
     def __str__(self):
         return self.question_name
 
+class FeedbackBatch(models.Model):
+    batch_id=models.ForeignKey(CourseBatch,on_delete=models.CASCADE)
+    start_date=models.DateTimeField()
+    end_date=models.DateTimeField()
 
 class FeedbackResponse(models.Model):
     question_id=models.ForeignKey(FeedbackQuestion,on_delete=models.CASCADE)
-    batch_id=models.ForeignKey(CourseBatch,on_delete=models.CASCADE)
+    feedback_batch_id=models.ForeignKey(FeedbackBatch,on_delete=models.CASCADE)
     student_id=models.ForeignKey(Student,to_field='id',on_delete=models.CASCADE)
     response=models.TextField()
+
