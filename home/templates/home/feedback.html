@@ -12,7 +12,7 @@
 
 <div class="container">
     <div class="rating-group">
-        <table border="2" class="table table-hover" rules="all">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th scope="col">Sr. No.</th>
@@ -42,6 +42,9 @@
                                 <i class="fa fa-star-o star-5" aria-hidden="true"></i>
                             </div>
 
+                            <!-- <p class="a-{{i.id}}" id="ratingvalue" name="input" disabled>
+                            </p> -->
+
                         </td>
 
 
@@ -61,7 +64,7 @@
                             // add class of parent div
                         clickedSelector += '.' + event.path[1].className
                             // get the class of actual star element which was clicked
-                        var innerClass = event.path[0].className.split(' ')[2]
+                        var innerClass = event.path[0].className.split(' ')[2];
                         clickedSelector += ' i.' + innerClass
                             // get the index of actual star which was clicked
                         var indexOfStar = parseInt(innerClass.split('-')[1])
@@ -76,6 +79,8 @@
                             var newSelector = clickedSelector.slice(0, clickedSelector.length - 1) + i
                             document.querySelector(newSelector).classList.remove('star-selected')
                         }
+                        // document.querySelector('.a-{{i.id}}').textContent = innerClass
+
                     });
                 </script>
 

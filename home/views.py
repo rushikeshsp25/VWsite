@@ -222,6 +222,7 @@ def edit_feedback_question(request,pk):
         if form.is_valid():
             new_course=form.save()
             new_course.save()
+            messages.success(request, 'Edit successful')
             return render(request,'home/dashboard.html')
 
 
@@ -251,6 +252,8 @@ def feedback_questions_new(request):
         if form.is_valid():
             new_course=form.save()
             new_course.save()
+            messages.success(request, 'Question submission successful')
+
             return render(request,'home/dashboard.html')
     else:
         form = FeedbackForm()
