@@ -1,0 +1,87 @@
+{% extends 'home/base.html' %} {% block title %}Dashboard | VisionWare {% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+<div class="container mt-4 mb-4">
+    <div>
+        <p class="section-heading mt-4">Students in ongoing batches</p>
+        <hr>
+        <div class="row">
+            {% for batch in all_batches %}
+            <div class="m-2">
+                <a href="{% url 'home:batchwise_students' pk=batch.pk %}">
+                    <button type="button" class="btn btn-primary">{{batch.batch_name}}</button>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <hr>
+    <div>
+        <p class="section-heading mt-4">College Wise students</p>
+        <hr>
+        <div class="row">
+            {% for college in all_colleges %}
+            <div class="m-2">
+                <a href="{% url 'home:collegewise_students'  pk=college.id %}">
+                    <button type="button" class="btn btn-primary">{{college.name}}</button>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <hr>
+    <div>
+        <p class="section-heading mt-4">Search Student</p>
+        <hr>
+        <div class="row search-form">
+            <div class="col-md-4 center">
+                <form action="{% url 'home:search_student' search_by='eno'%}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="control-label" for="id_search_eno">By Enrollment Number :</label>
+                        <input id="id_search_eno" maxlength="30" name="search_eno" type="text">
+                    </div>
+                    <button type="submit" class="btn btn-success">Search</button>
+                </form>
+            </div>
+            <div class="col-md-4 center">
+                <form action="{% url 'home:search_student' search_by='name'%}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="control-label" for="id_search_name">By First Name :</label>
+                        <input id="id_search_name" maxlength="30" name="search_name" type="text">
+                    </div>
+                    <button type="submit" class="btn btn-success">Search</button>
+                </form>
+            </div>
+            <div class="col-md-4 center">
+                <form action="{% url 'home:search_student' search_by='email'%}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="control-label " for="id_search_email">By Email :</label>
+                        <input id="id_search_email" maxlength="30" name="search_email" type="text">
+                    </div>
+                    <button type="submit" class="btn btn-success">Search</button>
+                </form>
+            </div>
+        </div>
+        <div class="center error-message">
+            {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+            {% endif %}
+        </div>
+    </div>
+    <hr>
+    <div>
+        <p class="section-heading mt-4">All students</p>
+        <hr>
+        <a href="{% url 'home:students_all'%}">
+            <button class="btn btn-primary">
+            Click here to see list of all students
+        </button>
+        </a>
+    </div>
+    <hr>
+</div>
+{% endblock %} {% block script%}
+<script>
+</script>
+{% endblock %}

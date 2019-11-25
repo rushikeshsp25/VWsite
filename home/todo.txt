@@ -1,0 +1,6 @@
+1] Login / SignUp UI like JHU   [First High Priority]   {DONE}
+2] Payment Gateway Integration [high priority]
+3] Admin -> Create Student and then Admit that Student to course
+            Admit existant student to the course
+4] * on required fields in custom forms
+5] Inquiry nodel in admin dashboard

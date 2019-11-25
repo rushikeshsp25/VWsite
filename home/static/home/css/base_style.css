@@ -2,6 +2,10 @@
      box-sizing: border-box;
  }
  
+ a {
+     text-decoration: none;
+ }
+ 
  html {
      height: 100%;
  }
@@ -12,6 +16,8 @@
      min-height: 100%;
      line-height: 1.5;
      -webkit-font-smoothing: antialiased;
+     font-family: 'Nunito', sans-serif;
+     background-color: #f5f5f5;
  }
  /* navbar styles */
  
@@ -22,7 +28,8 @@
  }
  
  .top_navbar .visionware-brand {
-     height: 12vh;
+     /* height: 12vh; */
+     width: 200px;
  }
  
  .top_navbar .navbar-nav .nav-link {
@@ -79,6 +86,12 @@
  }
  /* card styles */
  
+ .link,
+ .link:hover {
+     color: #212529;
+     text-decoration: none;
+ }
+ 
  .card {
      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
  }
@@ -92,7 +105,17 @@
  }
  /* headings */
  
+ .page-heading {
+     font-size: 1.6rem;
+     /* font-weight: bold; */
+ }
+ 
  .section-heading {
+     font-size: 1.4rem;
+     font-weight: 500;
+ }
+ 
+ .sub-section-heading {
      font-size: 1.2rem;
  }
  
@@ -106,4 +129,12 @@
      color: #155724;
      background-color: #d4edda;
      border-color: #c3e6cb;
+ }
+ 
+ .center {
+     text-align: center;
+ }
+ 
+ .error-message {
+     color: #721c24;
  }

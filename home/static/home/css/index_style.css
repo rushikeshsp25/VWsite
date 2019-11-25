@@ -1,11 +1,13 @@
 .cust-form-row {
     overflow: hidden;
-    padding: 10px;
     font-size: 13px;
     border-bottom: 1px solid #eee;
 }
 
 .cust-form-row .errorlist {
+    text-align: center;
+    padding: 0;
+    list-style: none;
     overflow: hidden;
     color: red;
     display: block;
@@ -53,6 +55,18 @@ textarea {
     text-align: center;
 }
 
+.login-container .head i {
+    /* border: 2px solid black; */
+    background-color: #ffde59;
+    color: black;
+    text-align: center;
+    font-size: 20px;
+    padding-top: 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
 .login-container {
     box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
     padding: 20px;
@@ -60,23 +74,240 @@ textarea {
 }
 
 .login-container .body input[type="text"],
-input[type="password"],
-input[type="email"] {
+.login-container .body input[type="password"],
+.login-container .body input[type="email"] {
     width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    height: 35px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid #bdb081;
+    border-radius: 10px;
+    height: 40px;
     padding-left: 5px;
+}
+
+.login-container .body textarea {
+    width: 100%;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid #bdb081;
+    border-radius: 10px;
+    padding-left: 5px;
+    height: 100px;
 }
 
 .login-container .body .btn {
     width: 100%;
-    background-color: #38b6ff;
+    background-color: #ffde59;
     color: white;
     border-radius: 4px;
-    height: 35px;
+    height: 40px;
+    color: black;
+}
+
+.login-container .body .btn:hover {
+    background-color: #38b6ff;
 }
 
 .login-container .body .form-controls {
     text-align: center;
+}
+
+.login-container .login-bottom {
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-container .signup-bottom {
+    font-size: 14px;
+    margin-top: 15px;
+    text-align: right;
+}
+
+.infotext {
+    color: gray;
+}
+
+.course-enroll-btn {
+    width: 100%;
+    margin-top: 5px;
+    background-color: #ffde59;
+}
+
+.course-enroll-btn:hover {
+    background-color: #38b6ff;
+}
+
+.course-level {
+    margin-top: 15px;
+    color: green;
+    font-weight: bold;
+}
+
+.batch-container {
+    margin: 10px;
+    padding: 10px;
+    background-color: #fdf3cc;
+    border-radius: 5px;
+    /* box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4); */
+}
+
+
+/* image grid */
+
+
+/* .image-grid-container {
+    padding: 5px;
+} */
+
+.image-grid .row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+
+
+/* Create four equal columns that sits next to each other */
+
+.image-grid .column {
+    flex: 25%;
+    max-width: 25%;
+    padding: 0 4px;
+}
+
+.image-grid .column img {
+    margin-top: 8px;
+    vertical-align: middle;
+    width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+    .image-grid .column {
+        flex: 50%;
+        max-width: 50%;
+    }
+}
+
+
+/*Zoom In*/
+
+.image-grid {
+    overflow: hidden;
+}
+
+.image-grid .column {
+    overflow: hidden;
+}
+
+.image-grid .column #zoomIn {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+.image-grid .column #zoomIn:hover {
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+    z-index: 10;
+    cursor: pointer;
+}
+
+
+/*highlights div*/
+
+
+/* .highlights hr {
+    border: 0.5px solid #38b6ff;
+}*/
+
+.highlights {
+    padding: 20px;
+    text-align: center;
+    opacity: 0.8;
+}
+
+
+/* .highlights p {
+    padding-top: 10px;
+} */
+
+.highlights .icon-round-border {
+    border: 7px double #38b6ff;
+    color: #38b6ff;
+    text-align: center;
+    font-size: 30px;
+    padding-top: 15px;
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    cursor: pointer;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.highlights .icon-round-border:hover {
+    color: #38b6ff;
+    border: 7px double #38b6ff;
+    background-color: #ffde59;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.banner {
+    box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+}
+
+.banner:hover {
+    cursor: pointer;
+}
+
+.highlights-container .body {
+    /* padding: 20px; */
+    background: url("../images/backgrounds/bg1.png") no-repeat fixed center;
+    color: white;
+}
+
+.highlights-container .body .section-heading {
+    color: #38b6ff;
+    font-weight: bold;
+}
+
+.shadow {
+    border: 1px solid rgb(214, 214, 214);
+    box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+    background-color: white;
+}
+
+
+/*search student*/
+
+.search-form input[type="text"],
+.search-form button {
+    width: 100%;
+}
+
+.section-head {
+    padding: 6px;
+    /* padding-left: 16px; */
+    background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+    text-align: center;
+    /* color: white; */
+    border-bottom: 1px solid rgb(214, 214, 214);
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+.carousel-inner>.item>img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 500px;
 }

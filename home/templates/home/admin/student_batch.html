@@ -1,0 +1,62 @@
+{% extends 'home/base.html' %} {% block title %}BatchWise Students | VisionWare {% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+<div class="container mt-4 mb-4">
+    <div class="center">
+        <p class="section-heading">{{result_type}}</p>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-6 text-left">
+            <p class="sub-section-heading">{{result_desc}}</p>
+        </div>
+        <div class="col-md-6 text-right">
+            <button type="button" class="btn btn-dark">Export as PDF</button>
+            <button type="button" class="btn btn-dark">Export as Excel</button>
+        </div>
+    </div>
+    <hr> {% if students %}
+    <table class="table table-bordered table-inverse">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Student Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>College</th>
+                <th>Year</th>
+                <th>course</th>
+                <th>Account Created</th>
+                <th>Admission Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student_batch in students %}
+            <tr>
+                <td>{{student_batch.student.user.first_name}} {{student_batch.student.user.last_name}}</td>
+                <td>{{student_batch.student.user.email}}</td>
+                <td>{{student_batch.student.phone}}</td>
+                <td>{{student_batch.student.college}}</td>
+                <td>{{student_batch.student.year}}</td>
+                <td>{{student_batch.batch.course.course_name}}</td>
+                <td>{{student_batch.student.date_time}}</td>
+                <td>{%if student_batch.admission%}
+                    <a href="{% url 'home:student_detail' pk=student_batch.student.id%}">
+                        <button type="button" class="btn btn-success">Done</button></a>
+                    {%else%}
+                    <a href="{% url 'home:student_detail' pk=student_batch.student.id%}">
+                        <button type="button" class="btn btn-danger">
+                                Pending</button>
+                    </a>
+                    {%endif%}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="center">
+        <p class="sub-section-heading error-message">No Students Found!</p>
+    </div>
+    {% endif %}
+    </br>
+    </br>
+</div>
+{% endblock %}

@@ -1,46 +1,42 @@
 {% extends 'home/base.html' %} {% block title %}Login | VisionWare{% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
-<div class="container col-md-6 col-lg-4 col-12 offset-md-2 offset-lg-4 mt-3">
+<div class="container col-md-6 col-lg-4 col-12 offset-md-3 offset-lg-4 mt-4 mb-4">
     <div class="login-container">
         <div class="head">
-            <p class="section-heading">Login</p>
+            <i class="fa fa-lock" aria-hidden="true"></i>
+            <p class="section-heading">Log In</p>
         </div>
-        <hr>
         <div class="body">
             <form class="login-form" role="form" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
+                {% csrf_token %} {%if form.non_field_errors %}
                 <div class="cust-form-row">
-                    {{ form.non_field_errors }} {%if error_message%}
+                    {{ form.non_field_errors }}
+                </div>
+                {%endif%} {%if error_message %}
+                <div class="cust-form-row">
                     <ul class="errorlist">
                         {{error_message|safe}}
                     </ul>
-                    {%endif%}
                 </div>
+                {%endif%}
                 <div class="form-group">
-                    <label class="control-labe" for="id_username">
-                    Username / email
-                </label>
+                    <label class="control-labe" for="id_username">Username / Email</label>
                     <input id="id_username" name="username" type="text">
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="id_password">
-                    Password
-                </label>
+                    <label class="control-label" for="id_password">Password</label>
                     <input id="id_password" name="password" type="password">
                 </div>
-                <div class="mb-2" style="font-size: 12px">
-                    <div class="text-right">
-                        <a href="#">forgot password</a>
-                    </div>
-                </div>
+
 
                 <div class="form-controls mb-3">
-                    <button type="submit" class="btn">login</button>
+                    <button type="submit" class="btn">LOG IN</button>
                 </div>
 
             </form>
-            <hr>
-            <p>New to VisionWare
-                <a href="#"> <a href="{%url 'home:signup_user'%}">signup</a></p>
+            <div class="login-bottom">
+                <a href="#">Forgot Password</a>
+                <a href="{%url 'home:signup_user'%}">New to VisionWare? signup</a>
+            </div>
         </div>
     </div>
 </div>

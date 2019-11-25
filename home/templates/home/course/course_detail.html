@@ -1,0 +1,57 @@
+{% extends 'home/base.html' %} {% block title %}Course Details | VisionWare {% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <img src="{{course.course_icon.url}}" alt="course image" width="100%">
+            <div>
+                <p class="course-level">
+                    Upcoming Batches
+                </p>
+                <div class="batch-container">
+                    {%if upcoming_batches%} {%for batch in upcoming_batches%}
+                    <p><strong>{{batch.batch_name}}</strong></p>
+                    <p class="infotext">Starting from {{batch.start_date}}</p>
+                    <a href="{%url 'home:student_admission_batch' batch.pk %}" class="btn btn-warning course-enroll-btn">Enroll Now</a> {%endfor%} {%else%}
+                    <p class="infotext">No batch scheduled yet, <a href="{%url 'home:contact_us' %}">contact us</a></p>
+                    {%endif%}
+
+                </div>
+            </div>
+            <br>
+        </div>
+        <div class="col-lg-7 col-md-6">
+            <div class="ml-md-3">
+                <h2 class="page-heading ">{{course.course_name}}</h2>
+                <hr>
+                <p class="course-level">
+                    {{course.level}} level
+                </p>
+                <hr>
+                <h3 class="section-heading">Course Outcomes </h3>
+                <p class="infotext">{{course.outcomes|linebreaksbr}}</p>
+                <hr>
+                <h3 class="section-heading">Prequisits </h3>
+                <p class="infotext">{{course.prerequisits|linebreaksbr}}</p>
+                <hr>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-12">
+            <div class="center">
+                <a href="{{course.syllabus.url}}" target="_blank">
+                    <img class="marginleft10" src="{% static 'home/images/pdf.png'%}" alt="PDF">
+                    <p>Download syllabus</p>
+                </a>
+            </div>
+
+        </div>
+    </div>
+    <br>
+</div>
+<div class="container">
+    <h3 class="section-heading">Course Description</h3>
+    <p class="infotext">{{course.description|linebreaksbr}}</p>
+</div>
+</br>
+</br>
+</div>
+{% endblock %}

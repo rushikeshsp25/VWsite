@@ -1,0 +1,49 @@
+{% extends 'home/base.html' %} {% block title %}{{result_type}} | VisionWare {% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+<div class="container mt-4 mb-4">
+    <div class="center">
+        <p class="section-heading">{{result_type}}</p>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-6 text-left">
+            <p class="sub-section-heading">{{result_desc}}</p>
+        </div>
+        <div class="col-md-6 text-right">
+            <button type="button" class="btn btn-dark">Export as PDF</button>
+            <button type="button" class="btn btn-dark">Export as Excel</button>
+        </div>
+    </div>
+    <hr> {% if students %}
+    <table class="table table-bordered table-inverse">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Student Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>College</th>
+                <th>Year</th>
+                <th>Account Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td><a href="{%url 'home:student_detail' pk=student.pk%}">{{student.user.first_name}} {{student.user.last_name}}</a></td>
+                <td>{{student.user.email}}</td>
+                <td>{{student.phone}}</td>
+                <td>{{student.college}}</td>
+                <td>{{student.year}}</td>
+                <td>{{student.date_time}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="center">
+        <p class="sub-section-heading error-message">No Students Found!</p>
+    </div>
+    {% endif %}
+    </br>
+    </br>
+</div>
+{% endblock %}

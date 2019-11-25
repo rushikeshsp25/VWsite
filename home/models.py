@@ -72,44 +72,37 @@ class Course(models.Model):
 
 class Student(models.Model):
     date_time = models.DateTimeField(default=datetime.now, blank=True)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     phone=models.CharField(max_length=10)
     college=models.ForeignKey(College,on_delete=models.SET('OTHER'))
     year=models.CharField(max_length=20,choices=YEAR_CHOICES)
     def __str__(self):
-        return self.name
+        return self.user.username
 
-class StudentCourse(models.Model):
+class CourseBatch(models.Model):
+    date_time = models.DateTimeField(default=datetime.now, blank=True)
+    batch_name=models.CharField(max_length=30)
+    start_date=models.DateField(blank=True)
+    course=models.ForeignKey(Course,on_delete=models.CASCADE)
+    fees=models.IntegerField()
+    feedback_enable=models.BooleanField()
+    def __str__(self):
+        return self.batch_name
+
+class StudentBatch(models.Model):
     date_time = models.DateTimeField(default=datetime.now, blank=True)
     student = models.ForeignKey(Student,on_delete=models.CASCADE)
-    course = models.ForeignKey(Course,to_field='course_name',on_delete=models.CASCADE)
+    batch = models.ForeignKey(CourseBatch,on_delete=models.CASCADE)
     admission = models.BooleanField(default=False)
     fees_paid = models.IntegerField(default=0)
     comments = models.TextField()
     rating = models.CharField(max_length=20, choices=RATING_CHOICES)
     def __str__(self):
-        return self.name+" @ "+self.course.course_name
-
-class StudentContact(models.Model):
-    date_time = models.DateTimeField(default=datetime.now, blank=True)
-    name = models.CharField(max_length=50)
-    email = models.EmailField()
-    phone = models.CharField(max_length=10)
-    message=models.TextField()
-    def __str__(self):
-        return self.name
-
-class Review(models.Model):
-    date_time = models.DateTimeField(default=datetime.now, blank=True)
-    course = models.ForeignKey(Course, to_field='course_name', on_delete=models.CASCADE)
-    rating = models.CharField(max_length=20, choices=RATING_CHOICES)
-    review = models.TextField()
-    reviewer = models.ForeignKey(Student,on_delete=models.CASCADE)
-    def __str__(self):
-        return self.review
+        return self.student.user.username+" @ "+self.batch.batch_name
 
 class StudyCourse(models.Model):
     date_time = models.DateTimeField(default=datetime.now, blank=True)
-    course_name= models.CharField(max_length=30)
+    course_name= models.CharField(max_length=70)
     description = models.TextField(blank=True,null=True)
     material_file=models.FileField(upload_to='StudyCourse')
     course_slug = models.SlugField(unique=True,blank=True)
@@ -129,17 +122,6 @@ class StudyCourse(models.Model):
     def __str__(self):
         return self.course_name
 
-
-class CourseBatch(models.Model):
-    date_time = models.DateTimeField(default=datetime.now, blank=True)
-    start_date=models.DateField(blank=True)
-    course=models.ForeignKey(Course,to_field='course_name',on_delete=models.CASCADE)
-    batch_name=models.CharField(max_length=30)
-    fees=models.IntegerField()
-    feedback_enable=models.BooleanField()
-    def __str__(self):
-        return self.batch_name
-
 class FeedbackQuestion(models.Model):
     date_time = models.DateTimeField(default=datetime.now, blank=True)
     question_name=models.TextField()
@@ -153,3 +135,13 @@ class FeedbackResponse(models.Model):
     batch_id=models.ForeignKey(CourseBatch,on_delete=models.CASCADE)
     student_id=models.ForeignKey(Student,to_field='id',on_delete=models.CASCADE)
     response=models.TextField()
+
+class Recruiter(models.Model):
+    full_name = models.CharField(max_length=70)
+    email = models.EmailField()
+    mobile_no=models.CharField(max_length=10)
+    company_name = models.CharField(max_length=70)
+    designation = models.CharField(max_length=70)
+    message = models.TextField()
+    def __str__(self):
+        return self.full_name+"@"+self.company_name

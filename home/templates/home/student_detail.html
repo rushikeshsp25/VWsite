@@ -1,0 +1,65 @@
+{% extends 'home/base.html' %} {% block title %}Student Details | VisionWare {% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+
+<div class="container mt-4 mb-4">
+    <div class="row">
+        <div class="col-md-2">
+            <!--Left blank to add student photo in future-->
+            <div style="height: 150px;width:120px;border: 1px solid black;">
+                photo
+            </div>
+        </div>
+        <div class="col-md-5">
+            <p class="section-heading">Student Details</p>
+            <hr>
+            <p class="sub-section-heading">Enrollment Number</p>
+            <p class="infotext">VW{{student.pk}}</p>
+            <hr>
+            <p class="sub-section-heading">Name</p>
+            <p class="infotext">{{student.user.first_name}} {{student.user.last_name}}</p>
+            <hr>
+            <p class="sub-section-heading">Email Id</p>
+            <p class="infotext">{{student.user.email}}</p>
+            <hr>
+            <p class="sub-section-heading">Mobile Number</p>
+            <p class="infotext">{{student.phone}}</p>
+            <hr>
+            <div class="row">
+                <div class="col-md-8">
+                    <p class="sub-section-heading">College</p>
+                    <p class="infotext">{{student.college}}</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="sub-section-heading">Year</p>
+                    <p class="infotext">{{student.year}}</p>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="col-md-5">
+            <p class="section-heading">Batch Details</p>
+            <hr>
+            <table class="table table-bordered table-inverse">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>Batch Name</th>
+                        <th>Start Date</th>
+                        <th>Batch Fees</th>
+                        <th>Fees Paid</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for student_batch in student_batches%}
+                    <tr>
+                        <td>{{student_batch.batch.batch_name}}</td>
+                        <td>{{student_batch.batch.start_date}}</td>
+                        <td>{{student_batch.batch.fees}}Rs</td>
+                        <td>{{student_batch.fees_paid}}Rs</td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

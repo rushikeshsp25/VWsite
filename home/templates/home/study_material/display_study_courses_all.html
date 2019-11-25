@@ -1,10 +1,12 @@
 {% extends 'home/base.html' %} {% block title %}Study Material | VisionWare{% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
 <section class="container mt-4 mb-4">
-    <p class="section-heading">Study Courses</p>
+    <p class="section-heading">Study Material</p>
     <div class="row">
-        {% for course in courses %}
+        {%if not courses%}
+        <p class="infotext ml-5">Coming soon...</p>
+        {%else%} {% for course in courses %}
         <div class="col-md-3 col-6 mb-4">
-            <a href="{%url 'home:display_study_material' course_slug=course.course_slug %}">
+            <a class="link" href="{%url 'home:display_study_material' course_slug=course.course_slug %}">
                 <div class="card">
                     <img src="{% static 'home/images/course/course.jpg' %}" class="card-img-top" alt="...">
                     <div class="card-body">
@@ -13,11 +15,7 @@
                 </div>
             </a>
         </div>
-
-        {% if forloop.counter|divisibleby:"4" and not forloop.last %}
-    </div>
-    <div class="row">
-        {% endif %} {% endfor %}
+        {%endfor%} {%endif%}
     </div>
 </section>
 
