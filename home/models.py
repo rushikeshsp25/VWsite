@@ -47,12 +47,12 @@ class Course(models.Model):
     course_name=models.CharField(max_length=70,unique=True)
     is_online=models.BooleanField(default=False)
     level=models.CharField(max_length=20,choices=LEVEL_CHOICES)
-    course_icon=models.FileField()
+    course_icon=models.FileField(upload_to='courseIcons')
     # fees=models.IntegerField(default=0)
     outcomes=models.TextField()
     prerequisits=models.TextField()
     description=models.TextField()
-    syllabus=models.FileField()
+    syllabus=models.FileField(upload_to='syllabus')
 
     course_slug = models.SlugField(unique=True,blank=True)
     def _generate_slug(self):
@@ -124,17 +124,28 @@ class StudyCourse(models.Model):
 
 class FeedbackQuestion(models.Model):
     date_time = models.DateTimeField(default=datetime.now, blank=True)
-    question_name=models.TextField()
+    question=models.TextField()
     question_type=models.CharField(max_length=10,choices=FEEDBACK_TYPE_CHOICES)
     def __str__(self):
-        return self.question_name
+        return self.question
+
+class FeedbackBatch(models.Model):
+    batch=models.ForeignKey(CourseBatch,on_delete=models.CASCADE)
+    feedback_title=models.CharField(max_length=50,default='')
+    start_date=models.DateField()    
+    end_date=models.DateField()
+    date_time=models.DateTimeField(default=datetime.now)
+    def __str__(self):
+        return self.feedback_title
 
 class FeedbackResponse(models.Model):
     date_time = models.DateTimeField(default=datetime.now, blank=True)
-    question_id=models.ForeignKey(FeedbackQuestion,on_delete=models.CASCADE)
-    batch_id=models.ForeignKey(CourseBatch,on_delete=models.CASCADE)
-    student_id=models.ForeignKey(Student,to_field='id',on_delete=models.CASCADE)
+    question=models.ForeignKey(FeedbackQuestion,on_delete=models.CASCADE)
+    feedback_batch=models.ForeignKey(FeedbackBatch,on_delete=models.CASCADE)
+    student=models.ForeignKey(Student,on_delete=models.CASCADE)
     response=models.TextField()
+    def __str__(self):
+        return self.feedback_batch.feedback_title+" : "+self.question.question+" : "+self.student.user.email
 
 class Recruiter(models.Model):
     full_name = models.CharField(max_length=70)

@@ -1,0 +1,81 @@
+{% extends 'home/base.html' %} {% block title %}Batch Feedback Analysis | VisionWare{% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+<section class="container mt-4 mb-4">
+    <div class="section-heading d-flex justify-content-between">
+        <p class="section-heading"><b>Batch :</b> {{feedback_batch.batch}}</p>
+        <p class="section-heading"><b>Feedback Title :</b> {{feedback_batch.feedback_title}}</p>
+    </div>
+    <hr>
+    <div class="section-body">
+        <p class="sub-section-heading">Overall Feedback Analysis</p>
+        <div class="center">
+            <div id="piechart_overall" class="shadow-sm p-3 mb-5 bg-white rounded fa fa-pie-chart"></div>
+        </div>
+        <hr>
+        <div class="accordion" id="accordionExample">
+            {% for question in feedback_questions %}
+            <div class="card">
+                <div class="card-header" id="heading_{{question.id}}">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse_{{question.id}}" aria-expanded="true" aria-controls="collapse_{{i.id}}">
+              {{question.question}}
+            </button>
+                    </h2>
+                </div>
+
+                <div id="collapse_{{question.id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="h-50">
+                            {% if question.question_type == 'rating' %}
+                            <div class="center">
+                                <div id="piechart_{{question.id}}" class="shadow-sm p-3 mb-5 bg-white rounded fa fa-pie-chart"></div>
+                            </div>
+                            {% else %}
+                            <div class="overflow-auto h-100">
+                                {% for key,responses in comment_response.items %} {% if key == question.id %} {% for response in responses %}
+                                <li class="list-group-item">{{response}}</li>
+                                {% endfor %} {% else %} {% endif %} {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+</section>
+{% endblock %} {% block script%}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    var options = {
+        title: 'Feedback',
+        is3D: true,
+    };
+    let data=null;
+    function drawChart(id,data){
+        google.charts.load('current', {
+            packages: ['corechart']
+        });
+        let graph_data = google.visualization.arrayToDataTable(data);
+        let chart = new google.visualization.PieChart(document.getElementById(id));
+        chart.draw(data, options); 
+    }
+    window.onload = function () {
+        data = [
+            ['Rate', 'No of students'], 
+            {%for key,value in overall.items %}
+            ['Rate {{ key }}', {{value}}], 
+            {% endfor %}
+        ];
+        drawChart("piechart_overall",data);
+        {% for question_id, responses in rating_response.items %}
+        data = [
+            ['Rate', 'No of students'], 
+            {% for key, value in responses.items %}
+            ['Rate {{ key }}', {{ value}}], 
+            {% endfor %}
+        ];
+        drawChart("piechart_{{question_id}}",data);
+        {% endfor %}
+    }
+</script>
+{% endblock %}

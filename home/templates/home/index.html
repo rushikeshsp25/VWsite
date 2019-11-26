@@ -38,7 +38,9 @@
         </div>
         <div class="section-body p-3 shadow">
             <div class="row">
-                {%for course in courses%}
+                {%if not courses%}
+                <p class="infotext ml-5">New Courses Coming Soon...</p>
+                {%endif%} {%for course in courses%}
                 <div class="col-lg-3 col-md-4 col-6 mb-4">
                     <a class="link" href="{%url 'home:course_details' course.course_slug %}">
                         <div class="card">

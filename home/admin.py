@@ -5,4 +5,4 @@ from django.contrib import admin
 from .models import *
 # Register your models here.
 
-admin.site.register([College,Course,Student,CourseBatch,StudentBatch,StudyCourse,FeedbackQuestion,FeedbackResponse,Recruiter])
+admin.site.register([College,Course,Student,CourseBatch,StudyCourse,FeedbackQuestion,FeedbackBatch,FeedbackResponse,Recruiter])
