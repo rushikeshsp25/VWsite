@@ -1,0 +1,83 @@
+{% extends 'home/base.html' %} {% block title %}Feedback | VisionWare{% endblock %} {% block head %} {% load static %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="{% static 'home/css/star_rating.css'%}"> {% endblock %} {% block body %}
+<div class="container mt-4 mb-4">
+    <div class="center mb-2">
+        <p class="section-heading ">{{feedback_batch.feedback_title}} for {{feedback_batch.batch.batch_name}}</p>
+    </div>
+    <form>
+        <div class="rating-group">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Sr. No.</th>
+                        <th scope="col">Question</th>
+                        <th scope="col">Response</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fq in feedback_questions %}
+                    <tr>
+                        <td scope="row">{{fq.id}}</td>
+                        <td>
+                            <div class="section-body">
+                                <div class="list-group">
+                                    {{fq.question}}
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            {% if fq.question_type == "rating" %}
+                            <div class="starclass">
+                                <div class="star-div-{{fq.id}}">
+                                    <i class="fa fa-star-o star-1" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o star-2" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o star-3" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o star-4" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o star-5" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            {% else %}
+                            <div class="form-group ">
+                                <textarea name="comment " class="form-control " id="exampleFormControlTextarea1 " rows="3 " placeholder="Your Answer Here"></textarea>
+                            </div> {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a class="btn btn-success " href="{%url 'home:index'%} ">Submit Feedback</a>
+        </div>
+    </form>
+
+</div>
+{% endblock %} {%block script %}
+<script>
+    document.querySelector('.rating-group').addEventListener('click', function(event) {
+        console.log("clicked");
+        // Variable to store the class of element
+        var clickedSelector = '';
+        // add class of parent div
+        clickedSelector += '.' + event.path[1].className;
+        console.log(event.path)
+        console.log(clickedSelector);
+        // get the class of actual star element which was clicked
+        var innerClass = event.path[0].className.split(' ')[2];
+        clickedSelector += ' i.' + innerClass;
+        // get the index of actual star which was clicked
+        var indexOfStar = parseInt(innerClass.split('-')[1])
+            // Change color of all stars before the selected star
+        for (var i = 1; i <= indexOfStar; i++) {
+            var newSelector = clickedSelector.slice(0, clickedSelector.length - 1) + i.toString();
+            document.querySelector(newSelector).classList.add('star-selected');
+        }
+        // Remove golden color of all stars after the selected star 
+        for (var i = indexOfStar + 1; i <= 5; i++) {
+            var newSelector = clickedSelector.slice(0, clickedSelector.length - 1) + i;
+            document.querySelector(newSelector).classList.remove('star-selected');
+        }
+        // document.querySelector('.a-{{i.id}}').textContent = innerClass
+
+    });
+</script>
+{%endblock%}

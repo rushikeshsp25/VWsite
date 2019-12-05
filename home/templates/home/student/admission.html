@@ -6,37 +6,93 @@
             <div class="col-md-6 col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">
-                            <strong>Enroll Online </strong>
+                        <h3 class="sub-section-heading">
+                            <strong>Enroll Online</strong>
                         </h3>
                     </div>
                     <div class="card-body">
-                        {% include 'home/form_template.html' %}
+                        <form class="admission-form" role="form" method="post" enctype="multipart/form-data">
+                            {% csrf_token %} {%if form.non_field_errors%}
+                            <div class="cust-form-row">
+                                {{ form.non_field_errors }}
+                            </div>
+                            {%endif%} {%if error_message%}
+                            <div class="cust-form-row">
+                                <ul class="errorlist">
+                                    {{error_message|safe}}
+                                </ul>
+                            </div>
+                            {%endif%}
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="fname">First Name</label>
+                                    <input type="text" class="form-control" name="fname" id="fname" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="lname">Last Name</label>
+                                    <input type="text" class="form-control" name="lname" id="lname" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6 col-12">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" name="email" id="exampleInputEmail1" required>
+                                </div>
+                                <div class="form-group col-md-6 col-12">
+                                    <label for="mobile">Mobile Number</label>
+                                    <input type="text" class="form-control" id="mobile" name="mobile" pattern="[6-9][0-9]{9}" title="Enter a valid mobile Number without country code" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputCollege">College</label>
+                                <select id="inputCollege" class="form-control" name="college" required>
+                                    {%for college in colleges%}
+                                    <option value={{college.shortname_without_space}}>{{college}}</option>
+                                    {%endfor%}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputYear">Year</label>
+                                <select id="inputYear" class="form-control" name="year" required>
+                                    <option value="FE">First Year</option>
+                                    <option value="SE">Second Year</option>
+                                    <option value="TE">Third Year</option>
+                                    <option value="BE">Final Year</option>
+                                    <option value="NA">Not Applicable</option>
+                                </select>
+                            </div>
+                            <div class="form-group datepicker">
+                                <label for="dob">Date Of Birth</label>
+                                <input class="form-control" type="text" id="dob" autocomplete="off" placeholder="yyyy-mm-dd" name="dob" required>
+                                <!-- <input type="date" name="inputDOB"> -->
+                            </div>
+                            <div class="form-controls center">
+                                <button type="submit" class="btn">Enroll Now</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">
+                        <h3 class="sub-section-heading">
                             <strong>Instructions for Students</strong>
                         </h3>
                     </div>
                     <div class="card-body">
                         <ul>
                             <li>Filling this form will not confirm your admission at VisionWare.</li>
-                            <br/>
+                            <br />
                             <li>It just indicates that you are interested learning @VisionWare.</li>
-                            <br/>
-                            <li>You will get all updates regarding course you are choosing after filling this form.</li>
-                            <br/>
-                            <li>You will receive promotional offers.</li>
-                            <br/>
+                            <br />
+                            <li>You will get all updates regarding the course you are choosing after filling this form.
+                            </li>
+                            <br />
                             <li>Enter your contact details(email and mobile number) correctly.</li>
-                            <br/>
-                            <li>You can confirm your admission by paying at least 50% fees at VisionWare office, Online payment option is unavailable right now.</li>
-                            <br/>
-                            <li>If you are interested learning new things, apart from the courses provided by VisionWare then feed them in interest box.</li>
+                            <br />
+                            <li>You can confirm your admission by paying the course fees at VisionWare office, Online payment option is currently unavailable.</li>
                         </ul>
                     </div>
                 </div>
@@ -46,4 +102,14 @@
         </br>
     </div>
 </Section>
+{% endblock %} {% block script%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function() {
+        $("#dob").datepicker({
+            dateFormat: "yy-mm-dd",
+            duration: "fast"
+        });
+    });
+</script>
 {% endblock %}

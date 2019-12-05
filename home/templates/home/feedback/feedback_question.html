@@ -1,0 +1,33 @@
+{% extends 'home/base.html' %} {% block title %}Feedback Question| VisionWare{% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+<div class="container mt-4 mb-4">
+    <div class="center mb-2">
+        <p class="section-heading ">Feedback Questions</p>
+    </div>
+    <hr>
+    <a class="btn btn-success" href="{%url 'home:feedback_questions_new'%}">New Feedback Question</a>
+    <hr>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Sr. No.</th>
+                <th scope="col">Question</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for question in display_all_questions %}
+            <tr>
+                <td scope="row">{{ forloop.counter }}</td>
+                <td>
+                    {{question.question}}
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="{%url 'home:edit_feedback_question' pk=question.id%}">Edit</a>
+                    <a class="btn btn-danger" href="{%url 'home:delete_feedback_question' pk=question.id %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}s

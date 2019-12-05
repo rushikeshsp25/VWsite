@@ -48,14 +48,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {%for student_batch in student_batches%}
                     <tr>
-                        <td>{{student_batch.batch.batch_name}}</td>
-                        <td>{{student_batch.batch.start_date}}</td>
-                        <td>{{student_batch.batch.fees}}Rs</td>
-                        <td>{{student_batch.fees_paid}}Rs</td>
+                        <td>{{student.batch.batch_name}}</td>
+                        <td>{{student.batch.start_date}}</td>
+                        <td>{{student.batch.fees}}Rs</td>
+                        <td>{{student.fees_paid}}Rs</td>
                     </tr>
-                    {%endfor%}
                 </tbody>
             </table>
         </div>

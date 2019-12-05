@@ -36,12 +36,12 @@
         <div class="section-head">
             <p class="section-heading p-0 m-0">New Courses</p>
         </div>
-        <div class="section-body p-3 shadow">
+        <div class="section-body p-4 shadow">
             <div class="row">
                 {%if not courses%}
                 <p class="infotext ml-5">New Courses Coming Soon...</p>
                 {%endif%} {%for course in courses%}
-                <div class="col-lg-3 col-md-4 col-6 mb-4">
+                <div class="col-lg-3 col-md-4 col-6 mb-2">
                     <a class="link" href="{%url 'home:course_details' course.course_slug %}">
                         <div class="card">
                             <img src="{% static 'home/images/course/course.jpg' %}" class="card-img-top" alt="...">
@@ -65,17 +65,18 @@
             </div>
         </div>
     </div>
-    <!-- <div class="shadow mt-3 p-3">
+    <div class="shadow mt-3 p-4">
         <div class="row">
             <div class="col-md-6 col-12">
-
-                <iframe id="ytplayer" type="text/html" width="100%" height="320" src="https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1" frameborder="0"></iframe>
+                <div class="videoWrapper">
+                    <iframe width="100%" height="310" src="https://www.youtube.com/embed/bgJoUrqjKY8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
             </div>
             <div class="col-md-6 col-12">
-                testimonial here
+                <p class="infotext">Testimonials here...</p>
             </div>
         </div>
-    </div> -->
+    </div>
     <div class="highlights-container mt-3">
         <div class="body">
             <!-- <div>
@@ -152,7 +153,7 @@
             </div>
         </div>
     </div>
-    <div class="image-grid-container mt-3">
+    <!-- <div class="image-grid-container mt-3">
         <div class="section-head">
             <p class="section-heading m-0 p-0">The Journey</p>
         </div>
@@ -213,13 +214,10 @@
                     <div id="zoomIn">
                         <img src="{%static 'home/images/grid-images/17.jpeg'%}">
                     </div>
-                    <!-- <a id="zoomIn">
-                            <img src="{%static 'home/images/grid-images/13.jpg'%}">
-                        </a> -->
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </section>
 
 

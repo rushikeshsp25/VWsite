@@ -37,7 +37,7 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <label class="control-label" for="id_search_eno">By Enrollment Number :</label>
-                        <input id="id_search_eno" maxlength="30" name="search_eno" type="text">
+                        <input id="id_search_eno" maxlength="30" name="search_eno" type="text" autocomplete="off">
                     </div>
                     <button type="submit" class="btn btn-success">Search</button>
                 </form>
@@ -47,7 +47,7 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <label class="control-label" for="id_search_name">By First Name :</label>
-                        <input id="id_search_name" maxlength="30" name="search_name" type="text">
+                        <input id="id_search_name" maxlength="30" name="search_name" type="text" autocomplete="off">
                     </div>
                     <button type="submit" class="btn btn-success">Search</button>
                 </form>
@@ -57,7 +57,7 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <label class="control-label " for="id_search_email">By Email :</label>
-                        <input id="id_search_email" maxlength="30" name="search_email" type="text">
+                        <input id="id_search_email" maxlength="30" name="search_email" type="text" autocomplete="off">
                     </div>
                     <button type="submit" class="btn btn-success">Search</button>
                 </form>

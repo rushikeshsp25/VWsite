@@ -6,7 +6,6 @@ from datetime import datetime
 from django.utils.text import slugify
 import itertools
 
-
 YEAR_CHOICES = (
     ('FE', 'First Year'),
     ('SE', 'Second Year'),
@@ -21,6 +20,11 @@ RATING_CHOICES = (
     ('3','3'),
     ('4','4'),
     ('5','5')
+)
+
+FEEDBACK_TYPE_CHOICES=(
+    ('comment', 'comment'),
+    ('rating', 'rating'),
 )
 
 
@@ -53,7 +57,6 @@ class Course(models.Model):
     prerequisits=models.TextField()
     description=models.TextField()
     syllabus=models.FileField(upload_to='syllabus')
-
     course_slug = models.SlugField(unique=True,blank=True)
     def _generate_slug(self):
         generated_slug = slug_original = slugify(self.course_name, allow_unicode=True)
@@ -70,36 +73,32 @@ class Course(models.Model):
     def __str__(self):
         return self.course_name
 
-class Student(models.Model):
-    date_time = models.DateTimeField(default=datetime.now, blank=True)
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    phone=models.CharField(max_length=10)
-    college=models.ForeignKey(College,on_delete=models.SET('OTHER'))
-    year=models.CharField(max_length=20,choices=YEAR_CHOICES)
-    def __str__(self):
-        return self.user.username
-
 class CourseBatch(models.Model):
     date_time = models.DateTimeField(default=datetime.now, blank=True)
     batch_name=models.CharField(max_length=30)
     start_date=models.DateField(blank=True)
     course=models.ForeignKey(Course,on_delete=models.CASCADE)
     fees=models.IntegerField()
-    feedback_enable=models.BooleanField()
     def __str__(self):
         return self.batch_name
 
-class StudentBatch(models.Model):
+class Student(models.Model):
     date_time = models.DateTimeField(default=datetime.now, blank=True)
-    student = models.ForeignKey(Student,on_delete=models.CASCADE)
+    first_name=models.CharField(max_length=70)
+    last_name=models.CharField(max_length=70)
+    email = models.EmailField()
+    phone=models.CharField(max_length=10)
+    college=models.ForeignKey(College,on_delete=models.SET('OTHER'))
+    year=models.CharField(max_length=20,choices=YEAR_CHOICES)
+    dob = models.DateField()
     batch = models.ForeignKey(CourseBatch,on_delete=models.CASCADE)
     admission = models.BooleanField(default=False)
     fees_paid = models.IntegerField(default=0)
-    comments = models.TextField()
-    rating = models.CharField(max_length=20, choices=RATING_CHOICES)
+    comments = models.TextField(blank=True)
+    rating = models.CharField(max_length=20, choices=RATING_CHOICES,blank=True)
     def __str__(self):
-        return self.student.user.username+" @ "+self.batch.batch_name
-
+        return self.first_name+' @ '+self.batch.batch_name
+        
 class StudyCourse(models.Model):
     date_time = models.DateTimeField(default=datetime.now, blank=True)
     course_name= models.CharField(max_length=70)

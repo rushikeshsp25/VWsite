@@ -1,5 +1,5 @@
 from django import forms
-from .models import Course, StudyCourse,FeedbackBatch
+from .models import Course,CourseBatch, StudyCourse,FeedbackBatch,FeedbackQuestion
 from django.contrib.auth.models import User
 
 # class AdmissionForm(forms.ModelForm):
@@ -8,11 +8,25 @@ from django.contrib.auth.models import User
 #     class Meta:
 #         model = student
 #         fields = ['name', 'email', 'phone','college','year','course','interest']
+class DateInput(forms.DateInput):
+    input_type='date'
 
 class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
         exclude = ['date_time','course_slug']
+
+class BatchForm(forms.ModelForm):
+    class Meta:
+        model = CourseBatch   
+        exclude = ['date_time']
+        widgets={'start_date':DateInput()}
+
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model=FeedbackQuestion
+        exlude=['']
+        fields=['question','question_type']
 
 class StudyCourseForm(forms.ModelForm):
     class Meta:
@@ -29,9 +43,6 @@ class StudyCourseForm(forms.ModelForm):
 #     class Meta:
 #         model = review
 #         fields = ['course', 'rating', 'review']
-
-class DateInput(forms.DateInput):
-    input_type='date'
 
 class FeedbackBatchForm(forms.ModelForm):
     class Meta:

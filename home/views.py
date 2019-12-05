@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.utils import timezone
-from .forms import CourseForm, StudyCourseForm,FeedbackBatchForm
+from .forms import CourseForm,BatchForm, StudyCourseForm,FeedbackBatchForm, FeedbackForm
 from django.contrib.auth import authenticate, login,logout
 from .models import *
 from datetime import datetime
@@ -10,6 +10,9 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required,user_passes_test
 import os
+import requests
+import PyPDF2
+import io
 #for displaying messages
 from django.contrib import messages
 
@@ -97,7 +100,7 @@ def logout_user(request):
     return redirect('home:login_user')
 
 def index(request):
-    courses = Course.objects.all().order_by('date_time')[:5]
+    courses = Course.objects.all().order_by('date_time')[:4]
     return render(request,'home/index.html',{'courses':courses})
 
 @login_required
@@ -167,6 +170,23 @@ def edit_course(request,pk):
         form = CourseForm(instance=course)
     return render(request,'home/course/create_edit_course.html',{'form':form})
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+def create_new_batch(request):
+    if request.method == "POST":
+        form = BatchForm(request.POST)
+        if form.is_valid():
+            new_batch=form.save(commit=False)
+            new_batch.save()
+            messages.success(request,'Batch Saved successfully !')
+            return redirect('home:dashboard')
+        else:
+            messages.error(request,'Invalid Form Submitted !')
+            return redirect('home:create_new_batch')
+    else:
+        form = BatchForm()
+    return render(request,'home/course/create_edit_batch.html',{'form':form})
+
 def display_all_courses(request):
     offline_courses = Course.objects.filter(is_online = False).order_by('date_time')
     online_courses = Course.objects.filter(is_online = True).order_by('date_time')
@@ -181,45 +201,30 @@ def course_details(request,course_slug):
         batches = CourseBatch.objects.filter(course=course,start_date__gte=today).order_by('start_date')
         return render(request,'home/course/course_detail.html',{'course':course,'upcoming_batches':batches})
 
-@login_required
 def student_admission_batch(request,course_batch_pk):
     try:
         course_batch = CourseBatch.objects.get(pk = course_batch_pk)
     except:
         messages.error(request,"Selected course batch doesn't exists !")
         return redirect('home:display_all_courses')
-    try:
-        student = Student.objects.get(user = request.user)
-    except:
-        messages.error(request,'Invalid attempt !')
+    if request.method == "POST":
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        email = request.POST['email']
+        mobile = request.POST['mobile']
+        college = request.POST['college']
+        year = request.POST['year']
+        dob = request.POST['dob']
+        college_obj = College.objects.get(shortname_without_space = college)
+        batch = CourseBatch.objects.get(pk=course_batch_pk)
+        student = Student(first_name=fname,last_name=lname,email=email,phone = mobile,college=college_obj,year=year,dob=dob,batch=batch)
+        student.save()
+        messages.success(request,'You have successfully enrolled for the batch !')
         return redirect('home:display_all_courses')
-    
-    student_batch = StudentBatch(student=student,
-                            batch=course_batch
-                     )
-    student_batch.save()
-    messages.success(request,"Please make the payment to confirm your admission !")
-    return render(request,'home/student/admission.html')
+    else:
+        all_colleges = College.objects.all()
+        return render(request,'home/student/admission.html',{'colleges':all_colleges})
 
-@login_required
-def student_admission_online_course(request,course_pk):
-    try:
-        course = Course.objects.get(pk = course_pk)
-    except:
-        messages.error(request,"Selected online course doesn't exists !")
-        return redirect('home:display_all_courses')
-    try:
-        student = Student.objects.get(user = request.user)
-    except:
-        messages.error('Invalid attempt !')
-        return redirect('home:display_all_courses')
-    
-    student_course = StudentOnlineCourse(student=student,
-                            batch=batch
-                     )
-    student_course.save()
-    messages.success(request,"Please make the payment to confirm your admission !")
-    return render(request,'home/admission.html')
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
@@ -278,8 +283,14 @@ def notWorkingLinks(request):
             html_content = f.read()
             not_working_links = getNotWorkingLinksHtml(html_content)
             not_working_links_all.append({course_name : not_working_links})
-        #also add for pdf
-        #else:
+        elif file_type=='PDF':
+            pdf_content = io.BytesIO()
+            pdf_content.seek(0)
+            pdf_content =PyPDF2.PdfFileReader(open(material_filepath,mode='rb'))
+            not_working_links_pdf=get_not_working_links_pdf(pdf_content)
+            not_working_links_all.append({course_name :not_working_links_pdf })
+        else:
+            return HttpResponse("Please Choose Either Html or Pdf file correctly")
     #sending emails
     admin_emails =  User.objects.filter(is_superuser=True).values_list('email', flat=True)
     try:
@@ -295,14 +306,87 @@ def notWorkingLinks(request):
     return HttpResponse(not_working_links_all)
 
 @login_required
+def feedback_init(request,feedback_batch_id):
+    if request.method=="POST":
+        email = request.POST['email']
+        dob = request.POST['dob']
+        try:
+            sobj = Student.objects.get(email=email,dob=dob)
+            print(sobj)
+            messages.success(request, 'Please give the proper feedback, It is very important to us!')
+            feedback_questions=FeedbackQuestion.objects.all()
+            feedback_batch = FeedbackBatch.objects.get(id=feedback_batch_id)
+            return render(request,'home/feedback/feedback_proceed.html',{'feedback_batch':feedback_batch,'student':sobj,'feedback_questions':feedback_questions})
+        except:
+            messages.error(request, 'You are not allowed to give this feedback')
+            return HttpResponse("Something went wrong")
+            # return redirect('home:feedback_init')
+        return HttpResponse("Your Feedback is successfully submitted")
+    else:
+        return render(request,'home/feedback/feedback_init.html')
+
+@login_required
+def feedback_proceed(request,feedback_batch_id):
+    return HttpResponse("Feedback next steps")
+    # feedback_questions=FeedbackQuestion.objects.all()
+    # response=FeedbackResponse()
+    # response.response=request.POST.get("comment")
+    # response.save()
+    # return render(request,'home/feedback/feedback.html',{'feedback_questions':feedback_questions})
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def delete_feedback_question(request,pk):
+    FeedbackQuestion.objects.filter(id=pk).delete()
+    display_all_questions=FeedbackQuestion.objects.all()
+    return render(request,'home/feedback/feedback_question.html',{'display_all_questions':display_all_questions})
+
+@login_required
+def feedback_questions(request):
+    display_all_questions=FeedbackQuestion.objects.all()
+    return render(request,'home/feedback/feedback_question.html',{'display_all_questions':display_all_questions})
+
+@login_required
 @user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+def feedback_questions_new(request):
+    if request.method == "POST":
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            new_question=form.save()
+            new_question.save()
+            messages.success(request, 'Question Created Successfully!')
+            return render(request,'home/dashboard.html')
+    else:
+        form = FeedbackForm()
+    return render(request,'home/feedback/create_edit_feedback_question.html',{'form':form})
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+def edit_feedback_question(request,pk):
+    course = get_object_or_404(FeedbackQuestion, pk=pk)
+    if request.method=='POST':
+        form = FeedbackForm(request.POST,instance=course)
+        if form.is_valid():
+            new_question=form.save()
+            new_question.save()
+            messages.success(request, 'Question Edited successfully!')
+            return render(request,'home/dashboard.html')
+    else:
+        form = FeedbackForm(instance=course)
+    return render(request,'home/feedback/create_edit_feedback_question.html',{'form':form})
+
+@login_required
+# @user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
 def dashboard(request):
-    all_courses = Course.objects.all()
-    all_batches = CourseBatch.objects.all()
-    return render(request,'home/dashboard.html',{
-        'all_courses':all_courses,
-        'all_batches':all_batches
-    })
+    if request.user.is_superuser:
+        all_courses = Course.objects.all()
+        all_batches = CourseBatch.objects.all()
+        return render(request,'home/dashboard.html',{
+            'all_courses':all_courses,
+            'all_batches':all_batches
+        })
+    else:
+        return redirect('home:student_dashboard')
 
 def contact_us(request):
     return render(request,'home/contactus.html')
@@ -331,7 +415,7 @@ def display_feedback_enabled_batches(request):
     return render(request,'home/feedback/display_feedback_batches.html',{'feedback_batches':feedback_batches})
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
 def feedback_batch_response(request,feedback_batch_id):
     feedback_batch=FeedbackBatch.objects.get(id=feedback_batch_id)
     feedback_questions=FeedbackQuestion.objects.all()
@@ -348,7 +432,7 @@ def feedback_batch_response(request,feedback_batch_id):
     return render(request,'home/feedback/feedback_batch_response.html',{'feedback_questions':feedback_questions,'overall':data,'rating_response':rating_response,'comment_response':comment_response,'feedback_batch':feedback_batch})
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
 def create_new_feedback(request):
     if request.method == "POST":
         form = FeedbackBatchForm(request.POST,request.FILES)
@@ -369,10 +453,6 @@ def create_new_feedback(request):
         form = FeedbackBatchForm()
     return render(request,'home/feedback/feedback_batch_form.html',{'form':form})
 
-
-def student_dashboard(request):
-    return render(request,'home/student/dashboard_student.html')
-
 def handler404(request,*args,**argv):
     return render(request,'home/page_not_found.html',status=404)
 
@@ -381,7 +461,6 @@ def handler500(request,*args,**argv):
 
 def permissionerror(request):
     return render(request,'home/page_not_found.html')
-
 
 #student search related views
 @login_required
@@ -416,7 +495,7 @@ def batchwise_students(request,pk):
         messages.error(request,'Invalid Batch')
         return redirect('home:students')
 
-    s_objs = StudentBatch.objects.filter(batch=batch).order_by('-date_time')
+    s_objs = Student.objects.filter(batch=batch).order_by('-date_time')
     context = {
     "result_type": "Batch Wise Students",
     "result_desc": batch.batch_name,
@@ -448,12 +527,7 @@ def student_detail(request,pk):
     except:
         messages.error(request,'Invalid Student ID')
         return redirect('home:students')
-    try:
-        s_batches = StudentBatch.objects.filter(student=s_obj)
-    except:
-        s_batches=None
-    print(s_batches)
-    return render(request, 'home/student_detail.html', {'student': s_obj,'student_batches':s_batches})
+    return render(request, 'home/student_detail.html', {'student': s_obj})
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
@@ -466,10 +540,10 @@ def search_student(request,search_by):
                 s_objs=Student.objects.filter(pk=eno)
             if search_by=='name':
                 name=request.POST.get('search_name',False)
-                s_objs=Student.objects.filter(user__first_name__contains=name)
+                s_objs=Student.objects.filter(first_name__contains=name)
             if search_by=='email':
                 email=request.POST.get('search_email',False)
-                s_objs=Student.objects.filter(user__email=email)
+                s_objs=Student.objects.filter(email=email)
             context = {
                 "result_type": "Students Result",
                 "result_desc": "",
@@ -480,4 +554,3 @@ def search_student(request,search_by):
             print(err)
             messages.error(request,'No Student Found!')
             return redirect('home:students')
-
