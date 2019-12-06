@@ -36,15 +36,15 @@
         <div class="section-head">
             <p class="section-heading p-0 m-0">New Courses</p>
         </div>
-        <div class="section-body p-4 shadow">
+        <div class="section-body p-2 shadow">
             <div class="row">
                 {%if not courses%}
                 <p class="infotext ml-5">New Courses Coming Soon...</p>
                 {%endif%} {%for course in courses%}
-                <div class="col-lg-3 col-md-4 col-6 mb-2">
+                <div class="col-lg-3 col-md-4 col-6">
                     <a class="link" href="{%url 'home:course_details' course.course_slug %}">
                         <div class="card">
-                            <img src="{% static 'home/images/course/course.jpg' %}" class="card-img-top" alt="...">
+                            <img src="{{course.course_icon.url}}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <p class="card-title">{{course.course_name}}</p>
                                 <div class="row">
@@ -65,7 +65,7 @@
             </div>
         </div>
     </div>
-    <div class="shadow mt-3 p-4">
+    <div class="shadow mt-3 p-2">
         <div class="row">
             <div class="col-md-6 col-12">
                 <div class="videoWrapper">
@@ -73,7 +73,17 @@
                 </div>
             </div>
             <div class="col-md-6 col-12">
-                <p class="infotext">Testimonials here...</p>
+                <p class="sub-section-heading"><strong>FAQ: How to prepare for Placements in IT sector ?</strong></p>
+                <hr>
+                <p class="">
+                    Believe or not, IT industry is in boom, but still getting a job in this industry is a challenge.<br/><br/>If you are looking for the jon in this industry, here are few tips :
+                    <ul class="">
+                        <li>Starting which very basic skill, knowledge of basic computer architecture</li>
+                        <li>You should be able to progam using atleast 1 Procedural language (C) and 1 Object oriented language (C++, Java, Python, Js)</li>
+                        <li>Having good grip on Data structures is necessary</li>
+                        <li>Database and SQL is a favourite topic among the interviewers</li>
+                    </ul>
+                </p>
             </div>
         </div>
     </div>
@@ -153,71 +163,73 @@
             </div>
         </div>
     </div>
-    <!-- <div class="image-grid-container mt-3">
+    <div class="mt-3">
         <div class="section-head">
             <p class="section-heading m-0 p-0">The Journey</p>
         </div>
-        <div class="image-grid p-3 shadow">
-            <div class="row">
-                <div class="column">
-                    <div id="zoomIn">
-                        <img src="{%static 'home/images/grid-images/1.jpg'%}">
+        <div class="section-body p-1 shadow">
+            <div class="image-grid">
+                <div class="img-row">
+                    <div class="column">
+                        <div class="zoomIn">
+                            <img src="{%static 'home/images/grid-images/1.jpg'%}">
+                        </div>
+                        <div class="zoomIn">
+                            <img src="{%static 'home/images/grid-images/15.jpeg'%}">
+                        </div>
+                        <div class="zoomIn">
+                            <img src="{%static 'home/images/grid-images/11.jpg'%}">
+                        </div>
+                        <div class="zoomIn">
+                            <img src="{%static 'home/images/grid-images/3.jpg'%}">
+                        </div>
                     </div>
-                    <div id="zoomIn">
-                        <img src="{%static 'home/images/grid-images/15.jpeg'%}">
+                    <div class="column">
+                        <div class="zoomIn">
+                            <img src="{%static 'home/images/grid-images/16.jpeg'%}">
+                        </div>
+                        <div class="zoomIn">
+                            <img src="{%static 'home/images/grid-images/5.jpg'%}">
+                        </div>
+                        <div class="zoomIn">
+                            <img src="{%static 'home/images/grid-images/8.jpg'%}">
+                        </div>
+                        <div class="zoomIn">
+                            <img src="{%static 'home/images/grid-images/10.jpg'%}">
+                        </div>
                     </div>
-                    <div id="zoomIn">
-                        <img src="{%static 'home/images/grid-images/11.jpg'%}">
+                    <div class="column">
+                        <div class="zoomIn">
+                            <img src="{%static 'home/images/grid-images/9.jpg'%}">
+                        </div>
+                        <div class="zoomIn">
+                            <img src="{%static 'home/images/grid-images/7.jpg'%}">
+                        </div>
+                        <div class="zoomIn">
+                            <img src="{%static 'home/images/grid-images/4.jpg'%}">
+                        </div>
+                        <div class="zoomIn">
+                            <img src="{%static 'home/images/grid-images/14.jpg'%}">
+                        </div>
                     </div>
-                    <div id="zoomIn">
-                        <img src="{%static 'home/images/grid-images/3.jpg'%}">
-                    </div>
-                </div>
-                <div class="column">
-                    <div id="zoomIn">
-                        <img src="{%static 'home/images/grid-images/16.jpeg'%}">
-                    </div>
-                    <div id="zoomIn">
-                        <img src="{%static 'home/images/grid-images/5.jpg'%}">
-                    </div>
-                    <div id="zoomIn">
-                        <img src="{%static 'home/images/grid-images/8.jpg'%}">
-                    </div>
-                    <div id="zoomIn">
-                        <img src="{%static 'home/images/grid-images/10.jpg'%}">
-                    </div>
-                </div>
-                <div class="column">
-                    <div id="zoomIn">
-                        <img src="{%static 'home/images/grid-images/9.jpg'%}">
-                    </div>
-                    <div id="zoomIn">
-                        <img src="{%static 'home/images/grid-images/7.jpg'%}">
-                    </div>
-                    <div id="zoomIn">
-                        <img src="{%static 'home/images/grid-images/4.jpg'%}">
-                    </div>
-                    <div id="zoomIn">
-                        <img src="{%static 'home/images/grid-images/14.jpg'%}">
-                    </div>
-                </div>
-                <div class="column">
-                    <div id="zoomIn">
-                        <img src="{%static 'home/images/grid-images/6.jpg'%}">
-                    </div>
-                    <div id="zoomIn">
-                        <img src="{%static 'home/images/grid-images/12.jpg'%}">
-                    </div>
-                    <div id="zoomIn">
-                        <img src="{%static 'home/images/grid-images/2.jpg'%}">
-                    </div>
-                    <div id="zoomIn">
-                        <img src="{%static 'home/images/grid-images/17.jpeg'%}">
+                    <div class="column">
+                        <div class="zoomIn">
+                            <img src="{%static 'home/images/grid-images/6.jpg'%}">
+                        </div>
+                        <div class="zoomIn">
+                            <img src="{%static 'home/images/grid-images/12.jpg'%}">
+                        </div>
+                        <div class="zoomIn">
+                            <img src="{%static 'home/images/grid-images/2.jpg'%}">
+                        </div>
+                        <div class="zoomIn">
+                            <img src="{%static 'home/images/grid-images/17.jpeg'%}">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 </section>
 
 

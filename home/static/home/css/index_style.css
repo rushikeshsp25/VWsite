@@ -77,15 +77,11 @@ textarea {
     margin: 20px;
 }
 
-.login-container hr {
-    /* border-top: 1px solid #dbcc97; */
-}
-
 .login-container .body input[type="text"],
 .login-container .body input[type="password"],
 .login-container .body input[type="email"] {
     width: 100%;
-    border: 1px solid #dbcc97;
+    border: 1px solid #ccc;
     border-radius: 5px;
     height: 40px;
     padding-left: 5px;
@@ -93,10 +89,7 @@ textarea {
 
 .login-container .body textarea {
     width: 100%;
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    border-bottom: 1px solid #bdb081;
+    border: 1px solid #ccc;
     border-radius: 10px;
     padding-left: 5px;
     height: 100px;
@@ -162,15 +155,9 @@ textarea {
 
 /* image grid */
 
-
-/* .image-grid-container {
-    padding: 5px;
-} */
-
-.image-grid .row {
+.image-grid .img-row {
     display: flex;
     flex-wrap: wrap;
-    padding: 0 4px;
 }
 
 
@@ -179,11 +166,14 @@ textarea {
 .image-grid .column {
     flex: 25%;
     max-width: 25%;
-    padding: 0 4px;
+}
+
+.image-grid .column .zoomIn {
+    padding: 2px;
+    overflow: hidden;
 }
 
 .image-grid .column img {
-    margin-top: 8px;
     vertical-align: middle;
     width: 100%;
 }
@@ -198,22 +188,14 @@ textarea {
 
 /*Zoom In*/
 
-.image-grid {
-    overflow: hidden;
-}
-
-.image-grid .column {
-    overflow: hidden;
-}
-
-.image-grid .column #zoomIn {
+.image-grid .column .zoomIn img {
     -webkit-transform: scale(1);
     transform: scale(1);
     -webkit-transition: .3s ease-in-out;
     transition: .3s ease-in-out;
 }
 
-.image-grid .column #zoomIn:hover {
+.image-grid .column .zoomIn img:hover {
     -webkit-transform: scale(1.5);
     transform: scale(1.5);
     z-index: 10;
@@ -286,7 +268,8 @@ textarea {
 
 .shadow {
     border: 1px solid rgb(214, 214, 214);
-    box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    /* box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4); */
     background-color: white;
 }
 
