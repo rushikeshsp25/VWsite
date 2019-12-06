@@ -33,7 +33,6 @@ urlpatterns = [
     path('su/feedback/feedback_question/new/',views.feedback_questions_new,name='feedback_questions_new'),
     path('su/feedback-analysis/batches/all/',views.display_feedback_enabled_batches,name='display_feedback_enabled_batches'),
     path('su/feedback-analysis/batches/<int:feedback_batch_id>/',views.feedback_batch_response,name='feedback_batch_response'),
-    path('su/admit_student/',views.admit_student,name='admit_student'),
     path('su/student/',views.students,name='students'),
     path('su/student/detail/<int:pk>',views.student_detail,name='student_detail'),
     path('su/student/search/<str:search_by>/',views.search_student,name='search_student'),

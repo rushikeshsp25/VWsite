@@ -465,11 +465,6 @@ def permissionerror(request):
 #student search related views
 @login_required
 @user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
-def admit_student(request):
-    return HttpResponse('admitting a student')
-
-@login_required
-@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
 def students(request):
     all_batches = CourseBatch.objects.all()
     all_colleges = College.objects.all()
