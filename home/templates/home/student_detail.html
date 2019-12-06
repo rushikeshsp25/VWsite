@@ -15,10 +15,10 @@
             <p class="infotext">VW{{student.pk}}</p>
             <hr>
             <p class="sub-section-heading">Name</p>
-            <p class="infotext">{{student.user.first_name}} {{student.user.last_name}}</p>
+            <p class="infotext">{{student.first_name}} {{student.last_name}}</p>
             <hr>
             <p class="sub-section-heading">Email Id</p>
-            <p class="infotext">{{student.user.email}}</p>
+            <p class="infotext">{{student.email}}</p>
             <hr>
             <p class="sub-section-heading">Mobile Number</p>
             <p class="infotext">{{student.phone}}</p>
@@ -52,7 +52,13 @@
                         <td>{{student.batch.batch_name}}</td>
                         <td>{{student.batch.start_date}}</td>
                         <td>{{student.batch.fees}}Rs</td>
-                        <td>{{student.fees_paid}}Rs</td>
+                        <td>{{student.fees_paid}}Rs 
+                            {% if student.fees_paid < student.batch.fees%}
+                                <a href="{% url 'home:pay_fees' student.pk %}">
+                                    <button class="btn btn-success">Pay Remaining</button>
+                                </a>
+                            {% endif %}
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -60,4 +66,8 @@
     </div>
 </div>
 </div>
+{% endblock %}
+{% block script %}
+<script>
+</script>
 {% endblock %}

@@ -554,3 +554,45 @@ def search_student(request,search_by):
             print(err)
             messages.error(request,'No Student Found!')
             return redirect('home:students')
+
+@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+def pay_fees(request,pk):
+    if request.method == "POST":
+        fees_paying=request.POST.get('feesip',0)
+        student_obj = get_object_or_404(Student, pk=pk)
+        fees_remaining = int(student_obj.batch.fees) - int(student_obj.fees_paid)
+        if int(fees_paying)>int(fees_remaining):
+            return render(request, 'home/pay_fees.html', {'student': student_obj,
+                                                          'fees_remaining': fees_remaining,
+                                                          'error_message':'invalid fees amount entered',
+                                                          })
+        student_obj.fees_paid=int(student_obj.fees_paid)+int(fees_paying)
+        student_obj.save()
+        if int(student_obj.fees_paid)>=int(student_obj.batch.fees)/2:
+            return redirect('home:confirm_admission',student_obj.pk)
+        messages.success(request,'Rs'+str(fees_paying)+' fees is received successfully')
+        return redirect('home:student_detail',student_obj.pk)
+    else:
+        student_obj = get_object_or_404(Student, pk=pk)
+        fees_remaining = int(student_obj.batch.fees) - int(student_obj.fees_paid)
+        return render(request,'home/pay_fees.html',{'student':student_obj,
+                                                    'fees_remaining':fees_remaining,
+                                                    })
+
+@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+def confirm_admission(request,pk):
+    s_obj=get_object_or_404(Student,pk=pk)
+    s_obj.admission=True
+    s_obj.save()
+    # try:
+    #     send_mail('Your Admission @ VisionWare IT Training Institute',
+    #               'Hi ' + s_obj.name + ',\n' + 'Your admission is confirmed for ' + str(
+    #                   s_obj.course.course_name) +
+    #               ' course.\nTotal course Fees is : ' + str(s_obj.course.fees) + '\nYou have Paid : ' + str(
+    #                   s_obj.fees_paid) +
+    #               '\nYour Enrollment Number is : ' + str(
+    #                   s_obj.pk) + '\nThanks for Being part of Visionware :))'
+    #               , 'admin@visionware.in', [str(s_obj.email),'rushikeshsp25@gmail.com'])
+    # except Exception as e:
+    #     return redirect('home:student_detail', pk=pk)
+    return redirect('home:student_detail', pk=pk)

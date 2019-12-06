@@ -1,0 +1,91 @@
+{% extends 'home/base.html' %} {% block title %}Pay Fees | VisionWare {% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+<div class="container mt-4 mb-4">
+    <div class="col-md-8 offset-md-2">
+        <table class="table table-bordered table-inverse">
+            <tr>
+                <td>
+                    <p class="sub-section-heading">Student Details</p>
+                </td>
+                <td>
+                    <p class="infotext">
+                        {{student.first_name}} {{student.last_name}}<br /> {{student.email}}
+                        <br /> {{student.phone}}
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="sub-section-heading">Batch Details</p>
+                </td>
+                <td>
+                    <p class="infotext">{{student.first_name}} {{student.batch.batch_name}}
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="sub-section-heading">Total Fees for this Batch is</p>
+                </td>
+                <td>
+                    <p class="sub-section-heading">{{student.batch.fees}} &#x20b9;</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="sub-section-heading">Fees Paid</p>
+                </td>
+                <td>
+                    <p class="sub-section-heading">{{student.fees_paid}} &#x20b9;</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="sub-section-heading">Fees Remaining</p>
+                </td>
+                <td>
+                    <p class="sub-section-heading">{{fees_remaining}} &#x20b9;</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="sub-section-heading">Admission Status</p>
+                </td>
+                <td>
+                    <p class="sub-section-heading"><strong>{%if student.admission%}Admission is
+                            confirmed{%else%}Pending{%endif%}</strong></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="sub-section-heading">Pay Now</p>
+                </td>
+                <td>
+                    {% if error_message %}
+                    <p class="error">{{ error_message }}</p>
+                    {% endif %}
+                    <form role="form" id="payFeesForm" action="{% url 'home:pay_fees' pk=student.pk %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="id_feesip">Enter amount Student paying in &#x20b9; </label>
+                            <input type="number" class="form-control" id="id_feesip" name="feesip" placeholder="0">
+                        </div>
+                        <button type="submit" id="btnSubmit" class="btn btn-primary mb-2">Confirm</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %} {% block script %}
+<script>
+    $(document).ready(function() {
+        $("#payFeesForm").submit(function(e) {
+            //stop submitting the form to see the disabled button effect
+            // e.preventDefault();
+            //disable the submit button
+            $("#btnSubmit").attr("disabled", true);
+            return true;
+        });
+    });
+</script>
+{% endblock %}
