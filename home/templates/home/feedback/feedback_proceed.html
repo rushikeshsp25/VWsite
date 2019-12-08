@@ -46,38 +46,68 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <a class="btn btn-success " href="{%url 'home:index'%} ">Submit Feedback</a>
+            <a class="btn btn-success form-submit">Submit Feedback</a>
         </div>
     </form>
 
 </div>
 {% endblock %} {%block script %}
 <script>
+    let answerObject = {}
     document.querySelector('.rating-group').addEventListener('click', function(event) {
-        console.log("clicked");
         // Variable to store the class of element
         var clickedSelector = '';
         // add class of parent div
         clickedSelector += '.' + event.path[1].className;
-        console.log(event.path)
-        console.log(clickedSelector);
+        const questionNumber = event.path[1].className.split('-')[2];
+
         // get the class of actual star element which was clicked
         var innerClass = event.path[0].className.split(' ')[2];
         clickedSelector += ' i.' + innerClass;
         // get the index of actual star which was clicked
-        var indexOfStar = parseInt(innerClass.split('-')[1])
-            // Change color of all stars before the selected star
+        if(innerClass) {
+            var indexOfStar = parseInt(innerClass.split('-')[1])
+        }
+        // Change color of all stars before the selected star
         for (var i = 1; i <= indexOfStar; i++) {
             var newSelector = clickedSelector.slice(0, clickedSelector.length - 1) + i.toString();
             document.querySelector(newSelector).classList.add('star-selected');
         }
+
         // Remove golden color of all stars after the selected star 
         for (var i = indexOfStar + 1; i <= 5; i++) {
             var newSelector = clickedSelector.slice(0, clickedSelector.length - 1) + i;
             document.querySelector(newSelector).classList.remove('star-selected');
         }
-        // document.querySelector('.a-{{i.id}}').textContent = innerClass
 
+        if(questionNumber && indexOfStar) {
+            answerObject[questionNumber] = indexOfStar;
+        }
     });
+
+    document.querySelector('.form-submit').addEventListener('click', function(event) {
+        let url = "{%url 'home:feedback_proceed' 1 %}"
+        post(url, answerObject)
+    })
+
+    // Function to submit form
+    function post(path, params, method='post') {
+        const form = document.createElement('form');
+        form.method = method;
+        form.action = path;
+        for (const key in params) {
+            if (params.hasOwnProperty(key)) {
+                const hiddenField = document.createElement('input');
+                hiddenField.type = 'hidden';
+                hiddenField.name = key;
+                hiddenField.value = params[key];
+
+                form.appendChild(hiddenField);
+            }
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+    }
 </script>
 {%endblock%}

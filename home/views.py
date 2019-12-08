@@ -11,6 +11,7 @@ from django.urls import reverse
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required,user_passes_test
+from django.views.decorators.csrf import csrf_exempt
 import os
 import requests
 import PyPDF2
@@ -329,8 +330,10 @@ def feedback_init(request,feedback_batch_id):
     else:
         return render(request,'home/feedback/feedback_init.html')
 
+@csrf_exempt
 @login_required
 def feedback_proceed(request,feedback_batch_id):
+    print(request.POST)
     return HttpResponse("Feedback next steps")
     # feedback_questions=FeedbackQuestion.objects.all()
     # response=FeedbackResponse()
