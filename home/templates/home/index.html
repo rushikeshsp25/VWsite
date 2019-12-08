@@ -36,32 +36,74 @@
         <div class="section-head">
             <p class="section-heading p-0 m-0">New Courses</p>
         </div>
-        <div class="section-body p-2 shadow">
-            <div class="row">
-                {%if not courses%}
-                <p class="infotext ml-5">New Courses Coming Soon...</p>
-                {%endif%} {%for course in courses%}
-                <div class="col-lg-3 col-md-4 col-6">
-                    <a class="link" href="{%url 'home:course_details' course.course_slug %}">
-                        <div class="card">
-                            <img src="{{course.course_icon.url}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <p class="card-title">{{course.course_name}}</p>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <p class="card-text">{{course.level}} Level</p>
-                                    </div>
-                                    <div class="col-md-4">
-                                        {% if not course.is_online %}
-                                        <i class="fa fa-building" style="font-size:80%; padding-left: 20px;" aria-hidden="true"></i> {%else%}
-                                        <i class="fa fa-desktop" style="font-size:80%; padding-left: 20px;" aria-hidden="true"></i> {%endif%}
+        <div class="section-body shadow">
+            <div class="container">
+                <div class="row">
+                    {%if not courses%}
+                    <p class="infotext ml-5">New Courses Coming Soon...</p>
+                    {%endif%} {%for course in courses%}
+                    <div class="col-lg-3 col-md-4 col-6 p-3">
+                        <a class="link" href="{%url 'home:course_details' course.course_slug %}">
+                            <div class="card h-100">
+                                <img src="{{course.course_icon.url}}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <p class="card-title">{{course.course_name}}</p>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <p class="card-text">{{course.level}} Level</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            {% if not course.is_online %}
+                                            <i class="fa fa-building" style="font-size:80%; padding-left: 20px;" aria-hidden="true"></i> {%else%}
+                                            <i class="fa fa-desktop" style="font-size:80%; padding-left: 20px;" aria-hidden="true"></i> {%endif%}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
+                    {%endfor%}
                 </div>
-                {%endfor%}
+            </div>
+        </div>
+    </div>
+
+    <div class="vision-mission">
+        <div class="container p-0">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="as-container">
+                        <div class="as-choice-card">
+                            <i class="as-card-icon fa fa-eye"></i>
+                            <h3 class="sub-section-heading"><strong>Vision</strong></h3>
+                            <p class="as-card-info">
+                                You will still be going to be able to sell whenever you are ready.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="as-container">
+                        <div class="as-choice-card">
+                            <i class="as-card-icon fa fa-space-shuttle"></i>
+                            <h3 class="sub-section-heading"><strong>Mission</strong></h3>
+                            <p class="as-card-info">
+                                You will still be going to be able to sell whenever you are ready.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="as-container">
+                        <div class="as-choice-card">
+                            <i class="as-card-icon fa fa-thumbs-up"></i>
+                            <h3 class="sub-section-heading"><strong>Values</strong></h3>
+                            <p class="as-card-info">
+                                You will still be going to be able to sell whenever you are ready.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -73,14 +115,15 @@
                 </div>
             </div>
             <div class="col-md-6 col-12">
-                <p class="sub-section-heading"><strong>FAQ: How to prepare for Placements in IT sector ?</strong></p>
+                <p class="sub-section-heading mt-sm-2"><strong>FAQ: How to prepare for the placement in IT sector ?</strong></p>
                 <hr>
                 <p class="">
-                    Believe or not, IT industry is in boom, but still getting a job in this industry is a challenge.<br/><br/>If you are looking for the jon in this industry, here are few tips :
+                    Believe it or not, IT industry is in boom, but still getting a job in this industry is a challenge.
+                    <br /><br />If you are looking for a job in this industry, here are few tips :
                     <ul class="">
-                        <li>Starting which very basic skill, knowledge of basic computer architecture</li>
-                        <li>You should be able to progam using atleast 1 Procedural language (C) and 1 Object oriented language (C++, Java, Python, Js)</li>
-                        <li>Having good grip on Data structures is necessary</li>
+                        <li>Starting with very basic skill, knowledge of basic computer architecture</li>
+                        <li>You should be able to progam using at least 1 Procedural language (C) and 1 Object oriented language (C++, Java, Python, Js)</li>
+                        <li>Having good grip on data structures is necessary</li>
                         <li>Database and SQL is a favourite topic among the interviewers</li>
                     </ul>
                 </p>

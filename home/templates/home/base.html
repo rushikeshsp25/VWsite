@@ -44,6 +44,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Placements</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Services
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Website Development</a>
+                        <a class="dropdown-item" href="#">Android Application</a>
+                        <a class="dropdown-item" href="#">Penetration Testing</a>
+                        <a class="dropdown-item" href="#">Digital Marketing</a>
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{%url 'home:hire_with_us' %}">Hire With Us</a>
                 </li>
@@ -55,8 +66,8 @@
                 {%if request.user.is_authenticated%}
                 <li class="nav-item dropleft">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Hello {{request.user.first_name}}
-                          </a>
+                        Hello {{request.user.first_name}}
+                    </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{%url 'home:dashboard' %}">Dashboard</a>
                         <div class="dropdown-divider"></div>
@@ -91,11 +102,11 @@
                 <div class="col-lg-4 offset-lg-1 col-6">
                     <p class="footer-title">QUICK LINKS</p>
                     <p class="footer-text">
-                        <div class="footer-link"><i class="fa fa-link" aria-hidden="true"></i><a href="#">Classroom
+                        <div class="footer-link"><i class="fa fa-link" aria-hidden="true"></i><a href="{%url 'home:display_all_courses' %}">Classroom
                                 Trainings</a></div>
-                        <div class="footer-link"><i class="fa fa-link" aria-hidden="true"></i><a href="#">Learn
+                        <div class="footer-link"><i class="fa fa-link" aria-hidden="true"></i><a href="{%url 'home:display_all_courses' %}">Learn
                                 Online</a></div>
-                        <div class="footer-link"><i class="fa fa-link" aria-hidden="true"></i><a href="#">Contact Us</a>
+                        <div class="footer-link"><i class="fa fa-link" aria-hidden="true"></i><a href="{%url 'home:contact_us' %}">Contact Us</a>
                         </div>
                     </p>
                 </div>

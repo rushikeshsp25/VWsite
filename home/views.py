@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login,logout
 from .models import *
 from datetime import datetime
 from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+
 from django.urls import reverse
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import messages
@@ -15,6 +17,8 @@ import PyPDF2
 import io
 #for displaying messages
 from django.contrib import messages
+from django.template.loader import render_to_string
+
 
 import requests
 import json
@@ -198,7 +202,7 @@ def course_details(request,course_slug):
         return render(request,'home/course/course_detail.html',{'course':course})
     else:    
         today = datetime.today()
-        batches = CourseBatch.objects.filter(course=course,start_date__gte=today).order_by('start_date')
+        batches = CourseBatch.objects.filter(course=course,registration_end_date__gte=today).order_by('start_date')
         return render(request,'home/course/course_detail.html',{'course':course,'upcoming_batches':batches})
 
 def student_admission_batch(request,course_batch_pk):
@@ -579,15 +583,20 @@ def confirm_admission(request,pk):
     s_obj=get_object_or_404(Student,pk=pk)
     s_obj.admission=True
     s_obj.save()
+    context_dict={
+        "name":s_obj.first_name+" "+s_obj.last_name,
+        "course_name":s_obj.batch.course.course_name,
+        "batch_name":s_obj.batch.batch_name,
+        "total_fees":s_obj.batch.fees,
+        "paid_fees":s_obj.fees_paid
+    }
+    html_message = render_to_string('home/email_templates/admission_confirmed.html', context_dict)
     # try:
-    #     send_mail('Your Admission @ VisionWare IT Training Institute',
-    #               'Hi ' + s_obj.name + ',\n' + 'Your admission is confirmed for ' + str(
-    #                   s_obj.course.course_name) +
-    #               ' course.\nTotal course Fees is : ' + str(s_obj.course.fees) + '\nYou have Paid : ' + str(
-    #                   s_obj.fees_paid) +
-    #               '\nYour Enrollment Number is : ' + str(
-    #                   s_obj.pk) + '\nThanks for Being part of Visionware :))'
-    #               , 'admin@visionware.in', [str(s_obj.email),'rushikeshsp25@gmail.com'])
+    #     email = EmailMessage('Admission Confirmation - VisionWare IT Training Institute', html_message, to=[str(s_obj.email),'dhapateashu.ad@gmail.com','rushikeshsp25@gmail.com'])
+    #     email.content_subtype = "html" # this is the crucial part 
+    #     email.send()
     # except Exception as e:
+    #     messages.error(request,"Something Went Wrong !")
     #     return redirect('home:student_detail', pk=pk)
+    messages.success(request,"Admission Confirmed !")
     return redirect('home:student_detail', pk=pk)
