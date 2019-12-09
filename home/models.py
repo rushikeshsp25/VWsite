@@ -130,11 +130,11 @@ class FeedbackQuestion(models.Model):
         return self.question
 
 class FeedbackBatch(models.Model):
+    date_time=models.DateTimeField(default=datetime.now)
     batch=models.ForeignKey(CourseBatch,on_delete=models.CASCADE)
     feedback_title=models.CharField(max_length=50,default='')
     start_date=models.DateField()    
     end_date=models.DateField()
-    date_time=models.DateTimeField(default=datetime.now)
     def __str__(self):
         return self.feedback_title
 
@@ -156,3 +156,16 @@ class Recruiter(models.Model):
     message = models.TextField()
     def __str__(self):
         return self.full_name+"@"+self.company_name
+
+
+class Service(models.Model):
+    service_name = models.CharField(max_length=70)
+    full_name = models.CharField(max_length=70)
+    email = models.EmailField()
+    mobile_no=models.CharField(max_length=10)
+    business_name = models.CharField(max_length=70)
+    business_description = models.TextField()
+    designation = models.CharField(max_length=70)
+    work_description = models.TextField()
+    def __str__(self):
+        return self.full_name+"@"+self.service_name

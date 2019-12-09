@@ -6,6 +6,8 @@
         <p class="section-heading ">{{feedback_batch.feedback_title}} for {{feedback_batch.batch.batch_name}}</p>
     </div>
     <form>
+        <input type="hidden" name="email" value="{{sobj.email}}">
+        <input type="hidden" name="dob" value="{{sobj.dob}}">
         <div class="rating-group">
             <table class="table table-hover">
                 <thead>
@@ -60,12 +62,14 @@
         // add class of parent div
         clickedSelector += '.' + event.path[1].className;
         const questionNumber = event.path[1].className.split('-')[2];
+        console.log(event)
+        console.log(questionNumber);
 
         // get the class of actual star element which was clicked
         var innerClass = event.path[0].className.split(' ')[2];
         clickedSelector += ' i.' + innerClass;
         // get the index of actual star which was clicked
-        if(innerClass) {
+        if (innerClass) {
             var indexOfStar = parseInt(innerClass.split('-')[1])
         }
         // Change color of all stars before the selected star
@@ -80,7 +84,8 @@
             document.querySelector(newSelector).classList.remove('star-selected');
         }
 
-        if(questionNumber && indexOfStar) {
+        if (questionNumber && indexOfStar) {
+            console.log(questionNumber, indexOfStar);
             answerObject[questionNumber] = indexOfStar;
         }
     });
@@ -91,7 +96,7 @@
     })
 
     // Function to submit form
-    function post(path, params, method='post') {
+    function post(path, params, method = 'post') {
         const form = document.createElement('form');
         form.method = method;
         form.action = path;
@@ -101,11 +106,9 @@
                 hiddenField.type = 'hidden';
                 hiddenField.name = key;
                 hiddenField.value = params[key];
-
                 form.appendChild(hiddenField);
             }
         }
-
         document.body.appendChild(form);
         form.submit();
     }

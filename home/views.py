@@ -106,6 +106,7 @@ def logout_user(request):
 
 def index(request):
     courses = Course.objects.all().order_by('date_time')[:4]
+    print(courses)
     return render(request,'home/index.html',{'courses':courses})
 
 @login_required
@@ -310,7 +311,6 @@ def notWorkingLinks(request):
         return HttpResponse("Something went wrong while sending not working links emails")
     return HttpResponse(not_working_links_all)
 
-@login_required
 def feedback_init(request,feedback_batch_id):
     if request.method=="POST":
         email = request.POST['email']
@@ -318,14 +318,19 @@ def feedback_init(request,feedback_batch_id):
         try:
             sobj = Student.objects.get(email=email,dob=dob)
             print(sobj)
-            messages.success(request, 'Please give the proper feedback, It is very important to us!')
             feedback_questions=FeedbackQuestion.objects.all()
+            today = datetime.today()
             feedback_batch = FeedbackBatch.objects.get(id=feedback_batch_id)
+            # feedback_batch = FeedbackBatch.objects.get(id=feedback_batch_id,start_date__gte = today, end_date__lte = today)
+            if not (sobj.batch.id == feedback_batch.batch.id and sobj.admission):
+                raise Exception("student not admitted")
+            messages.success(request, 'Please give the proper feedback, It is very important to us!')
             return render(request,'home/feedback/feedback_proceed.html',{'feedback_batch':feedback_batch,'student':sobj,'feedback_questions':feedback_questions})
-        except:
+        except Exception as e:
+            print(e)
             messages.error(request, 'You are not allowed to give this feedback')
-            return HttpResponse("Something went wrong")
-            # return redirect('home:feedback_init')
+            return render(request,'home/feedback/feedback_init.html')
+
         return HttpResponse("Your Feedback is successfully submitted")
     else:
         return render(request,'home/feedback/feedback_init.html')
@@ -362,7 +367,7 @@ def feedback_questions_new(request):
             new_question=form.save()
             new_question.save()
             messages.success(request, 'Question Created Successfully!')
-            return render(request,'home/dashboard.html')
+            return redirect('home:feedback_questions')
     else:
         form = FeedbackForm()
     return render(request,'home/feedback/create_edit_feedback_question.html',{'form':form})
@@ -467,7 +472,7 @@ def handler500(request,*args,**argv):
     return HttpResponse("Resourse is deleted or moved")
 
 def permissionerror(request):
-    return render(request,'home/page_not_found.html')
+    return HttpResponse("Permission Error")
 
 #student search related views
 @login_required
@@ -532,7 +537,7 @@ def student_detail(request,pk):
     return render(request, 'home/student_detail.html', {'student': s_obj})
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+@user_passes_test(lambda u: u.has_perm('home.view_student'),login_url='/permissionerror/')
 def search_student(request,search_by):
     if request.method == "POST":
         try:
@@ -557,7 +562,7 @@ def search_student(request,search_by):
             messages.error(request,'No Student Found!')
             return redirect('home:students')
 
-@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+@user_passes_test(lambda u: u.has_perm('home.change_student'),login_url='/permissionerror/')
 def pay_fees(request,pk):
     if request.method == "POST":
         fees_paying=request.POST.get('feesip',0)
@@ -581,7 +586,7 @@ def pay_fees(request,pk):
                                                     'fees_remaining':fees_remaining,
                                                     })
 
-@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+@user_passes_test(lambda u: u.has_perm('home.change_student'),login_url='/permissionerror/')
 def confirm_admission(request,pk):
     s_obj=get_object_or_404(Student,pk=pk)
     s_obj.admission=True
@@ -603,3 +608,23 @@ def confirm_admission(request,pk):
     #     return redirect('home:student_detail', pk=pk)
     messages.success(request,"Admission Confirmed !")
     return redirect('home:student_detail', pk=pk)
+
+def services(request,name):
+    if request.method=="POST":
+        service_name = request.POST['service']
+        full_name = request.POST['fullname']
+        email = request.POST['email']
+        mobile = request.POST['mobile']
+        business_name = request.POST['company']
+        company_des = request.POST['company_des']
+        designation = request.POST['designation']
+        message = request.POST['message']
+        if not service_name or not full_name or not email or not mobile or not business_name or not designation or not message:
+            return render(request, 'home/hire_with_us.html',{'error_message': '<li>Incomplete form is submitted</li>'})
+        service = Service(service_name=service_name,full_name=full_name,email=email,mobile_no=mobile,business_name=business_name,designation=designation,work_description=message)
+        service.save()
+        messages.success(request,"Thank you for showing your interest in VisionWare, Our team will contact you soon")
+        return redirect('home:index')
+    else:
+        service = name
+        return render(request,'home/services.html',{'service':service})

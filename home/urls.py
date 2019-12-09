@@ -39,5 +39,7 @@ urlpatterns = [
     path('su/student/result/batchwise/<int:pk>/',views.batchwise_students,name='batchwise_students'),
     path('su/student/result/collegewise/<int:pk>/',views.collegewise_students,name='collegewise_students'),
     path('su/student/result/all/',views.students_all,name='students_all'),
+    path('services/<str:name>/',views.services,name='services'),
+
 ]
 

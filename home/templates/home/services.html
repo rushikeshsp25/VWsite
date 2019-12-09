@@ -1,0 +1,73 @@
+{% extends 'home/base.html' %} {% block title %}Business with VisionWare | VisionWare {% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+<div class="container mt-4">
+    <img src="{%static 'home/images/other/services1.png'%}" width="100%">
+</div>
+<div class="container col-md-8 col-lg-6 col-12 offset-md-2 offset-lg-3  mb-4">
+    <div class="login-container shadow">
+        <div class="head">
+            <i class="fa fa-desktop" aria-hidden="true"></i>
+            <p class="section-heading">Digitalize Your Business</p>
+            <hr>
+        </div>
+        <div class="body">
+            <form class="login-form" role="form" method="post" enctype="multipart/form-data">
+                {% csrf_token %} {%if form.non_field_errors%}
+                <div class="cust-form-row">
+                    {{ form.non_field_errors }}
+                </div>
+                {%endif%} {%if error_message%}
+                <div class="cust-form-row">
+                    <ul class="errorlist">
+                        {{error_message|safe}}
+                    </ul>
+                </div>
+                {%endif%}
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="service">Service</label>
+                        <input type="text" class="form-control" name="service" id="service" value="{{service}}" required readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" class="form-control" name="fullname" id="fullname" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 col-12">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" name="email" id="email" required>
+                    </div>
+                    <div class="form-group col-md-6 col-12">
+                        <label for="mobile">Mobile Number</label>
+                        <input type="text" class="form-control" id="mobile" name="mobile" pattern="[6-9][0-9]{9}" title="Enter a valid mobile Number without country code" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="company">Business Name</label>
+                    <input type="text" class="form-control" name="company" id="company" required>
+                </div>
+                <div class="form-group">
+                    <label for="company_des">Short Description About Your Business</label>
+                    <textarea name="company_des" id="company_des" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="designation">Your Designation</label>
+                    <input type="text" class="form-control" name="designation" id="designation" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Describe Your Work</label>
+                    <textarea name="message" id="message" required></textarea>
+                </div>
+                <div class="form-controls">
+                    <button type="submit" class="btn">SUBMIT</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block script%}
+<script>
+</script>
+{% endblock %}
