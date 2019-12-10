@@ -1,12 +1,12 @@
-{% extends 'home/base.html' %} {% block title %}Hire With VisionWare | VisionWare {% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+{% extends 'home/base.html' %} {% block title %}Business with VisionWare | VisionWare {% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
 <div class="container mt-4">
-    <img src="{%static 'home/images/other/hire_with_us.png'%}" width="100%">
+    <img src="{%static 'home/images/other/services1.png'%}" width="100%">
 </div>
 <div class="container col-md-8 col-lg-6 col-12 offset-md-2 offset-lg-3  mb-4">
     <div class="login-container shadow">
         <div class="head">
-            <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
-            <p class="section-heading">Hire The Best</p>
+            <i class="fa fa-desktop" aria-hidden="true"></i>
+            <p class="section-heading">Digitalize Your Business</p>
             <hr>
         </div>
         <div class="body">
@@ -22,7 +22,12 @@
                     </ul>
                 </div>
                 {%endif%}
-
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="service">Service</label>
+                        <input type="text" class="form-control" name="service" id="service" value="{{service}}" required readonly>
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="form-group">
                         <label for="fullname">Full Name</label>
@@ -32,7 +37,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6 col-12">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" name="email" id="exampleInputEmail1" required>
+                        <input type="email" class="form-control" name="email" id="email" required>
                     </div>
                     <div class="form-group col-md-6 col-12">
                         <label for="mobile">Mobile Number</label>
@@ -40,16 +45,20 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="company">Company Name</label>
+                    <label for="company">Business Name</label>
                     <input type="text" class="form-control" name="company" id="company" required>
                 </div>
                 <div class="form-group">
-                    <label for="designation">Designation</label>
+                    <label for="company_des">Short Description About Your Business</label>
+                    <textarea name="company_des" id="company_des" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="designation">Your Designation</label>
                     <input type="text" class="form-control" name="designation" id="designation" required>
                 </div>
                 <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea name="message" id="message"></textarea>
+                    <label for="message">Describe Your Work</label>
+                    <textarea name="message" id="message" required></textarea>
                 </div>
                 <div class="form-controls">
                     <button type="submit" class="btn">SUBMIT</button>

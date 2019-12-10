@@ -20,7 +20,7 @@ class BatchForm(forms.ModelForm):
     class Meta:
         model = CourseBatch   
         exclude = ['date_time']
-        widgets={'start_date':DateInput()}
+        widgets={'start_date':DateInput(),'registration_end_date':DateInput()}
 
 class FeedbackForm(forms.ModelForm):
     class Meta:

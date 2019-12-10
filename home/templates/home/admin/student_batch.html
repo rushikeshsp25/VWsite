@@ -37,11 +37,11 @@
                 <td>{{student.year}}</td>
                 <td>{{student.batch.course.course_name}}</td>
                 <td>{{student.date_time}}</td>
-                <td>{%if student_batch.admission%}
-                    <a href="{% url 'home:student_detail' pk=student_batch.student.id%}">
+                <td>{%if student.admission%}
+                    <a href="{% url 'home:student_detail' pk=student.pk%}">
                         <button type="button" class="btn btn-success">Done</button></a>
                     {%else%}
-                    <a href="{% url 'home:student_detail' pk=student.id%}">
+                    <a href="{% url 'home:student_detail' pk=student.pk%}">
                         <button type="button" class="btn btn-danger">
                                 Pending</button>
                     </a>
