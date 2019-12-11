@@ -76,8 +76,8 @@ class Course(models.Model):
 class CourseBatch(models.Model):
     date_time = models.DateTimeField(default=datetime.now, blank=True)
     batch_name=models.CharField(max_length=30)
-    start_date=models.DateField(blank=True)
-    registration_end_date=models.DateField(blank=True)
+    start_date=models.DateField()
+    registration_end_date=models.DateField()
     course=models.ForeignKey(Course,on_delete=models.CASCADE)
     fees=models.IntegerField()
     def __str__(self):
