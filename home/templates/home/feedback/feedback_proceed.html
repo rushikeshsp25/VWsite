@@ -6,8 +6,8 @@
         <p class="section-heading ">{{feedback_batch.feedback_title}} for {{feedback_batch.batch.batch_name}}</p>
     </div>
     <form>
-        <input type="hidden" name="email" value="{{sobj.email}}">
-        <input type="hidden" name="dob" value="{{sobj.dob}}">
+        <input type="hidden" name="email" id="user_email" value="{{student.email}}">
+        <input type="hidden" name="dob" id="user_dob" value="{{student.dob}}">
         <div class="rating-group">
             <table class="table table-hover">
                 <thead>
@@ -55,7 +55,13 @@
 </div>
 {% endblock %} {%block script %}
 <script>
-    let answerObject = {}
+    let answerObject = {
+        userDetails: {
+            "userEmail": document.getElementById('user_email').value,
+            "userDob": document.getElementById('user_dob').value,
+        },
+        answers: {}
+    }
     document.querySelector('.rating-group').addEventListener('click', function(event) {
         // Variable to store the class of element
         var clickedSelector = '';
@@ -91,8 +97,8 @@
 
     document.querySelector('.form-submit').addEventListener('click', function(event) {
         let url = "{%url 'home:feedback_proceed' 1 %}"
-        makeAnswerObject()
-        post(url, answerObject)
+        makeAnswerObject();
+        post(url, answerObject);
     })
 
     // Function to create answer object
@@ -106,12 +112,12 @@
             // Find out how many childrens has star-selected class
             let starChildrens = starRating.childNodes[1]['children'];
             let count = 0;
-            for(const starChildren of starChildrens) {
-                if(starChildren.classList.contains('star-selected')) {
+            for (const starChildren of starChildrens) {
+                if (starChildren.classList.contains('star-selected')) {
                     count++;
                 }
             }
-            answerObject[question] = count;
+            answerObject.answers[question] = count;
         }
 
         // Get comments answers
@@ -119,7 +125,7 @@
         for (const commentBox of commentBoxes) {
             let classes = commentBox.childNodes[1].classList
             let question = classes[1].split('-')[1]
-            answerObject[question] = commentBox.childNodes[1].value;
+            answerObject.answers[question] = commentBox.childNodes[1].value;
         }
     }
 
@@ -133,7 +139,7 @@
                 const hiddenField = document.createElement('input');
                 hiddenField.type = 'hidden';
                 hiddenField.name = key;
-                hiddenField.value = params[key];
+                hiddenField.value = JSON.stringify(params[key]);
                 form.appendChild(hiddenField);
             }
         }

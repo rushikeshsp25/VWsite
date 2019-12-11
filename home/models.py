@@ -145,7 +145,7 @@ class FeedbackResponse(models.Model):
     student=models.ForeignKey(Student,on_delete=models.CASCADE)
     response=models.TextField()
     def __str__(self):
-        return self.feedback_batch.feedback_title+" : "+self.question.question+" : "+self.student.user.email
+        return self.feedback_batch.feedback_title+" : "+self.student.email+" : "+self.question.question
 
 class Recruiter(models.Model):
     full_name = models.CharField(max_length=70)

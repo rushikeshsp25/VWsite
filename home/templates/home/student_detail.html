@@ -23,6 +23,9 @@
             <p class="sub-section-heading">Mobile Number</p>
             <p class="infotext">{{student.phone}}</p>
             <hr>
+            <p class="sub-section-heading">DOB</p>
+            <p class="infotext">{{student.dob}}</p>
+            <hr>
             <div class="row">
                 <div class="col-md-8">
                     <p class="sub-section-heading">College</p>
@@ -51,12 +54,11 @@
                     <tr>
                         <td>{{student.batch.batch_name}}</td>
                         <td>{{student.batch.start_date}}</td>
-                        <td>{{student.batch.fees}}Rs</td>
-                        <td>{{student.fees_paid}}Rs 
-                            {% if student.fees_paid < student.batch.fees%}
-                                <a href="{% url 'home:pay_fees' student.pk %}">
-                                    <button class="btn btn-success">Pay Remaining</button>
-                                </a>
+                        <td>{{student.batch.fees}} Rs</td>
+                        <td>{{student.fees_paid}} Rs {% if student.fees_paid < student.batch.fees%} 
+                            <a href="{% url 'home:pay_fees' student.pk %}">
+                                <button class="btn btn-success">Pay Remaining</button>
+                            </a>
                             {% endif %}
                         </td>
                     </tr>
@@ -66,8 +68,7 @@
     </div>
 </div>
 </div>
-{% endblock %}
-{% block script %}
+{% endblock %} {% block script %}
 <script>
 </script>
 {% endblock %}

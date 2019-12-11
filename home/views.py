@@ -317,11 +317,18 @@ def feedback_init(request,feedback_batch_id):
         dob = request.POST['dob']
         try:
             sobj = Student.objects.get(email=email,dob=dob)
-            print(sobj)
+            feedback_batch = FeedbackBatch.objects.get(id=feedback_batch_id)
+            try:
+                fobjs = FeedbackResponse.objects.filter(feedback_batch=feedback_batch,student=sobj)
+                print(fobjs)
+                if(fobjs):
+                    messages.error(request, 'You have already submitted the feedback')
+                    return render(request,'home/feedback/feedback_init.html')
+            except:
+                pass
             feedback_questions=FeedbackQuestion.objects.all()
             today = datetime.today()
-            feedback_batch = FeedbackBatch.objects.get(id=feedback_batch_id)
-            # feedback_batch = FeedbackBatch.objects.get(id=feedback_batch_id,start_date__gte = today, end_date__lte = today)
+            feedback_batch = FeedbackBatch.objects.get(id=feedback_batch_id,start_date__gte = today, end_date__lte = today)
             if not (sobj.batch.id == feedback_batch.batch.id and sobj.admission):
                 raise Exception("student not admitted")
             messages.success(request, 'Please give the proper feedback, It is very important to us!')
@@ -330,21 +337,34 @@ def feedback_init(request,feedback_batch_id):
             print(e)
             messages.error(request, 'You are not allowed to give this feedback')
             return render(request,'home/feedback/feedback_init.html')
-
-        return HttpResponse("Your Feedback is successfully submitted")
     else:
         return render(request,'home/feedback/feedback_init.html')
 
 @csrf_exempt
 @login_required
 def feedback_proceed(request,feedback_batch_id):
-    print(request.POST)
-    return HttpResponse("Feedback next steps")
-    # feedback_questions=FeedbackQuestion.objects.all()
-    # response=FeedbackResponse()
-    # response.response=request.POST.get("comment")
-    # response.save()
-    # return render(request,'home/feedback/feedback.html',{'feedback_questions':feedback_questions})
+    userDetails = json.loads(request.POST.get("userDetails"))
+    answers = json.loads(request.POST.get("answers"))
+    sobj=None
+    f_b=None
+    try:
+        # sobj = Student.objects.get(email=userDetails['userEmail'],dob=userDetails['userDob'])
+        sobj = Student.objects.get(email=userDetails['userEmail'])
+        f_b = FeedbackBatch.objects.get(id=feedback_batch_id)
+    except Exception as e:
+        print(e)
+        messages.error(request,"Opps,something went wrong")
+        return redirect('home:feedback_init',feedback_batch_id=feedback_batch_id )
+
+    for key, value in answers.items():
+        fq=FeedbackQuestion.objects.get(id = key)
+        feed_res=FeedbackResponse(question=fq,feedback_batch=f_b,student=sobj,response=value)
+        feed_res.save()
+    # question=models.ForeignKey(FeedbackQuestion,on_delete=models.CASCADE)
+    # feedback_batch=models.ForeignKey(FeedbackBatch,on_delete=models.CASCADE) 
+    # response=models.TextField()
+    messages.success(request,"Thank You! Feedback Submitted Successfully")
+    return redirect('home:feedback_init',feedback_batch_id=feedback_batch_id )
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
