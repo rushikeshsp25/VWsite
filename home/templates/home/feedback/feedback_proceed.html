@@ -30,7 +30,7 @@
                         </td>
                         <td>
                             {% if fq.question_type == "rating" %}
-                            <div class="starclass">
+                            <div class="starclass star-rating">
                                 <div class="star-div-{{fq.id}}">
                                     <i class="fa fa-star-o star-1" aria-hidden="true"></i>
                                     <i class="fa fa-star-o star-2" aria-hidden="true"></i>
@@ -40,8 +40,8 @@
                                 </div>
                             </div>
                             {% else %}
-                            <div class="form-group ">
-                                <textarea name="comment " class="form-control " id="exampleFormControlTextarea1 " rows="3 " placeholder="Your Answer Here"></textarea>
+                            <div class="form-group comment-box">
+                                <textarea name="comment " class="form-control comment-{{fq.id}}" id="exampleFormControlTextarea1 " rows="3 " placeholder="Your Answer Here"></textarea>
                             </div> {% endif %}
                         </td>
                     </tr>
@@ -84,16 +84,44 @@
             document.querySelector(newSelector).classList.remove('star-selected');
         }
 
-        if (questionNumber && indexOfStar) {
-            console.log(questionNumber, indexOfStar);
-            answerObject[questionNumber] = indexOfStar;
-        }
+        // if(questionNumber && indexOfStar) {
+        //     answerObject[questionNumber] = indexOfStar;
+        // }
     });
 
     document.querySelector('.form-submit').addEventListener('click', function(event) {
         let url = "{%url 'home:feedback_proceed' 1 %}"
+        makeAnswerObject()
         post(url, answerObject)
     })
+
+    // Function to create answer object
+    function makeAnswerObject() {
+        // Get ratings answers
+        let starRatings = document.querySelectorAll('.star-rating')
+        for (const starRating of starRatings) {
+            let childClass = starRating.childNodes[1]['classList'][0];
+            let question = childClass.split('-')[2];
+
+            // Find out how many childrens has star-selected class
+            let starChildrens = starRating.childNodes[1]['children'];
+            let count = 0;
+            for(const starChildren of starChildrens) {
+                if(starChildren.classList.contains('star-selected')) {
+                    count++;
+                }
+            }
+            answerObject[question] = count;
+        }
+
+        // Get comments answers
+        let commentBoxes = document.querySelectorAll('.comment-box');
+        for (const commentBox of commentBoxes) {
+            let classes = commentBox.childNodes[1].classList
+            let question = classes[1].split('-')[1]
+            answerObject[question] = commentBox.childNodes[1].value;
+        }
+    }
 
     // Function to submit form
     function post(path, params, method = 'post') {
