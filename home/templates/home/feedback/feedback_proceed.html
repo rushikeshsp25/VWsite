@@ -68,8 +68,6 @@
         // add class of parent div
         clickedSelector += '.' + event.path[1].className;
         const questionNumber = event.path[1].className.split('-')[2];
-        console.log(event)
-        console.log(questionNumber);
 
         // get the class of actual star element which was clicked
         var innerClass = event.path[0].className.split(' ')[2];
