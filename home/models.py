@@ -169,3 +169,10 @@ class Service(models.Model):
     work_description = models.TextField()
     def __str__(self):
         return self.full_name+"@"+self.service_name
+
+class OnlineCampaign(models.Model):
+    campaign_name=models.CharField(max_length=70)
+    campaign_subject=models.CharField(max_length=70)
+    campaign_message=models.TextField()
+    campaign_target_contacts_file=models.FileField(upload_to='CampaignTargetContacts')
+    date_time=models.DateTimeField(default=datetime.now)

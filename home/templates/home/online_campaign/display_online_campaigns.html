@@ -1,0 +1,26 @@
+{% extends 'home/base.html' %} {% block title %}Online Campaigns | VisionWare{% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+<div class="container mt-4 mb-4">
+    <div class="center">
+        <p class="section-heading">Previous online campaigns</p>
+    </div>
+    <hr>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Campaign Name</th>
+                <th scope="col">Campaign Subject</th>
+                <th scope="col">Campaign Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in campaigns %}
+            <tr>
+                <td>{{i.campaign_name}}</td>
+                <td>{{i.campaign_subject}}</td>
+                <td>{{ i.date_time| date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

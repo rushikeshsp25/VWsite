@@ -1,0 +1,22 @@
+<form id="onlineCampaignForm" enctype="multipart/form-data" method="POST" class="generated-form mb-5">
+    {% csrf_token %}
+    <div class="cust-form-row">
+        {{ form.non_field_errors }} {%if error_message%}
+        <ul class="errorlist">
+            {{error_message|safe}}
+        </ul>
+        {%endif%}
+    </div>
+    {%for field in form%}
+    <div class="cust-form-row">
+        {{field.errors}}
+        <label for="{{ field.id_for_label }}">
+                    {{ field.label }}{% if field.field.required %}*{% endif %}
+                </label> {{field}}
+    </div>
+    {%endfor%}
+    <div class="form-controls">
+        <button type="submit" id="btnSubmit" class="btn btn-success mt-1">Save</button>
+    </div>
+
+</form>

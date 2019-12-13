@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.utils import timezone
-from .forms import CourseForm,BatchForm, StudyCourseForm,FeedbackBatchForm, FeedbackForm
+from .forms import CourseForm,BatchForm, StudyCourseForm,FeedbackBatchForm, FeedbackForm,OnlineCampaignForm
 from django.contrib.auth import authenticate, login,logout
 from .models import *
 from datetime import datetime
@@ -27,6 +27,8 @@ import json
 from django.db.models import Subquery
 from .helpers.linkCheck import getNotWorkingLinksHtml
 from .helpers.feedbackQuestionsResponse import feedback_question_responses
+from .helpers.onlineCampaignSMS import send_sms
+import csv
 
 # Create your views here.
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
@@ -648,3 +650,43 @@ def services(request,name):
     else:
         service = name
         return render(request,'home/services.html',{'service':service})
+
+
+    
+@login_required
+@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+def online_campaign(request):
+    if request.method == "POST":
+        form = OnlineCampaignForm(request.POST,request.FILES)
+        if form.is_valid():
+            new_online_campaign=form.save(commit=False)
+            new_online_campaign.campaign_target_contacts_file=request.FILES['campaign_target_contacts_file']
+            msg=request.POST.get('campaign_message')
+            file_type = new_online_campaign.campaign_target_contacts_file.url.split('.')[-1].lower()
+            if file_type != 'csv' :
+                context = {
+                    'form': form,
+                    'error_message': '<li>Contacts file must be of type CSV</li>'
+                }
+                return render(request, 'home/online_campaign/online_campaign_form.html', context)
+            file_contents=request.FILES['campaign_target_contacts_file'].read().decode('UTF-8')
+            headings=file_contents.split('\r\n')[0].split(',')
+            if headings[0].lower()!='name' or headings[1].lower()!='mobile' or headings[2].lower()!='email' or headings[3].lower()!='passout_year':
+                context = {
+                    'form': form,
+                    'error_message': '<li>Table structure is not in the format of Name | Mobile | Email | Passout_Year</li>'
+                }
+                return render(request, 'home/online_campaign/online_campaign_form.html', context)
+            new_online_campaign.save()
+            status=send_sms(file_contents,msg)                      #this function is in helpers/onlineCampaignSMS.py
+            if status==0:
+                return HttpResponse("Sorry, Something went wrong!")
+            messages.success(request,'Online Campaign is successful!')
+            return redirect('home:dashboard')
+    else:
+        form = OnlineCampaignForm()
+        return render(request,'home/online_campaign/online_campaign_form.html',{'form':form})
+
+def display_online_campaigns(request):
+    campaigns=OnlineCampaign.objects.all().order_by('-id')
+    return render(request,'home/online_campaign/display_online_campaigns.html',{'campaigns':campaigns})
