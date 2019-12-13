@@ -169,3 +169,9 @@ class Service(models.Model):
     work_description = models.TextField()
     def __str__(self):
         return self.full_name+"@"+self.service_name
+
+class PlacementInformation(models.Model):
+    student_name=models.CharField(max_length=40)
+    company_name=models.CharField(max_length=40)
+    mobile_no=models.CharField(max_length=10)
+    image=models.ImageField(blank=True,null=True)
