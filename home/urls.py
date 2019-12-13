@@ -40,6 +40,9 @@ urlpatterns = [
     path('su/student/result/collegewise/<int:pk>/',views.collegewise_students,name='collegewise_students'),
     path('su/student/result/all/',views.students_all,name='students_all'),
     path('services/<str:name>/',views.services,name='services'),
+    path('placements/',views.add_placement,name='add_placement'),
+    path('placementwall',views.placement_wall,name='placement_wall'),
+
 
 ]
 

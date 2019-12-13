@@ -1,0 +1,57 @@
+{% extends 'home/base.html' %} {% block title %}Placements | VisionWare {% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+
+<div class="container">
+    <div class="recent-courses mt-3">
+        <div class="section-head">
+            <p class="section-heading p-0 m-0">Placement Wall</p>
+        </div>
+    </div>
+    <div class="row">
+        {% for post in posts %}
+        <br>
+        <div class="col-lg-3 col-md-4 col-6 p-3">
+            <div class="card h-100">
+                <img src="{{post.image.url}}" class="card-img-top" alt="..." height="250px">
+                <div class="card-body">
+                    <p class="card-title">{{post.student_name}}</p>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="card-text">Placed In:{{post.company_name}}</p>
+                            <p class="card-text">Mobile No: {{post.mobile_no}}</p>
+                        </div>
+                    </div>
+                </div>
+                </a>
+
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:"4" %}
+    </div>
+    <div class="row">
+        {% endif %} {% endfor %}
+    </div>
+    <br>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if posts.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1">&laquo; First</a></li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ post.previous_page_number }}">Previous</a></li>
+            </li>
+            {% endif %}
+            <li class="page-item"><a class="page-link" href="#">{{ posts.number }}</a></li>
+            {% if posts.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ posts.next_page_number }}"> Next </a></li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ posts.paginator.num_pages }}"> Last &raquo;</a></li>
+            {% endif %}
+
+        </ul>
+    </nav>
+</div>
+{% endblock %} {% block script%}
+<script>
+</script>
+{% endblock %}

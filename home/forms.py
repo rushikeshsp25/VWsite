@@ -1,5 +1,5 @@
 from django import forms
-from .models import Course,CourseBatch, StudyCourse,FeedbackBatch,FeedbackQuestion
+from .models import Course,CourseBatch, StudyCourse,FeedbackBatch,FeedbackQuestion,PlacementInformation
 from django.contrib.auth.models import User
 
 # class AdmissionForm(forms.ModelForm):
@@ -27,6 +27,13 @@ class FeedbackForm(forms.ModelForm):
         model=FeedbackQuestion
         exlude=['']
         fields=['question','question_type']
+
+class PlacementForm(forms.ModelForm):
+    class Meta:
+        model=PlacementInformation
+        exlude=['']
+        fields=['student_name','company_name','mobile_no','image']
+
 
 class StudyCourseForm(forms.ModelForm):
     class Meta:

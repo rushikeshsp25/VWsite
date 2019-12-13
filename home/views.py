@@ -1,12 +1,11 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.utils import timezone
-from .forms import CourseForm,BatchForm, StudyCourseForm,FeedbackBatchForm, FeedbackForm
+from .forms import CourseForm,BatchForm, StudyCourseForm,FeedbackBatchForm, FeedbackForm,PlacementForm
 from django.contrib.auth import authenticate, login,logout
 from .models import *
 from datetime import datetime
 from django.core.mail import send_mail
 from django.core.mail import EmailMessage
-
 from django.urls import reverse
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import messages
@@ -19,14 +18,13 @@ import io
 #for displaying messages
 from django.contrib import messages
 from django.template.loader import render_to_string
-
-
 import requests
 import json
-
 from django.db.models import Subquery
 from .helpers.linkCheck import getNotWorkingLinksHtml
 from .helpers.feedbackQuestionsResponse import feedback_question_responses
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger 
+
 
 # Create your views here.
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
@@ -648,3 +646,29 @@ def services(request,name):
     else:
         service = name
         return render(request,'home/services.html',{'service':service})
+
+def add_placement(request):
+    if request.method == "POST":
+        form = PlacementForm(request.POST,request.FILES)
+        if form.is_valid():
+            new_question=form.save()
+            new_question.save()
+            messages.success(request, 'Placement Created Successfully!')
+            return redirect('home:add_placement')
+    else:
+        form = PlacementForm()
+    return render(request,'home/placements/add_placement.html',{'form':form})
+
+def  placement_wall(request):
+    from django.shortcuts import render
+    posts = PlacementInformation.objects.all()
+    paginator = Paginator(posts, 16)
+    page = request.GET.get('page')
+    # Handle out of range and invalid page numbers:
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+    return render(request, 'home/placements/placement_wall.html', {'posts': posts})
