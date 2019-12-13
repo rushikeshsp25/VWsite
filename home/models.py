@@ -148,6 +148,7 @@ class FeedbackResponse(models.Model):
         return self.feedback_batch.feedback_title+" : "+self.student.email+" : "+self.question.question
 
 class Recruiter(models.Model):
+    date_time = models.DateTimeField(default=datetime.now, blank=True)
     full_name = models.CharField(max_length=70)
     email = models.EmailField()
     mobile_no=models.CharField(max_length=10)
@@ -159,6 +160,7 @@ class Recruiter(models.Model):
 
 
 class Service(models.Model):
+    date_time = models.DateTimeField(default=datetime.now, blank=True)
     service_name = models.CharField(max_length=70)
     full_name = models.CharField(max_length=70)
     email = models.EmailField()
@@ -171,6 +173,7 @@ class Service(models.Model):
         return self.full_name+"@"+self.service_name
 
 class PlacementInformation(models.Model):
+    date_time = models.DateTimeField(default=datetime.now, blank=True)
     student_name=models.CharField(max_length=40)
     company_name=models.CharField(max_length=40)
     mobile_no=models.CharField(max_length=10)
