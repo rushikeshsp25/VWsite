@@ -2,7 +2,12 @@
 <section class="container mt-4 mb-4">
     <p class="section-heading">Create New Batch</p>
     <div class="col-lg-6 col-10">
-        {% include 'home/form_template.html' %}
+        <form enctype="multipart/form-data" method="POST" class="generated-form mb-5">
+            {% include 'home/form_template.html' %}
+            <div class="form-controls">
+                <button type="submit" class="btn btn-success mt-1">Save</button>
+            </div>
+        </form>
     </div>
 </section>
 {% endblock %} {% block script%}

@@ -178,3 +178,10 @@ class PlacementInformation(models.Model):
     company_name=models.CharField(max_length=40)
     mobile_no=models.CharField(max_length=10)
     image=models.ImageField(blank=True,null=True)
+    
+class OnlineCampaign(models.Model):
+    campaign_name=models.CharField(max_length=70)
+    campaign_subject=models.CharField(max_length=70)
+    campaign_message=models.TextField()
+    campaign_target_contacts_file=models.FileField(upload_to='CampaignTargetContacts')
+    date_time=models.DateTimeField(default=datetime.now)

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.utils import timezone
-from .forms import CourseForm,BatchForm, StudyCourseForm,FeedbackBatchForm, FeedbackForm,PlacementForm
+from .forms import CourseForm,BatchForm, StudyCourseForm,FeedbackBatchForm, FeedbackForm,PlacementForm, OnlineCampaignForm
 from django.contrib.auth import authenticate, login,logout
 from .models import *
 from datetime import datetime
@@ -24,7 +24,8 @@ from django.db.models import Subquery
 from .helpers.linkCheck import getNotWorkingLinksHtml
 from .helpers.feedbackQuestionsResponse import feedback_question_responses
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger 
-
+from .helpers.onlineCampaignSMS import send_sms
+import csv
 
 # Create your views here.
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
@@ -108,7 +109,7 @@ def index(request):
     return render(request,'home/index.html',{'courses':courses})
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+@user_passes_test(lambda u: u.has_perm('home.add_course'),login_url='/permissionerror/',redirect_field_name=None)
 def create_new_course(request):
     if request.method == "POST":
         form = CourseForm(request.POST, request.FILES)
@@ -141,7 +142,7 @@ def create_new_course(request):
     return render(request,'home/course/create_edit_course.html',{'form':form})
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+@user_passes_test(lambda u: u.has_perm('home.edit_course'),login_url='/permissionerror/',redirect_field_name=None)
 def edit_course(request,pk):
     course = get_object_or_404(Course, pk=pk)
     if request.method == "POST":
@@ -175,7 +176,7 @@ def edit_course(request,pk):
     return render(request,'home/course/create_edit_course.html',{'form':form})
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+@user_passes_test(lambda u: u.has_perm('home.add_coursebatch'),login_url='/permissionerror/',redirect_field_name=None)
 def create_new_batch(request):
     if request.method == "POST":
         form = BatchForm(request.POST)
@@ -231,7 +232,7 @@ def student_admission_batch(request,course_batch_pk):
 
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+@user_passes_test(lambda u: u.has_perm('home.add_studycourse'),login_url='/permissionerror/',redirect_field_name=None)
 def create_new_study_material(request):
     if request.method == "POST":
         form = StudyCourseForm(request.POST,request.FILES)
@@ -273,7 +274,7 @@ def display_all_study_material(request):
     return render(request,'home/study_material/display_study_courses_all.html',{'courses':courses})
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+@user_passes_test(lambda u: u.has_perm('home.view_studycourse'),login_url='/permissionerror/',redirect_field_name=None)
 def notWorkingLinks(request):
     study_courses = StudyCourse.objects.all()
     not_working_links_all = []
@@ -358,11 +359,13 @@ def feedback_proceed(request,feedback_batch_id):
         fq=FeedbackQuestion.objects.get(id = key)
         feed_res=FeedbackResponse(question=fq,feedback_batch=f_b,student=sobj,response=value)
         feed_res.save()
-    # question=models.ForeignKey(FeedbackQuestion,on_delete=models.CASCADE)
-    # feedback_batch=models.ForeignKey(FeedbackBatch,on_delete=models.CASCADE) 
-    # response=models.TextField()
     messages.success(request,"Thank You! Feedback Submitted Successfully")
     return redirect('home:feedback_init',feedback_batch_id=feedback_batch_id )
+
+@login_required
+def feedback_questions(request):
+    display_all_questions=FeedbackQuestion.objects.all()
+    return render(request,'home/feedback/feedback_question.html',{'display_all_questions':display_all_questions})
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
@@ -372,12 +375,7 @@ def delete_feedback_question(request,pk):
     return render(request,'home/feedback/feedback_question.html',{'display_all_questions':display_all_questions})
 
 @login_required
-def feedback_questions(request):
-    display_all_questions=FeedbackQuestion.objects.all()
-    return render(request,'home/feedback/feedback_question.html',{'display_all_questions':display_all_questions})
-
-@login_required
-@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/',redirect_field_name=None)
 def feedback_questions_new(request):
     if request.method == "POST":
         form = FeedbackForm(request.POST)
@@ -391,7 +389,7 @@ def feedback_questions_new(request):
     return render(request,'home/feedback/create_edit_feedback_question.html',{'form':form})
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/',redirect_field_name=None)
 def edit_feedback_question(request,pk):
     course = get_object_or_404(FeedbackQuestion, pk=pk)
     if request.method=='POST':
@@ -406,7 +404,6 @@ def edit_feedback_question(request,pk):
     return render(request,'home/feedback/create_edit_feedback_question.html',{'form':form})
 
 @login_required
-# @user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
 def dashboard(request):
     if request.user.is_superuser:
         all_courses = Course.objects.all()
@@ -439,13 +436,13 @@ def hire_with_us(request):
         return render(request,'home/hire_with_us.html')
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.has_perm('home.view_feedbackbatch'),login_url='/permissionerror/',redirect_field_name=None)
 def display_feedback_enabled_batches(request):
     feedback_batches=FeedbackBatch.objects.all().order_by('-start_date')
     return render(request,'home/feedback/display_feedback_batches.html',{'feedback_batches':feedback_batches})
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+@user_passes_test(lambda u: u.has_perm('home.view_feedbackresponse'),login_url='/permissionerror/',redirect_field_name=None)
 def feedback_batch_response(request,feedback_batch_id):
     feedback_batch=FeedbackBatch.objects.get(id=feedback_batch_id)
     feedback_questions=FeedbackQuestion.objects.all()
@@ -462,7 +459,7 @@ def feedback_batch_response(request,feedback_batch_id):
     return render(request,'home/feedback/feedback_batch_response.html',{'feedback_questions':feedback_questions,'overall':data,'rating_response':rating_response,'comment_response':comment_response,'feedback_batch':feedback_batch})
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+@user_passes_test(lambda u: u.has_perm('home.add_feedbackbatch'),login_url='/permissionerror/',redirect_field_name=None)
 def create_new_feedback(request):
     if request.method == "POST":
         form = FeedbackBatchForm(request.POST,request.FILES)
@@ -483,25 +480,16 @@ def create_new_feedback(request):
         form = FeedbackBatchForm()
     return render(request,'home/feedback/feedback_batch_form.html',{'form':form})
 
-def handler404(request,*args,**argv):
-    return render(request,'home/page_not_found.html',status=404)
-
-def handler500(request,*args,**argv):
-    return HttpResponse("Resourse is deleted or moved")
-
-def permissionerror(request):
-    return HttpResponse("Permission Error")
-
 #student search related views
 @login_required
-@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+@user_passes_test(lambda u: u.has_perm('home.view_student'),login_url='/permissionerror/',redirect_field_name=None)
 def students(request):
     all_batches = CourseBatch.objects.all()
     all_colleges = College.objects.all()
     return render(request, 'home/admin/students.html',{'all_batches':all_batches,'all_colleges':all_colleges})
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+@user_passes_test(lambda u: u.has_perm('home.view_student'),login_url='/permissionerror/',redirect_field_name=None)
 def students_all(request):
     s_objs = Student.objects.all().order_by('-date_time')
     context = {
@@ -512,7 +500,7 @@ def students_all(request):
     return render(request, 'home/admin/student_college_all.html', context)
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+@user_passes_test(lambda u: u.has_perm('home.view_student'),login_url='/permissionerror/',redirect_field_name=None)
 def batchwise_students(request,pk):
     try:
         batch=CourseBatch.objects.get(pk=pk)
@@ -529,7 +517,7 @@ def batchwise_students(request,pk):
     return render(request, 'home/admin/student_batch.html', context)
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+@user_passes_test(lambda u: u.has_perm('home.view_student'),login_url='/permissionerror/',redirect_field_name=None)
 def collegewise_students(request,pk):
     try:
         college=College.objects.get(pk=pk)
@@ -545,7 +533,7 @@ def collegewise_students(request,pk):
     return render(request, 'home/admin/student_college_all.html', context)
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+@user_passes_test(lambda u: u.has_perm('home.view_student'),login_url='/permissionerror/',redirect_field_name=None)
 def student_detail(request,pk):
     try:
         s_obj = Student.objects.get(pk=pk)
@@ -555,7 +543,7 @@ def student_detail(request,pk):
     return render(request, 'home/student_detail.html', {'student': s_obj})
 
 @login_required
-@user_passes_test(lambda u: u.has_perm('home.view_student'),login_url='/permissionerror/')
+@user_passes_test(lambda u: u.has_perm('home.view_student'),login_url='/permissionerror/',redirect_field_name=None)
 def search_student(request,search_by):
     if request.method == "POST":
         try:
@@ -580,7 +568,7 @@ def search_student(request,search_by):
             messages.error(request,'No Student Found!')
             return redirect('home:students')
 
-@user_passes_test(lambda u: u.has_perm('home.change_student'),login_url='/permissionerror/')
+@user_passes_test(lambda u: u.has_perm('home.change_student'),login_url='/permissionerror/',redirect_field_name=None)
 def pay_fees(request,pk):
     if request.method == "POST":
         fees_paying=request.POST.get('feesip',0)
@@ -604,7 +592,7 @@ def pay_fees(request,pk):
                                                     'fees_remaining':fees_remaining,
                                                     })
 
-@user_passes_test(lambda u: u.has_perm('home.change_student'),login_url='/permissionerror/')
+@user_passes_test(lambda u: u.has_perm('home.change_student'),login_url='/permissionerror/',redirect_field_name=None)
 def confirm_admission(request,pk):
     s_obj=get_object_or_404(Student,pk=pk)
     s_obj.admission=True
@@ -617,13 +605,17 @@ def confirm_admission(request,pk):
         "paid_fees":s_obj.fees_paid
     }
     html_message = render_to_string('home/email_templates/admission_confirmed.html', context_dict)
-    # try:
-    #     email = EmailMessage('Admission Confirmation - VisionWare IT Training Institute', html_message, to=[str(s_obj.email),'dhapateashu.ad@gmail.com','rushikeshsp25@gmail.com'])
-    #     email.content_subtype = "html" # this is the crucial part 
-    #     email.send()
-    # except Exception as e:
-    #     messages.error(request,"Something Went Wrong !")
-    #     return redirect('home:student_detail', pk=pk)
+    try:
+        email = EmailMessage(
+            'Admission Confirmation - VisionWare IT Training Institute', 
+            html_message, 
+            to=[str(s_obj.email),'dhapateashu.ad@gmail.com','rushikeshsp25@gmail.com']
+            )
+        email.content_subtype = "html" # this is the crucial part 
+        email.send()
+    except Exception as e:
+        messages.error(request,"Something Went Wrong !")
+        return redirect('home:student_detail', pk=pk)
     messages.success(request,"Admission Confirmed !")
     return redirect('home:student_detail', pk=pk)
 
@@ -672,3 +664,51 @@ def  placement_wall(request):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
     return render(request, 'home/placements/placement_wall.html', {'posts': posts})
+
+    
+@login_required
+@user_passes_test(lambda u: u.has_perm('home.add_onlinecampaign'), login_url='/permissionerror/',redirect_field_name=None)
+def online_campaign(request):
+    if request.method == "POST":
+        form = OnlineCampaignForm(request.POST,request.FILES)
+        if form.is_valid():
+            new_online_campaign=form.save(commit=False)
+            new_online_campaign.campaign_target_contacts_file=request.FILES['campaign_target_contacts_file']
+            msg=request.POST.get('campaign_message')
+            file_type = new_online_campaign.campaign_target_contacts_file.url.split('.')[-1].lower()
+            if file_type != 'csv' :
+                context = {
+                    'form': form,
+                    'error_message': '<li>Contacts file must be of type CSV</li>'
+                }
+                return render(request, 'home/online_campaign/online_campaign_form.html', context)
+            file_contents=request.FILES['campaign_target_contacts_file'].read().decode('UTF-8')
+            headings=file_contents.split('\r\n')[0].split(',')
+            if headings[0].lower()!='name' or headings[1].lower()!='mobile' or headings[2].lower()!='email' or headings[3].lower()!='passout_year':
+                context = {
+                    'form': form,
+                    'error_message': '<li>Table structure is not in the format of Name | Mobile | Email | Passout_Year</li>'
+                }
+                return render(request, 'home/online_campaign/online_campaign_form.html', context)
+            new_online_campaign.save()
+            status=send_sms(file_contents,msg)                      #this function is in helpers/onlineCampaignSMS.py
+            if status==0:
+                return HttpResponse("Sorry, Something went wrong!")
+            messages.success(request,'Online Campaign is successful!')
+            return redirect('home:dashboard')
+    else:
+        form = OnlineCampaignForm()
+        return render(request,'home/online_campaign/online_campaign_form.html',{'form':form})
+
+def display_online_campaigns(request):
+    campaigns=OnlineCampaign.objects.all().order_by('-id')
+    return render(request,'home/online_campaign/display_online_campaigns.html',{'campaigns':campaigns})
+
+def handler404(request,*args,**argv):
+    return render(request,'home/page_not_found.html',status=404)
+
+def handler500(request,*args,**argv):
+    return HttpResponse("Resourse is deleted or moved")
+
+def permissionerror(request):
+    return HttpResponse("Permission Error")

@@ -1,0 +1,23 @@
+{% extends 'home/base.html' %} {% block title %}Online Campaign | VisionWare{% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+<section class="container mt-4 mb-4">
+    <p class="section-heading">Start a New Campaign</p>
+    <div class="col-lg-6 col-10">
+        <form enctype="multipart/form-data" method="POST" class="generated-form mb-5">
+            {% include 'home/form_template.html' %}
+            <div class="form-controls">
+                <button type="submit" class="btn btn-success mt-1">Create</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %} {% block script%}
+<script>
+    $(document).ready(function() {
+        $("#onlineCampaignForm").submit(function() {
+            $("#btnSubmit").attr("disabled", true);
+            $("#btnSubmit").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Loading...`);
+            return true;
+        });
+    });
+</script>
+{% endblock %}

@@ -42,7 +42,7 @@ urlpatterns = [
     path('services/<str:name>/',views.services,name='services'),
     path('placements/',views.add_placement,name='add_placement'),
     path('placementwall',views.placement_wall,name='placement_wall'),
-
-
+    path('online-campaign/',views.online_campaign,name='online_campaign'),
+    path('online-campaigns/all/',views.display_online_campaigns,name='display_online_campaigns'),
 ]
 
