@@ -104,7 +104,7 @@ def logout_user(request):
     return redirect('home:login_user')
 
 def index(request):
-    courses = Course.objects.all().order_by('date_time')[:4]
+    courses = Course.objects.all().order_by('-date_time')[:4]
     print(courses)
     return render(request,'home/index.html',{'courses':courses})
 
