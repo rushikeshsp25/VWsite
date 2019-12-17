@@ -13,7 +13,7 @@ SECRET_KEY = 'wd2m&c5t#w*ad2^5#s8uo0c39dt*tm-%*!rfx6yndvqk8a7nu1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.visionware.in','13.126.250.182']
 
 
 # Application definition
@@ -65,9 +65,9 @@ WSGI_APPLICATION = 'VWsite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'visionwaredb',
-        'USER': 'visionwaredbadmin',
-        'PASSWORD': 'visionware@2020',
+        'NAME': 'myproject',
+        'USER': 'myprojectuser',
+        'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -111,6 +111,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 
 #for uploading files

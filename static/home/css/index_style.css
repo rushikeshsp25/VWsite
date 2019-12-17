@@ -1,0 +1,526 @@
+.cust-form-row {
+    overflow: hidden;
+    font-size: 13px;
+    border-bottom: 1px solid #eee;
+}
+
+.cust-form-row .errorlist {
+    text-align: center;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    color: red;
+    display: block;
+    width: 100%;
+}
+
+.cust-form-row label {
+    display: block;
+    padding: 4px 10px 0 0;
+    float: left;
+    width: 160px;
+    word-wrap: break-word;
+    line-height: 1;
+}
+
+.cust-form-row input[type="text"],
+input[type="number"],
+textarea {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding-left: 5px;
+}
+
+.cust-form-row input {
+    height: 35px;
+}
+
+
+/*create course styles*/
+
+.generated-form .form-controls {
+    text-align: right;
+}
+
+.generated-form {
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+
+/*loginform styles*/
+
+.login-container {
+    background-color: white;
+}
+
+.login-container .head {
+    text-align: center;
+}
+
+.login-container .head i {
+    /* border: 2px solid black; */
+    background-color: #ffde59;
+    color: black;
+    text-align: center;
+    font-size: 20px;
+    padding-top: 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.login-container {
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.08), 0px 1px 2px rgba(0, 0, 0, 0.12);
+    padding: 20px;
+    margin: 20px;
+}
+
+.login-container .body input[type="text"],
+.login-container .body input[type="password"],
+.login-container .body input[type="email"] {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 40px;
+    padding-left: 5px;
+}
+
+.login-container .body textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding-left: 5px;
+    height: 100px;
+}
+
+.login-container .body .btn {
+    width: 100%;
+    background-color: #ffde59;
+    color: white;
+    border-radius: 4px;
+    height: 40px;
+    color: black;
+}
+
+.login-container .body .btn:hover {
+    background-color: #38b6ff;
+}
+
+.login-container .body .form-controls {
+    text-align: center;
+}
+
+.login-container .login-bottom {
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-container .signup-bottom {
+    font-size: 14px;
+    margin-top: 15px;
+    text-align: right;
+}
+
+.infotext {
+    color: gray;
+}
+
+.course-enroll-btn {
+    width: 100%;
+    margin-top: 5px;
+    background-color: #ffde59;
+}
+
+.course-enroll-btn:hover {
+    background-color: #38b6ff;
+}
+
+.course-level {
+    margin-top: 15px;
+    color: green;
+    font-weight: bold;
+}
+
+.batch-container {
+    margin: 10px;
+    padding: 10px;
+    background-color: #fdf3cc;
+    border-radius: 5px;
+    /* box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4); */
+}
+
+
+/* image grid */
+
+.image-grid .img-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+/* Create four equal columns that sits next to each other */
+
+.image-grid .column {
+    flex: 25%;
+    max-width: 25%;
+}
+
+.image-grid .column .zoomIn {
+    padding: 2px;
+    overflow: hidden;
+}
+
+.image-grid .column img {
+    vertical-align: middle;
+    width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+    .image-grid .column {
+        flex: 50%;
+        max-width: 50%;
+    }
+}
+
+
+/*Zoom In*/
+
+.image-grid .column .zoomIn img {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+.image-grid .column .zoomIn img:hover {
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+    z-index: 10;
+    cursor: pointer;
+}
+
+
+/*highlights div*/
+
+
+/* .highlights hr {
+    border: 0.5px solid #38b6ff;
+}*/
+
+.highlights {
+    padding: 20px;
+    text-align: center;
+    opacity: 0.8;
+}
+
+
+/* .highlights p {
+    padding-top: 10px;
+} */
+
+.highlights .icon-round-border {
+    border: 7px double #38b6ff;
+    color: #38b6ff;
+    text-align: center;
+    font-size: 30px;
+    padding-top: 15px;
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    cursor: pointer;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.highlights .icon-round-border:hover {
+    color: #38b6ff;
+    border: 7px double #38b6ff;
+    background-color: #ffde59;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.banner {
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.08), 0px 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.banner:hover {
+    cursor: pointer;
+}
+
+.highlights-container .body {
+    /* padding: 20px; */
+    background: url("../images/backgrounds/bg1.png") no-repeat fixed center;
+    color: white;
+}
+
+.highlights-container .body .section-heading {
+    color: #38b6ff;
+    font-weight: bold;
+}
+
+.shadow {
+    border: 1px solid rgb(214, 214, 214);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.08), 0px 1px 2px rgba(0, 0, 0, 0.12);
+    background-color: white;
+}
+
+
+/*search student*/
+
+.search-form input[type="text"],
+.search-form button {
+    width: 100%;
+}
+
+.section-head {
+    padding: 6px;
+    /* padding-left: 16px; */
+    background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+    text-align: center;
+    /* color: white; */
+    border-bottom: 1px solid rgb(214, 214, 214);
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+.carousel-inner>.item>img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 500px;
+}
+
+.videoWrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 */
+    padding-top: 25px;
+    height: 0;
+}
+
+.videoWrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.admission-form input[type="date"] {
+    width: 100%;
+}
+
+.admission-form .btn {
+    width: 100%;
+    background-color: #ffde59;
+    color: white;
+    border-radius: 4px;
+    height: 40px;
+    color: black;
+}
+
+
+/*datepicker styles*/
+
+
+/* .datepicker input {
+    font-family: 'Roboto', sans-serif;
+    display: block;
+    border: none;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    line-height: 1.5rem;
+    padding: 0;
+    font-size: 1rem;
+    color: #607D8B;
+    width: 100%;
+    margin-top: 0.5rem;
+} */
+
+.datepicker input:focus {
+    outline: none;
+}
+
+#ui-datepicker-div {
+    display: none;
+    background-color: #fff;
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
+    margin-top: 0.25rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+
+.datepicker table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.ui-datepicker-calendar thead th {
+    padding: 0.25rem 0;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: #78909C;
+}
+
+.ui-datepicker-calendar tbody td {
+    width: 2.5rem;
+    text-align: center;
+    padding: 0;
+}
+
+.ui-datepicker-calendar tbody td a {
+    display: block;
+    border-radius: 0.25rem;
+    line-height: 2rem;
+    transition: 0.3s all;
+    color: #546E7A;
+    font-size: 0.875rem;
+    text-decoration: none;
+}
+
+.ui-datepicker-calendar tbody td a:hover {
+    background-color: #E0F2F1;
+}
+
+.ui-datepicker-calendar tbody td a.ui-state-active {
+    background-color: #38b6ff;
+    color: white;
+}
+
+.ui-datepicker-header a.ui-corner-all {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    width: 2rem;
+    height: 2rem;
+    margin: 0.5rem;
+    border-radius: 0.25rem;
+    transition: 0.3s all;
+}
+
+.ui-datepicker-header a.ui-corner-all:hover {
+    background-color: #ECEFF1;
+}
+
+.ui-datepicker-header a.ui-datepicker-prev {
+    left: 0;
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMyIgdmlld0JveD0iMCAwIDEzIDEzIj48cGF0aCBmaWxsPSIjNDI0NzcwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik03LjI4OCA2LjI5NkwzLjIwMiAyLjIxYS43MS43MSAwIDAgMSAuMDA3LS45OTljLjI4LS4yOC43MjUtLjI4Ljk5OS0uMDA3TDguODAzIDUuOGEuNjk1LjY5NSAwIDAgMSAuMjAyLjQ5Ni42OTUuNjk1IDAgMCAxLS4yMDIuNDk3bC00LjU5NSA0LjU5NWEuNzA0LjcwNCAwIDAgMS0xLS4wMDcuNzEuNzEgMCAwIDEtLjAwNi0uOTk5bDQuMDg2LTQuMDg2eiIvPjwvc3ZnPg==");
+    background-repeat: no-repeat;
+    background-size: 0.5rem;
+    background-position: 50%;
+    transform: rotate(180deg);
+}
+
+.ui-datepicker-header a.ui-datepicker-next {
+    right: 0;
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMyIgdmlld0JveD0iMCAwIDEzIDEzIj48cGF0aCBmaWxsPSIjNDI0NzcwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik03LjI4OCA2LjI5NkwzLjIwMiAyLjIxYS43MS43MSAwIDAgMSAuMDA3LS45OTljLjI4LS4yOC43MjUtLjI4Ljk5OS0uMDA3TDguODAzIDUuOGEuNjk1LjY5NSAwIDAgMSAuMjAyLjQ5Ni42OTUuNjk1IDAgMCAxLS4yMDIuNDk3bC00LjU5NSA0LjU5NWEuNzA0LjcwNCAwIDAgMS0xLS4wMDcuNzEuNzEgMCAwIDEtLjAwNi0uOTk5bDQuMDg2LTQuMDg2eiIvPjwvc3ZnPg==');
+    background-repeat: no-repeat;
+    background-size: 10px;
+    background-position: 50%;
+}
+
+.ui-datepicker-header a>span {
+    display: none;
+}
+
+.ui-datepicker-title {
+    text-align: center;
+    line-height: 2rem;
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding-bottom: 0.25rem;
+}
+
+.ui-datepicker-week-col {
+    color: #78909C;
+    font-weight: 400;
+    font-size: 0.75rem;
+}
+
+
+/*vision mission*/
+
+.vision-mission {
+    margin-top: 50px;
+}
+
+.as-container {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.as-choice-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 16px 32px 16px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid rgb(214, 214, 214);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.08), 0px 1px 2px rgba(0, 0, 0, 0.12);
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.as-choice-card * {
+    position: relative;
+    z-index: 2;
+}
+
+.as-choice-card:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: #38b6ff;
+    transition: ease-in-out .3s;
+    z-index: 0;
+}
+
+.as-card-icon {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 72px;
+    height: 72px;
+    top: -36px;
+    font-size: 25px;
+    color: #ffffff;
+    background-color: #38b6ff;
+    border-radius: 50%;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.12);
+    transition: ease-in-out .3s;
+}
+
+.as-card-title,
+.as-card-info {
+    transition: ease-in-out .3s;
+}
+
+.as-card-info {
+    width: 100%;
+    padding-bottom: 32px;
+    margin: 0;
+}
+
+.as-choice-card:hover .as-card-icon {
+    background-color: #ffde59;
+    color: black;
+}
