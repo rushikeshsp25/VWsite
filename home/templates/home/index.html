@@ -54,11 +54,12 @@
                         <a class="link" href="{%url 'home:course_details' course.course_slug %}">
                             <div class="card h-100">
                                 <img src="{{course.course_icon.url}}" class="card-img-top" alt="...">
+                                <hr>
                                 <div class="card-body">
-                                    <p class="card-title">{{course.course_name}}</p>
+                                    <p class="card-title"><strong>{{course.course_name}}</strong></p>
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <p class="card-text">{{course.level}} Level</p>
+                                            <p class="card-text" style="color: green;">{{course.level}} Level</p>
                                         </div>
                                         <div class="col-md-4">
                                             {% if not course.is_online %}
