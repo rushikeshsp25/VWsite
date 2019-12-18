@@ -8,14 +8,14 @@
         {% for post in posts %}
         <div class="col-lg-3 col-md-4 col-6 p-3">
             <div class="card h-100">
-                <div class="card-img-container" style="height: 300px; overflow: hidden;">
-                    <img src="{{post.image.url}}" class="card-img-top" alt="..." width="100%">
+                <div class="card-img-container" style="height: 200px; overflow: hidden;">
+                    <img src="{{post.image.url}}" class="card-img-top" alt="...">
                 </div>
                 <div class="card-body">
-                    <p class="card-title">{{post.student_name}}</p>
+                    <p class="card-title"><strong>{{post.student_name}}</strong></p>
                     <hr>
-                    <p class="card-text">Placed In : <span class="infotext">{{post.company_name}}</span></p>
-                    <p class="card-text">Mobile No : <span class="infotext">{{post.mobile_no}}</span></p>
+                    <p class="card-text"><strong>Placed In :</strong><span class="">{{post.company_name}}</span></p>
+                    <p class="card-text"><strong>Mobile No :</strong><span class="">{{post.mobile_no}}</span></p>
                 </div>
                 </a>
             </div>
