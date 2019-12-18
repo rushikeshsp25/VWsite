@@ -3,15 +3,24 @@
     <p class="section-heading">Add a New Placement Detail</p>
     <hr>
     <div class="col-lg-6 col-10">
-        <form enctype="multipart/form-data" method="POST" class="generated-form mb-5">
+        <form enctype="multipart/form-data" method="POST" class="generated-form mb-5" id="addPlacement">
             {% include 'home/form_template.html' %}
             <div class="form-controls">
-                <button type="submit" class="btn btn-success mt-1">Add</button>
+                <button type="submit" id="btnSubmit" class="btn btn-success mt-1">Add</button>
             </div>
         </form>
     </div>
 </div>
 {% endblock %} {% block script%}
 <script>
+    $(document).ready(function() {
+        $("#addPlacement").submit(function(e) {
+            //stop submitting the form to see the disabled button effect
+            // e.preventDefault();
+            //disable the submit button
+            $("#btnSubmit").attr("disabled", true);
+            return true;
+        });
+    });
 </script>
 {% endblock %}
