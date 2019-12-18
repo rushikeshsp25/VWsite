@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC|Architects+Daughter|Nunito|Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'home/css/font-awesome.min.css'%}">
+    <link rel="stylesheet" href="{% static 'home/css/animate.css' %}">
     <link rel="stylesheet" href="{% static 'home/css/base_style.css'%}">
     <link rel="stylesheet" href="{% static 'home/css/index_style.css'%}">
     <link rel="apple-touch-icon" href="{% static 'home/images/favicons/apple-icon-180x180.png' %}">
@@ -23,7 +24,7 @@
 </head>
 
 <body>
-    <nav class="navbar top_navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar top_navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="{%url 'home:index' %}">
             <img src="{% static 'home/images/new_logo.png' %}" alt="VisionWare" class="visionware-brand d-inline-block align-middle mr-2">
         </a>
@@ -43,6 +44,9 @@
                 </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="{%url 'home:placement_wall' %}">Placements</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link animated infinite pulse" href="{%url 'home:pfs_promo' %}">Placement For Sure</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

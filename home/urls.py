@@ -44,5 +44,6 @@ urlpatterns = [
     path('placementwall',views.placement_wall,name='placement_wall'),
     path('online-campaign/',views.online_campaign,name='online_campaign'),
     path('online-campaigns/all/',views.display_online_campaigns,name='display_online_campaigns'),
+    path('placement-for-sure',views.pfs_promo,name='pfs_promo')
 ]
 

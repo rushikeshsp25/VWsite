@@ -704,6 +704,9 @@ def display_online_campaigns(request):
     campaigns=OnlineCampaign.objects.all().order_by('-id')
     return render(request,'home/online_campaign/display_online_campaigns.html',{'campaigns':campaigns})
 
+def pfs_promo(request):
+    return render(request,'home/placement_for_sure.html')
+    
 def handler404(request,*args,**argv):
     return render(request,'home/page_not_found.html',status=404)
 
