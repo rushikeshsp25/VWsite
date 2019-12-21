@@ -1,5 +1,13 @@
 {% extends 'home/base.html' %} {% block title %}Course Details | VisionWare {% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
 <div class="container mt-5 mb-5">
+    <div class="md-6 center">
+        <h2 class="page-heading "><strong>{{course.course_name}}</strong></h2>
+        <hr>
+        <p class="course-level">
+            {{course.level}} level
+        </p>
+        <hr>
+    </div>
     <div class="row">
         <div class="col-lg-3 col-md-6">
             <img src="{{course.course_icon.url}}" alt="course image" width="100%">
@@ -21,12 +29,6 @@
         </div>
         <div class="col-lg-7 col-md-6">
             <div class="ml-md-3">
-                <h2 class="page-heading ">{{course.course_name}}</h2>
-                <hr>
-                <p class="course-level">
-                    {{course.level}} level
-                </p>
-                <hr>
                 <h3 class="section-heading">Course Outcomes </h3>
                 <p class="infotext">{{course.outcomes|linebreaksbr}}</p>
                 <hr>
