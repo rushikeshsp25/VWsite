@@ -42,5 +42,7 @@ urlpatterns = [
     path('services/<str:name>/',views.services,name='services'),
     path('online-campaign/',views.online_campaign,name='online_campaign'),
     path('online-campaigns/all/',views.display_online_campaigns,name='display_online_campaigns'),
+    path('attendance/form/',views.attendance_form,name="attendance_form"),
+ 
 ]
 

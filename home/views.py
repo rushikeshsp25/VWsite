@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect,get_object_or_404
+from django.shortcuts import render,redirect,get_object_or_404,render_to_response
 from django.utils import timezone
 from .forms import CourseForm,BatchForm, StudyCourseForm,FeedbackBatchForm, FeedbackForm,OnlineCampaignForm
 from django.contrib.auth import authenticate, login,logout
@@ -6,9 +6,9 @@ from .models import *
 from datetime import datetime
 from django.core.mail import send_mail
 from django.core.mail import EmailMessage
-
+from django.core import serializers
 from django.urls import reverse
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseRedirect,JsonResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.views.decorators.csrf import csrf_exempt
@@ -30,6 +30,8 @@ from .helpers.feedbackQuestionsResponse import feedback_question_responses
 from .helpers.onlineCampaignSMS import send_sms
 import csv
 
+from datetime import date
+from django.forms.models import model_to_dict
 # Create your views here.
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
@@ -690,3 +692,21 @@ def online_campaign(request):
 def display_online_campaigns(request):
     campaigns=OnlineCampaign.objects.all().order_by('-id')
     return render(request,'home/online_campaign/display_online_campaigns.html',{'campaigns':campaigns})
+
+def attendance_form(request):
+    if request.method == "POST":
+        if request.is_ajax():
+            batch_id=request.POST.get('batch_id')
+            students=Student.objects.filter(batch=batch_id)
+            print(type(students))
+            for i in students:
+                print(i.first_name,i.last_name)
+            return HttpResponse("hiii") 
+    else:
+        batches=CourseBatch.objects.all()
+        return render(request,'home/attendance_form.html',{'batches':batches})
+
+
+
+
+
