@@ -7,6 +7,7 @@
     <table class="table table-hover">
         <thead>
             <tr>
+                <th scope="col">Batch Id</th>
                 <th scope="col">Batch Name</th>
                 <th scope="col">Feedback Title</th>
                 <th scope="col">Feedback Start Date</th>
@@ -17,6 +18,7 @@
         <tbody>
             {% for i in feedback_batches %}
             <tr>
+                <td>{{i.id}}</td>
                 <td>{{i.batch}}</td>
                 <td>{{i.feedback_title}}</td>
                 <td>{{ i.start_date}}</td>

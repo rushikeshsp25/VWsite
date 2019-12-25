@@ -1,0 +1,56 @@
+{% extends 'home/base.html' %} {% block title %}Send Message and Mails to Batch | VisionWare {% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+<div class="container mt-4 mb-4 col-md-8 col-lg-6 col-12 offset-md-2 offset-lg-3">
+    <div class="login-container shadow">
+        <div class="head">
+            <p class="section-heading">Send Message + Mail to Batch</p>
+            <hr>
+        </div>
+        <div class="body">
+            <form id="sendSmsEmailBatch" class="login-form" role="form" method="post" enctype="multipart/form-data">
+                {% csrf_token %} {%if form.non_field_errors%}
+                <div class="cust-form-row">
+                    {{ form.non_field_errors }}
+                </div>
+                {%endif%} {%if error_message%}
+                <div class="cust-form-row">
+                    <ul class="errorlist">
+                        {{error_message|safe}}
+                    </ul>
+                </div>
+                {%endif%}
+                <div class="form-group">
+                    <label for="designation">Batch</label>
+                    <select name="batch">
+                        {% for batch in batches %}
+                        <option value="{{batch.batch_name}}">{{batch.batch_name}}</option>
+                        {% endfor %}
+                      </select>
+                </div>
+                <div class="form-group">
+                    <label for="designation">Subject</label>
+                    <input type="text" class="form-control" name="subject" id="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" required></textarea>
+                </div>
+                <div class="form-controls">
+                    <button type="submit" class="btn" id="btnSubmit">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block script%}
+<script>
+    $(document).ready(function() {
+        $("#sendSmsEmailBatch").submit(function(e) {
+            //stop submitting the form to see the disabled button effect
+            // e.preventDefault();
+            //disable the submit button
+            $("#btnSubmit").attr("disabled", true);
+            return true;
+        });
+    });
+</script>
+{% endblock %}

@@ -4,6 +4,7 @@ from .forms import CourseForm,BatchForm, StudyCourseForm,FeedbackBatchForm, Feed
 from django.contrib.auth import authenticate, login,logout
 from .models import *
 from datetime import datetime
+from datetime import date
 from django.core.mail import send_mail
 from django.core.mail import EmailMessage
 from django.urls import reverse
@@ -25,6 +26,8 @@ from .helpers.linkCheck import getNotWorkingLinksHtml
 from .helpers.feedbackQuestionsResponse import feedback_question_responses
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger 
 from .helpers.onlineCampaignSMS import send_sms
+from .helpers.sendSMS import send_sms_number as sendSms
+
 import csv
 
 # Create your views here.
@@ -317,17 +320,14 @@ def feedback_init(request,feedback_batch_id):
         try:
             sobj = Student.objects.get(email=email,dob=dob)
             feedback_batch = FeedbackBatch.objects.get(id=feedback_batch_id)
-            try:
-                fobjs = FeedbackResponse.objects.filter(feedback_batch=feedback_batch,student=sobj)
-                print(fobjs)
-                if(fobjs):
-                    messages.error(request, 'You have already submitted the feedback')
-                    return render(request,'home/feedback/feedback_init.html')
-            except:
-                pass
+            fobjs = FeedbackResponse.objects.filter(feedback_batch=feedback_batch,student=sobj)
+            if(fobjs):
+                messages.error(request, 'You have already submitted the feedback')
+                return render(request,'home/feedback/feedback_init.html')
             feedback_questions=FeedbackQuestion.objects.all()
-            today = datetime.today()
-            feedback_batch = FeedbackBatch.objects.get(id=feedback_batch_id,start_date__gte = today, end_date__lte = today)
+            today = date.today()
+            print(today)
+            feedback_batch = FeedbackBatch.objects.get(id=feedback_batch_id,start_date__gte = today, end_date__gte = today)
             if not (sobj.batch.id == feedback_batch.batch.id and sobj.admission):
                 raise Exception("student not admitted")
             messages.success(request, 'Please give the proper feedback, It is very important to us!')
@@ -465,6 +465,12 @@ def create_new_feedback(request):
         form = FeedbackBatchForm(request.POST,request.FILES)
         if form.is_valid():
             feedback=form.save(commit=False)
+            if not ((feedback.start_date-feedback.batch.start_date).days >= 0):
+                context = {
+                    'form': form,
+                    'error_message': '<li>Feedback Start date is Less than Batch Start Date</li>'
+                }
+                return render(request,'home/feedback/feedback_batch_form.html',context)
             if (feedback.end_date-feedback.start_date).days >= 0:
                 print(feedback.end_date-feedback.start_date)
                 feedback.save()
@@ -609,7 +615,8 @@ def confirm_admission(request,pk):
         email = EmailMessage(
             'Admission Confirmation - VisionWare IT Training Institute', 
             html_message, 
-            to=[str(s_obj.email),'dhapateashu.ad@gmail.com','rushikeshsp25@gmail.com']
+            to=[str(s_obj.email)],
+            cc=['dhapateashu.ad@gmail.com','rushikeshsp25@gmail.com']
             )
         email.content_subtype = "html" # this is the crucial part 
         email.send()
@@ -618,6 +625,9 @@ def confirm_admission(request,pk):
         return redirect('home:student_detail', pk=pk)
     messages.success(request,"Admission Confirmed !")
     return redirect('home:student_detail', pk=pk)
+
+def services_index(request):
+    return render(request,'home/services_index.html')
 
 def services(request,name):
     if request.method=="POST":
@@ -699,6 +709,54 @@ def online_campaign(request):
     else:
         form = OnlineCampaignForm()
         return render(request,'home/online_campaign/online_campaign_form.html',{'form':form})
+
+
+@login_required
+@user_passes_test(lambda u: u.has_perm('home.view_student'), login_url='/permissionerror/',redirect_field_name=None)
+def send_message_batch(request):
+    if request.method == "POST":
+        subject = request.POST['subject']
+        message = request.POST['message']
+        batch = request.POST['batch']
+        batch_obj = CourseBatch.objects.get(batch_name=batch)
+        s_objs = Student.objects.filter(batch=batch_obj,admission=True)
+        student_emails = []
+        message = message+"%0A"+"This is system generated email."
+        for student in s_objs:
+            student_emails.append(student.email)
+        #send emails to all students from batch
+        print(message)
+        email = EmailMessage(
+            subject,
+            message, 
+            to=student_emails,
+            cc=['dhapateashu.ad@gmail.com','rushikeshsp25@gmail.com']
+            )
+        email.send()
+        messages.success(request,'Emails + Messages are sent successfully!')
+        return redirect('home:dashboard')
+    else:
+        batch_objs = CourseBatch.objects.all()
+        return render(request,'home/messaging/send_message_batch.html',{'batches':batch_objs})
+
+@login_required
+@user_passes_test(lambda u: u.has_perm('home.view_student'), login_url='/permissionerror/',redirect_field_name=None)
+def send_sms_number(request):
+    if request.method == "POST":
+        message = request.POST['message']
+        mobile = request.POST['mobile']
+        try:
+            res = sendSms(mobile,message)
+            print(res)
+        except Exception as e:
+            print(e)
+            messages.error(request,'Messages send Error!')
+            return redirect('home:dashboard')
+        messages.success(request,'Messages sent successfully!')
+        return redirect('home:dashboard')
+    else:
+        return render(request,'home/messaging/send_sms_number.html')
+
 
 def display_online_campaigns(request):
     campaigns=OnlineCampaign.objects.all().order_by('-id')

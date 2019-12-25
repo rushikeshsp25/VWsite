@@ -50,17 +50,17 @@
         title: 'Feedback',
         is3D: true,
     };
-    let data=null;
+    google.charts.load('current', {
+        packages: ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawCharts);
     function drawChart(id,data){
-        google.charts.load('current', {
-            packages: ['corechart']
-        });
-        let graph_data = google.visualization.arrayToDataTable(data);
+        let graph_data = new google.visualization.arrayToDataTable(data);
         let chart = new google.visualization.PieChart(document.getElementById(id));
-        chart.draw(data, options); 
+        chart.draw(graph_data, options); 
     }
-    window.onload = function () {
-        data = [
+    function drawCharts(){
+        let data = [
             ['Rate', 'No of students'], 
             {%for key,value in overall.items %}
             ['Rate {{ key }}', {{value}}], 
@@ -74,7 +74,7 @@
             ['Rate {{ key }}', {{ value}}], 
             {% endfor %}
         ];
-        drawChart("piechart_{{question_id}}",data);
+        drawChart("piechart_{{question_id}}",data)
         {% endfor %}
     }
 </script>

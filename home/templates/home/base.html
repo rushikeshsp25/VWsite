@@ -48,23 +48,11 @@
                 <li class="nav-item">
                     <a class="nav-link animated infinite pulse" href="{%url 'home:pfs_promo' %}">Placement For Sure</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Services
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{%url 'home:services' 'Website Development' %}">Website
-                            Development</a>
-                        <a class="dropdown-item" href="{%url 'home:services' 'Android Application' %}">Android
-                            Application</a>
-                        <a class="dropdown-item" href="{%url 'home:services' 'Penetration Testing' %}">Penetration
-                            Testing</a>
-                        <a class="dropdown-item" href="{%url 'home:services' 'Digital Marketing' %}">Digital
-                            Marketing</a>
-                    </div>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{%url 'home:hire_with_us' %}">Hire With Us</a>
+                </li>
+                <li class="nav-item  animated infinite pulse">
+                    <a class="nav-link" href="{%url 'home:services_index' %}">Services</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{%url 'home:contact_us' %}">Contact</a>
@@ -112,8 +100,10 @@
                     <p class="footer-text">
                         <div class="footer-link"><i class="fa fa-link" aria-hidden="true"></i><a href="{%url 'home:display_all_courses' %}">Classroom
                                 Trainings</a></div>
-                        <div class="footer-link"><i class="fa fa-link" aria-hidden="true"></i><a href="{%url 'home:display_all_courses' %}">Learn
-                                Online</a></div>
+                        <!-- <div class="footer-link"><i class="fa fa-link" aria-hidden="true"></i><a href="{%url 'home:display_all_courses' %}">Learn
+                                Online</a></div> -->
+                        <div class="footer-link"><i class="fa fa-link" aria-hidden="true"></i><a href="{%url 'home:services_index' %}">Services</a>
+                        </div>
                         <div class="footer-link"><i class="fa fa-link" aria-hidden="true"></i><a href="{%url 'home:contact_us' %}">Contact Us</a>
                         </div>
                     </p>

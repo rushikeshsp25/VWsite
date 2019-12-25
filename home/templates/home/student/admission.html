@@ -1,5 +1,5 @@
 {% extends 'home/base.html' %} {% block title %}Online Admission | VisionWare {% endblock %} {% block head %} {% load static %}
-<link rel="stylesheet" href="{% static 'home/css/page-not-found.css'%}"> {% endblock %} {% block body %}
+<link href="{% static 'home/css/datepicker.min.css' %}" rel="stylesheet" type="text/css"> {% endblock %} {% block body %}
 <Section class="container mt-4 mb-4">
     <div class="container">
         <div class="row">
@@ -62,10 +62,9 @@
                                     <option value="NA">Not Applicable</option>
                                 </select>
                             </div>
-                            <div class="form-group datepicker">
+                            <div class="form-group">
                                 <label for="dob">Date Of Birth</label>
-                                <input class="form-control" type="text" id="dob" autocomplete="off" placeholder="yyyy-mm-dd" name="dob" required>
-                                <!-- <input type="date" name="inputDOB"> -->
+                                <input type="text" class="form-control date-input" name="dob" placeholder="YYYY-MM-DD" required/>
                             </div>
                             <div class="form-controls center">
                                 <button type="submit" class="btn">Enroll Now</button>
@@ -103,13 +102,13 @@
     </div>
 </Section>
 {% endblock %} {% block script%}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+<script src="{% static 'home/js/datepicker.min.js' %}"></script>
+<script src="{% static 'home/js/datepicker.en.js' %}"></script>
 <script>
-    $(function() {
-        $("#dob").datepicker({
-            dateFormat: "yy-mm-dd",
-            duration: "fast"
-        });
-    });
+    $('.date-input').datepicker({
+        language: 'en',
+        dateFormat: "yyyy-mm-dd",
+        autoClose: true
+    })
 </script>
 {% endblock %}
