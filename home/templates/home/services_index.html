@@ -1,0 +1,117 @@
+ {% extends 'home/base.html' %} {% block title %}VisionWare Product Development, Pune {% endblock %} {% block head %} {% load static %}
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'home/css/fonts/icomoon/style.css' %}">
+<link rel="stylesheet" href="{% static 'home/css/aos.css' %}">
+<link rel="stylesheet" href="{% static 'home/css/jquery.fancybox.min.css'%}">
+<link rel="stylesheet" href="{% static 'home/css/style_services.css' %}"> {% endblock %} {% block body %}
+<div class="site-wrap">
+    <div class="site-section bg-light" id="what-we-do-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-6 section-title">
+                    <span class="sub-title mb-2 d-block">What We Do</span>
+                    <h2 class="title text-primary">We do all things related to web.</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 ml-auto">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+                            <div class="service h-100">
+                                <span class="icon-photo_album display-4 text-primary d-block mb-4"></span>
+                                <h3>Web Design</h3>
+                                <p>We design beautiful websites for you if you don't know anything about UI/UX. We will choose color paletes, themes, icons and all other things</p>
+                                <p><a href="{%url 'home:services' 'Website-Design' %}" class="readmore">Get a QTN</a></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+                            <div class="service h-100">
+                                <span class="icon-laptop_mac display-4 text-primary d-block mb-4"></span>
+                                <h3>Web Development</h3>
+                                <p>We design a complete website for you from scratch. We integrate your themes and logos in our websites. We make your buisness online.</p>
+                                <p><a href="{%url 'home:services' 'Website-Development' %}" class="readmore">Get a QTN</a></p>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+                            <div class="service h-100">
+                                <span class="icon-layers display-4 text-primary d-block mb-4"></span>
+                                <h3>Deployment</h3>
+                                <p>We deploy your applications to cloud so that you don't have to manage it. We also support managing your deployed applications so that it meet your constant increasing requirements.</p>
+                                <p><a href="{%url 'home:services' 'Deployment' %}" class="readmore">Get a QTN</a></p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+                            <div class="service h-100">
+                                <span class="icon-mobile display-4 text-primary d-block mb-4"></span>
+                                <h3>Mobile Apps</h3>
+                                <p>We develope Android and IOS apps from scratch. We also converts your existing website to mobile app.
+                                </p>
+                                <p><a href="{%url 'home:services' 'Mobile-App' %}" class="readmore">Get a QTN</a></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+                            <div class="service h-100">
+                                <span class="icon-pencil display-4 text-primary d-block mb-4"></span>
+                                <h3>Bug Fixes</h3>
+                                <p>We solve problems in your applications. We add more features for your existing application. We resolve all the bugs in your code.</p>
+                                <p><a href="{%url 'home:services' 'Bug-Fix' %}" class="readmore">Get a QTN</a></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+                            <div class="service h-100">
+                                <span class="icon-search2 display-4 text-primary d-block mb-4"></span>
+                                <h3>Search Engine Optimization</h3>
+                                <p>We provide support for building applications which rank higher in search engine rankings.</p>
+                                <p><a href="{%url 'home:services' 'SEO' %}" class="readmore">Get a QTN</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END .site-section -->
+
+
+
+    <div class="site-section" id="portfolio-section">
+        <div class="container">
+            <div class="row mb-5 ">
+                <div class="col-md-8 section-title text-center mx-auto">
+                    <span class="sub-title mb-2 d-block">Recent Works</span>
+                    <h2 class="title text-primary mb-3">Here are some recent client-faced projects
+                    </h2>
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <img src="{%static 'home/images/services/pro_1.png' %}" alt="Image" class="img-fluid">
+            </div>
+
+            <div class="row mb-5">
+                <img src="{%static 'home/images/services/pro_2.png' %}" alt="Image" class="img-fluid">
+            </div>
+
+            <div class="row mb-5">
+                <img src="{%static 'home/images/services/pro_3.png' %}" alt="Image" class="img-fluid">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="site-section bg-light">
+    <div class="container">
+        <div class="row mb-5 ">
+            <div class="col-md-7 section-title text-center mx-auto">
+                <span class="sub-title mb-2 d-block">Testimonials</span>
+                <h2 class="title text-primary mb-3">Our Client Sayings</h2>
+            </div>
+        </div>
+        <img class="img-fluid" src="{%static 'home/images/services/client_1.png' %}" alt="Image">
+    </div>
+</div>
+</div>
+{% endblock %} {% block script%} {% endblock %}

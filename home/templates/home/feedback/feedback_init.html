@@ -1,4 +1,5 @@
-{% extends 'home/base.html' %} {% block title %}Feedback First Steps | VisionWare{% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+{% extends 'home/base.html' %} {% block title %}Feedback First Steps | VisionWare{% endblock %} {% block head %} {% load static %}
+<link href="{% static 'home/css/datepicker.min.css' %}" rel="stylesheet" type="text/css"> {% endblock %} {% block body %}
 <div class="container mt-4 mb-4">
     <div class="card col-md-8 offset-md-2">
         <div class="card-header center">
@@ -24,10 +25,9 @@
                         <label for="email">Email</label>
                         <input type="email" class="form-control" name="email" id="exampleInputEmail1" autocomplete="off" required>
                     </div>
-                    <div class="form-group datepicker col-md-6">
+                    <div class="form-group col-md-6">
                         <label for="dob">Date Of Birth</label>
-                        <input class="form-control" type="text" id="dob" autocomplete="off" placeholder="yyyy-mm-dd" name="dob" required>
-                        <!-- <input type="date" name="inputDOB"> -->
+                        <input type="text" class="form-control date-input" name="dob" placeholder="YYYY-MM-DD" autocomplete="off" required/>
                     </div>
                 </div>
 
@@ -38,14 +38,15 @@
         </div>
     </div>
 </div>
-{% endblock %} {%block script %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+<br>
+<br> {% endblock %} {%block script %}
+<script src="{% static 'home/js/datepicker.min.js' %}"></script>
+<script src="{% static 'home/js/datepicker.en.js' %}"></script>
 <script>
-    $(function() {
-        $("#dob").datepicker({
-            dateFormat: "yy-mm-dd",
-            duration: "fast"
-        });
-    });
+    $('.date-input').datepicker({
+        language: 'en',
+        dateFormat: "yyyy-mm-dd",
+        autoClose: true
+    })
 </script>
 {%endblock%}
