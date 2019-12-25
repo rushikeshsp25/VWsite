@@ -11,9 +11,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'wd2m&c5t#w*ad2^5#s8uo0c39dt*tm-%*!rfx6yndvqk8a7nu1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['.visionware.in','13.126.250.182']
+ALLOWED_HOSTS = ['.visionware.in','3.6.55.56']
 
 
 # Application definition
@@ -116,7 +116,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 #for uploading files
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 
 
