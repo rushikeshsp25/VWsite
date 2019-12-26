@@ -721,11 +721,11 @@ def send_message_batch(request):
         batch_obj = CourseBatch.objects.get(batch_name=batch)
         s_objs = Student.objects.filter(batch=batch_obj,admission=True)
         student_emails = []
-        message = message+"%0A"+"This is system generated email."
+        student_phones = []
         for student in s_objs:
             student_emails.append(student.email)
+            student_phones.append(student.phone)
         #send emails to all students from batch
-        print(message)
         email = EmailMessage(
             subject,
             message, 
@@ -733,6 +733,8 @@ def send_message_batch(request):
             cc=['dhapateashu.ad@gmail.com','rushikeshsp25@gmail.com']
             )
         email.send()
+        for phone in student_phones:
+            sendSms(phone,message)
         messages.success(request,'Emails + Messages are sent successfully!')
         return redirect('home:dashboard')
     else:

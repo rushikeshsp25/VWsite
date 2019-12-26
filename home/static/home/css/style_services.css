@@ -55,7 +55,8 @@ h6 {
     visibility: hidden
 }
 
-.site-section {
+
+/* .site-section {
     padding: 4.5em 0
 }
 
@@ -63,7 +64,7 @@ h6 {
     .site-section {
         padding: 3em 0
     }
-}
+} */
 
 .bg-image {
     background-size: cover;
