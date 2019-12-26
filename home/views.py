@@ -749,7 +749,7 @@ def send_sms_number(request):
         mobile = request.POST['mobile']
         try:
             res = sendSms(mobile,message)
-            print(res)
+            print(res.text)
         except Exception as e:
             print(e)
             messages.error(request,'Messages send Error!')
