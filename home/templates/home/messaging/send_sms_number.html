@@ -2,7 +2,7 @@
 <div class="container mt-4 mb-4 col-md-8 col-lg-6 col-12 offset-md-2 offset-lg-3">
     <div class="login-container shadow">
         <div class="head">
-            <p class="section-heading">Send Message + Mail to Batch</p>
+            <p class="section-heading">Send SMS to a Number</p>
             <hr>
         </div>
         <div class="body">
@@ -25,6 +25,7 @@
                 <div class="form-group">
                     <label for="message">Message</label>
                     <textarea name="message" id="message" maxlength="500" required></textarea>
+                    <p id="characters" style="color: chocolate;">Characters Used : 0</p>
                 </div>
                 <div class="form-controls">
                     <button type="submit" class="btn" id="btnSubmit">Send</button>
@@ -39,6 +40,12 @@
         $("#sendSmsNumber").submit(function(e) {
             $("#btnSubmit").attr("disabled", true);
             return true;
+        });
+        var textarea = document.getElementById('message');
+        textarea.addEventListener('keyup', function(e) {
+            var characters = this.value.length;
+            console.log(characters);
+            document.getElementById('characters').innerHTML = "Characters Used : " + characters;
         });
     });
 </script>
