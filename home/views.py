@@ -27,7 +27,7 @@ from .helpers.feedbackQuestionsResponse import feedback_question_responses
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger 
 from .helpers.onlineCampaignSMS import send_sms
 from .helpers.sendSMS import send_sms_number as sendSms
-
+from .helpers.smsMessags import admission_confirm_message
 import csv
 
 # Create your views here.
@@ -621,7 +621,13 @@ def confirm_admission(request,pk):
         email.content_subtype = "html" # this is the crucial part 
         email.send()
     except Exception as e:
-        messages.error(request,"Something Went Wrong !")
+        messages.error(request,"Error  while sending an Email !")
+        return redirect('home:student_detail', pk=pk)
+    try:
+        admission_confirm_message.format(s_obj.batch.course.course_name)
+        sendSms(str(s_obj.phone),message)
+    except Exception as e:
+        messages.error(request,"Error  while sending SMS !")
         return redirect('home:student_detail', pk=pk)
     messages.success(request,"Admission Confirmed !")
     return redirect('home:student_detail', pk=pk)
@@ -726,15 +732,23 @@ def send_message_batch(request):
             student_emails.append(student.email)
             student_phones.append(student.phone)
         #send emails to all students from batch
-        email = EmailMessage(
-            subject,
-            message, 
-            to=student_emails,
-            cc=['dhapateashu.ad@gmail.com','rushikeshsp25@gmail.com']
-            )
-        email.send()
-        for phone in student_phones:
-            sendSms(phone,message)
+        try:
+            email = EmailMessage(
+                subject,
+                message, 
+                to=student_emails,
+                cc=['dhapateashu.ad@gmail.com','rushikeshsp25@gmail.com']
+                )
+            email.send()
+        except Exception as e:
+            messages.error(request,'Error while sending an Email')
+            return redirect('home:dashboard')
+        try:
+            for phone in student_phones:
+                sendSms(phone,message)
+        except Exception as e:
+            messages.error(request,'Error while sending SMS')
+            return redirect('home:dashboard')
         messages.success(request,'Emails + Messages are sent successfully!')
         return redirect('home:dashboard')
     else:
