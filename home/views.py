@@ -36,7 +36,6 @@ IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 def dictionarify_the_response_queryset(response):
     d={}
     for i in response:
-        print(i.id)
         d[i.response]=d.get(i,0)+1
     return d
 
@@ -74,7 +73,6 @@ def signup_user(request):
         year = request.POST['year']
         password = request.POST['password']
         college_obj = College.objects.get(shortname_without_space = college)
-        print(fname,lname,email,mobile,college,year,password)
         if not fname or not lname or not email or not mobile or not college or not year or not password:
             return render(request, 'home/auth/signup.html',{'colleges':colleges,
                     'error_message': '<li>Incomplete form is submitted</li>'
@@ -108,7 +106,6 @@ def logout_user(request):
 
 def index(request):
     courses = Course.objects.all().order_by('date_time')[:4]
-    print(courses)
     return render(request,'home/index.html',{'courses':courses})
 
 @login_required
@@ -309,7 +306,6 @@ def notWorkingLinks(request):
                 'admin@visionware.in', admin_emails)
         return HttpResponse("not working links mails sent successfully")
     except Exception as e:
-        print("Exception is : ",e)
         return HttpResponse("Something went wrong while sending not working links emails")
     return HttpResponse(not_working_links_all)
 
@@ -326,14 +322,12 @@ def feedback_init(request,feedback_batch_id):
                 return render(request,'home/feedback/feedback_init.html')
             feedback_questions=FeedbackQuestion.objects.all()
             today = date.today()
-            print(today)
             feedback_batch = FeedbackBatch.objects.get(id=feedback_batch_id,start_date__gte = today, end_date__gte = today)
             if not (sobj.batch.id == feedback_batch.batch.id and sobj.admission):
                 raise Exception("student not admitted")
             messages.success(request, 'Please give the proper feedback, It is very important to us!')
             return render(request,'home/feedback/feedback_proceed.html',{'feedback_batch':feedback_batch,'student':sobj,'feedback_questions':feedback_questions})
         except Exception as e:
-            print(e)
             messages.error(request, 'You are not allowed to give this feedback')
             return render(request,'home/feedback/feedback_init.html')
     else:
@@ -351,7 +345,6 @@ def feedback_proceed(request,feedback_batch_id):
         sobj = Student.objects.get(email=userDetails['userEmail'])
         f_b = FeedbackBatch.objects.get(id=feedback_batch_id)
     except Exception as e:
-        print(e)
         messages.error(request,"Opps,something went wrong")
         return redirect('home:feedback_init',feedback_batch_id=feedback_batch_id )
 
@@ -455,7 +448,6 @@ def feedback_batch_response(request,feedback_batch_id):
     feedback_batch = FeedbackBatch.objects.get(id=feedback_batch_id)
     batch_responses= FeedbackResponse.objects.filter(feedback_batch=feedback_batch)
     rating_response,comment_response=feedback_question_responses(feedback_questions,batch_responses)  
-    print(rating_response,comment_response)  
     return render(request,'home/feedback/feedback_batch_response.html',{'feedback_questions':feedback_questions,'overall':data,'rating_response':rating_response,'comment_response':comment_response,'feedback_batch':feedback_batch})
 
 @login_required
@@ -472,7 +464,6 @@ def create_new_feedback(request):
                 }
                 return render(request,'home/feedback/feedback_batch_form.html',context)
             if (feedback.end_date-feedback.start_date).days >= 0:
-                print(feedback.end_date-feedback.start_date)
                 feedback.save()
                 messages.success(request,'Feedback for Batch is created successfully !')
                 return redirect('home:dashboard')
@@ -570,7 +561,6 @@ def search_student(request,search_by):
             }
             return render(request, 'home/admin/student_college_all.html', context)
         except Exception as err:
-            print(err)
             messages.error(request,'No Student Found!')
             return redirect('home:students')
 
@@ -763,9 +753,7 @@ def send_sms_number(request):
         mobile = request.POST['mobile']
         try:
             res = sendSms(mobile,message)
-            print(res.text)
         except Exception as e:
-            print(e)
             messages.error(request,'Messages send Error!')
             return redirect('home:dashboard')
         messages.success(request,'Messages sent successfully!')

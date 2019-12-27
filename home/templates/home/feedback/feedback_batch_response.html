@@ -27,7 +27,7 @@
                         <div class="h-50">
                             {% if question.question_type == 'rating' %}
                             <div class="center">
-                                <div id="piechart_{{question.id}}" class="shadow-sm p-3 mb-5 bg-white rounded fa fa-pie-chart"></div>
+                                <div id="piechart_{{ question.id }}" class="shadow-sm p-3 mb-5 bg-white rounded fa fa-pie-chart"></div>
                             </div>
                             {% else %}
                             <div class="overflow-auto h-100">
@@ -46,27 +46,33 @@
 {% endblock %} {% block script%}
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-    var options = {
-        title: 'Feedback',
-        is3D: true,
-    };
     google.charts.load('current', {
         packages: ['corechart']
     });
+
     google.charts.setOnLoadCallback(drawCharts);
-    function drawChart(id,data){
+
+    function drawChart(id,data,options){
         let graph_data = new google.visualization.arrayToDataTable(data);
         let chart = new google.visualization.PieChart(document.getElementById(id));
         chart.draw(graph_data, options); 
     }
+
     function drawCharts(){
-        let data = [
+        var data;
+        data = [
             ['Rate', 'No of students'], 
             {%for key,value in overall.items %}
             ['Rate {{ key }}', {{value}}], 
             {% endfor %}
         ];
-        drawChart("piechart_overall",data);
+        drawChart("piechart_overall",data,{
+            title: 'Overall Feedback',
+            is3D: true,
+            width:400,
+            height:300,
+            legend: 'none'
+        });
         {% for question_id, responses in rating_response.items %}
         data = [
             ['Rate', 'No of students'], 
@@ -74,7 +80,13 @@
             ['Rate {{ key }}', {{ value}}], 
             {% endfor %}
         ];
-        drawChart("piechart_{{question_id}}",data)
+        drawChart("piechart_{{ question_id }}",data,{
+            title: 'Question {{ question_id }} Feedback',
+            is3D: true,
+            width:400,
+            height:300,
+            legend: 'none'
+        });
         {% endfor %}
     }
 </script>
