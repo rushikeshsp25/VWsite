@@ -166,3 +166,24 @@ h6 {
     opacity: 1;
     visibility: visible
 }
+
+.features .block {
+    background-color: #007bff;
+    height: 100%;
+    padding: 15px;
+}
+
+.features .block h3 {
+    color: white;
+    font-size: 1.1rem;
+}
+
+.features .block .icon {
+    color: white;
+}
+
+.features .block p {
+    color: white;
+    font-size: 1rem;
+    /* font-weight: 400; */
+}

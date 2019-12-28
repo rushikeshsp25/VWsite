@@ -2,7 +2,7 @@
 <div class="container mt-4">
     <img src="{%static 'home/images/other/services1.png'%}" width="100%">
 </div>
-<div class="container col-md-8 col-lg-6 col-12 offset-md-2 offset-lg-3  mb-4">
+<div class="container-fluid col-md-8 col-lg-6 col-12 offset-md-2 offset-lg-3 mt-2 mb-4">
     <div class="login-container shadow">
         <div class="head">
             <i class="fa fa-desktop" aria-hidden="true"></i>
@@ -24,40 +24,40 @@
                 {%endif%}
                 <div class="form-group">
                     <div class="form-group">
-                        <label for="service">Service</label>
+                        <label for="service">Service<span class="required">*</span></label>
                         <input type="text" class="form-control" name="service" id="service" value="{{service}}" required readonly>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-group">
-                        <label for="fullname">Full Name</label>
+                        <label for="fullname">Full Name<span class="required">*</span></label>
                         <input type="text" class="form-control" name="fullname" id="fullname" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6 col-12">
-                        <label for="email">Email</label>
+                        <label for="email">Email<span class="required">*</span></label>
                         <input type="email" class="form-control" name="email" id="email" required>
                     </div>
                     <div class="form-group col-md-6 col-12">
-                        <label for="mobile">Mobile Number</label>
+                        <label for="mobile">Mobile Number<span class="required">*</span></label>
                         <input type="text" class="form-control" id="mobile" name="mobile" pattern="[6-9][0-9]{9}" title="Enter a valid mobile Number without country code" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="company">Business Name</label>
+                    <label for="company">Business Name<span class="required">*</span></label>
                     <input type="text" class="form-control" name="company" id="company" required>
                 </div>
                 <div class="form-group">
-                    <label for="company_des">Short Description About Your Business</label>
+                    <label for="company_des">Short Description About Your Business<span class="required">*</span></label>
                     <textarea name="company_des" id="company_des" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="designation">Your Designation</label>
+                    <label for="designation">Your Designation<span class="required">*</span></label>
                     <input type="text" class="form-control" name="designation" id="designation" required>
                 </div>
                 <div class="form-group">
-                    <label for="message">Describe Your Work</label>
+                    <label for="message">Describe Your Work<span class="required">*</span></label>
                     <textarea name="message" id="message" required></textarea>
                 </div>
                 <div class="form-controls">

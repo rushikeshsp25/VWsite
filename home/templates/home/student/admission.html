@@ -1,9 +1,9 @@
 {% extends 'home/base.html' %} {% block title %}Online Admission | VisionWare {% endblock %} {% block head %} {% load static %}
 <link href="{% static 'home/css/datepicker.min.css' %}" rel="stylesheet" type="text/css"> {% endblock %} {% block body %}
-<Section class="container mt-4 mb-4">
+<Section class="container mb-4">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-12">
+            <div class="col-md-6 col-12 p-0 mt-4">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="sub-section-heading">
@@ -26,26 +26,26 @@
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="fname">First Name</label>
+                                    <label for="fname">First Name <span class="required">*</span></label>
                                     <input type="text" class="form-control" name="fname" id="fname" required>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="lname">Last Name</label>
+                                    <label for="lname">Last Name<span class="required">*</span></label>
                                     <input type="text" class="form-control" name="lname" id="lname" required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6 col-12">
-                                    <label for="email">Email</label>
+                                    <label for="email">Email<span class="required">*</span></label>
                                     <input type="email" class="form-control" name="email" id="exampleInputEmail1" required>
                                 </div>
                                 <div class="form-group col-md-6 col-12">
-                                    <label for="mobile">Mobile Number</label>
+                                    <label for="mobile">Mobile Number<span class="required">*</span></label>
                                     <input type="text" class="form-control" id="mobile" name="mobile" pattern="[6-9][0-9]{9}" title="Enter a valid mobile Number without country code" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputCollege">College</label>
+                                <label for="inputCollege">College<span class="required">*</span></label>
                                 <select id="inputCollege" class="form-control" name="college" required>
                                     {%for college in colleges%}
                                     <option value={{college.shortname_without_space}}>{{college}}</option>
@@ -53,7 +53,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="inputYear">Year</label>
+                                <label for="inputYear">Year<span class="required">*</span></label>
                                 <select id="inputYear" class="form-control" name="year" required>
                                     <option value="FE">First Year</option>
                                     <option value="SE">Second Year</option>
@@ -63,7 +63,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="dob">Date Of Birth</label>
+                                <label for="dob">Date Of Birth<span class="required">*</span></label>
                                 <input type="text" class="form-control date-input" name="dob" placeholder="YYYY-MM-DD" required/>
                             </div>
                             <div class="form-controls center">
@@ -73,7 +73,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-12">
+            <div class="col-md-6 col-12 p-0 pl-md-2 mt-4">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="sub-section-heading">
