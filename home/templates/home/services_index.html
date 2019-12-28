@@ -1,68 +1,78 @@
  {% extends 'home/base.html' %} {% block title %}VisionWare Product Development, Pune {% endblock %} {% block head %} {% load static %}
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'home/css/fonts/icomoon/style.css' %}">
-<link rel="stylesheet" href="{% static 'home/css/aos.css' %}">
 <link rel="stylesheet" href="{% static 'home/css/jquery.fancybox.min.css'%}">
 <link rel="stylesheet" href="{% static 'home/css/style_services.css' %}"> {% endblock %} {% block body %}
 <div class="site-wrap mt-4 mb-4">
     <div class="site-section bg-light mt-4" id="what-we-do-section">
-        <div class="container">
+        <div class="container p-4">
             <div class="col-lg-6 section-title mb-4">
                 <span class="sub-title mb-2 d-block">What We Do</span>
-                <h2 class="title text-primary">We do all things related to web.</h2>
+                <h2 class="title text-primary">We do all things related to modern web.</h2>
             </div>
             <div class="row">
                 <div class="col-lg-12 ml-auto">
                     <div class="row">
                         <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-                            <div class="service h-100">
-                                <span class="icon-photo_album display-4 text-primary d-block mb-4"></span>
-                                <h3>Web Design</h3>
-                                <p>We design beautiful websites for you if you don't know anything about UI/UX. We will choose color paletes, themes, icons and all other things</p>
-                                <p><a href="{%url 'home:services' 'Website-Design' %}" class="readmore">Get a QTN</a></p>
+                            <div class="wow bounceInLeft">
+                                <div class="service h-100">
+                                    <span class="icon-photo_album display-4 text-primary d-block mb-4"></span>
+                                    <h3>Web Design</h3>
+                                    <p>Design beautiful websites with VisionWare UI/UX expert team. Attract more number of audience by creating beautiful looking website.</p>
+                                    <p><a href="{%url 'home:services' 'Website-Design' %}" class="readmore">Message Us</a></p>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-                            <div class="service h-100">
-                                <span class="icon-laptop_mac display-4 text-primary d-block mb-4"></span>
-                                <h3>Web Development</h3>
-                                <p>We design a complete website for you from scratch. We integrate your themes and logos in our websites. We make your buisness online.</p>
-                                <p><a href="{%url 'home:services' 'Website-Development' %}" class="readmore">Get a QTN</a></p>
+                            <div class="wow bounceInUp" data-wow-delay="0.3s">
+                                <div class="service h-100">
+                                    <span class="icon-laptop_mac display-4 text-primary d-block mb-4"></span>
+                                    <h3>Web Development</h3>
+                                    <p>Your website is a powerful marketing tool. We will build you responsive website to improve your business presence.</p>
+                                    <p><a href="{%url 'home:services' 'Website-Development' %}" class="readmore">Message Us</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+                            <div class="wow bounceInRight">
+                                <div class="service h-100">
+                                    <span class="icon-layers display-4 text-primary d-block mb-4"></span>
+                                    <h3>Deployment</h3>
+                                    <p>Take your Application to the Cloud. Enjoy elastic pricing, Error Proof Infrastructure and 24*7 support from team VisionWare.</p>
+                                    <p><a href="{%url 'home:services' 'Deployment' %}" class="readmore">Message Us</a></p>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+                            <div class="wow bounceInRight">
+                                <div class="service h-100">
+                                    <span class="icon-mobile display-4 text-primary d-block mb-4"></span>
+                                    <h3>Mobile Apps</h3>
+                                    <p>Hi-end and cost-efficient mobile app development to accomplish all your business needs.
+                                    </p>
+                                    <p><a href="{%url 'home:services' 'Mobile-App' %}" class="readmore">Message Us</a></p>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-                            <div class="service h-100">
-                                <span class="icon-layers display-4 text-primary d-block mb-4"></span>
-                                <h3>Deployment</h3>
-                                <p>We deploy your applications to cloud so that you don't have to manage it. We also support managing your deployed applications so that it meet your constant increasing requirements.</p>
-                                <p><a href="{%url 'home:services' 'Deployment' %}" class="readmore">Get a QTN</a></p>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-                            <div class="service h-100">
-                                <span class="icon-mobile display-4 text-primary d-block mb-4"></span>
-                                <h3>Mobile Apps</h3>
-                                <p>We develope Android and IOS apps from scratch. We also converts your existing website to mobile app.
-                                </p>
-                                <p><a href="{%url 'home:services' 'Mobile-App' %}" class="readmore">Get a QTN</a></p>
+                            <div class="wow bounceInUp" data-wow-delay="0.3s">
+                                <div class="service h-100">
+                                    <span class="icon-pencil display-4 text-primary d-block mb-4"></span>
+                                    <h3>Bug Fixes</h3>
+                                    <p>Find and solve problems in your application. VisionWare can resolve all the bugs present in your codebase.</p>
+                                    <p><a href="{%url 'home:services' 'Bug-Fix' %}" class="readmore">Message Us</a></p>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-                            <div class="service h-100">
-                                <span class="icon-pencil display-4 text-primary d-block mb-4"></span>
-                                <h3>Bug Fixes</h3>
-                                <p>We solve problems in your applications. We add more features for your existing application. We resolve all the bugs in your code.</p>
-                                <p><a href="{%url 'home:services' 'Bug-Fix' %}" class="readmore">Get a QTN</a></p>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-                            <div class="service h-100">
-                                <span class="icon-search2 display-4 text-primary d-block mb-4"></span>
-                                <h3>Search Engine Optimization</h3>
-                                <p>We provide support for building applications which rank higher in search engine rankings.</p>
-                                <p><a href="{%url 'home:services' 'SEO' %}" class="readmore">Get a QTN</a></p>
+                            <div class="wow bounceInLeft" data-wow-delay="0.3s">
+                                <div class="service h-100">
+                                    <span class="icon-search2 display-4 text-primary d-block mb-4"></span>
+                                    <h3>Search Engine Optimization</h3>
+                                    <p>When your sites appear on the first page of major search engines such as Google your potential customers are more likely to trust your brand.</p>
+                                    <p><a href="{%url 'home:services' 'SEO' %}" class="readmore">Message Us</a></p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -70,41 +80,102 @@
             </div>
         </div>
     </div>
-    <div class="site-section bg-light mt-4" id="portfolio-section">
-        <div class="container">
-            <div class="col-md-8 section-title text-center mx-auto mb-4">
-                <span class="sub-title mb-2 d-block">Recent Works</span>
-                <h2 class="title text-primary">Here are some recent client-faced projects</h2>
+    <div id="features" class="features bg-light">
+        <div class="container p-4">
+            <div class="wow bounceInUp">
+                <div class="section-title text-center mx-auto mb-4">
+                    <h2 class="title text-primary">Find Better Solutions Build Better Products</h2>
+                </div>
             </div>
-            <picture>
-                <source srcset="{%static 'home/images/services/pro_1.png'%}" media="(min-width: 800px)">
-                <source srcset="{%static 'home/images/services/mobile/pro_1.png'%}" media="(min-width: 360px)">
-                <img class="d-block w-100" src="{%static 'home/images/services/pro_1.png'%}">
-            </picture>
-            <picture>
-                <source srcset="{%static 'home/images/services/pro_2.png'%}" media="(min-width: 800px)">
-                <source srcset="{%static 'home/images/services/mobile/pro_2.png'%}" media="(min-width: 360px)">
-                <img class="d-block w-100" src="{%static 'home/images/services/pro_2.png'%}">
-            </picture>
-            <picture>
-                <source srcset="{%static 'home/images/services/pro_3.png'%}" media="(min-width: 800px)">
-                <source srcset="{%static 'home/images/services/mobile/pro_3.png'%}" media="(min-width: 360px)">
-                <img class="d-block w-100" src="{%static 'home/images/services/pro_3.png'%}">
-            </picture>
+            <div class="row">
+                <div class="col-6 col-md-3  mb-4 wow bounceInUp">
+                    <div class="block">
+                        <span class="icon-important_devices display-4 d-block mb-2 icon"></span>
+                        <h3>Fully Responsive</h3>
+                        <p> Responsive website provides an optimal viewing experience,ease of reading and navigation with a minimum of resizing, panning, and scrolling</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3  mb-4 wow bounceInUp" data-wow-delay="0.3s">
+                    <div class="block">
+                        <span class="icon-level-up display-4 d-block mb-2 icon"></span>
+                        <h3>Speed Optimized</h3>
+                        <p>We build really fast loadig and quick navigatable Websites which is primary factor dictating success for modern online businesses. Speed is love !!</p>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-3  mb-4 wow bounceInUp" data-wow-delay="0.6s">
+                    <div class="block">
+                        <span class="icon-web display-4 d-block mb-2 icon"></span>
+                        <h3>Fully SEO Optimized</h3>
+                        <p>Search engine optimization (SEO) is the practice of increasing the quantity and quality of traffic to your website through organic search engine results.</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3  mb-4 wow bounceInUp" data-wow-delay="0.9s">
+                    <div class="block">
+                        <span class="icon-list2 display-4 d-block mb-2 icon"></span>
+                        <h3>Tons of Feature</h3>
+                        <p>Enhance your website's productivity with web analytics, A/B testing and more. Your website's security is also our very concern ! </p>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- .container close -->
+    </div>
+    <!-- #service close -->
+    <div class="site-section bg-light mt-4" id="portfolio-section">
+        <div class="container p-4">
+            <div class="wow bounceInUp">
+                <div class="section-title text-center mx-auto mb-4">
+                    <span class="sub-title mb-2 d-block">Recent Works</span>
+                    <h2 class="title text-primary">Here are our few recent projects</h2>
+                </div>
+            </div>
+            <div class="wow fadeInLeft" data-wow-delay="0.3s">
+                <picture>
+                    <source srcset="{%static 'home/images/services/pro_1.png'%}" media="(min-width: 800px)">
+                    <source srcset="{%static 'home/images/services/mobile/pro_1.png'%}" media="(min-width: 360px)">
+                    <img class="d-block w-100" src="{%static 'home/images/services/pro_1.png'%}">
+                </picture>
+            </div>
+            <div class="wow fadeInRight" data-wow-delay="0.3s">
+                <picture>
+                    <source srcset="{%static 'home/images/services/pro_2.png'%}" media="(min-width: 800px)">
+                    <source srcset="{%static 'home/images/services/mobile/pro_2.png'%}" media="(min-width: 360px)">
+                    <img class="d-block w-100" src="{%static 'home/images/services/pro_2.png'%}">
+                </picture>
+            </div>
+            <div class="wow fadeInLeft" data-wow-delay="0.3s">
+                <picture>
+                    <source srcset="{%static 'home/images/services/pro_3.png'%}" media="(min-width: 800px)">
+                    <source srcset="{%static 'home/images/services/mobile/pro_3.png'%}" media="(min-width: 360px)">
+                    <img class="d-block w-100" src="{%static 'home/images/services/pro_3.png'%}">
+                </picture>
+            </div>
         </div>
     </div>
     <div class="site-section bg-light mt-4" id="testimonial-section">
-        <div class="container">
-            <div class="section-title text-center mx-auto mb-4">
-                <span class="sub-title mb-2 d-block">Testimonials</span>
-                <h2 class="title text-primary">Our Client Sayings</h2>
+        <div class="container p-2">
+            <div class="wow bounceInUp">
+                <div class="section-title text-center mx-auto mb-4">
+                    <span class="sub-title mb-2 d-block">Testimonials</span>
+                    <h2 class="title text-primary">Our Client Sayings</h2>
+                </div>
             </div>
-            <picture>
-                <source srcset="{%static 'home/images/services/client_1.png'%}" media="(min-width: 800px)">
-                <source srcset="{%static 'home/images/services/mobile/client_1.png'%}" media="(min-width: 360px)">
-                <img class="d-block w-100" src="{%static 'home/images/services/client_1.png'%}">
-            </picture>
+            <div class="wow bounceInRight">
+                <picture>
+                    <source srcset="{%static 'home/images/services/client_1.png'%}" media="(min-width: 800px)">
+                    <source srcset="{%static 'home/images/services/mobile/client_1.png'%}" media="(min-width: 360px)">
+                    <img class="d-block w-100" src="{%static 'home/images/services/client_1.png'%}">
+                </picture>
+            </div>
         </div>
     </div>
 </div>
-{% endblock %} {% block script%} {% endblock %}
+{% endblock %} {% block script%}
+<script src="{%static 'home/js/wow.min.js' %}"></script>
+<script>
+    new WOW().init();
+</script>
+{% endblock %}
