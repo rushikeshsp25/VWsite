@@ -12,14 +12,14 @@
         <a class="btn btn-success m-2" href="{%url 'home:create_new_course'%}">Course</a>
         <a class="btn btn-success m-2" href="{%url 'home:create_new_batch'%}">Batch</a>
         <a class="btn btn-success m-2" href="{%url 'home:feedback_questions_new'%}">Feedback Question</a>
-        <a class="btn btn-success m-2" href="{%url 'home:create_new_study_material'%}">Study Material</a>
+        {% comment %} <a class="btn btn-success m-2" href="{%url 'home:create_new_study_material'%}">Study Material</a> {% endcomment %}
         <a class="btn btn-success m-2" href="{%url 'home:add_placement'%}">Placement</a>
     </div>
     <hr>
-    <div>
+    {% comment %} <div>
         <p class="section-heading mt-4">Reports</p>
         <a class="btn btn-success m-2" href="{%url 'home:notWorkingLinks'%}">Not reachable Links</a>
-    </div>
+    </div> {% endcomment %}
     <hr>
     <div>
         <p class="section-heading mt-4">Feedback</p>
@@ -35,6 +35,7 @@
         <a class="btn btn-success m-2" href="{%url 'home:send_message_batch'%}">Send Message + Email to a Batch</a>
         <a class="btn btn-success m-2" href="{%url 'home:send_sms_number'%}">Send SMS to Mobile Number</a>
     </div>
+    <hr>
     <div>
         <p class="section-heading mt-4">Downloads</p>
         <a class="btn btn-success m-2" href="/assets/templates/sat_result_template.csv">SMS Campaign Template</a>

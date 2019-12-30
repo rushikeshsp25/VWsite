@@ -41,6 +41,7 @@ urlpatterns = [
     path('su/student/result/all/',views.students_all,name='students_all'),
     path('su/messaging/send_message_batch/',views.send_message_batch,name='send_message_batch'),
     path('su/messaging/send_sms_number/',views.send_sms_number,name='send_sms_number'), 
+    path('su/services/all/',views.view_services,name='view_services'), 
     path('services/',views.services_index,name='services_index'),
     path('services/<str:name>/',views.services,name='services'),
     path('placements/',views.add_placement,name='add_placement'),
