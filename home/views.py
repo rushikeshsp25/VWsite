@@ -637,13 +637,17 @@ def services(request,name):
         message = request.POST['message']
         if not service_name or not full_name or not email or not mobile or not business_name or not designation or not message:
             return render(request, 'home/hire_with_us.html',{'error_message': '<li>Incomplete form is submitted</li>'})
-        service = Service(service_name=service_name,full_name=full_name,email=email,mobile_no=mobile,business_name=business_name,designation=designation,work_description=message)
+        service = Service(service_name=service_name,full_name=full_name,email=email,mobile_no=mobile,business_name=business_name,business_description=company_des,designation=designation,work_description=message)
         service.save()
-        messages.success(request,"Thank you for showing your interest in VisionWare, Our team will contact you soon")
+        messages.success(request,"Thank you for showing your interest in VisionWare, Our team will contact you soon!")
         return redirect('home:index')
     else:
         service = name
         return render(request,'home/services.html',{'service':service})
+
+def view_services(request):
+    service_requests = Service.objects.all()
+    return render(request,'home/service_requests.html',{'service_requests':service_requests})
 
 def add_placement(request):
     if request.method == "POST":

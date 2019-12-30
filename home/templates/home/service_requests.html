@@ -1,0 +1,46 @@
+{% extends 'home/base.html' %} {% block title %}All Service Requests | VisionWare {% endblock %} {% block head %} {% load static %}{% endblock %} {% block body %}
+<div class="container mt-4 mb-4">
+    <div class="center">
+        <p class="section-heading">All Service Requests</p>
+    </div>
+    <hr>
+    <hr> {% if service_requests %}
+    <table class="table table-bordered table-inverse">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Datetime</th>
+                <th>Serive Name</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Business Name</th>
+                <th>Business Description</th>
+                <th>Designation</th>
+                <th>Work Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for service in service_requests %}
+            <tr>
+                <td>{{service.date_time}}</td>
+                <td>{{service.service_name}}</td>
+                <td>{{service.full_name}}</td>
+                <td>{{service.email}}</td>
+                <td>{{service.mobile_no}}</td>
+                <td>{{service.business_name}}</td>
+                <td>{{service.business_description}}</td>
+                <td>{{service.designation}}</td>
+                <td>{{service.work_description}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="center">
+        <p class="sub-section-heading error-message">No Service Request Found!</p>
+    </div>
+    {% endif %}
+    </br>
+    </br>
+</div>
+{% endblock %} {% block script%} {% endblock %}
