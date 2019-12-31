@@ -1,0 +1,50 @@
+{% extends 'home/base.html' %} {% block title %}*SAT Score Validator | VisionWare {% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+
+<div class="container mt-4 mb-4">
+    <div class="shadow p-4 col-md-10 offset-md-1">
+        {% if certification.is_pass %}
+        <p class="section-heading"><span style="color: green;margin-right: 5px;">Congratulations!!</span> You have <span style="color: green;">passed</span> the <strong>{{ certification.exam_name }}</strong> exam.</p>
+        {% else %}
+        <p class="section-heading"><span style="color: red;margin-right: 5px;">Sorry!!</span> You have <span style="color: red;">failed</span> the {{ certification.exam_name }} exam</p>
+        {% endif %}
+        <div style="border: 1px double black; padding: 20px;">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="sub-section-heading">Student Name</p>
+                    <p class="infotext">{{certification.student_name}}</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="sub-section-heading">Exam Name</p>
+                    <p class="infotext">{{certification.exam_name}}</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="sub-section-heading">Exam Date</p>
+                    <p class="infotext">{{certification.conducted_on}}</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="sub-section-heading">Certificate ID</p>
+                    <p class="infotext">{{certification.certification_id}}</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="sub-section-heading">Marks Out of 100</p>
+                    <p class="infotext">{{certification.marks_out_of_100}}</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="sub-section-heading">Result</p>
+                    {% if certification.is_pass %}
+                    <p class="infotext" style="color: green;">PASS</p>
+                    {% else %}
+                    <p class="infotext" style="color: red;">FAIL</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block script %}
+<script>
+</script>
+{% endblock %}

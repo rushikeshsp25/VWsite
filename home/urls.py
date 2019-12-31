@@ -42,12 +42,18 @@ urlpatterns = [
     path('su/messaging/send_message_batch/',views.send_message_batch,name='send_message_batch'),
     path('su/messaging/send_sms_number/',views.send_sms_number,name='send_sms_number'), 
     path('su/services/all/',views.view_services,name='view_services'), 
+    path('su/attendance/form/',views.attendance_form,name="attendance_form"),
+    path('su/attendance/view/',views.view_attendance,name="view_attendance"),
+    path('su/attendance/lecture-details/<int:pk>/',views.lecture_details,name="lecture_details"),
+    path('su/sat/add/',views.certification_form,name="certification_form"),
+    path('su/sat/certification-entries/all/',views.certification_entries,name="certification_entries"),
+    path('su/online-campaign/',views.online_campaign,name='online_campaign'),
+    path('su/online-campaigns/all/',views.display_online_campaigns,name='display_online_campaigns'),
     path('services/',views.services_index,name='services_index'),
     path('services/<str:name>/',views.services,name='services'),
     path('placements/',views.add_placement,name='add_placement'),
     path('placementwall',views.placement_wall,name='placement_wall'),
-    path('online-campaign/',views.online_campaign,name='online_campaign'),
-    path('online-campaigns/all/',views.display_online_campaigns,name='display_online_campaigns'),
-    path('placement-for-sure',views.pfs_promo,name='pfs_promo')
+    path('placement-for-sure',views.pfs_promo,name='pfs_promo'),
+    path('satcheck/',views.sat_check,name="sat_check"),
 ]
 
