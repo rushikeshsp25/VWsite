@@ -828,6 +828,7 @@ def certification_form(request):
 def sat_check(request):
     if request.method=='POST':
         cert_id=request.POST.get('cert_id')
+        print(cert_id)
         try:
             certification=StudentCertification.objects.get(certification_id=cert_id)
         except:
