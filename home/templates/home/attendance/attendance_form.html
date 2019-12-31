@@ -1,39 +1,54 @@
 {% extends 'home/base.html' %} {% block title %}Attendance Form | VisionWare {% endblock %} {% block head %}
-{% load static %} {% endblock %} {% block body %}
-<div class="container shadow p-3 mb-5 bg-white rounded mx-auto">
+{% load static %} 
+<link rel="stylesheet" href="{% static 'home/css/attendance.css'%}">
+{% endblock %}
+
+{% block body %}
+
+<div class="container shadow p-3 mb-5 mt-4 col-md-8 offset-md-2 bg-white rounded mx-auto">
+<div class="section-heading text-center"> Add Attendance and Lecture Details</div>
+<br>
     <form role="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
+           <div class="cust-form-row">
+        {%if error_message%}
+        <ul class="errorlist">
+            {{error_message|safe}}
+        </ul>
+        {%endif%}
+    </div>
+ 
 
         <div class="form-group row">
             <label for="batch" class="col-sm-2 col-form-label">Batch</label>
             <div class="col-sm-10">
-                <select class="form-control" id="batch-select">
+                <select name="batch" class="form-control" id="batch-select" required>
                 <option></option>
                     {% for batch in batches %}
-                    <option name="{{batch.batch_name}}" value="{{batch.id}}">{{batch.batch_name}}</option>
+                    <option  value="{{batch.id}}">{{batch.batch_name}}</option>
                     {% endfor %}
                 </select>
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="date" class="col-sm-2 col-form-label">Lecture Take By</label>
+            <label for="lecture_taken_by" class="col-sm-2 col-form-label">Lecture Take By</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="lecture_taken_by" name="lecture_taken_by" required>
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="date" class="col-sm-2 col-form-label">Lecture Topics</label>
+            <label for="lecture_topics" class="col-sm-2 col-form-label">Lecture Topics</label>
             <div class="col-sm-10">
                 <textarea type="text" class="form-control" id="lecture_topics" name="lecture_topics" required></textarea>
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="date" class="col-sm-2 col-form-label">Date</label>
+            <label for="lecture_date" class="col-sm-2 col-form-label">Date</label>
             <div class="col-sm-10">
-                <input type="date" class="form-control" id="date" name="date" required disabled>
+                <input type="date" class="form-control" id="date" name="lecture_date" required disabled>
             </div>
         </div>
 
@@ -51,16 +66,22 @@
         <div class="form-group row">
             <label for="date" class="col-sm-2 col-form-label">Any special Remarks</label>
             <div class="col-sm-10">
-                <textarea type="text" class="form-control" id="lecture_taken_by" name="lecture_taken_by" required></textarea>
+                <textarea type="text" class="form-control" id="lecture_taken_by" name="remarks" required></textarea>
             </div>
         </div>
 
-        {% for student in students %}
-        <p>{{student.first_name }} {{student.last_name}}</p>        
-        {% endfor %}
+        <br>
+        <section>        
+        <p class ="section-heading" id="heading"></p>
+        <br>
+    <div id="students" style="margin-left: 2%;" class="section-body"> 
+        
+    </div>
+    </section>
+    
 
-        <div class="form-controls">
-            <button type="submit" id="take_attendance" class="btn">Take Attendance</button>
+        <div class="form-controls text-center">
+            <button type="submit"  class="btn btn-primary">Take Attendance</button>
         </div>
     </form>
 </div>
@@ -71,6 +92,7 @@
 
 
 {% endblock %}
+
 {% block script%}
 <script>
 
@@ -84,6 +106,7 @@
 </script>
 
 <script>
+$(document).ready(function() {
  $("#batch-select").change(function () {
        batch_id=$(this).val();
 
@@ -93,12 +116,22 @@
         data: {
           'batch_id': batch_id
         },
-        success: alert("hiii")
+        success: (response)=>{
+            document.getElementById("heading").innerHTML = "Tick all absent students";
+            document.getElementById("students").innerHTML = "";
+            response.students.forEach((student,index)=>{
+                var div = '<div><input type="checkbox" class="form-check-input"  id="exampleCheck'+student[0]+'" name="students" value="'+student[0]+'"><label class="form-check-label"  for="exampleCheck'+student[0]+'">VW'+student[0]+' - '+student[1]+' '+student[2]+'</label></div>';
+                $('#students').append(div);
+
+            })
+          
+        }
     
       });
+      
 
 
-
+    });
     });
 
     function getCookie(name) {

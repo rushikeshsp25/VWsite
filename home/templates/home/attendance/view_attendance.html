@@ -1,0 +1,59 @@
+{% extends 'home/base.html' %} {% block title %}View Attendance | VisionWare{% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+<div class="container p-3 mb-5 mt-4">
+    <div class="col-md-8 offset-md-2">
+    <p class="section-heading text-center">Select Batch to view lecture-wise details</p>
+    <br>
+    <form role="form" method="post" class="form-inline" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group col-md-8">
+            <label for="batch" class="col-sm-2 col-form-label">Batch</label>
+            <div class="col-sm-10">
+                <select name="batch" class="form-control" id="batch-select" style="width: 100%;" required>
+                <option></option>
+                    {% for batch in batches %}
+                    <option  value="{{batch.id}}">{{batch.batch_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="text-center col-md-4">
+        <button type="submit"  class="btn btn-primary">View details</button>
+        </div>
+    </form>
+
+</div>
+</div>
+
+{% if attendance %}
+<hr>
+<div id="attendance-display" class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Lecture Date</th>
+                <th scope="col">Instructor</th>
+                <th scope="col">Start time</th>
+                <th scope="col">End Time</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for att in attendance %}
+            <tr>
+                <td>{{att.lecture_date}}</td>
+                <td>{{att.instructor}}</td>
+                <td>{{att.start_time}}</td>
+                <td>{{att.end_time}}</td>
+                <td><a href="{% url 'home:lecture_details' pk=att.id %}">View details</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% endblock %} {% block script%}
+<script>
+</script>
+{% endblock %}

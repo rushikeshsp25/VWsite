@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404,render_to_response
 from django.utils import timezone
-from .forms import CourseForm,BatchForm, StudyCourseForm,FeedbackBatchForm, FeedbackForm,OnlineCampaignForm
+from .forms import CourseForm,BatchForm, StudyCourseForm,FeedbackBatchForm, FeedbackForm,OnlineCampaignForm,CertificationDetailForm
 from django.contrib.auth import authenticate, login,logout
 from .models import *
 from datetime import datetime
@@ -21,6 +21,7 @@ from django.contrib import messages
 from django.template.loader import render_to_string
 
 
+
 import requests
 import json
 
@@ -28,6 +29,8 @@ from django.db.models import Subquery
 from .helpers.linkCheck import getNotWorkingLinksHtml
 from .helpers.feedbackQuestionsResponse import feedback_question_responses
 from .helpers.onlineCampaignSMS import send_sms
+from .helpers.attendance import get_attendance_dictionary
+from .helpers.certification import generate_cert_id
 import csv
 
 from datetime import date
@@ -682,31 +685,156 @@ def online_campaign(request):
             new_online_campaign.save()
             status=send_sms(file_contents,msg)                      #this function is in helpers/onlineCampaignSMS.py
             if status==0:
-                return HttpResponse("Sorry, Something went wrong!")
+                messages.error(request,'Sorry, something went wrong!')
+                return redirect('home:dashboard')
             messages.success(request,'Online Campaign is successful!')
             return redirect('home:dashboard')
     else:
         form = OnlineCampaignForm()
         return render(request,'home/online_campaign/online_campaign_form.html',{'form':form})
 
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
 def display_online_campaigns(request):
     campaigns=OnlineCampaign.objects.all().order_by('-id')
     return render(request,'home/online_campaign/display_online_campaigns.html',{'campaigns':campaigns})
 
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
 def attendance_form(request):
+    batches=CourseBatch.objects.all().order_by('-id')
     if request.method == "POST":
         if request.is_ajax():
             batch_id=request.POST.get('batch_id')
-            students=Student.objects.filter(batch=batch_id)
-            print(type(students))
-            for i in students:
-                print(i.first_name,i.last_name)
-            return HttpResponse("hiii") 
+            students_queryset=Student.objects.filter(batch=batch_id)
+            students=[]
+            for i in students_queryset:
+                l=[i.id,i.first_name,i.last_name]
+                students.append(l)
+            data={
+            'students':students
+            }
+            return JsonResponse(data)
+        else:
+            if Attendance.objects.filter(batch=request.POST.get("batch"),lecture_date=datetime.now()).exists():
+                messages.error(request,"Today's Attendance for entered batch has already been recorded!")
+                return redirect('home:attendance_form')
+                return render(request,'home/attendance/attendance_form.html',{'batches':batches,'error_message':"<li>Today's Attendance for entered batch has already been recorded!</li>"})
+            att=Attendance()
+            att.batch=CourseBatch.objects.get(id=request.POST.get("batch"))
+            att.instructor=request.POST.get('lecture_taken_by')
+            att.lecture_topics=request.POST.get('lecture_topics')
+            att.start_time=request.POST.get('start_time')
+            att.end_time=request.POST.get('end_time')
+            att.remarks=request.POST.get('remarks')
+            student_list=Student.objects.filter(batch=request.POST.get("batch"))
+            att.attendance=get_attendance_dictionary(student_list,request.POST.getlist('students'))
+            att.save()            
+            
+            messages.success(request,'Attendance added successfully!')
+            return redirect('home:dashboard')
     else:
-        batches=CourseBatch.objects.all()
-        return render(request,'home/attendance_form.html',{'batches':batches})
+        return render(request,'home/attendance/attendance_form.html',{'batches':batches})
+
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+def view_attendance(request):
+    batches=CourseBatch.objects.all().order_by('-id')
+    if request.method=="POST":
+        batch=request.POST.get('batch')
+        att=Attendance.objects.filter(batch=batch).order_by('-id')
+        return render(request,'home/attendance/view_attendance.html',{'batches':batches,'attendance':att})
+    else:
+        return render(request,'home/attendance/view_attendance.html',{'batches':batches})
 
 
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+def lecture_details(request,pk):
+    a=Attendance.objects.get(id=pk)
+    attendance=[]
+    students=Student.objects.all()
+    attendance_dict=json.loads(a.attendance)
+    for s_id,att in attendance_dict.items():
+        l=[s_id,students.get(id=int(s_id)).first_name,students.get(id=int(s_id)).last_name,att]
+        attendance.append(l)   
+    context={
+        'batch':a.batch,
+        'instructor':a.instructor,
+        'lecture_date':a.lecture_date,
+        'start_time':a.start_time,
+        'end_time':a.end_time,
+        'lecture_topics':a.lecture_topics,
+        'remarks':a.remarks,
+        'attendance':attendance
+    }         
+    return render(request,'home/attendance/view_lecture_details.html',context)
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser,login_url='/permissionerror/')
+def certification_form(request):
+    if request.method == "POST":
+        form = CertificationDetailForm(request.POST,request.FILES)
+        if form.is_valid():
+            certification=form.save(commit=False)
+            certification.result_file=request.FILES['result_file']
+            exam_name=request.POST.get('exam_name')
+            exam_code=request.POST.get('exam_code')
+            conducted_on=request.POST.get('conducted_on')
+            file_type = certification.result_file.url.split('.')[-1].lower()
+            if file_type != 'csv':
+                context = {
+                    'form': form,
+                    'error_message': '<li>Result file must be of type CSV</li>'
+                }
+                return render(request, 'home/certification/certification_form.html', context)
+            file_contents=request.FILES['result_file'].read().decode('UTF-8')
+            headings=file_contents.split('\r\n')[0].split(',')
+            if headings[0].lower()!='name' or headings[1].lower()!='email' or headings[2].lower()!='phone' or headings[3].lower()!='visionware_batch_name' or headings[4].lower()!='marks_out_of_100' or headings[5].lower()!='is_pass':
+                context = {
+                    'form': form,
+                    'error_message': '<li>CSV Table structure is not in the format of name | email | phone | visionware_batch_name | marks_out_of_100 | is_pass </li>'
+                }
+                return render(request, 'home/certification/certification_form.html', context)
+            certification.save()
+            entry_no=0
+            entries=file_contents.split('\r\n')[1:]
+            for entry in entries:
+                if entry!='':
+                    entry_no+=1
+                    line=entry.split(',')
+                    cert=StudentCertification()
+                    cert.certification_id=generate_cert_id(exam_code,conducted_on,str(entry_no))
+                    cert.student_name=line[0]
+                    cert.student_email=line[1]
+                    cert.exam_name=exam_name
+                    cert.visionware_batch_name=line[3]
+                    cert.marks_out_of_100=line[4]
+                    if line[5].lower() in('1','y','yes','true'):
+                        cert.is_pass=True
+                    elif line[5].lower() in('0','n','no','false'):
+                        cert.is_pass=False
+                    cert.save()
+            messages.success(request,'Certification Details has been recorded!')
+            return redirect('home:dashboard')
+    else:
+        form = CertificationDetailForm()
+        return render(request, 'home/certification/certification_form.html',{'form':form})
+    
+def sat_check(request):
+    if request.method=='POST':
+        cert_id=request.POST.get('cert_id')
+        try:
+            certification=StudentCertification.objects.get(certification_id=cert_id)
+        except:
+            messages.error(request,'Invalid Certificate ID')
+            return redirect('home:sat_check')   
+        return render(request, 'home/certification/SAT_check_display.html',{'certification':certification})     
+    else:
+        return render(request, 'home/certification/SAT_check_form.html')
 
+    

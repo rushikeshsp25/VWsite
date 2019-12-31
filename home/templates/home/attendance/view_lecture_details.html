@@ -1,0 +1,56 @@
+{% extends 'home/base.html' %} {% block title %}Lecture Details | VisionWare {% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+
+<div class="container mt-4 mb-4">
+       
+            <p class="section-heading">Lecture Details</p>
+            <dl class="row">
+                <dt class="col-sm-3">Batch</dt>
+                <dd class="col-sm-9">{{batch}}</dd>
+              
+                <dt class="col-sm-3">Instructor</dt>
+                <dd class="col-sm-9">{{instructor}}</dd>
+              
+                <dt class="col-sm-3">Date</dt>
+                <dd class="col-sm-9">{{lecture_date}}</dd>
+
+                <dt class="col-sm-3">Timing</dt>
+                <dd class="col-sm-9">{{start_time}}-{{end_time}}</dd>
+
+                <dt class="col-sm-3">Lecture topics</dt>
+                <dd class="col-sm-9"><p>{{lecture_topics}}</p></dd>
+
+                
+                <dt class="col-sm-3">Remarks</dt>
+                <dd class="col-sm-9"><p>{{remarks}}</p></dd>            
+
+
+              
+            </dl>
+            <hr>
+            <p><b>Attendance</b></p>
+            
+        <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">VisionWare ID</th>
+                <th scope="col">Student Name</th>
+                <th scope="col">Attendance</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in attendance %}
+            <tr>
+                <td>VW{{i.0}}</td>
+                <td>{{i.1}} {{i.2}}</td>
+                <td>{{i.3 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody> 
+        </table>
+      
+        
+</div>
+{% endblock %} {% block script %}
+<script>
+</script>
+{% endblock %}

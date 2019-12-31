@@ -43,6 +43,10 @@ urlpatterns = [
     path('online-campaign/',views.online_campaign,name='online_campaign'),
     path('online-campaigns/all/',views.display_online_campaigns,name='display_online_campaigns'),
     path('attendance/form/',views.attendance_form,name="attendance_form"),
+    path('attendance/view/',views.view_attendance,name="view_attendance"),
+    path('sat/add/',views.certification_form,name="certification_form"),
+    path('attendance/lecture-details/<int:pk>/',views.lecture_details,name="lecture_details"),
+    path('satcheck/',views.sat_check,name="sat_check"),
  
 ]
 
