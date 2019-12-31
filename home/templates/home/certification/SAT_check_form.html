@@ -1,0 +1,38 @@
+{% extends 'home/base.html' %} {% block title %}SAT Exams | VisionWare{% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+<div class="container mt-4 mb-4">
+    <div class="card col-md-8 offset-md-2">
+        <div class="card-header center">
+            <h3 class="sub-section-heading">
+                Validate *SAT Exam Score
+            </h3>
+        </div>
+        <div class="card-body">
+            <form class="admission-form" role="form" method="post" enctype="multipart/form-data">
+                {% csrf_token %} {%if form.non_field_errors%}
+                <div class="cust-form-row">
+                    {{ form.non_field_errors }}
+                </div>
+                {%endif%} {%if error_message%}
+                <div class="cust-form-row">
+                    <ul class="errorlist">
+                        {{error_message|safe}}
+                    </ul>
+                </div>
+                {%endif%}
+                <div class="form-group">
+                    <label for="cert_id"> Enter Certificate ID :</label>
+                    <input type="text" class="form-control" name="cert_id" id="cert_id" autocomplete="off" required>
+                </div>
+                <div class="form-controls">
+                    <button type="submit" class="btn">Proceed Further</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+</div>
+{% endblock %} {%block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+{%endblock%}

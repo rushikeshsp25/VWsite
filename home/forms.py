@@ -1,5 +1,5 @@
 from django import forms
-from .models import Course,CourseBatch, StudyCourse,FeedbackBatch,FeedbackQuestion,PlacementInformation,OnlineCampaign
+from .models import *
 from django.contrib.auth.models import User
 
 # class AdmissionForm(forms.ModelForm):
@@ -61,3 +61,9 @@ class OnlineCampaignForm(forms.ModelForm):
     class Meta:
         model = OnlineCampaign
         exclude = ['date_time']
+    
+class CertificationDetailForm(forms.ModelForm):
+    class Meta:
+        model=CertificationDetail
+        exclude=['date_time']
+        widgets={'conducted_on':DateInput()}

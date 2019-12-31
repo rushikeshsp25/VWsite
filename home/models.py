@@ -185,3 +185,33 @@ class OnlineCampaign(models.Model):
     campaign_message=models.TextField()
     campaign_target_contacts_file=models.FileField(upload_to='CampaignTargetContacts')
     date_time=models.DateTimeField(default=datetime.now)
+
+class Attendance(models.Model):
+    batch = models.ForeignKey(CourseBatch,on_delete=models.CASCADE)
+    instructor=models.CharField(max_length=50)
+    lecture_topics=models.TextField()
+    lecture_date=models.DateField(default=datetime.now)
+    start_time=models.TimeField()
+    end_time=models.TimeField()
+    remarks=models.TextField(default='')
+    attendance=models.TextField(default='')
+
+class CertificationDetail(models.Model):
+    exam_name=models.CharField(max_length=70)
+    exam_code=models.CharField(max_length=70)
+    conducted_on=models.DateField()
+    no_of_students_appeared=models.IntegerField()
+    no_of_students_passed=models.IntegerField()
+    result_file=models.FileField(upload_to="CertificationResultFile")
+    date_time=models.DateTimeField(default=datetime.now)
+
+class StudentCertification(models.Model):
+    conducted_on=models.DateField()
+    certification_id=models.TextField()
+    student_name=models.TextField()
+    student_email=models.EmailField()
+    exam_name=models.TextField()
+    visionware_batch_name=models.TextField()
+    marks_out_of_100=models.IntegerField()
+    is_pass=models.BooleanField()   
+

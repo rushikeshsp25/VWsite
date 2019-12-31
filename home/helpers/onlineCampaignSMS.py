@@ -9,7 +9,7 @@ def sendPostRequest(reqUrl, apiKey, secretKey, useType, phoneNo, senderId, textM
  
 
 def send_sms(file,message):
-    lines=file.split('\r\n')[1:]                    #avoid headings
+    lines=file.split('\n')[1:]                    #avoid headings
     for i in lines: 
         if i!='':                                 #eof check
             row=i.split(',')
@@ -19,7 +19,7 @@ def send_sms(file,message):
                     response = sendPostRequest(WAY2SMS_URL, WAY2SMS_API_KEY, WAY2SMS_SECRET_KEY, WAY2SMS_USETYPE, mobile_no,WAY2SMS_SENDER_ID,message ) 
                 except:
                     return 0
-                d=json.loads(response.text)             #str to dict
+                d=json.loads(response.text)            #str to dict 
                 if d["status"] == "error":              #error while  sending message
                     return 0               
     return 1

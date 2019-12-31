@@ -10,39 +10,50 @@
     <div>
         <p class="section-heading mt-4">Create a New</p>
         <a class="btn btn-success m-2" href="{%url 'home:create_new_course'%}">Course</a>
-        <a class="btn btn-success m-2" href="{%url 'home:create_new_batch'%}">Batch</a>
-        <a class="btn btn-success m-2" href="{%url 'home:feedback_questions_new'%}">Feedback Question</a>
-        {% comment %} <a class="btn btn-success m-2" href="{%url 'home:create_new_study_material'%}">Study Material</a> {% endcomment %}
+        <a class="btn btn-success m-2" href="{%url 'home:create_new_batch'%}">Batch</a> {% comment %} <a class="btn btn-success m-2" href="{%url 'home:create_new_study_material'%}">Study Material</a> {% endcomment %}
         <a class="btn btn-success m-2" href="{%url 'home:add_placement'%}">Placement</a>
     </div>
-    <hr>
-    {% comment %} <div>
+    <hr> {% comment %}
+    <div>
         <p class="section-heading mt-4">Reports</p>
-        <a class="btn btn-success m-2" href="{%url 'home:notWorkingLinks'%}">Not reachable Links</a>
+        <a class="btn btn-dark m-2" href="{%url 'home:notWorkingLinks'%}">Not reachable Links</a>
     </div> {% endcomment %}
     <hr>
     <div>
         <p class="section-heading mt-4">Feedback</p>
-        <a class="btn btn-success m-2" href="{%url 'home:create_new_feedback'%}">Batch Feedback</a>
-        <a class="btn btn-success m-2" href="{%url 'home:feedback_questions'%}"> Feedback Questions</a>
-        <a class="btn btn-success m-2" href="{%url 'home:display_feedback_enabled_batches'%}">Feedback analysis</a>
+        <a class="btn btn-warning m-2" href="{%url 'home:feedback_questions_new'%}">Add Feedback Question</a>
+        <a class="btn btn-warning m-2" href="{%url 'home:create_new_feedback'%}">Batch Feedback</a>
+        <a class="btn btn-warning m-2" href="{%url 'home:feedback_questions'%}"> Feedback Questions</a>
+        <a class="btn btn-warning m-2" href="{%url 'home:display_feedback_enabled_batches'%}">Feedback analysis</a>
     </div>
     <hr>
     <div>
         <p class="section-heading mt-4">Messaging</p>
-        <a class="btn btn-success m-2" href="{%url 'home:online_campaign'%}">New SMS Campaign</a>
-        <a class="btn btn-success m-2" href="{%url 'home:display_online_campaigns'%}">Previous SMS Campaigns</a>
-        <a class="btn btn-success m-2" href="{%url 'home:send_message_batch'%}">Send Message + Email to a Batch</a>
-        <a class="btn btn-success m-2" href="{%url 'home:send_sms_number'%}">Send SMS to Mobile Number</a>
+        <a class="btn btn-info m-2" href="{%url 'home:online_campaign'%}">New SMS Campaign</a>
+        <a class="btn btn-info m-2" href="{%url 'home:display_online_campaigns'%}">Previous SMS Campaigns</a>
+        <a class="btn btn-info m-2" href="{%url 'home:send_message_batch'%}">Send Message + Email to a Batch</a>
+        <a class="btn btn-info m-2" href="{%url 'home:send_sms_number'%}">Send SMS to Mobile Number</a>
+    </div>
+    <hr>
+    <div>
+        <p class="section-heading mt-4">Attendance</p>
+        <a class="btn btn-success m-2" href="{%url 'home:attendance_form'%}">Add Attendance</a>
+        <a class="btn btn-success m-2" href="{%url 'home:view_attendance'%}">View Attendance</a>
+    </div>
+    <hr>
+    <div>
+        <p class="section-heading mt-4">Exam Certifications</p>
+        <a class="btn btn-success m-2" href="{%url 'home:certification_form'%}">Add Certification Results</a>
+        <a class="btn btn-success m-2" href="{%url 'home:certification_entries'%}">All Certification Entries</a>
+
     </div>
     <hr>
     <div>
         <p class="section-heading mt-4">Downloads</p>
-        <a class="btn btn-success m-2" href="/assets/templates/sat_result_template.csv">SMS Campaign Template</a>
-        <a class="btn btn-success m-2" href="/assets/templates/sat_result_template.csv">SAT result Template</a>
+        <a class="btn btn-primary m-2" href="/assets/templates/sat_result_template.csv">SMS Campaign Template</a>
+        <a class="btn btn-primary m-2" href="/assets/templates/sat_result_template.csv">SAT result Template</a>
     </div>
     <hr>
-
 </section>
 {% endblock %} {% block script%}
 <script>

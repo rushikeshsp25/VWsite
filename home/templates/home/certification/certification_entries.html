@@ -1,0 +1,45 @@
+{% extends 'home/base.html' %} {% block title %}*SAT Certification Entries | VisionWare {% endblock %} {% block head %} {% load static %} {% endblock %} {% block body %}
+
+<div class="container mt-4 mb-4">
+    <div class="center">
+        <p class="section-heading">*SAT Certification Entries</p>
+    </div>
+    <hr> {% if student_certificates %}
+    <table class="table table-bordered table-inverse">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Exam Name</th>
+                <th>Conducted On</th>
+                <th>Certificate Id</th>
+                <th>Student Name</th>
+                <th>Student Email</th>
+                <th>VW Batch Name</th>
+                <th>Marks Out of 100</th>
+                <th>Pass / Fail</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in student_certificates %}
+            <tr>
+                <td>{{student.exam_name}}</td>
+                <td>{{student.conducted_on}}</td>
+                <td>{{student.certification_id}}</td>
+                <td>{{student.student_name}}</td>
+                <td>{{student.student_email}}</td>
+                <td>{{student.visionware_batch_name}}</td>
+                <td>{{student.marks_out_of_100}}</td>
+                <td>{% if student.is_pass %} Pass {% else %} Fail {% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="center">
+        <p class="sub-section-heading error-message">No Data Found!</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %} {% block script %}
+<script>
+</script>
+{% endblock %}
