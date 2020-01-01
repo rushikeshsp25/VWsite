@@ -721,9 +721,10 @@ def online_campaign(request):
                 }
                 return render(request, 'home/online_campaign/online_campaign_form.html', context)
             new_online_campaign.save()
-            status=send_sms(file_contents,msg)                      #this function is in helpers/onlineCampaignSMS.py
-            if status==0:
-                messages.error(request,'Sorry, something went wrong!')
+            response=send_sms(file_contents,msg)                      #this function is in helpers/onlineCampaignSMS.py
+            print(type(response))
+            if response['status']==0:
+                messages.error(request,'Error : Wrong Mobile Numbers : '+response['payload'])
                 return redirect('home:dashboard')
             messages.success(request,'Online Campaign is successful!')
             return redirect('home:dashboard')
