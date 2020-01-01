@@ -55,20 +55,51 @@
                         <td>{{student.batch.batch_name}}</td>
                         <td>{{student.batch.start_date}}</td>
                         <td>{{student.batch.fees}} Rs</td>
-                        <td>{{student.fees_paid}} Rs {% if student.fees_paid < student.batch.fees%} 
-                            <a href="{% url 'home:pay_fees' student.pk %}">
+                        <td>{{student.fees_paid}} Rs {% if student.fees_paid < student.batch.fees%} <a href="{% url 'home:pay_fees' student.pk %}">
                                 <button class="btn btn-success">Pay Remaining</button>
-                            </a>
-                            {% endif %}
+                                </a>
+                                {% endif %}
                         </td>
                     </tr>
                 </tbody>
             </table>
+            {% if student.admission%}
+            <hr>
+            <p class="section-heading">Comment</p>
+            <hr>
+            <form method="post">
+                {% csrf_token %} 
+                <textarea class="form-control" name="comment_now">[{% now 'DATE_FORMAT' %}]:</textarea>
+                <div class="center m-2">
+                <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </form>
+            <hr>
+            <table class="table table-bordered table-inverse container" style="table-layout: fixed; overflow: hidden;">
+                <thead class="thead-inverse ">
+                    <tr>
+                        <th>Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Comment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for comment in comments %}
+                    <tr>
+                        <td style="word-break: break-all;">
+                            {{ comment }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
         </div>
     </div>
 </div>
 </div>
 {% endblock %} {% block script %}
 <script>
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
 </script>
 {% endblock %}
