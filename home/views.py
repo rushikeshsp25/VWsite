@@ -536,12 +536,28 @@ def collegewise_students(request,pk):
 @login_required
 @user_passes_test(lambda u: u.has_perm('home.view_student'),login_url='/permissionerror/',redirect_field_name=None)
 def student_detail(request,pk):
+    s_obj=None
     try:
         s_obj = Student.objects.get(pk=pk)
     except:
         messages.error(request,'Invalid Student ID')
         return redirect('home:students')
-    return render(request, 'home/student_detail.html', {'student': s_obj})
+
+    new_comment=None
+    if request.method=="POST":
+        current_comment=str(request.POST.get("comment_now"))
+        prev_comment=str(s_obj.comments)
+        new_comment=None
+        if prev_comment:
+            new_comment=current_comment+";"+prev_comment
+        else:
+            new_comment=current_comment
+        s_obj.comments=new_comment
+        s_obj.save()
+    
+    comments = str(s_obj.comments).split(';')
+    return render(request, 'home/student_detail.html', {'student': s_obj,'comments':comments})
+
 
 @login_required
 @user_passes_test(lambda u: u.has_perm('home.view_student'),login_url='/permissionerror/',redirect_field_name=None)
