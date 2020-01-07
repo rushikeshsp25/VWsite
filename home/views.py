@@ -37,6 +37,45 @@ from django.forms.models import model_to_dict
 # Create your views here.
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
+import logging
+
+from django.http import HttpResponse
+
+logging.config.dictConfig({
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'console': {
+            'format': '%(name)-12s %(levelname)-8s %(message)s'
+        },
+        'file': {
+            'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
+        }
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'console'
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'file',
+            'filename': '/tmp/debug.log'
+        }
+    },
+    'loggers': {
+        '': {
+            'level': 'DEBUG',
+            'handlers': ['console', 'file']
+        }
+    }
+})
+
+# This retrieves a Python logging instance (or creates it)
+logger = logging.getLogger(__name__)
+
+
 def dictionarify_the_response_queryset(response):
     d={}
     for i in response:
@@ -213,10 +252,12 @@ def course_details(request,course_slug):
 def student_admission_batch(request,course_batch_pk):
     try:
         course_batch = CourseBatch.objects.get(pk = course_batch_pk)
-    except:
+    except Exception as e:
+        logger.error("student_admission_batch view : "+str(e))
         messages.error(request,"Selected course batch doesn't exists !")
         return redirect('home:display_all_courses')
     if request.method == "POST":
+        logger.info("student_admission_batch view : POST request received")
         fname = request.POST['fname']
         lname = request.POST['lname']
         email = request.POST['email']
@@ -224,13 +265,18 @@ def student_admission_batch(request,course_batch_pk):
         college = request.POST['college']
         year = request.POST['year']
         dob = request.POST['dob']
-        college_obj = College.objects.get(shortname_without_space = college)
-        batch = CourseBatch.objects.get(pk=course_batch_pk)
-        student = Student(first_name=fname,last_name=lname,email=email,phone = mobile,college=college_obj,year=year,dob=dob,batch=batch)
-        student.save()
-        messages.success(request,'You have successfully enrolled for the batch !')
-        return redirect('home:display_all_courses')
+        try:
+            college_obj = College.objects.get(shortname_without_space = college)
+            student = Student(first_name=fname,last_name=lname,email=email,phone = mobile,college=college_obj,year=year,dob=dob,batch=course_batch)
+            student.save()
+            messages.success(request,'You have successfully enrolled for the batch !')
+            return redirect('home:display_all_courses')
+        except Exception as e:
+            logger.error("student_admission_batch view : "+str(e))
+            messages.error(request,'Something Went Wrong Try Again Later !')
+            return redirect('home:display_all_courses')
     else:
+        logger.info("student_admission_batch view : GET request received")
         all_colleges = College.objects.all()
         return render(request,'home/student/admission.html',{'colleges':all_colleges})
 

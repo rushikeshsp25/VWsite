@@ -11,7 +11,7 @@
                         </h3>
                     </div>
                     <div class="card-body">
-                        <form class="admission-form" role="form" method="post" enctype="multipart/form-data">
+                        <form class="admission-form" id="admissionForm" role="form" method="post" enctype="multipart/form-data">
                             {% csrf_token %} {%if form.non_field_errors%}
                             <div class="cust-form-row">
                                 {{ form.non_field_errors }}
@@ -67,7 +67,7 @@
                                 <input type="text" class="form-control date-input" name="dob" placeholder="YYYY-MM-DD" required/>
                             </div>
                             <div class="form-controls center">
-                                <button type="submit" class="btn">Enroll Now</button>
+                                <button type="submit" id="btnSubmit" class="btn">Enroll Now</button>
                             </div>
                         </form>
                     </div>
@@ -105,10 +105,16 @@
 <script src="{% static 'home/js/datepicker.min.js' %}"></script>
 <script src="{% static 'home/js/datepicker.en.js' %}"></script>
 <script>
-    $('.date-input').datepicker({
-        language: 'en',
-        dateFormat: "yyyy-mm-dd",
-        autoClose: true
-    })
+    $(document).ready(function() {
+        $('.date-input').datepicker({
+            language: 'en',
+            dateFormat: "yyyy-mm-dd",
+            autoClose: true
+        })
+        $("#admissionForm").submit(function(e) {
+            $("#btnSubmit").attr("disabled", true);
+            return true;
+        });
+    });
 </script>
 {% endblock %}
