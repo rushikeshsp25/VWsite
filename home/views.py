@@ -664,7 +664,8 @@ def confirm_admission(request,pk):
         "course_name":s_obj.batch.course.course_name,
         "batch_name":s_obj.batch.batch_name,
         "total_fees":s_obj.batch.fees,
-        "paid_fees":s_obj.fees_paid
+        "paid_fees":s_obj.fees_paid,
+        "date":str(datetime.today())
     }
     html_message = render_to_string('home/email_templates/admission_confirmed.html', context_dict)
     try:
@@ -680,8 +681,7 @@ def confirm_admission(request,pk):
         messages.error(request,"Error  while sending an Email !")
         return redirect('home:student_detail', pk=pk)
     try:
-        admission_confirm_message.format(s_obj.batch.course.course_name)
-        sendSms(str(s_obj.phone),message)
+        sendSms(str(s_obj.phone),admission_confirm_message.format(s_obj.batch.course.course_name))
     except Exception as e:
         messages.error(request,"Error  while sending SMS !")
         return redirect('home:student_detail', pk=pk)

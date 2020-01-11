@@ -53,7 +53,7 @@ urlpatterns = [
     path('services/<str:name>/',views.services,name='services'),
     path('placements/',views.add_placement,name='add_placement'),
     path('placementwall',views.placement_wall,name='placement_wall'),
-    path('placement-for-sure',views.pfs_promo,name='pfs_promo'),
+    # path('placement-for-sure',views.pfs_promo,name='pfs_promo'),
     path('satcheck/',views.sat_check,name="sat_check"),
 ]
 

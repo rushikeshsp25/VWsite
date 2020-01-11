@@ -24,6 +24,7 @@
                 <th>Year</th>
                 <th>course</th>
                 <th>Account Created</th>
+                <th>Fees Paid</th>
                 <th>Admission Status</th>
             </tr>
         </thead>
@@ -37,6 +38,7 @@
                 <td>{{student.year}}</td>
                 <td>{{student.batch.course.course_name}}</td>
                 <td>{{student.date_time}}</td>
+                <td>{{student.fees_paid}}</td>
                 <td>{%if student.admission%}
                     <a href="{% url 'home:student_detail' pk=student.pk%}">
                         <button type="button" class="btn btn-success">Done</button></a>
