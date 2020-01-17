@@ -132,7 +132,7 @@
                     <h2 class="title text-primary">Here are our few recent projects</h2>
                 </div>
             </div>
-            <div class="wow fadeInLeft" data-wow-delay="0.3s">
+            {% comment %} <div class="wow fadeInLeft" data-wow-delay="0.3s">
                 <picture>
                     <source srcset="{%static 'home/images/services/pro_1.png'%}" media="(min-width: 800px)">
                     <source srcset="{%static 'home/images/services/mobile/pro_1.png'%}" media="(min-width: 360px)">
@@ -145,7 +145,7 @@
                     <source srcset="{%static 'home/images/services/mobile/pro_2.png'%}" media="(min-width: 360px)">
                     <img class="d-block w-100" src="{%static 'home/images/services/pro_2.png'%}">
                 </picture>
-            </div>
+            </div>  {% endcomment %}
             <div class="wow fadeInLeft" data-wow-delay="0.3s">
                 <picture>
                     <source srcset="{%static 'home/images/services/pro_3.png'%}" media="(min-width: 800px)">
@@ -155,7 +155,7 @@
             </div>
         </div>
     </div>
-    <div class="site-section bg-light mt-4" id="testimonial-section">
+    {% comment %} <div class="site-section bg-light mt-4" id="testimonial-section">
         <div class="container p-2">
             <div class="wow bounceInUp">
                 <div class="section-title text-center mx-auto mb-4">
@@ -171,7 +171,7 @@
                 </picture>
             </div>
         </div>
-    </div>
+    </div> {% endcomment %}
 </div>
 {% endblock %} {% block script%}
 <script src="{%static 'home/js/wow.min.js' %}"></script>
