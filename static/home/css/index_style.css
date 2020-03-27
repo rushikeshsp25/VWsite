@@ -260,8 +260,8 @@ textarea {
 }
 
 .highlights-container .body {
-    background-color: black;
     background: url("../images/backgrounds/bg1.png") no-repeat fixed center;
+    background-color: black;
     color: white;
 }
 
