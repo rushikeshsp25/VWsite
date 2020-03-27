@@ -135,6 +135,7 @@ class FeedbackBatch(models.Model):
     feedback_title=models.CharField(max_length=50,default='')
     start_date=models.DateField()    
     end_date=models.DateField()
+    is_feedback_on = models.BooleanField(default=False)
     def __str__(self):
         return self.feedback_title
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect,get_object_or_404,render_to_response
+from django.shortcuts import render,redirect,get_object_or_404
 from django.utils import timezone
 from .forms import CourseForm,BatchForm, StudyCourseForm,FeedbackBatchForm, FeedbackForm,OnlineCampaignForm,PlacementForm,CertificationDetailForm
 from django.contrib.auth import authenticate, login,logout
@@ -14,14 +14,12 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.views.decorators.csrf import csrf_exempt
 import os
-import requests
 import PyPDF2
 import io
 #for displaying messages
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger 
-import requests
 import json
 from django.db.models import Subquery
 from .helpers.linkCheck import getNotWorkingLinksHtml
@@ -365,23 +363,30 @@ def feedback_init(request,feedback_batch_id):
         dob = request.POST['dob']
         try:
             sobj = Student.objects.get(email=email,dob=dob)
-            feedback_batch = FeedbackBatch.objects.get(id=feedback_batch_id)
+            today = date.today()
+            feedback_batch = FeedbackBatch.objects.get(id=feedback_batch_id,start_date__lte = today, end_date__gte = today, is_feedback_on=True)
             fobjs = FeedbackResponse.objects.filter(feedback_batch=feedback_batch,student=sobj)
             if(fobjs):
                 messages.error(request, 'You have already submitted the feedback')
                 return render(request,'home/feedback/feedback_init.html')
             feedback_questions=FeedbackQuestion.objects.all()
-            today = date.today()
-            feedback_batch = FeedbackBatch.objects.get(id=feedback_batch_id,start_date__gte = today, end_date__gte = today)
             if not (sobj.batch.id == feedback_batch.batch.id and sobj.admission):
-                raise Exception("student not admitted")
+                messages.error(request, "You are not admitted")
+                return render(request,'home/feedback/feedback_init.html')
             messages.success(request, 'Please give the proper feedback, It is very important to us!')
             return render(request,'home/feedback/feedback_proceed.html',{'feedback_batch':feedback_batch,'student':sobj,'feedback_questions':feedback_questions})
         except Exception as e:
+            print("Error",e)
             messages.error(request, 'You are not allowed to give this feedback')
             return render(request,'home/feedback/feedback_init.html')
     else:
-        return render(request,'home/feedback/feedback_init.html')
+        try:
+            today = date.today()
+            feedback_batch = FeedbackBatch.objects.get(id=feedback_batch_id,start_date__lte = today, end_date__gte = today, is_feedback_on=True)
+            return render(request,'home/feedback/feedback_init.html')
+        except Exception as e:
+            print("Error",e)
+            return render(request,'home/page_not_found.html',status=404)
 
 @csrf_exempt
 @login_required
